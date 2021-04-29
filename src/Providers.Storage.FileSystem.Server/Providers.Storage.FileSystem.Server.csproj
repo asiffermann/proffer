@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Providers.Storage.FileSystem.Server</AssemblyName>
+    <PackageId>Providers.Storage.FileSystem.Server</PackageId>
+    <Description>File Server based on the Providers.Storage.FileSystem provider.</Description>
+    <Product>Providers</Product>
+    <Authors>Adrien Siffermann</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Providers.Storage.FileSystem\Providers.Storage.FileSystem.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.0" />
+  </ItemGroup>
+
+</Project>
