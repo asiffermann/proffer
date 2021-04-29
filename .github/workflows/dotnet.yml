@@ -18,6 +18,9 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: GitTools
+      uses: GitTools/actions@v0.9.9
+
     - name: Determine Version
       id:   gitversion
       uses: gittools/actions/gitversion/execute@v0.9.9
