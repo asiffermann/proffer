@@ -39,3 +39,5 @@ branches:
     tag: PR
     source-branches: ['topic', 'trunk']
     pre-release-weight: 30000
+  develop:
+    regex: ^trunk$
