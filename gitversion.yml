@@ -1,0 +1,43 @@
+branches:
+  trunk:
+    regex: ^trunk$
+    mode: ContinuousDeployment
+    tag: rc
+    increment: Minor
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    tracks-release-branches: true
+    is-release-branch: false
+    is-mainline: false
+    pre-release-weight: 0
+    source-branches: []
+  topic:
+    regex: ^topics?[/-]
+    mode: ContinuousDeployment
+    tag: beta.{BranchName}
+    pre-release-weight: 30000
+    source-branches: ['trunk']
+  release:
+    regex: ^releases?[/-]
+    mode: ContinuousDelivery
+    tag: ''
+    increment: Patch
+    pre-release-weight: 55000
+    prevent-increment-of-merged-branch-version: false
+    is-release-branch: true
+    source-branches: ['trunk']
+  hotfix:
+    mode: ContinuousDelivery
+    tag: rc
+    increment: Patch
+    regex: ^hotfix(es)?[/-]
+    source-branches: ['release']
+    pre-release-weight: 30000
+  pull-request:
+    regex: ^(pull|pull\-requests|pr)[/-]
+    mode: ContinuousDelivery
+    tag: PR
+    source-branches: ['topic', 'trunk']
+    pre-release-weight: 30000
+  develop:
+    regex: ^trunk$
