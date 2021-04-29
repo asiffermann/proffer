@@ -7,6 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Providers", "src\Providers\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C-4548-46EC-BE45-F716251461DD}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		gitversion.yml = gitversion.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A08DBB7E-DDD4-49BB-9A49-5E3FB88EE878}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4E4394F6-91C7-43E2-BEDA-B7F8EBBA2C68}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +36,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F68C8B99-797E-44B2-9171-F00B4F4A4B2C} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
+		{4E4394F6-91C7-43E2-BEDA-B7F8EBBA2C68} = {A08DBB7E-DDD4-49BB-9A49-5E3FB88EE878}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E14A063-006D-442F-BBA4-C9CF12D2438A}
