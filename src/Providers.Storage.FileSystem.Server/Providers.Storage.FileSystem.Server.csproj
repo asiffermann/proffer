@@ -6,6 +6,7 @@
     <Description>File Server based on the Providers.Storage.FileSystem provider.</Description>
     <Product>Providers</Product>
     <Authors>Adrien Siffermann</Authors>
+    <RepositoryUrl>https://github.com/asiffermann/providers</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
