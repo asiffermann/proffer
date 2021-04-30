@@ -1,18 +1,28 @@
 namespace Providers.Templating.Internal
 {
-    using Microsoft.Extensions.Caching.Memory;
-    using Storage;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.Caching.Memory;
+    using Storage;
 
+    /// <summary>
+    /// Loads template references from an <see cref="IStore"/> and cache results.
+    /// </summary>
     public class TemplateLoader : ITemplateLoader
     {
-        private IMemoryCache memoryCache;
-        private IEnumerable<ITemplateProvider> providers;
-        private IStore store;
+        private readonly IMemoryCache memoryCache;
+        private readonly IEnumerable<ITemplateProvider> providers;
+        private readonly IStore store;
         //private Dictionary<ITemplateProvider, ITemplateScope> scopes;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TemplateLoader"/> class.
+        /// </summary>
+        /// <param name="store">The store.</param>
+        /// <param name="providers">The providers.</param>
+        /// <param name="memoryCache">The memory cache.</param>
+        /// <param name="scope">The scope.</param>
         public TemplateLoader(IStore store, IEnumerable<ITemplateProvider> providers, IMemoryCache memoryCache, string scope)
         {
             this.store = store;
@@ -21,13 +31,20 @@ namespace Providers.Templating.Internal
             //this.scope = memoryCache.GetOrCreateAsync("x_tmpl_inf_scopes", async entry => { })
         }
 
+        /// <summary>
+        /// Gets a template by name.
+        /// </summary>
+        /// <param name="name">The template name.</param>
+        /// <returns>
+        /// The matching <see cref="ITemplate" />.
+        /// </returns>
         public Task<ITemplate> GetTemplate(string name)
         {
             return this.memoryCache.GetOrCreateAsync($"x_tmpl_{this.store.Name}_{name}", async entry =>
             {
                 string directory;
                 string file;
-                var lastSlash = name.LastIndexOf('/');
+                int lastSlash = name.LastIndexOf('/');
                 if (lastSlash < 0)
                 {
                     directory = "";
@@ -40,29 +57,35 @@ namespace Providers.Templating.Internal
                 }
 
                 entry.SetPriority(CacheItemPriority.High);
-                var fileReference = (await this.store.ListAsync(directory, $"{file}.*")).First();
-                var provider = this.providers.First(x => x.Extensions.Any(ext => fileReference.Path.EndsWith(ext)));
+                IFileReference fileReference = ( await this.store.ListAsync(directory, $"{file}.*") ).First();
+                ITemplateProvider provider = this.providers.First(x => x.Extensions.Any(ext => fileReference.Path.EndsWith(ext)));
 
-                var scope = await GetScope(provider, directory);
+                ITemplateProviderScope scope = await this.GetScope(provider, directory);
 
                 return scope.Compile(await this.store.ReadAllTextAsync(fileReference));
             });
         }
 
+        /// <summary>
+        /// Gets the scope.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="name">The scope name.</param>
+        /// <returns></returns>
         private Task<ITemplateProviderScope> GetScope(ITemplateProvider provider, string name)
         {
             return this.memoryCache.GetOrCreateAsync($"x_tmpl_{this.store.Name}_inf_scopes_{provider.Extensions.First()}_{name}", async entry =>
             {
                 entry.SetPriority(CacheItemPriority.High);
-                var scope = provider.CreateScope();
-                var files = await this.store.ListAsync(name, "_*.*");
-                foreach (var file in files)
+                ITemplateProviderScope scope = provider.CreateScope();
+                IFileReference[] files = await this.store.ListAsync(name, "_*.*");
+                foreach (IFileReference file in files)
                 {
-                    var path = file.Path.Split('/');
-                    var fileName = path.Last();
+                    string[] path = file.Path.Split('/');
+                    string fileName = path.Last();
                     if (fileName.StartsWith("_") && provider.Extensions.Any(ext => fileName.EndsWith(ext)))
                     {
-                        var partialName = System.IO.Path.GetFileNameWithoutExtension(fileName.Substring(1));
+                        string partialName = System.IO.Path.GetFileNameWithoutExtension(fileName.Substring(1));
                         scope.RegisterPartial(partialName, await this.store.ReadAllTextAsync(file));
                     }
                 }
