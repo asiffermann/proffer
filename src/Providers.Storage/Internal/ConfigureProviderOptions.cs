@@ -1,9 +1,18 @@
-﻿namespace Providers.Storage.Internal
+namespace Providers.Storage.Internal
 {
     using Providers.Storage.Configuration;
     using Microsoft.Extensions.Options;
     using System.Linq;
+    using System.Collections.Generic;
 
+    /// <summary>
+    /// Configures a provider <typeparamref name="TParsedOptions"/> from generic <see cref="StorageOptions"/>.
+    /// </summary>
+    /// <typeparam name="TParsedOptions">The type of the parsed options.</typeparam>
+    /// <typeparam name="TInstanceOptions">The type of the provider instance options.</typeparam>
+    /// <typeparam name="TStoreOptions">The type of the store options.</typeparam>
+    /// <typeparam name="TScopedStoreOptions">The type of the scoped store options.</typeparam>
+    /// <seealso cref="IConfigureOptions{TParsedOptions}" />
     public class ConfigureProviderOptions<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions> : IConfigureOptions<TParsedOptions>
         where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>
         where TInstanceOptions : class, IProviderInstanceOptions, new()
@@ -12,11 +21,19 @@
     {
         private readonly StorageOptions storageOptions;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigureProviderOptions{TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions}"/> class.
+        /// </summary>
+        /// <param name="storageOptions">The storage options.</param>
         public ConfigureProviderOptions(IOptions<StorageOptions> storageOptions)
         {
             this.storageOptions = storageOptions.Value;
         }
 
+        /// <summary>
+        /// Invoked to configure a <typeparamref name="TParsedOptions" /> instance.
+        /// </summary>
+        /// <param name="options">The options instance to configure.</param>
         public void Configure(TParsedOptions options)
         {
             if (this.storageOptions == null)
@@ -30,13 +47,13 @@
                 .Where(kvp => kvp.Value.Type == options.Name)
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-            foreach (var parsedProviderInstance in options.ParsedProviderInstances)
+            foreach (KeyValuePair<string, TInstanceOptions> parsedProviderInstance in options.ParsedProviderInstances)
             {
                 parsedProviderInstance.Value.Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(options);
             }
 
-            var parsedStores = this.storageOptions.Stores.Parse<TStoreOptions>();
-            foreach (var parsedStore in parsedStores)
+            IReadOnlyDictionary<string, TStoreOptions> parsedStores = this.storageOptions.Stores.Parse<TStoreOptions>();
+            foreach (KeyValuePair<string, TStoreOptions> parsedStore in parsedStores)
             {
                 parsedStore.Value.Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(options);
             }
@@ -45,8 +62,8 @@
                 .Where(kvp => kvp.Value.ProviderType == options.Name)
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-            var parsedScopedStores = this.storageOptions.ScopedStores.Parse<TScopedStoreOptions>();
-            foreach (var parsedScopedStore in parsedScopedStores)
+            IReadOnlyDictionary<string, TScopedStoreOptions> parsedScopedStores = this.storageOptions.ScopedStores.Parse<TScopedStoreOptions>();
+            foreach (KeyValuePair<string, TScopedStoreOptions> parsedScopedStore in parsedScopedStores)
             {
                 parsedScopedStore.Value.Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(options);
             }
