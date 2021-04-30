@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		gitversion.yml = gitversion.yml
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A08DBB7E-DDD4-49BB-9A49-5E3FB88EE878}"
