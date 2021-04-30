@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Providers.Templating.Mustache</AssemblyName>
+    <PackageId>Providers.Templating.Mustache</PackageId>
+    <Description>Mustache.js provider for Providers.Templating abstractions.</Description>
+    <Product>Providers</Product>
+    <Authors>Adrien Siffermann</Authors>
+    <RepositoryUrl>https://github.com/asiffermann/providers</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Providers.Templating\Providers.Templating.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="mustache-sharp" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
