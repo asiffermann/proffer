@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Proffer.Email</AssemblyName>
+    <PackageId>Proffer.Email</PackageId>
+    <Description>Templated email sending abstractions with providers.</Description>
+    <Product>Proffer</Product>
+    <Authors>Adrien Siffermann</Authors>
+    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Proffer.Templating\Proffer.Templating.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>
