@@ -6,7 +6,7 @@ namespace Providers.Storage
     using System.Threading.Tasks;
 
     /// <summary>
-    /// A store allows to save, list or read files on a container in a specific <see cref="IStorageProvider"/>.
+    /// A store allows to save, list or read files on a container in its configured <see cref="IStorageProvider"/>.
     /// </summary>
     public interface IStore
     {

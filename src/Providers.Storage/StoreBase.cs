@@ -1,14 +1,23 @@
-﻿namespace Providers.Storage
+namespace Providers.Storage
 {
+    /// <summary>
+    /// Abstract base typed store.
+    /// </summary>
     public abstract class StoreBase
     {
-        private readonly IStore store;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StoreBase"/> class.
+        /// </summary>
+        /// <param name="storeName">The name of the store.</param>
+        /// <param name="storageFactory">The storage factory.</param>
         public StoreBase(string storeName, IStorageFactory storageFactory)
         {
-            this.store = storageFactory.GetStore(storeName);
+            this.Store = storageFactory.GetStore(storeName);
         }
 
-        public IStore Store => this.store;
+        /// <summary>
+        /// Gets the store.
+        /// </summary>
+        public IStore Store { get; }
     }
 }

@@ -1,7 +1,7 @@
 namespace Providers.Storage.Configuration
 {
     /// <summary>
-    /// Define a store access level.
+    /// Defines a store access level.
     /// </summary>
     public enum AccessLevel
     {
