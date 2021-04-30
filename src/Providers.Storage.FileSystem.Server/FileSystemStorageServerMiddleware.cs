@@ -1,21 +1,31 @@
-﻿namespace Providers.Storage.FileSystem.Server
+namespace Providers.Storage.FileSystem.Server
 {
-    using Providers.Storage.FileSystem.Configuration;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
-    using System.Threading.Tasks;
+    using Providers.Storage.FileSystem.Configuration;
 
+    /// <summary>
+    /// ASP.NET Core middleware to serve over HTTP files stored in a Storage store.
+    /// </summary>
     public class FileSystemStorageServerMiddleware
     {
-        private RequestDelegate next;
+        private readonly RequestDelegate next;
+        private readonly ILogger<FileSystemStorageServerMiddleware> logger;
+        private readonly IOptions<FileSystemStorageServerOptions> serverOptions;
+        private readonly FileSystemParsedOptions fileSystemParsedOptions;
 
-        private ILogger<FileSystemStorageServerMiddleware> logger;
-        private IOptions<FileSystemStorageServerOptions> serverOptions;
-        private FileSystemParsedOptions fileSystemParsedOptions;
-
-        public FileSystemStorageServerMiddleware(RequestDelegate next,
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSystemStorageServerMiddleware"/> class.
+        /// </summary>
+        /// <param name="next">The next function.</param>
+        /// <param name="serverOptions">The server options.</param>
+        /// <param name="logger">The logger.</param>
+        /// <param name="fileSystemParsedOptions">The file system parsed options.</param>
+        public FileSystemStorageServerMiddleware(
+            RequestDelegate next,
             IOptions<FileSystemStorageServerOptions> serverOptions,
             ILogger<FileSystemStorageServerMiddleware> logger,
             IOptions<FileSystemParsedOptions> fileSystemParsedOptions)
@@ -26,15 +36,19 @@
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Invokes the middleware.
+        /// </summary>
+        /// <param name="context">The context.</param>
         public async Task Invoke(HttpContext context)
         {
-            var subPathStart = context.Request.Path.Value.IndexOf('/', 1);
+            int subPathStart = context.Request.Path.Value.IndexOf('/', 1);
             if (subPathStart > 0)
             {
-                var storeName = context.Request.Path.Value.Substring(1, subPathStart - 1);
-                var storageFactory = context.RequestServices.GetRequiredService<IStorageFactory>();
+                string storeName = context.Request.Path.Value.Substring(1, subPathStart - 1);
+                IStorageFactory storageFactory = context.RequestServices.GetRequiredService<IStorageFactory>();
 
-                if (this.fileSystemParsedOptions.ParsedStores.TryGetValue(storeName, out var storeOptions)
+                if (this.fileSystemParsedOptions.ParsedStores.TryGetValue(storeName, out FileSystemStoreOptions storeOptions)
                     && storeOptions.ProviderType == FileSystemStorageProvider.ProviderName)
                 {
                     if (storeOptions.AccessLevel != Storage.Configuration.AccessLevel.Public)
@@ -45,7 +59,7 @@
 
                     IStore store = storageFactory.GetStore(storeName, storeOptions);
 
-                    var file = await store.GetAsync(context.Request.Path.Value.Substring(subPathStart + 1), withMetadata: true);
+                    IFileReference file = await store.GetAsync(context.Request.Path.Value.Substring(subPathStart + 1), withMetadata: true);
                     if (file != null)
                     {
                         context.Response.ContentType = file.Properties.ContentType;
