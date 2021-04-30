@@ -60,7 +60,7 @@ jobs:
     name: Publish to GitHub Packages
 
     needs: build
-    if: contains(needs.build.outputs.fullSemVer, 'rc')
+    #if: contains(needs.build.outputs.fullSemVer, 'rc')
 
     runs-on: ubuntu-latest
 
