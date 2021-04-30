@@ -1,10 +1,10 @@
 namespace Providers.Storage.Azure.Internal
 {
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
     using System;
     using System.IO;
     using System.Threading.Tasks;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
 
     /// <summary>
     /// A reference of a stored file at a given path on Azure Storage.
@@ -98,7 +98,7 @@ namespace Providers.Storage.Azure.Internal
         /// <summary>
         /// Updates the file content with the given <see cref="Stream" />.
         /// </summary>
-        /// <param name="stream"></param>
+        /// <param name="stream">The new file content.</param>
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>

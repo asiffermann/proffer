@@ -1,7 +1,7 @@
 namespace Providers.Storage.Azure.Configuration
 {
-    using Providers.Storage.Configuration;
     using System.Collections.Generic;
+    using Providers.Storage.Configuration;
 
     /// <summary>
     /// Typed Azure Storage options parsed from the dynamic configuration.

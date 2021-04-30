@@ -1,9 +1,13 @@
-﻿namespace Providers.Storage.FileSystem.Internal
+namespace Providers.Storage.FileSystem.Internal
 {
     using System;
     using System.IO;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// A reference of a stored file at a given path on a File System.
+    /// </summary>
+    /// <seealso cref="IFileReference" />
     public class FileSystemFileReference : IFileReference
     {
         private readonly FileSystemStore store;
@@ -12,6 +16,16 @@
         private bool withMetadata;
         private Lazy<IFileProperties> propertiesLazy;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSystemFileReference"/> class.
+        /// </summary>
+        /// <param name="filePath">The file system path.</param>
+        /// <param name="path">The path.</param>
+        /// <param name="store">The store.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, the metadata for the file have been fetched.</param>
+        /// <param name="extendedProperties">The extended properties.</param>
+        /// <param name="publicUrlProvider">The public URL provider.</param>
+        /// <param name="extendedPropertiesProvider">The extended properties provider.</param>
         public FileSystemFileReference(
             string filePath,
             string path,
@@ -44,55 +58,99 @@
                     return publicUrlProvider.GetPublicUrl(this.store.Name, this);
                 }
 
-                throw new InvalidOperationException("There is not FileSystemServer enabled.");
+                throw new InvalidOperationException("There is no FileSystemServer enabled.");
             });
         }
 
+        /// <summary>
+        /// Gets the file system path.
+        /// </summary>
         public string FileSystemPath { get; }
 
+        /// <summary>
+        /// Gets the file path.
+        /// </summary>
         public string Path { get; }
 
+        /// <summary>
+        /// Gets the public URL.
+        /// </summary>
         public string PublicUrl => this.publicUrlLazy.Value;
 
+        /// <summary>
+        /// Gets the properties.
+        /// </summary>
         public IFileProperties Properties => this.propertiesLazy.Value;
 
+        /// <summary>
+        /// Deletes the file.
+        /// </summary>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
         public Task DeleteAsync()
         {
             File.Delete(this.FileSystemPath);
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
-        public ValueTask<byte[]> ReadAllBytesAsync()
-        {
-            return new ValueTask<byte[]>(File.ReadAllBytes(this.FileSystemPath));
-        }
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:byte[]" /> containing the file content.
+        /// </returns>
+        public ValueTask<byte[]> ReadAllBytesAsync() => new(File.ReadAllBytes(this.FileSystemPath));
 
-        public ValueTask<string> ReadAllTextAsync()
-        {
-            return new ValueTask<string>(File.ReadAllText(this.FileSystemPath));
-        }
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> containing the file content.
+        /// </returns>
+        public ValueTask<string> ReadAllTextAsync() => new(File.ReadAllText(this.FileSystemPath));
 
-        public ValueTask<Stream> ReadAsync()
-        {
-            return new ValueTask<Stream>(File.OpenRead(this.FileSystemPath));
-        }
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="Stream" /> containing the file content.
+        /// </returns>
+        public ValueTask<Stream> ReadAsync() => new(File.OpenRead(this.FileSystemPath));
 
+        /// <summary>
+        /// Reads the file content into the given stream.
+        /// </summary>
+        /// <param name="targetStream">The target stream.</param>
         public async Task ReadToStreamAsync(Stream targetStream)
         {
-            using (var file = File.Open(this.FileSystemPath, FileMode.Open, FileAccess.Read))
+            using (FileStream file = File.Open(this.FileSystemPath, FileMode.Open, FileAccess.Read))
             {
                 await file.CopyToAsync(targetStream);
             }
         }
 
+        /// <summary>
+        /// Updates the file content with the given <see cref="Stream" />.
+        /// </summary>
+        /// <param name="stream">The new file content.</param>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
         public async Task UpdateAsync(Stream stream)
         {
-            using (var file = File.Open(this.FileSystemPath, FileMode.Truncate, FileAccess.Write))
+            using (FileStream file = File.Open(this.FileSystemPath, FileMode.Truncate, FileAccess.Write))
             {
                 await stream.CopyToAsync(file);
             }
         }
 
+        /// <summary>
+        /// Saves the file properties.
+        /// </summary>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
         public Task SavePropertiesAsync()
         {
             if (this.extendedPropertiesProvider == null)
@@ -106,11 +164,17 @@
                 (this.Properties as FileSystemFileProperties).ExtendedProperties);
         }
 
-        public ValueTask<string> GetSharedAccessSignature(ISharedAccessPolicy policy)
-        {
-            throw new NotSupportedException();
-        }
+        /// <summary>
+        /// Gets a shared access signature.
+        /// </summary>
+        /// <param name="policy">The policy.</param>
+        /// <returns>A shared access signature to read file.</returns>
+        public ValueTask<string> GetSharedAccessSignature(ISharedAccessPolicy policy) => throw new NotSupportedException();
 
+        /// <summary>
+        /// Fetches the file properties.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         public async Task FetchProperties()
         {
             if (this.withMetadata)
@@ -123,7 +187,7 @@
                 throw new InvalidOperationException("There is no FileSystem extended properties provider.");
             }
 
-            var extendedProperties = await this.extendedPropertiesProvider.GetExtendedPropertiesAsync(
+            FileExtendedProperties extendedProperties = await this.extendedPropertiesProvider.GetExtendedPropertiesAsync(
                 this.store.AbsolutePath,
                 this);
 

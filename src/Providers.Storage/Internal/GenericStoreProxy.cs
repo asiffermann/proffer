@@ -64,6 +64,7 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// The <see cref="IFileReference" /> at path.
         /// </returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public ValueTask<IFileReference> GetAsync(Uri file, bool withMetadata)
             => this.innerStore.GetAsync(file, withMetadata);
 
@@ -170,6 +171,7 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// A shared access signature to read or list the store files.
         /// </returns>
+        /// <exception cref="NotSupportedException"></exception>
         public ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy policy)
             => this.innerStore.GetSharedAccessSignatureAsync(policy);
     }

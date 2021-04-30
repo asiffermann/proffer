@@ -54,6 +54,7 @@ namespace Providers.Storage
         /// <param name="uri">The file uniform resource identifier (URI).</param>
         /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for the file.</param>
         /// <returns>The <see cref="IFileReference"/> at path.</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         ValueTask<IFileReference> GetAsync(Uri uri, bool withMetadata);
 
         /// <summary>
@@ -113,6 +114,7 @@ namespace Providers.Storage
         /// </summary>
         /// <param name="policy">The policy.</param>
         /// <returns>A shared access signature to read or list the store files.</returns>
+        /// <exception cref="NotSupportedException"></exception>
         ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy policy);
     }
 }

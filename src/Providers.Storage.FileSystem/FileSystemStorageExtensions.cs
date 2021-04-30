@@ -1,22 +1,36 @@
-﻿namespace Providers.Storage
+namespace Providers.Storage
 {
     using FileSystem;
-    using Providers.Storage.FileSystem.Configuration;
-    using Providers.Storage.Internal;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Microsoft.Extensions.Options;
+    using Providers.Storage.FileSystem.Configuration;
+    using Providers.Storage.Internal;
 
+    /// <summary>
+    /// <see cref="IServiceCollection"/> extension methods.
+    /// </summary>
     public static class FileSystemStorageExtensions
     {
-        public static IServiceCollection AddFileSystemStorage(this IServiceCollection services, string rootPath)
+        /// <summary>
+        /// Registers the File System provider services on given root path.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <param name="rootPath">The root path.</param>
+        /// <returns>The service collection.</returns>
+        public static IServiceCollection AddFileSystemStorageProvider(this IServiceCollection services, string rootPath)
         {
             return services
                 .Configure<FileSystemParsedOptions>(options => options.RootPath = rootPath)
                 .AddFileSystemStorageServices();
         }
 
-        public static IServiceCollection AddFileSystemStorage(this IServiceCollection services)
+        /// <summary>
+        /// Registers the File System provider services on root path <see cref="System.IO.Directory.GetCurrentDirectory"/>.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <returns>The service collection.</returns>
+        public static IServiceCollection AddFileSystemStorageProvider(this IServiceCollection services)
         {
             return services              
                 .Configure<FileSystemParsedOptions>(options => options.RootPath = System.IO.Directory.GetCurrentDirectory())

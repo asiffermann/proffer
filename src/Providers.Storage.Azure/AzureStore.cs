@@ -174,7 +174,8 @@ namespace Providers.Storage.Azure
         /// <returns>
         /// The <see cref="IFileReference" /> at path.
         /// </returns>
-        public async ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withMetadata) => await this.InternalGetAsync(file, withMetadata);
+        public async ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withMetadata)
+            => await this.InternalGetAsync(file, withMetadata);
 
         /// <summary>
         /// Gets the file reference from URI.
@@ -184,7 +185,9 @@ namespace Providers.Storage.Azure
         /// <returns>
         /// The <see cref="IFileReference" /> at path.
         /// </returns>
-        public async ValueTask<IFileReference> GetAsync(Uri uri, bool withMetadata) => await this.InternalGetAsync(uri, withMetadata);
+        /// <exception cref="InvalidOperationException"></exception>
+        public async ValueTask<IFileReference> GetAsync(Uri uri, bool withMetadata)
+            => await this.InternalGetAsync(uri, withMetadata);
 
         /// <summary>
         /// Deletes the file.

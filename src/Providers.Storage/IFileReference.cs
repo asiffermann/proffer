@@ -53,6 +53,7 @@ namespace Providers.Storage
         /// <summary>
         /// Updates the file content with the given <see cref="Stream"/>.
         /// </summary>
+        /// <param name="stream">The new file content.</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
         Task UpdateAsync(Stream stream);
 

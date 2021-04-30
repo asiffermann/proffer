@@ -1,8 +1,8 @@
 namespace Providers.Storage.Azure.Configuration
 {
-    using Providers.Storage.Configuration;
     using System.Collections.Generic;
     using System.Linq;
+    using Providers.Storage.Configuration;
 
     /// <summary>
     /// Options for an <see cref="AzureStore"/>.

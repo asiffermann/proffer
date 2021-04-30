@@ -1,4 +1,4 @@
-﻿namespace Providers.Storage.FileSystem
+namespace Providers.Storage.FileSystem
 {
     using Providers.Storage.FileSystem.Configuration;
     using System;
@@ -8,12 +8,22 @@
     using System.Security.Cryptography;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// A File System store allows to save, list or read files on a container in its configured <see cref="FileSystemStorageProvider"/>.
+    /// </summary>
+    /// <seealso cref="IStore" />
     public class FileSystemStore : IStore
     {
         private readonly FileSystemStoreOptions storeOptions;
         private readonly IPublicUrlProvider publicUrlProvider;
         private readonly IExtendedPropertiesProvider extendedPropertiesProvider;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSystemStore"/> class.
+        /// </summary>
+        /// <param name="storeOptions">The store options.</param>
+        /// <param name="publicUrlProvider">The public URL provider.</param>
+        /// <param name="extendedPropertiesProvider">The extended properties provider.</param>
         public FileSystemStore(FileSystemStoreOptions storeOptions, IPublicUrlProvider publicUrlProvider, IExtendedPropertiesProvider extendedPropertiesProvider)
         {
             storeOptions.Validate();
@@ -23,10 +33,22 @@
             this.extendedPropertiesProvider = extendedPropertiesProvider;
         }
 
-        public string Name => storeOptions.Name;
+        /// <summary>
+        /// Gets the name of the store.
+        /// </summary>
+        public string Name => this.storeOptions.Name;
 
-        internal string AbsolutePath => storeOptions.AbsolutePath;
+        /// <summary>
+        /// Gets the absolute path.
+        /// </summary>
+        internal string AbsolutePath => this.storeOptions.AbsolutePath;
 
+        /// <summary>
+        /// Initializes the store by creating a container in its <see cref="IStorageProvider" />.
+        /// </summary>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
         public Task InitAsync()
         {
             if (!Directory.Exists(this.AbsolutePath))
@@ -34,12 +56,21 @@
                 Directory.CreateDirectory(this.AbsolutePath);
             }
 
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Lists the files under <paramref name="path" />.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="recursive">If set to <c>true</c>, recurse the listing across folders.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for each file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> list under <paramref name="path" />.
+        /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, bool recursive, bool withMetadata)
         {
-            var directoryPath = (string.IsNullOrEmpty(path) || path == "/" || path == "\\") ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
+            string directoryPath = (string.IsNullOrEmpty(path) || path == "/" || path == "\\") ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
 
             var result = new List<IFileReference>();
             if (Directory.Exists(directoryPath))
@@ -48,7 +79,7 @@
                     .Select(fp => fp.Replace(this.AbsolutePath, "").Trim('/', '\\'))
                     .ToList();
 
-                foreach (var resultPath in allResultPaths)
+                foreach (string resultPath in allResultPaths)
                 {
                     result.Add(await this.InternalGetAsync(resultPath, withMetadata));
                 }
@@ -57,9 +88,19 @@
             return result.ToArray();
         }
 
+        /// <summary>
+        /// Lists the files under <paramref name="path" /> matching the <paramref name="searchPattern" />.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="searchPattern">The search pattern.</param>
+        /// <param name="recursive">If set to <c>true</c>, recurse the listing across folders.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for each file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> list under <paramref name="path" /> matching the <paramref name="searchPattern" />.
+        /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, string searchPattern, bool recursive, bool withMetadata)
         {
-            var directoryPath = (string.IsNullOrEmpty(path) || path == "/" || path == "\\") ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
+            string directoryPath = (string.IsNullOrEmpty(path) || path == "/" || path == "\\") ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
 
             var result = new List<IFileReference>();
             if (Directory.Exists(directoryPath))
@@ -67,12 +108,14 @@
                 var matcher = new Microsoft.Extensions.FileSystemGlobbing.Matcher(StringComparison.Ordinal);
                 matcher.AddInclude(searchPattern);
 
-                var matches = matcher.Execute(new Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
+                Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult matches = matcher.Execute(
+                    new Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
+
                 var allResultPaths = matches.Files
                     .Select(match => Path.Combine(path, match.Path).Trim('/', '\\'))
                     .ToList();
 
-                foreach (var resultPath in allResultPaths)
+                foreach (string resultPath in allResultPaths)
                 {
                     result.Add(await this.InternalGetAsync(resultPath, withMetadata));
                 }
@@ -81,11 +124,26 @@
             return result.ToArray();
         }
 
+        /// <summary>
+        /// Gets the file reference from path.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for the file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> at path.
+        /// </returns>
         public async ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withMetadata)
-        {
-            return await this.InternalGetAsync(file, withMetadata);
-        }
+            => await this.InternalGetAsync(file, withMetadata);
 
+        /// <summary>
+        /// Gets the file reference from URI.
+        /// </summary>
+        /// <param name="uri">The file uniform resource identifier (URI).</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for the file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> at path.
+        /// </returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async ValueTask<IFileReference> GetAsync(Uri uri, bool withMetadata)
         {
             if (uri.IsAbsoluteUri)
@@ -96,30 +154,66 @@
             return await this.InternalGetAsync(uri.ToString(), withMetadata);
         }
 
+        /// <summary>
+        /// Deletes the file.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
         public async Task DeleteAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.FileSystemFileReference fileReference = await this.InternalGetAsync(file);
             await fileReference.DeleteAsync();
         }
 
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <returns>
+        /// A <see cref="Stream" /> containing the file content.
+        /// </returns>
         public async ValueTask<Stream> ReadAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.FileSystemFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadAsync();
         }
 
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <returns>
+        /// A <see cref="T:byte[]" /> containing the file content.
+        /// </returns>
         public async ValueTask<byte[]> ReadAllBytesAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.FileSystemFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadAllBytesAsync();
         }
 
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <returns>
+        /// A <see cref="string" /> containing the file content.
+        /// </returns>
         public async ValueTask<string> ReadAllTextAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.FileSystemFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadAllTextAsync();
         }
 
+        /// <summary>
+        /// Saves the file.
+        /// </summary>
+        /// <param name="data">The file content.</param>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <param name="contentType">The content-type of the file.</param>
+        /// <param name="overwritePolicy">The overwrite policy.</param>
+        /// <param name="metadata">The metadata.</param>
+        /// <returns>
+        /// The saved <see cref="IFileReference" />.
+        /// </returns>
         public async ValueTask<IFileReference> SaveAsync(byte[] data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
         {
             using (var stream = new MemoryStream(data, 0, data.Length))
@@ -128,10 +222,22 @@
             }
         }
 
+        /// <summary>
+        /// Saves the file.
+        /// </summary>
+        /// <param name="data">The file content.</param>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <param name="contentType">The content-type of the file.</param>
+        /// <param name="overwritePolicy">The overwrite policy.</param>
+        /// <param name="metadata">The metadata.</param>
+        /// <returns>
+        /// The saved <see cref="IFileReference" />.
+        /// </returns>
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         public async ValueTask<IFileReference> SaveAsync(Stream data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
         {
-            var fileReference = await this.InternalGetAsync(file, withMetadata: true, checkIfExists: false);
-            var fileExists = File.Exists(fileReference.FileSystemPath);
+            Internal.FileSystemFileReference fileReference = await this.InternalGetAsync(file, withMetadata: true, checkIfExists: false);
+            bool fileExists = File.Exists(fileReference.FileSystemPath);
 
             if (fileExists)
             {
@@ -142,27 +248,27 @@
             }
 
             var properties = fileReference.Properties as Internal.FileSystemFileProperties;
-            var hashes = ComputeHashes(data);
+            (string ETag, string ContentMD5) = ComputeHashes(data);
 
             if (!fileExists 
                 || overwritePolicy == OverwritePolicy.Always
-                || (overwritePolicy == OverwritePolicy.IfContentModified && properties.ContentMD5 != hashes.ContentMD5))
+                || (overwritePolicy == OverwritePolicy.IfContentModified && properties.ContentMD5 != ContentMD5))
             {
                 this.EnsurePathExists(fileReference.FileSystemPath);
 
-                using (var fileStream = File.Open(fileReference.FileSystemPath, FileMode.Create, FileAccess.Write))
+                using (FileStream fileStream = File.Open(fileReference.FileSystemPath, FileMode.Create, FileAccess.Write))
                 {
                     await data.CopyToAsync(fileStream);
                 }
             }
 
             properties.ContentType = contentType;
-            properties.ExtendedProperties.ETag = hashes.ETag;
-            properties.ExtendedProperties.ContentMD5 = hashes.ContentMD5;
+            properties.ExtendedProperties.ETag = ETag;
+            properties.ExtendedProperties.ContentMD5 = ContentMD5;
 
             if (metadata != null)
             {
-                foreach (var kvp in metadata)
+                foreach (KeyValuePair<string, string> kvp in metadata)
                 {
                     properties.Metadata.Add(kvp.Key, kvp.Value);
                 }
@@ -173,19 +279,23 @@
             return fileReference;
         }
 
+        /// <summary>
+        /// Gets a shared access signature.
+        /// </summary>
+        /// <param name="policy">The policy.</param>
+        /// <returns>
+        /// A shared access signature to read or list the store files.
+        /// </returns>
+        /// <exception cref="NotSupportedException"></exception>
         public ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy policy)
-        {
-            throw new NotSupportedException();
-        }
+            => throw new NotSupportedException();
 
         private ValueTask<Internal.FileSystemFileReference> InternalGetAsync(IPrivateFileReference file, bool withMetadata = false, bool checkIfExists = true)
-        {
-            return this.InternalGetAsync(file.Path, withMetadata, checkIfExists);
-        }
+            => this.InternalGetAsync(file.Path, withMetadata, checkIfExists);
 
         private async ValueTask<Internal.FileSystemFileReference> InternalGetAsync(string path, bool withMetadata, bool checkIfExists = true)
         {
-            var fullPath = Path.Combine(this.AbsolutePath, path);
+            string fullPath = Path.Combine(this.AbsolutePath, path);
             if (checkIfExists && !File.Exists(fullPath))
             {
                 return null;
@@ -216,7 +326,7 @@
 
         private void EnsurePathExists(string path)
         {
-            var directoryPath = Path.GetDirectoryName(path);
+            string directoryPath = Path.GetDirectoryName(path);
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
@@ -225,14 +335,14 @@
 
         private static (string ETag, string ContentMD5) ComputeHashes(Stream stream)
         {
-            var eTag = string.Empty;
-            var contentMD5 = string.Empty;
+            string eTag = string.Empty;
+            string contentMD5 = string.Empty;
 
             stream.Seek(0, SeekOrigin.Begin);
             using (var md5 = MD5.Create())
             {
                 stream.Seek(0, SeekOrigin.Begin);
-                var hash = md5.ComputeHash(stream);
+                byte[] hash = md5.ComputeHash(stream);
                 stream.Seek(0, SeekOrigin.Begin);
                 contentMD5 = Convert.ToBase64String(hash);
                 string hex = BitConverter.ToString(hash);
