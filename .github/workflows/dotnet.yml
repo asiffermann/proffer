@@ -86,4 +86,4 @@ jobs:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Publish packages to GPR
-      run: dotnet nuget push *.nupkg
+      run: dotnet nuget push --api-key ${{ secrets.GITHUB_TOKEN }} *.nupkg
