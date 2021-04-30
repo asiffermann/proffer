@@ -43,7 +43,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task InitAsync() => this.innerStore.InitAsync();
+        public Task InitAsync()
+            => this.innerStore.InitAsync();
 
         /// <summary>
         /// Deletes the file.
@@ -52,7 +53,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task DeleteAsync(IPrivateFileReference file) => this.innerStore.DeleteAsync(file);
+        public Task DeleteAsync(IPrivateFileReference file)
+            => this.innerStore.DeleteAsync(file);
 
         /// <summary>
         /// Gets the file reference from URI.
@@ -62,7 +64,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// The <see cref="IFileReference" /> at path.
         /// </returns>
-        public ValueTask<IFileReference> GetAsync(Uri file, bool withMetadata) => this.innerStore.GetAsync(file, withMetadata);
+        public ValueTask<IFileReference> GetAsync(Uri file, bool withMetadata)
+            => this.innerStore.GetAsync(file, withMetadata);
 
         /// <summary>
         /// Gets the file reference from path.
@@ -72,7 +75,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// The <see cref="IFileReference" /> at path.
         /// </returns>
-        public ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withMetadata) => this.innerStore.GetAsync(file, withMetadata);
+        public ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withMetadata)
+            => this.innerStore.GetAsync(file, withMetadata);
 
         /// <summary>
         /// Lists the files under <paramref name="path" />.
@@ -83,7 +87,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// The <see cref="IFileReference" /> list under <paramref name="path" />.
         /// </returns>
-        public ValueTask<IFileReference[]> ListAsync(string path, bool recursive, bool withMetadata) => this.innerStore.ListAsync(path, recursive, withMetadata);
+        public ValueTask<IFileReference[]> ListAsync(string path, bool recursive, bool withMetadata)
+            => this.innerStore.ListAsync(path, recursive, withMetadata);
 
         /// <summary>
         /// Lists the files under <paramref name="path" /> matching the <paramref name="searchPattern" />.
@@ -95,7 +100,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// The <see cref="IFileReference" /> list under <paramref name="path" /> matching the <paramref name="searchPattern" />.
         /// </returns>
-        public ValueTask<IFileReference[]> ListAsync(string path, string searchPattern, bool recursive, bool withMetadata) => this.innerStore.ListAsync(path, searchPattern, recursive, withMetadata);
+        public ValueTask<IFileReference[]> ListAsync(string path, string searchPattern, bool recursive, bool withMetadata)
+            => this.innerStore.ListAsync(path, searchPattern, recursive, withMetadata);
 
         /// <summary>
         /// Reads the file content.
@@ -104,7 +110,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// A <see cref="T:byte[]" /> containing the file content.
         /// </returns>
-        public ValueTask<byte[]> ReadAllBytesAsync(IPrivateFileReference file) => this.innerStore.ReadAllBytesAsync(file);
+        public ValueTask<byte[]> ReadAllBytesAsync(IPrivateFileReference file)
+            => this.innerStore.ReadAllBytesAsync(file);
 
         /// <summary>
         /// Reads the file content.
@@ -113,7 +120,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// A <see cref="string" /> containing the file content.
         /// </returns>
-        public ValueTask<string> ReadAllTextAsync(IPrivateFileReference file) => this.innerStore.ReadAllTextAsync(file);
+        public ValueTask<string> ReadAllTextAsync(IPrivateFileReference file)
+            => this.innerStore.ReadAllTextAsync(file);
 
         /// <summary>
         /// Reads the file content.
@@ -122,7 +130,8 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// A <see cref="Stream" /> containing the file content.
         /// </returns>
-        public ValueTask<Stream> ReadAsync(IPrivateFileReference file) => this.innerStore.ReadAsync(file);
+        public ValueTask<Stream> ReadAsync(IPrivateFileReference file)
+            => this.innerStore.ReadAsync(file);
 
         /// <summary>
         /// Saves the file.
@@ -135,7 +144,9 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// The saved <see cref="IFileReference" />.
         /// </returns>
-        public ValueTask<IFileReference> SaveAsync(Stream data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null) => this.innerStore.SaveAsync(data, file, contentType, overwritePolicy);
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
+        public ValueTask<IFileReference> SaveAsync(Stream data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
+            => this.innerStore.SaveAsync(data, file, contentType, overwritePolicy);
 
         /// <summary>
         /// Saves the file.
@@ -148,7 +159,9 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// The saved <see cref="IFileReference" />.
         /// </returns>
-        public ValueTask<IFileReference> SaveAsync(byte[] data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null) => this.innerStore.SaveAsync(data, file, contentType, overwritePolicy);
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
+        public ValueTask<IFileReference> SaveAsync(byte[] data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
+            => this.innerStore.SaveAsync(data, file, contentType, overwritePolicy);
 
         /// <summary>
         /// Gets a shared access signature.
@@ -157,6 +170,7 @@ namespace Providers.Storage.Internal
         /// <returns>
         /// A shared access signature to read or list the store files.
         /// </returns>
-        public ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy policy) => this.innerStore.GetSharedAccessSignatureAsync(policy);
+        public ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy policy)
+            => this.innerStore.GetSharedAccessSignatureAsync(policy);
     }
 }

@@ -1,22 +1,30 @@
-﻿namespace Providers.Storage.Azure
+namespace Providers.Storage.Azure
 {
-    using Providers.Storage.Azure.Configuration;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
-    using Microsoft.WindowsAzure.Storage.Core;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Threading.Tasks;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Blob;
+    using Microsoft.WindowsAzure.Storage.Core;
+    using Providers.Storage.Azure.Configuration;
 
+    /// <summary>
+    /// An Azure store allows to save, list or read files on a container in its configured <see cref="AzureStorageProvider"/>.
+    /// </summary>
+    /// <seealso cref="IStore" />
     public class AzureStore : IStore
     {
         private readonly AzureStoreOptions storeOptions;
         private readonly Lazy<CloudBlobClient> client;
         private readonly Lazy<CloudBlobContainer> container;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureStore"/> class.
+        /// </summary>
+        /// <param name="storeOptions">The store options.</param>
         public AzureStore(AzureStoreOptions storeOptions)
         {
             storeOptions.Validate();
@@ -26,28 +34,38 @@
             this.container = new Lazy<CloudBlobContainer>(() => this.client.Value.GetContainerReference(storeOptions.FolderName));
         }
 
+        /// <summary>
+        /// Gets the name of the store.
+        /// </summary>
         public string Name => this.storeOptions.Name;
 
+        /// <summary>
+        /// Initializes the store by creating a container in its <see cref="IStorageProvider" />.
+        /// </summary>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
         public Task InitAsync()
         {
-            BlobContainerPublicAccessType accessType;
-            switch (this.storeOptions.AccessLevel)
+            BlobContainerPublicAccessType accessType = this.storeOptions.AccessLevel switch
             {
-                case Storage.Configuration.AccessLevel.Public:
-                    accessType = BlobContainerPublicAccessType.Container;
-                    break;
-                case Storage.Configuration.AccessLevel.Confidential:
-                    accessType = BlobContainerPublicAccessType.Blob;
-                    break;
-                case Storage.Configuration.AccessLevel.Private:
-                default:
-                    accessType = BlobContainerPublicAccessType.Off;
-                    break;
-            }
+                Storage.Configuration.AccessLevel.Public => BlobContainerPublicAccessType.Container,
+                Storage.Configuration.AccessLevel.Confidential => BlobContainerPublicAccessType.Blob,
+                _ => BlobContainerPublicAccessType.Off,
+            };
 
             return this.container.Value.CreateIfNotExistsAsync(accessType, null, null);
         }
 
+        /// <summary>
+        /// Lists the files under <paramref name="path" />.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="recursive">If set to <c>true</c>, recurse the listing across folders.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for each file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> list under <paramref name="path" />.
+        /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, bool recursive, bool withMetadata)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -58,16 +76,24 @@
             {
                 if (!path.EndsWith("/"))
                 {
-                    path = path + "/";
+                    path += "/";
                 }
             }
 
             BlobContinuationToken continuationToken = null;
-            List<IListBlobItem> results = new List<IListBlobItem>();
+            var results = new List<IListBlobItem>();
 
             do
             {
-                var response = await this.container.Value.ListBlobsSegmentedAsync(path, recursive, withMetadata ? BlobListingDetails.Metadata : BlobListingDetails.None, null, continuationToken, new BlobRequestOptions(), new OperationContext());
+                BlobResultSegment response = await this.container.Value.ListBlobsSegmentedAsync(
+                    path,
+                    recursive,
+                    withMetadata ? BlobListingDetails.Metadata : BlobListingDetails.None,
+                    null,
+                    continuationToken,
+                    new BlobRequestOptions(),
+                    new OperationContext());
+
                 continuationToken = response.ContinuationToken;
                 results.AddRange(response.Results);
             }
@@ -76,6 +102,16 @@
             return results.OfType<ICloudBlob>().Select(blob => new Internal.AzureFileReference(blob, withMetadata: withMetadata)).ToArray();
         }
 
+        /// <summary>
+        /// Lists the files under <paramref name="path" /> matching the <paramref name="searchPattern" />.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="searchPattern">The search pattern.</param>
+        /// <param name="recursive">If set to <c>true</c>, recurse the listing across folders.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for each file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> list under <paramref name="path" /> matching the <paramref name="searchPattern" />.
+        /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, string searchPattern, bool recursive, bool withMetadata)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -86,28 +122,36 @@
             {
                 if (!path.EndsWith("/"))
                 {
-                    path = path + "/";
+                    path += "/";
                 }
             }
 
             string prefix = path;
-            var firstWildCard = searchPattern.IndexOf('*');
+            int firstWildCard = searchPattern.IndexOf('*');
             if (firstWildCard >= 0)
             {
                 prefix += searchPattern.Substring(0, firstWildCard);
                 searchPattern = searchPattern.Substring(firstWildCard);
             }
 
-            Microsoft.Extensions.FileSystemGlobbing.Matcher matcher = new Microsoft.Extensions.FileSystemGlobbing.Matcher(StringComparison.Ordinal);
+            var matcher = new Microsoft.Extensions.FileSystemGlobbing.Matcher(StringComparison.Ordinal);
             matcher.AddInclude(searchPattern);
 
             var operationContext = new OperationContext();
             BlobContinuationToken continuationToken = null;
-            List<IListBlobItem> results = new List<IListBlobItem>();
+            var results = new List<IListBlobItem>();
 
             do
             {
-                var response = await this.container.Value.ListBlobsSegmentedAsync(prefix, recursive, withMetadata ? BlobListingDetails.Metadata : BlobListingDetails.None, null, continuationToken, new BlobRequestOptions(), new OperationContext());
+                BlobResultSegment response = await this.container.Value.ListBlobsSegmentedAsync(
+                    prefix,
+                    recursive,
+                    withMetadata ? BlobListingDetails.Metadata : BlobListingDetails.None,
+                    null,
+                    continuationToken,
+                    new BlobRequestOptions(),
+                    new OperationContext());
+
                 continuationToken = response.ContinuationToken;
                 results.AddRange(response.Results);
             }
@@ -117,45 +161,92 @@
                 .Select(blob => new Internal.AzureFileReference(blob, withMetadata: withMetadata))
                 .ToDictionary(x => Path.GetFileName(x.Path));
 
-            var filteredResults = matcher.Execute(new Internal.AzureListDirectoryWrapper(path, pathMap));
+            Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult filteredResults = matcher.Execute(new Internal.AzureListDirectoryWrapper(path, pathMap));
 
             return filteredResults.Files.Select(x => pathMap[x.Path]).ToArray();
         }
 
-        public async ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withMetadata)
-        {
-            return await this.InternalGetAsync(file, withMetadata);
-        }
+        /// <summary>
+        /// Gets the file reference from path.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for the file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> at path.
+        /// </returns>
+        public async ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withMetadata) => await this.InternalGetAsync(file, withMetadata);
 
-        public async ValueTask<IFileReference> GetAsync(Uri uri, bool withMetadata)
-        {
-            return await this.InternalGetAsync(uri, withMetadata);
-        }
+        /// <summary>
+        /// Gets the file reference from URI.
+        /// </summary>
+        /// <param name="uri">The file uniform resource identifier (URI).</param>
+        /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for the file.</param>
+        /// <returns>
+        /// The <see cref="IFileReference" /> at path.
+        /// </returns>
+        public async ValueTask<IFileReference> GetAsync(Uri uri, bool withMetadata) => await this.InternalGetAsync(uri, withMetadata);
 
+        /// <summary>
+        /// Deletes the file.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
         public async Task DeleteAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
             await fileReference.DeleteAsync();
         }
 
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <returns>
+        /// A <see cref="Stream" /> containing the file content.
+        /// </returns>
         public async ValueTask<Stream> ReadAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadInMemoryAsync();
         }
 
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <returns>
+        /// A <see cref="T:byte[]" /> containing the file content.
+        /// </returns>
         public async ValueTask<byte[]> ReadAllBytesAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadAllBytesAsync();
         }
 
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <returns>
+        /// A <see cref="string" /> containing the file content.
+        /// </returns>
         public async ValueTask<string> ReadAllTextAsync(IPrivateFileReference file)
         {
-            var fileReference = await this.InternalGetAsync(file);
+            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadAllTextAsync();
         }
 
+        /// <summary>
+        /// Saves the file.
+        /// </summary>
+        /// <param name="data">The file content.</param>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <param name="contentType">The content-type of the file.</param>
+        /// <param name="overwritePolicy">The overwrite policy.</param>
+        /// <param name="metadata">The metadata.</param>
+        /// <returns>
+        /// The saved <see cref="IFileReference" />.
+        /// </returns>
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         public async ValueTask<IFileReference> SaveAsync(byte[] data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
         {
             using (var stream = new SyncMemoryStream(data, 0, data.Length))
@@ -164,11 +255,23 @@
             }
         }
 
+        /// <summary>
+        /// Saves the file.
+        /// </summary>
+        /// <param name="data">The file content.</param>
+        /// <param name="file">The reference holding the file path.</param>
+        /// <param name="contentType">The content-type of the file.</param>
+        /// <param name="overwritePolicy">The overwrite policy.</param>
+        /// <param name="metadata">The metadata.</param>
+        /// <returns>
+        /// The saved <see cref="IFileReference" />.
+        /// </returns>
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         public async ValueTask<IFileReference> SaveAsync(Stream data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
         {
-            var uploadBlob = true;
-            var blockBlob = this.container.Value.GetBlockBlobReference(file.Path);
-            var blobExists = await blockBlob.ExistsAsync();
+            bool uploadBlob = true;
+            CloudBlockBlob blockBlob = this.container.Value.GetBlockBlobReference(file.Path);
+            bool blobExists = await blockBlob.ExistsAsync();
 
             if (blobExists)
             {
@@ -184,16 +287,16 @@
                     using (var md5 = MD5.Create())
                     {
                         data.Seek(0, SeekOrigin.Begin);
-                        var contentMD5 = Convert.ToBase64String(md5.ComputeHash(data));
+                        string contentMD5 = Convert.ToBase64String(md5.ComputeHash(data));
                         data.Seek(0, SeekOrigin.Begin);
-                        uploadBlob = (contentMD5 != blockBlob.Properties.ContentMD5);
+                        uploadBlob = contentMD5 != blockBlob.Properties.ContentMD5;
                     }
                 }
             }
 
             if (metadata != null)
             {
-                foreach (var kvp in metadata)
+                foreach (KeyValuePair<string, string> kvp in metadata)
                 {
                     blockBlob.Metadata.Add(kvp.Key, kvp.Value);
                 }
@@ -215,6 +318,13 @@
             return reference;
         }
 
+        /// <summary>
+        /// Gets a shared access signature.
+        /// </summary>
+        /// <param name="policy">The policy.</param>
+        /// <returns>
+        /// A shared access signature to read or list the store files.
+        /// </returns>
         public ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy policy)
         {
             var adHocPolicy = new SharedAccessBlobPolicy()
@@ -229,7 +339,7 @@
 
         internal static SharedAccessBlobPermissions FromGenericToAzure(SharedAccessPermissions permissions)
         {
-            var result = SharedAccessBlobPermissions.None;
+            SharedAccessBlobPermissions result = SharedAccessBlobPermissions.None;
 
             if (permissions.HasFlag(SharedAccessPermissions.Add))
             {
@@ -292,7 +402,7 @@
                     else
                     {
                         blob = this.container.Value.GetBlockBlobReference(uri.ToString());
-                        if (!(await blob.ExistsAsync()))
+                        if (!await blob.ExistsAsync())
                         {
                             return null;
                         }

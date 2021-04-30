@@ -104,6 +104,7 @@ namespace Providers.Storage
         /// <returns>
         /// The saved <see cref="IFileReference" />.
         /// </returns>
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         public static ValueTask<IFileReference> SaveAsync(this IStore store, byte[] data, string path, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string,string> metadata = null)
             => store.SaveAsync(data, new Internal.PrivateFileReference(path), contentType, overwritePolicy, metadata);
 
@@ -119,6 +120,7 @@ namespace Providers.Storage
         /// <returns>
         /// The saved <see cref="IFileReference" />.
         /// </returns>
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         public static ValueTask<IFileReference> SaveAsync(this IStore store, Stream data, string path, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string,string> metadata = null)
             => store.SaveAsync(data, new Internal.PrivateFileReference(path), contentType, overwritePolicy, metadata);
     }

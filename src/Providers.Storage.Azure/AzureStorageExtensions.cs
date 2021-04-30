@@ -1,15 +1,23 @@
-﻿namespace Providers.Storage
+namespace Providers.Storage
 {
     using Azure;
-    using Providers.Storage.Azure.Configuration;
-    using Providers.Storage.Internal;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Microsoft.Extensions.Options;
+    using Providers.Storage.Azure.Configuration;
+    using Providers.Storage.Internal;
 
+    /// <summary>
+    /// <see cref="IServiceCollection"/> extension methods.
+    /// </summary>
     public static class AzureStorageExtensions
     {
-        public static IServiceCollection AddAzureStorage(this IServiceCollection services)
+        /// <summary>
+        /// Registers the Azure Storage provider services.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <returns>The service collection.</returns>
+        public static IServiceCollection AddAzureStorageProvider(this IServiceCollection services)
         {
             return services
                 .AddSingleton<IConfigureOptions<AzureParsedOptions>, ConfigureProviderOptions<AzureParsedOptions, AzureProviderInstanceOptions, AzureStoreOptions, AzureScopedStoreOptions>>()

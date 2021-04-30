@@ -98,6 +98,7 @@ namespace Providers.Storage.Configuration
         /// <typeparam name="TScopedStoreOptions">The type of the scoped store options.</typeparam>
         /// <param name="parsedProviderInstance">The parsed provider instance options.</param>
         /// <param name="options">The options.</param>
+        /// <exception cref="Exceptions.BadProviderConfiguration"></exception>
         public static void Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this TInstanceOptions parsedProviderInstance, TParsedOptions options)
             where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>
             where TInstanceOptions : class, IProviderInstanceOptions, new()
@@ -116,6 +117,7 @@ namespace Providers.Storage.Configuration
         /// <typeparam name="TScopedStoreOptions">The type of the scoped store options.</typeparam>
         /// <param name="parsedStore">The parsed store options.</param>
         /// <param name="options">The options.</param>
+        /// <exception cref="Exceptions.BadStoreConfiguration"></exception>
         public static void Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this TStoreOptions parsedStore, TParsedOptions options)
             where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>
             where TInstanceOptions : class, IProviderInstanceOptions, new()

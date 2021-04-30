@@ -1,4 +1,4 @@
-﻿namespace Providers.Storage.Azure.Internal
+namespace Providers.Storage.Azure.Internal
 {
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
@@ -6,11 +6,21 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// A reference of a stored file at a given path on Azure Storage.
+    /// </summary>
+    /// <seealso cref="IFileReference" />
     public class AzureFileReference : IFileReference
     {
         private Lazy<AzureFileProperties> propertiesLazy;
         private bool withMetadata;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureFileReference"/> class.
+        /// </summary>
+        /// <param name="path">The file path.</param>
+        /// <param name="cloudBlob">The Azure Storage blob.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, the metadata for the file have been fetched.</param>
         public AzureFileReference(string path, ICloudBlob cloudBlob, bool withMetadata)
         {
             this.Path = path;
@@ -27,29 +37,56 @@
             });
         }
 
-        public AzureFileReference(ICloudBlob cloudBlob, bool withMetadata) :
-            this(cloudBlob.Name, cloudBlob, withMetadata)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureFileReference"/> class.
+        /// </summary>
+        /// <param name="cloudBlob">The Azure Storage blob.</param>
+        /// <param name="withMetadata">If set to <c>true</c>, the metadata for the file have been fetched.</param>
+        public AzureFileReference(ICloudBlob cloudBlob, bool withMetadata)
+            : this(cloudBlob.Name, cloudBlob, withMetadata)
         {
         }
 
+        /// <summary>
+        /// Gets the file path.
+        /// </summary>
         public string Path { get; }
 
+        /// <summary>
+        /// Gets the properties.
+        /// </summary>
         public IFileProperties Properties => this.propertiesLazy.Value;
 
+        /// <summary>
+        /// Gets the public URL.
+        /// </summary>
         public string PublicUrl => this.CloudBlob.Uri.ToString();
 
+        /// <summary>
+        /// Gets the Azure Storage blob.
+        /// </summary>
         public ICloudBlob CloudBlob { get; }
 
-        public Task DeleteAsync()
-        {
-            return this.CloudBlob.DeleteAsync();
-        }
+        /// <summary>
+        /// Deletes the file.
+        /// </summary>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
+        public Task DeleteAsync() => this.CloudBlob.DeleteAsync();
 
-        public async ValueTask<Stream> ReadAsync()
-        {
-            return await this.ReadInMemoryAsync();
-        }
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="Stream" /> containing the file content.
+        /// </returns>
+        public async ValueTask<Stream> ReadAsync() => await this.ReadInMemoryAsync();
 
+        /// <summary>
+        /// Reads the file content in memory.
+        /// </summary>
+        /// <returns>A new <see cref="MemoryStream" /> containing the file content.</returns>
         public async ValueTask<MemoryStream> ReadInMemoryAsync()
         {
             var memoryStream = new MemoryStream();
@@ -58,16 +95,27 @@
             return memoryStream;
         }
 
-        public Task UpdateAsync(Stream stream)
-        {
-            return this.CloudBlob.UploadFromStreamAsync(stream);
-        }
+        /// <summary>
+        /// Updates the file content with the given <see cref="Stream" />.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
+        public Task UpdateAsync(Stream stream) => this.CloudBlob.UploadFromStreamAsync(stream);
 
-        public async Task ReadToStreamAsync(Stream targetStream)
-        {
-            await this.CloudBlob.DownloadRangeToStreamAsync(targetStream, null, null);
-        }
+        /// <summary>
+        /// Reads the file content into the given stream.
+        /// </summary>
+        /// <param name="targetStream">The target stream.</param>
+        public async Task ReadToStreamAsync(Stream targetStream) => await this.CloudBlob.DownloadRangeToStreamAsync(targetStream, null, null);
 
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string" /> containing the file content.
+        /// </returns>
         public async ValueTask<string> ReadAllTextAsync()
         {
             using (var reader = new StreamReader(await this.CloudBlob.OpenReadAsync(AccessCondition.GenerateEmptyCondition(), new BlobRequestOptions(), new OperationContext())))
@@ -76,16 +124,29 @@
             }
         }
 
-        public async ValueTask<byte[]> ReadAllBytesAsync()
-        {
-            return (await this.ReadInMemoryAsync()).ToArray();
-        }
+        /// <summary>
+        /// Reads the file content.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:byte[]" /> containing the file content.
+        /// </returns>
+        public async ValueTask<byte[]> ReadAllBytesAsync() => ( await this.ReadInMemoryAsync() ).ToArray();
 
-        public Task SavePropertiesAsync()
-        {
-            return this.propertiesLazy.Value.SaveAsync();
-        }
+        /// <summary>
+        /// Saves the file properties.
+        /// </summary>
+        /// <returns>
+        /// A task that represents the asynchronous operation.
+        /// </returns>
+        public Task SavePropertiesAsync() => this.propertiesLazy.Value.SaveAsync();
 
+        /// <summary>
+        /// Gets a shared access signature.
+        /// </summary>
+        /// <param name="policy">The policy.</param>
+        /// <returns>
+        /// A shared access signature to read file.
+        /// </returns>
         public ValueTask<string> GetSharedAccessSignature(ISharedAccessPolicy policy)
         {
             var adHocPolicy = new SharedAccessBlobPolicy()
@@ -98,6 +159,10 @@
             return new ValueTask<string>(this.CloudBlob.GetSharedAccessSignature(adHocPolicy));
         }
 
+        /// <summary>
+        /// Fetches the file properties.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         public async Task FetchProperties()
         {
             if (this.withMetadata)

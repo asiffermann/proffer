@@ -49,6 +49,7 @@ namespace Providers.Storage.Configuration
         /// </summary>
         /// <param name="storeOptions">The store options.</param>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
+        /// <exception cref="Exceptions.BadStoreConfiguration"></exception>
         void BindStoreOptions(TStoreOptions storeOptions, TInstanceOptions providerInstanceOptions = null);
     }
 }

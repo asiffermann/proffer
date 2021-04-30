@@ -34,6 +34,8 @@ namespace Providers.Storage.Internal
         /// Invoked to configure a <typeparamref name="TParsedOptions" /> instance.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
+        /// <exception cref="Exceptions.BadStoreConfiguration"></exception>
+        /// <exception cref="Exceptions.BadProviderConfiguration"></exception>
         public void Configure(TParsedOptions options)
         {
             if (this.storageOptions == null)

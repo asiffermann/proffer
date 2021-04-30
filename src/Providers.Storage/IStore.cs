@@ -51,10 +51,10 @@ namespace Providers.Storage
         /// <summary>
         /// Gets the file reference from URI.
         /// </summary>
-        /// <param name="file">The file uniform resource identifier (URI).</param>
+        /// <param name="uri">The file uniform resource identifier (URI).</param>
         /// <param name="withMetadata">If set to <c>true</c>, fetch metadata for the file.</param>
         /// <returns>The <see cref="IFileReference"/> at path.</returns>
-        ValueTask<IFileReference> GetAsync(Uri file, bool withMetadata);
+        ValueTask<IFileReference> GetAsync(Uri uri, bool withMetadata);
 
         /// <summary>
         /// Deletes the file.
@@ -93,6 +93,7 @@ namespace Providers.Storage
         /// <param name="overwritePolicy">The overwrite policy.</param>
         /// <param name="metadata">The metadata.</param>
         /// <returns>The saved <see cref="IFileReference"/>.</returns>
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         ValueTask<IFileReference> SaveAsync(byte[] data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null);
 
         /// <summary>
@@ -104,6 +105,7 @@ namespace Providers.Storage
         /// <param name="overwritePolicy">The overwrite policy.</param>
         /// <param name="metadata">The metadata.</param>
         /// <returns>The saved <see cref="IFileReference"/>.</returns>
+        /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         ValueTask<IFileReference> SaveAsync(Stream data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null);
 
         /// <summary>
