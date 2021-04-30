@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Providers.Storage.FileSystem.ExtendedProperties.FileSystem</AssemblyName>
+    <PackageId>Providers.Storage.FileSystem.ExtendedProperties.FileSystem</PackageId>
+    <Description>File System based extended properties storage provider for the FileSystem provider.</Description>
+    <Product>Providers</Product>
+    <Authors>Adrien Siffermann</Authors>
+    <RepositoryUrl>https://github.com/asiffermann/providers</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Providers.Storage.FileSystem\Providers.Storage.FileSystem.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>
