@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Proffer.Email.Smtp</AssemblyName>
+    <PackageId>Proffer.Email.Smtp</PackageId>
+    <Description>SMTP provider for Proffer.Email abstractions.</Description>
+    <Product>Proffer</Product>
+    <Authors>Adrien Siffermann</Authors>
+    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Proffer.Email\Proffer.Email.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="1.18.1.1" />
+  </ItemGroup>
+
+</Project>
