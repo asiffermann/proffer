@@ -45,9 +45,16 @@ jobs:
       run: dotnet build --no-restore --configuration Release -p:Version=${{ steps.gitversion.outputs.fullSemVer }}
 
     - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal
+      run: dotnet test --no-build --configuration Release --logger trx --results-directory "tests-results"
       env:
         "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: tests-results
+        path: tests-results
+      if: ${{ always() }}
 
     - name: Pack
       run: dotnet pack --no-build --configuration Release --output ./packages -p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}
