@@ -8,6 +8,11 @@ namespace Proffer.Email
     public class EmailOptions 
     {
         /// <summary>
+        /// The default configuration section name.
+        /// </summary>
+        public const string DefaultConfigurationSectionName = "Email";
+
+        /// <summary>
         /// Gets or sets the provider options.
         /// </summary>
         public EmailProviderOptions Provider { get; set; }

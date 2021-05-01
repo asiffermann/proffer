@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,13 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="SampleDirectory\**\*.*;appsettings.json;appsettings.*.json">
+    <None Update="Templates\**\*.*;appsettings.json;appsettings.*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Files\beach.jpeg">
+    <None Update="appsettings.development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Files\sample.pdf">
+    <None Update="Attachments\beach.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Attachments\sample.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,13 +1,12 @@
 namespace Proffer.Email.Integration.Test
 {
-    using Microsoft.Extensions.Options;
     using System.Collections.Generic;
+    using Microsoft.Extensions.Options;
 
     public class Datas
     {
-        public const string FirstRecipient = "no-reply@test.geeklearning.io";
-        public const string SecondRecipient = "no-reply2@test.geeklearning.io";
-        public const string ThirdRecipient = "no-reply3@test.geeklearning.io";
+        public const string FirstRecipient = "tests@proffer-dotnet.org";
+        public const string SecondRecipient = "hello@proffer-dotnet.org";
 
         public static IOptions<EmailOptions> GetOptions(StoresFixture storeFixture, string storeName = null)
         {
@@ -18,15 +17,14 @@ namespace Proffer.Email.Integration.Test
                     Type = "SendGrid",
                     Parameters = new Dictionary<string, string>
                     {
-                        { "Key", storeFixture.SendGridKey },
-                        { "User", storeFixture.SendGridUser },
+                        { "Key", storeFixture.SendGridKey }
                     },
                 },
                 TemplateStorage = storeName,
                 DefaultSender = new Internal.EmailAddress
                 {
-                    DisplayName = "test user",
-                    Email = "no-reply@test.geeklearning.io"
+                    DisplayName = "Proffer",
+                    Email = "no-reply@proffer-dotnet.org"
                 },
                 Mockup = new MockupOptions
                 {

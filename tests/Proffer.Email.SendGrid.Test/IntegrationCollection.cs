@@ -3,7 +3,7 @@ namespace Proffer.Email.Integration.Test
     using Xunit;
 
     [CollectionDefinition(nameof(IntegrationCollection))]
-    public class IntegrationCollection: ICollectionFixture<StoresFixture>
+    public class IntegrationCollection : ICollectionFixture<StoresFixture>
     {
     }
 }
