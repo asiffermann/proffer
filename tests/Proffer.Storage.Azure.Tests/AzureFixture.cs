@@ -124,9 +124,7 @@ namespace Proffer.Storage.Azure.Tests
 
         private void ResetAzureStores()
         {
-            string azCopy = Path.Combine(
-                Environment.ExpandEnvironmentVariables(this.Configuration["AzCopyPath"]),
-                "AzCopy.exe");
+            string azcopy = Environment.ExpandEnvironmentVariables(this.Configuration["AzCopy10Command"]);
 
             foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.AzureParsedOptions.ParsedStores)
             {
@@ -134,15 +132,17 @@ namespace Proffer.Storage.Azure.Tests
                 string cloudStoragekey = cloudStorageAccount.Credentials.ExportBase64EncodedKey();
                 string containerName = parsedStoreKvp.Value.FolderName;
 
-                string dest = cloudStorageAccount.BlobStorageUri.PrimaryUri.ToString() + containerName;
+                string containerUrl = cloudStorageAccount.BlobStorageUri.PrimaryUri.ToString() + containerName;
 
                 CloudBlobClient client = cloudStorageAccount.CreateCloudBlobClient();
 
                 CloudBlobContainer container = client.GetContainerReference(containerName);
                 container.CreateIfNotExistsAsync().Wait();
 
-                string arguments = $"/Source:\"{Path.Combine(this.BasePath, "SampleDirectory")}\" /Dest:\"{dest}\" /DestKey:{cloudStoragekey} /S /y";
-                var process = Process.Start(new ProcessStartInfo(azCopy)
+                string defaultContentPath = Path.Combine(this.BasePath, "Stores", "DefaultContent");
+
+                string arguments = $"copy '{defaultContentPath}' '{containerUrl}?{cloudStoragekey}' --recursive";
+                var process = Process.Start(new ProcessStartInfo(azcopy)
                 {
                     Arguments = arguments
                 });
