@@ -1,23 +1,25 @@
-﻿namespace Proffer.Email.InMemory
+namespace Proffer.Email.InMemory
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
+    /// <summary>
+    /// A repository in memory to hold sent emails through the provider.
+    /// </summary>
+    /// <seealso cref="IInMemoryEmailRepository" />
     public class InMemoryEmailRepository : IInMemoryEmailRepository
     {
-        private List<InMemoryEmail> innerEmailStore = new List<InMemoryEmail>();
+        private readonly List<InMemoryEmail> innerEmailStore = new();
 
-        public IReadOnlyCollection<InMemoryEmail> Store
-        {
-            get
-            {
-                return new ReadOnlyCollection<InMemoryEmail>(innerEmailStore);
-            }
-        }
+        /// <summary>
+        /// Gets the emails store.
+        /// </summary>
+        public IReadOnlyCollection<InMemoryEmail> Store => new ReadOnlyCollection<InMemoryEmail>(this.innerEmailStore);
 
-        public void Save(InMemoryEmail email)
-        {            
-            this.innerEmailStore.Add(email);
-        }
+        /// <summary>
+        /// Saves the specified email in the store.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        public void Save(InMemoryEmail email) => this.innerEmailStore.Add(email);
     }
 }

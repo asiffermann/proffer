@@ -32,7 +32,7 @@ namespace Proffer.Templating.Internal
         /// A <see cref="ITemplateLoader" /> that loads templates from the given <see cref="IStore" />.
         /// </returns>
         public ITemplateLoader Create(IStore store)
-            => new TemplateLoader(store, this.providers, this.memoryCache, null);
+            => new TemplateLoader(store, this.providers, this.memoryCache);
 
         /// <summary>
         /// Creates a template loader from the specified store with the specified cache scope.
@@ -43,6 +43,6 @@ namespace Proffer.Templating.Internal
         /// A <see cref="ITemplateLoader" /> that loads templates from the given <see cref="IStore" />.
         /// </returns>
         public ITemplateLoader Create(IStore store, string scope)
-            => new TemplateLoader(store, this.providers, this.memoryCache, scope);
+            => new TemplateLoader(store, this.providers, this.memoryCache);
     }
 }

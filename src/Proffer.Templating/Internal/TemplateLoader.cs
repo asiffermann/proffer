@@ -14,7 +14,6 @@ namespace Proffer.Templating.Internal
         private readonly IMemoryCache memoryCache;
         private readonly IEnumerable<ITemplateProvider> providers;
         private readonly IStore store;
-        //private Dictionary<ITemplateProvider, ITemplateScope> scopes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateLoader"/> class.
@@ -22,13 +21,11 @@ namespace Proffer.Templating.Internal
         /// <param name="store">The store.</param>
         /// <param name="providers">The providers.</param>
         /// <param name="memoryCache">The memory cache.</param>
-        /// <param name="scope">The scope.</param>
-        public TemplateLoader(IStore store, IEnumerable<ITemplateProvider> providers, IMemoryCache memoryCache, string scope)
+        public TemplateLoader(IStore store, IEnumerable<ITemplateProvider> providers, IMemoryCache memoryCache)
         {
             this.store = store;
             this.providers = providers;
             this.memoryCache = memoryCache;
-            //this.scope = memoryCache.GetOrCreateAsync("x_tmpl_inf_scopes", async entry => { })
         }
 
         /// <summary>
