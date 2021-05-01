@@ -87,10 +87,10 @@ namespace Proffer.Email.Integration.Test
         [Fact(DisplayName = nameof(SendNotificationWithAttachments))]
         public async Task SendNotificationWithAttachments()
         {
-            byte[] data = System.IO.File.ReadAllBytes(@"Attachments\beach.jpeg");
+            byte[] data = System.IO.File.ReadAllBytes(@"Attachments/beach.jpeg");
             var image = new EmailAttachment("Beach.jpeg", data, "image", "jpeg");
 
-            data = System.IO.File.ReadAllBytes(@"Attachments\sample.pdf");
+            data = System.IO.File.ReadAllBytes(@"Attachments/sample.pdf");
             var pdf = new EmailAttachment("Sample.pdf", data, "application", "pdf");
 
             await this.emailSender.SendTemplatedEmailAsync(

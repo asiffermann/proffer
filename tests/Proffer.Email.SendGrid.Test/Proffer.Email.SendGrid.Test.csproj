@@ -7,16 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Templates\**\*.*;appsettings.json;appsettings.*.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="appsettings.development.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Attachments\beach.jpeg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Attachments\sample.pdf">
+    <None Update="Templates\*.*;Attachments\*.*;appsettings.json;appsettings.*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
