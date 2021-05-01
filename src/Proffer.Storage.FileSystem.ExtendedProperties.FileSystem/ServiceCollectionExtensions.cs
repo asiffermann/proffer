@@ -9,7 +9,7 @@ namespace Proffer.Storage
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class FileSystemExtendedPropertiesExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Registers a File System extended properties provider that stores it in JSON files.

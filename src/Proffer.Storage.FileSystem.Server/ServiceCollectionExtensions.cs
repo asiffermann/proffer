@@ -10,7 +10,7 @@ namespace Proffer.Storage
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class FileSystemStorageServerExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds a File System provider Storage Server, serving files over HTTP.

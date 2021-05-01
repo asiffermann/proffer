@@ -10,15 +10,15 @@ namespace Proffer.Storage
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class FileSystemStorageExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers the File System provider services on given root path.
+        /// Registers the Proffer.Storage services to the File System on the given root path.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <param name="rootPath">The root path.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddFileSystemStorageProvider(this IServiceCollection services, string rootPath)
+        public static IServiceCollection AddFileSystemStorage(this IServiceCollection services, string rootPath)
         {
             return services
                 .Configure<FileSystemParsedOptions>(options => options.RootPath = rootPath)
@@ -26,11 +26,11 @@ namespace Proffer.Storage
         }
 
         /// <summary>
-        /// Registers the File System provider services on root path <see cref="System.IO.Directory.GetCurrentDirectory"/>.
+        /// Registers the Proffer.Storage services to the File System on the root path <see cref="System.IO.Directory.GetCurrentDirectory"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddFileSystemStorageProvider(this IServiceCollection services)
+        public static IServiceCollection AddFileSystemStorage(this IServiceCollection services)
         {
             return services              
                 .Configure<FileSystemParsedOptions>(options => options.RootPath = System.IO.Directory.GetCurrentDirectory())

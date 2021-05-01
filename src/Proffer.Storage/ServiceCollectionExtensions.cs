@@ -9,14 +9,14 @@ namespace Proffer.Storage
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class StorageServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers the storage providers basic services.
+        /// Registers Proffer.Storage services.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddStorageProviders(this IServiceCollection services)
+        public static IServiceCollection AddStorage(this IServiceCollection services)
         {
             services.TryAddTransient<IStorageFactory, Internal.StorageFactory>();
             services.TryAdd(ServiceDescriptor.Transient(typeof(IStore<>), typeof(Internal.GenericStoreProxy<>)));
@@ -24,20 +24,20 @@ namespace Proffer.Storage
         }
 
         /// <summary>
-        /// Registers the storage providers basic services and configures it with the given section.
+        /// Registers Proffer.Storage services and configures it with the given section.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <param name="configurationSection">The configuration section.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddStorageProviders(this IServiceCollection services, IConfigurationSection configurationSection)
+        public static IServiceCollection AddStorage(this IServiceCollection services, IConfigurationSection configurationSection)
         {
             return services
                 .Configure<StorageOptions>(configurationSection)
-                .AddStorageProviders();
+                .AddStorage();
         }
 
         /// <summary>
-        /// Registers the storage providers basic services and configures it from the given <paramref name="configurationRoot" /> at section <paramref name="sectionName" />.
+        /// Registers Proffer.Storage services and configures it from the given <paramref name="configurationRoot" /> at section <paramref name="sectionName" />.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <param name="configurationRoot">The configuration root.</param>
@@ -45,7 +45,7 @@ namespace Proffer.Storage
         /// <returns>
         /// The service collection.
         /// </returns>
-        public static IServiceCollection AddStorageProviders(this IServiceCollection services, IConfigurationRoot configurationRoot, string sectionName = StorageOptions.DefaultConfigurationSectionName)
+        public static IServiceCollection AddStorage(this IServiceCollection services, IConfigurationRoot configurationRoot, string sectionName = StorageOptions.DefaultConfigurationSectionName)
         {
             return services
                 .Configure<StorageOptions>(configurationRoot.GetSection(sectionName))
@@ -64,7 +64,7 @@ namespace Proffer.Storage
 
                     storageOptions.ConnectionStrings = connectionStrings;
                 })
-                .AddStorageProviders();
+                .AddStorage();
         }
     }
 }

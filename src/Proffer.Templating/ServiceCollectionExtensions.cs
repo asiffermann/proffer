@@ -9,11 +9,11 @@ namespace Proffer.Templating
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers the templating providers basic services.
+        /// Registers Proffer.Templating services.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddTemplatingProviders(this IServiceCollection services)
+        public static IServiceCollection AddTemplating(this IServiceCollection services)
         {
             services.TryAddTransient<ITemplateLoaderFactory, Internal.TemplateLoaderFactory>();
             return services;

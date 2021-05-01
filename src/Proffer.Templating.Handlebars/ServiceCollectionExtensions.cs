@@ -9,11 +9,11 @@ namespace Proffer.Templating
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers the <see cref="HandlebarsDotNet"/> templating provider.
+        /// Registers the Proffer.Templating services to use <see cref="HandlebarsDotNet"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddHandlebarsProvider(this IServiceCollection services)
+        public static IServiceCollection AddHandlebars(this IServiceCollection services)
         {
             services.TryAddEnumerable(ServiceDescriptor.Transient<ITemplateProvider, Handlebars.HandlebarsTemplateProvider>());
             return services;

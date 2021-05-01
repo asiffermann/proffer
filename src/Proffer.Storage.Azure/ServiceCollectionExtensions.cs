@@ -10,23 +10,19 @@ namespace Proffer.Storage
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class AzureStorageExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers the Azure Storage provider services.
+        /// Registers the Proffer.Storage services to Azure Storage.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddAzureStorageProvider(this IServiceCollection services)
+        public static IServiceCollection AddAzureStorage(this IServiceCollection services)
         {
-            return services
+            services
                 .AddSingleton<IConfigureOptions<AzureParsedOptions>, ConfigureProviderOptions<AzureParsedOptions, AzureProviderInstanceOptions, AzureStoreOptions, AzureScopedStoreOptions>>()
-                .AddAzureStorageServices();
-        }
+                .TryAddEnumerable(ServiceDescriptor.Transient<IStorageProvider, AzureStorageProvider>());
 
-        private static IServiceCollection AddAzureStorageServices(this IServiceCollection services)
-        {
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IStorageProvider, AzureStorageProvider>());
             return services;
         }
     }
