@@ -51,6 +51,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EB0DAEC2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.SendGrid.Test", "tests\Proffer.Email.SendGrid.Test\Proffer.Email.SendGrid.Test.csproj", "{5D2F4666-7C27-48B0-845C-C0A7A9ED537A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.Azure.Test", "tests\Proffer.Storage.Azure.Test\Proffer.Storage.Azure.Test.csproj", "{9A682CF2-0465-494A-9A82-AB2341E624A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Testing", "tests\Proffer.Testing\Proffer.Testing.csproj", "{815899B8-C129-469A-B169-2A59E65181F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +113,14 @@ Global
 		{5D2F4666-7C27-48B0-845C-C0A7A9ED537A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D2F4666-7C27-48B0-845C-C0A7A9ED537A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D2F4666-7C27-48B0-845C-C0A7A9ED537A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A682CF2-0465-494A-9A82-AB2341E624A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A682CF2-0465-494A-9A82-AB2341E624A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A682CF2-0465-494A-9A82-AB2341E624A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A682CF2-0465-494A-9A82-AB2341E624A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +140,8 @@ Global
 		{71EB6650-2C03-4DA2-89FA-C4443CB0FB2A} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
 		{60BA8317-9CDB-4002-9E43-88EB8BBB3280} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
 		{5D2F4666-7C27-48B0-845C-C0A7A9ED537A} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
+		{9A682CF2-0465-494A-9A82-AB2341E624A1} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
+		{815899B8-C129-469A-B169-2A59E65181F1} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E14A063-006D-442F-BBA4-C9CF12D2438A}

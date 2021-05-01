@@ -1,4 +1,4 @@
-namespace Proffer.Email.Integration.Test
+namespace Proffer.Email.SendGrid.Test
 {
     using System;
     using System.Collections.Generic;
@@ -6,22 +6,26 @@ namespace Proffer.Email.Integration.Test
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
     using Proffer.Email.Internal;
+    using Proffer.Testing;
     using Xunit;
+    using Xunit.Categories;
 
-    [Collection(nameof(IntegrationCollection))]
-    [Trait("Operation", "SendSimpleEmail"), Trait("Kind", "Integration")]
+    [IntegrationTest]
+    [Feature(nameof(Email))]
+    [Feature(nameof(SendGrid))]
+    [Collection(nameof(SendGridCollection))]
     public class SendSimpleEmailTest
     {
-        private readonly EmailServicesFixture storeFixture;
+        private readonly SendGridFixture storeFixture;
         private readonly IEmailSender emailSender;
 
-        public SendSimpleEmailTest(EmailServicesFixture fixture)
+        public SendSimpleEmailTest(SendGridFixture fixture)
         {
             this.storeFixture = fixture;
             this.emailSender = this.storeFixture.Services.GetRequiredService<IEmailSender>();
         }
 
-        [Fact(DisplayName = nameof(Send))]
+        [Fact]
         public async Task Send()
         {
             await this.emailSender.SendEmailAsync("Simple mail", "Hello, it's a simple mail", new EmailAddress
@@ -31,7 +35,7 @@ namespace Proffer.Email.Integration.Test
             });
         }
 
-        [Fact(DisplayName = nameof(SendWithReplyTo))]
+        [Fact]
         public async Task SendWithReplyTo()
         {
             await this.emailSender.SendEmailAsync(
@@ -49,7 +53,7 @@ namespace Proffer.Email.Integration.Test
                 });
         }
 
-        [Fact(DisplayName = nameof(SendWithCC))]
+        [Fact]
         public async Task SendWithCC()
         {
             await this.emailSender.SendEmailAsync(
@@ -60,17 +64,17 @@ namespace Proffer.Email.Integration.Test
                 new EmailAddress
                 {
                     DisplayName = "recipient user",
-                    Email = Datas.FirstRecipient
+                    Email = SendGridFixture.FirstRecipient
                 }.Yield(),
                 new EmailAddress
                 {
                     DisplayName = "cc user",
-                    Email = Datas.SecondRecipient
+                    Email = SendGridFixture.SecondRecipient
                 }.Yield(),
                 Array.Empty<IEmailAddress>());
         }
 
-        [Fact(DisplayName = nameof(SendWithBcc))]
+        [Fact]
         public async Task SendWithBcc()
         {
             await this.emailSender.SendEmailAsync(
@@ -81,17 +85,17 @@ namespace Proffer.Email.Integration.Test
                 new EmailAddress
                 {
                     DisplayName = "recipient user",
-                    Email = Datas.FirstRecipient
+                    Email = SendGridFixture.FirstRecipient
                 }.Yield(),
                 Array.Empty<IEmailAddress>(),
                 new EmailAddress
                 {
                     DisplayName = "test user",
-                    Email = Datas.SecondRecipient
+                    Email = SendGridFixture.SecondRecipient
                 }.Yield());
         }
 
-        [Fact(DisplayName = nameof(SendWithAttachments))]
+        [Fact]
         public async Task SendWithAttachments()
         {
             byte[] data = System.IO.File.ReadAllBytes(@"Attachments/beach.jpeg");
@@ -108,11 +112,11 @@ namespace Proffer.Email.Integration.Test
                 new EmailAddress
                 {
                     DisplayName = "test user",
-                    Email = Datas.FirstRecipient
+                    Email = SendGridFixture.FirstRecipient
                 });
         }
 
-        [Fact(DisplayName = nameof(ErrorSendWithCCDuplicates))]
+        [Fact]
         public async Task ErrorSendWithCCDuplicates()
         {
             await Assert.ThrowsAsync<ArgumentException>(() =>
@@ -124,12 +128,12 @@ namespace Proffer.Email.Integration.Test
                      new EmailAddress
                      {
                          DisplayName = "recipient user",
-                         Email = Datas.SecondRecipient
+                         Email = SendGridFixture.SecondRecipient
                      }.Yield(),
                      new EmailAddress
                      {
                          DisplayName = "cc user",
-                         Email = Datas.SecondRecipient
+                         Email = SendGridFixture.SecondRecipient
                      }.Yield(),
                      Array.Empty<IEmailAddress>()));
         }

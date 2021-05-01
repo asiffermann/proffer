@@ -1,4 +1,4 @@
-namespace Proffer.Email.Integration.Test
+namespace Proffer.Email.SendGrid.Test
 {
     using System;
     using System.Collections.Generic;
@@ -6,22 +6,26 @@ namespace Proffer.Email.Integration.Test
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
     using Proffer.Email.Internal;
+    using Proffer.Testing;
     using Xunit;
+    using Xunit.Categories;
 
-    [Collection(nameof(IntegrationCollection))]
-    [Trait("Operation", "SendTemplated"), Trait("Kind", "Integration")]
+    [IntegrationTest]
+    [Feature(nameof(Email))]
+    [Feature(nameof(SendGrid))]
+    [Collection(nameof(SendGridCollection))]
     public class SendTemplatedEmailTest
     {
-        private readonly EmailServicesFixture storeFixture;
+        private readonly SendGridFixture storeFixture;
         private readonly IEmailSender emailSender;
 
-        public SendTemplatedEmailTest(EmailServicesFixture fixture)
+        public SendTemplatedEmailTest(SendGridFixture fixture)
         {
             this.storeFixture = fixture;
             this.emailSender = this.storeFixture.Services.GetRequiredService<IEmailSender>();
         }
 
-        [Fact(DisplayName = nameof(SendNotification1))]
+        [Fact]
         public async Task SendNotification1()
         {
             await this.emailSender.SendTemplatedEmailAsync(
@@ -30,11 +34,11 @@ namespace Proffer.Email.Integration.Test
                 new EmailAddress
                 {
                     DisplayName = "test user",
-                    Email = Datas.FirstRecipient
+                    Email = SendGridFixture.FirstRecipient
                 });
         }
 
-        [Fact(DisplayName = nameof(SendNotificationWithWithCC))]
+        [Fact]
         public async Task SendNotificationWithWithCC()
         {
             await this.emailSender.SendTemplatedEmailAsync(
@@ -45,17 +49,17 @@ namespace Proffer.Email.Integration.Test
                 new EmailAddress
                 {
                     DisplayName = "recipient user",
-                    Email = Datas.FirstRecipient
+                    Email = SendGridFixture.FirstRecipient
                 }.Yield(),
                 new EmailAddress
                 {
                     DisplayName = "cc user",
-                    Email = Datas.SecondRecipient
+                    Email = SendGridFixture.SecondRecipient
                 }.Yield(),
                 Array.Empty<IEmailAddress>());
         }
 
-        [Fact(DisplayName = nameof(SendNotificationWithWithBbc))]
+        [Fact]
         public async Task SendNotificationWithWithBbc()
         {
             await this.emailSender.SendTemplatedEmailAsync(
@@ -66,17 +70,17 @@ namespace Proffer.Email.Integration.Test
                 new EmailAddress
                 {
                     DisplayName = "recipient user",
-                    Email = Datas.FirstRecipient
+                    Email = SendGridFixture.FirstRecipient
                 }.Yield(),
                 Array.Empty<IEmailAddress>(),
                 new EmailAddress
                 {
                     DisplayName = "test user",
-                    Email = Datas.SecondRecipient
+                    Email = SendGridFixture.SecondRecipient
                 }.Yield());
         }
 
-        [Fact(DisplayName = nameof(SendNotificationWithAttachments))]
+        [Fact]
         public async Task SendNotificationWithAttachments()
         {
             byte[] data = System.IO.File.ReadAllBytes(@"Attachments/beach.jpeg");
@@ -93,7 +97,7 @@ namespace Proffer.Email.Integration.Test
                 new EmailAddress
                 {
                     DisplayName = "test user",
-                    Email = Datas.FirstRecipient
+                    Email = SendGridFixture.FirstRecipient
                 });
         }
     }

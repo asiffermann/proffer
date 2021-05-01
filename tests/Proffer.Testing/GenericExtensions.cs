@@ -1,6 +1,6 @@
-﻿namespace Proffer.Email.Integration.Test
+namespace Proffer.Testing
 {
-    public static class Utils
+    public static class GenericExtensions
     {
         public static T[] Yield<T>(this T item)
         {
