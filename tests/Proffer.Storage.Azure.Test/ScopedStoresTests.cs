@@ -1,19 +1,22 @@
-﻿namespace Proffer.Storage.Integration.Test
+namespace Proffer.Storage.Azure.Test
 {
-    using Microsoft.Extensions.DependencyInjection;
-    using Storage;
     using System;
     using System.Text;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.DependencyInjection;
+    using Storage;
     using Xunit;
+    using Xunit.Categories;
 
-    [Collection(nameof(IntegrationCollection))]
-    [Trait("Operation", "ScopedStores"), Trait("Kind", "Integration")]
+    [IntegrationTest]
+    [Feature(nameof(Storage))]
+    [Feature(nameof(Azure))]
+    [Collection(nameof(AzureCollection))]
     public class ScopedStoresTests
     {
-        private StoresFixture storeFixture;
+        private readonly AzureFixture storeFixture;
 
-        public ScopedStoresTests(StoresFixture fixture)
+        public ScopedStoresTests(AzureFixture fixture)
         {
             this.storeFixture = fixture;
         }
@@ -21,19 +24,19 @@
         [Theory(DisplayName = nameof(ScopedStoreUpdate)), InlineData("ScopedStore1"), InlineData("ScopedStore2")]
         public async Task ScopedStoreUpdate(string storeName)
         {
-            var storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
+            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
             var formatArg = Guid.NewGuid();
-            var store = storageFactory.GetScopedStore(storeName, formatArg);
+            IStore store = storageFactory.GetScopedStore(storeName, formatArg);
 
             await store.InitAsync();
 
-            var textToWrite = "The answer is 42";
-            var filePath = "Update/42.txt";
+            string textToWrite = "The answer is 42";
+            string filePath = "Update/42.txt";
 
             await store.SaveAsync(Encoding.UTF8.GetBytes(textToWrite), filePath, "text/plain");
 
-            var readFromWrittenFile = await store.ReadAllTextAsync(filePath);
+            string readFromWrittenFile = await store.ReadAllTextAsync(filePath);
 
             Assert.Equal(textToWrite, readFromWrittenFile);
         }

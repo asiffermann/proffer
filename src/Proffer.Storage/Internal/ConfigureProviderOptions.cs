@@ -45,7 +45,7 @@ namespace Proffer.Storage.Internal
 
             options.ConnectionStrings = this.storageOptions.ConnectionStrings;
 
-            options.ParsedProviderInstances = this.storageOptions.Proffer.Parse<TInstanceOptions>()
+            options.ParsedProviderInstances = this.storageOptions.Providers.Parse<TInstanceOptions>()
                 .Where(kvp => kvp.Value.Type == options.Name)
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 

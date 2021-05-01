@@ -25,7 +25,7 @@ namespace Proffer.Storage.Configuration
         public StorageOptions()
         {
             this.parsedProviderInstances = new Lazy<IReadOnlyDictionary<string, ProviderInstanceOptions>>(
-                () => this.Proffer.Parse<ProviderInstanceOptions>());
+                () => this.Providers.Parse<ProviderInstanceOptions>());
             this.parsedStores = new Lazy<IReadOnlyDictionary<string, StoreOptions>>(
                 () => this.Stores.Parse<StoreOptions>());
             this.parsedScopedStores = new Lazy<IReadOnlyDictionary<string, ScopedStoreOptions>>(
@@ -40,7 +40,7 @@ namespace Proffer.Storage.Configuration
         /// <summary>
         /// Gets or sets the providers unparsed options.
         /// </summary>
-        public IReadOnlyDictionary<string, IConfigurationSection> Proffer { get; set; }
+        public IReadOnlyDictionary<string, IConfigurationSection> Providers { get; set; }
 
         /// <summary>
         /// Gets or sets the stores unparsed options.

@@ -1,27 +1,28 @@
-﻿namespace Proffer.Storage.Integration.Test
+namespace Proffer.Storage.Azure.Test
 {
-    using Storage;
-    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
+    using System.Linq;
     using System.Threading.Tasks;
-    using Xunit;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Options;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
-    using Microsoft.Extensions.Options;
     using Proffer.Storage.Azure.Configuration;
-    using System.Linq;
+    using Storage;
+    using Xunit;
+    using Xunit.Categories;
 
-    [Collection(nameof(IntegrationCollection))]
-    [Trait("Operation", "SharedAccess"), Trait("Kind", "Integration")]
+    [IntegrationTest]
+    [Feature(nameof(Storage))]
+    [Feature(nameof(Azure))]
+    [Collection(nameof(AzureCollection))]
     public class SharedAccessTests
     {
-        private readonly StoresFixture storeFixture;
+        private readonly AzureFixture storeFixture;
 
-        public SharedAccessTests(StoresFixture fixture)
+        public SharedAccessTests(AzureFixture fixture)
         {
             this.storeFixture = fixture;
         }
@@ -29,14 +30,14 @@
         [Theory(DisplayName = nameof(StoreSharedAccess)), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
         public async Task StoreSharedAccess(string storeName)
         {
-            var storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-            var options = this.storeFixture.Services.GetRequiredService<IOptions<AzureParsedOptions>>();
+            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
+            IOptions<AzureParsedOptions> options = this.storeFixture.Services.GetRequiredService<IOptions<AzureParsedOptions>>();
 
-            var store = storageFactory.GetStore(storeName);
+            IStore store = storageFactory.GetStore(storeName);
 
-            options.Value.ParsedStores.TryGetValue(storeName, out var storeOptions);
+            options.Value.ParsedStores.TryGetValue(storeName, out AzureStoreOptions storeOptions);
 
-            var sharedAccessSignature = await store.GetSharedAccessSignatureAsync(new SharedAccessPolicy
+            string sharedAccessSignature = await store.GetSharedAccessSignatureAsync(new SharedAccessPolicy
             {
                 ExpiryTime = DateTime.UtcNow.AddHours(24),
                 Permissions = SharedAccessPermissions.List,
@@ -46,21 +47,21 @@
 
             var accountSAS = new StorageCredentials(sharedAccessSignature);
             var accountWithSAS = new CloudStorageAccount(accountSAS, account.Credentials.AccountName, endpointSuffix: null, useHttps: true);
-            var blobClientWithSAS = accountWithSAS.CreateCloudBlobClient();
-            var containerWithSAS = blobClientWithSAS.GetContainerReference(storeOptions.FolderName);
+            CloudBlobClient blobClientWithSAS = accountWithSAS.CreateCloudBlobClient();
+            CloudBlobContainer containerWithSAS = blobClientWithSAS.GetContainerReference(storeOptions.FolderName);
 
             BlobContinuationToken continuationToken = null;
-            List<IListBlobItem> results = new List<IListBlobItem>();
+            var results = new List<IListBlobItem>();
 
             do
             {
-                var response = await containerWithSAS.ListBlobsSegmentedAsync(continuationToken);
+                BlobResultSegment response = await containerWithSAS.ListBlobsSegmentedAsync(continuationToken);
                 continuationToken = response.ContinuationToken;
                 results.AddRange(response.Results);
             }
             while (continuationToken != null);
 
-            var filesFromStore = await store.ListAsync(null, false, false);
+            IFileReference[] filesFromStore = await store.ListAsync(null, false, false);
 
             Assert.Equal(filesFromStore.Length, results.OfType<ICloudBlob>().Count());
         }

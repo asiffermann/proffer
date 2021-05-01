@@ -1,12 +1,12 @@
-﻿namespace Proffer.Storage.Integration.Test
+namespace Proffer.Storage.Azure.Test.Stubs
 {
-    using Proffer.Storage.Configuration;
     using System.Collections.Generic;
     using System.Linq;
+    using Proffer.Storage.Configuration;
 
-    public class TestStore : IStoreOptions
+    public class StoreOptionsStub : IStoreOptions
     {
-        public TestStore()
+        public StoreOptionsStub()
         {
             this.Name = "TestStore";
             this.ProviderType = "FileSystem";

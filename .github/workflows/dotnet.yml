@@ -48,6 +48,9 @@ jobs:
       run: dotnet test --no-build --configuration Release --logger trx --collect "XPlat Code Coverage" --results-directory "tests-results" --settings coverlet.runsettings
       env:
         "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
+        "ConnectionStrings:ConnectionStringFromAppSettings": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "Storage:Providers:FirstAzure:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "Storage:Stores:Store4:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
 
     - name: Upload tests results artifacts
       uses: actions/upload-artifact@v2

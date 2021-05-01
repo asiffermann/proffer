@@ -1,17 +1,20 @@
-namespace Proffer.Storage.Integration.Test
+namespace Proffer.Storage.Azure.Test
 {
+    using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
     using Storage;
-    using System.Threading.Tasks;
     using Xunit;
+    using Xunit.Categories;
 
-    [Collection(nameof(IntegrationCollection))]
-    [Trait("Operation", "Delete"), Trait("Kind", "Integration")]
+    [IntegrationTest]
+    [Feature(nameof(Storage))]
+    [Feature(nameof(Azure))]
+    [Collection(nameof(AzureCollection))]
     public class DeleteTests
     {
-        private StoresFixture storeFixture;
+        private readonly AzureFixture storeFixture;
 
-        public DeleteTests(StoresFixture fixture)
+        public DeleteTests(AzureFixture fixture)
         {
             this.storeFixture = fixture;
         }
@@ -19,11 +22,11 @@ namespace Proffer.Storage.Integration.Test
         [Theory(DisplayName = nameof(Delete)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
         public async Task Delete(string storeName)
         {
-            var storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
+            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
-            var store = storageFactory.GetStore(storeName);
+            IStore store = storageFactory.GetStore(storeName);
 
-            var file = await store.GetAsync("Delete/ToDelete.txt");
+            IFileReference file = await store.GetAsync("Delete/ToDelete.txt");
 
             await file.DeleteAsync();
 

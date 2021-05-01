@@ -7,7 +7,6 @@ namespace Proffer.Email.SendGrid.Test
     using Proffer.Testing;
     using Storage;
     using Templating;
-    using Xunit;
 
     public class SendGridFixture : ServiceProviderFixture
     {
@@ -68,7 +67,4 @@ namespace Proffer.Email.SendGrid.Test
                 .AddSendGridEmail();
         }
     }
-
-    [CollectionDefinition(nameof(SendGridCollection))]
-    public class SendGridCollection : ServiceProviderCollection<SendGridFixture> { }
 }
