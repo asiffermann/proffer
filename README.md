@@ -3,7 +3,7 @@
 # Proffer
 
 | Package  |  Current version  | Downloads  |
-|---|---|---|---|
+|---|---|---|
 | Proffer.Storage | [![NuGet](https://img.shields.io/nuget/v/Proffer.Storage.svg)](https://www.nuget.org/packages/Proffer.Storage/) | [![NuGet](https://img.shields.io/nuget/dt/Proffer.Storage.svg)](https://www.nuget.org/packages/Proffer.Storage/)
 
 .NET Core basic abstractions to configuration-driven providers
