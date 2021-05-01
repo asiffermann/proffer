@@ -8,7 +8,7 @@ namespace Proffer.Email.Integration.Test
         public const string FirstRecipient = "tests@proffer-dotnet.org";
         public const string SecondRecipient = "hello@proffer-dotnet.org";
 
-        public static IOptions<EmailOptions> GetOptions(StoresFixture storeFixture, string storeName = null)
+        public static IOptions<EmailOptions> GetOptions(EmailServicesFixture storeFixture, string storeName = null)
         {
             return Options.Create(new EmailOptions
             {

@@ -1,16 +1,17 @@
 namespace Proffer.Email.Integration.Test
 {
     using System;
-    using System.Collections.Generic;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
+    using Proffer.Email.Internal;
     using Storage;
     using Templating;
 
-    public class StoresFixture
+    public class EmailServicesFixture
     {
-        public StoresFixture()
+        public EmailServicesFixture()
         {
             this.BasePath = PlatformServices.Default.Application.ApplicationBasePath;
 
@@ -21,7 +22,6 @@ namespace Proffer.Email.Integration.Test
                 .AddEnvironmentVariables();
 
             this.Configuration = builder.Build();
-
             this.SendGridKey = this.Configuration["Email:Provider:Parameters:Key"];
 
             var services = new ServiceCollection();
@@ -38,9 +38,14 @@ namespace Proffer.Email.Integration.Test
                 .AddSendGridEmail();
 
             this.Services = services.BuildServiceProvider();
+
+            IOptions<EmailOptions> emailOptions = this.Services.GetRequiredService<IOptions<EmailOptions>>();
+            this.DefaultSender = emailOptions.Value.DefaultSender;
         }
 
         public string SendGridKey { get; set; }
+
+        public EmailAddress DefaultSender { get; set; }
 
         public IConfigurationRoot Configuration { get; }
 

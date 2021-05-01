@@ -12,10 +12,10 @@ namespace Proffer.Email.Integration.Test
     [Trait("Operation", "SendSimpleEmail"), Trait("Kind", "Integration")]
     public class SendSimpleEmailTest
     {
-        private readonly StoresFixture storeFixture;
+        private readonly EmailServicesFixture storeFixture;
         private readonly IEmailSender emailSender;
 
-        public SendSimpleEmailTest(StoresFixture fixture)
+        public SendSimpleEmailTest(EmailServicesFixture fixture)
         {
             this.storeFixture = fixture;
             this.emailSender = this.storeFixture.Services.GetRequiredService<IEmailSender>();
@@ -35,11 +35,7 @@ namespace Proffer.Email.Integration.Test
         public async Task SendWithReplyTo()
         {
             await this.emailSender.SendEmailAsync(
-                new EmailAddress
-                {
-                    DisplayName = "Sender user test replyTo",
-                    Email = "no-reply@proffer-dotnet.org"
-                },
+                this.storeFixture.DefaultSender,
                 new EmailAddress
                 {
                     DisplayName = "Reply Address",
@@ -57,11 +53,7 @@ namespace Proffer.Email.Integration.Test
         public async Task SendWithCC()
         {
             await this.emailSender.SendEmailAsync(
-                new EmailAddress
-                {
-                    DisplayName = "Sender user test cc",
-                    Email = "no-reply@proffer-dotnet.org"
-                },
+                this.storeFixture.DefaultSender,
                 "Cc test",
                 "Hello, this is an email with cc recipients",
                 Enumerable.Empty<IEmailAttachment>(),
@@ -82,11 +74,7 @@ namespace Proffer.Email.Integration.Test
         public async Task SendWithBcc()
         {
             await this.emailSender.SendEmailAsync(
-                new EmailAddress
-                {
-                    DisplayName = "Sender user test bcc",
-                    Email = "no-reply@proffer-dotnet.org"
-                },
+                this.storeFixture.DefaultSender,
                 "Bcc test",
                 "Hello, this is an email with bcc recipients",
                 Enumerable.Empty<IEmailAttachment>(),
@@ -113,11 +101,7 @@ namespace Proffer.Email.Integration.Test
             var pdf = new EmailAttachment("Sample.pdf", data, "application", "pdf");
 
             await this.emailSender.SendEmailAsync(
-                new EmailAddress
-                {
-                    DisplayName = "test user attachm ments",
-                    Email = "no-reply@proffer-dotnet.org"
-                },
+                this.storeFixture.DefaultSender,
                 "Test mail with attachments",
                 "Hello, this is an email with attachments",
                 new List<IEmailAttachment> { image, pdf },
@@ -133,25 +117,21 @@ namespace Proffer.Email.Integration.Test
         {
             await Assert.ThrowsAsync<ArgumentException>(() =>
                  this.emailSender.SendEmailAsync(
+                     this.storeFixture.DefaultSender,
+                     "Cc test",
+                     "Hello, this is an email with cc recipients",
+                     Enumerable.Empty<IEmailAttachment>(),
                      new EmailAddress
                      {
-                         DisplayName = "Sender user test cc",
-                         Email = "no-reply@proffer-dotnet.org"
-                     },
-                    "Cc test",
-                    "Hello, this is an email with cc recipients",
-                    Enumerable.Empty<IEmailAttachment>(),
-                    new EmailAddress
-                    {
-                        DisplayName = "recipient user",
-                        Email = Datas.SecondRecipient
-                    }.Yield(),
-                    new EmailAddress
-                    {
-                        DisplayName = "cc user",
-                        Email = Datas.SecondRecipient
-                    }.Yield(),
-                    Array.Empty<IEmailAddress>()));
+                         DisplayName = "recipient user",
+                         Email = Datas.SecondRecipient
+                     }.Yield(),
+                     new EmailAddress
+                     {
+                         DisplayName = "cc user",
+                         Email = Datas.SecondRecipient
+                     }.Yield(),
+                     Array.Empty<IEmailAddress>()));
         }
     }
 }

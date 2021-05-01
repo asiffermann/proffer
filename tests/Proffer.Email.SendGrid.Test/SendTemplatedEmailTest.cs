@@ -12,10 +12,10 @@ namespace Proffer.Email.Integration.Test
     [Trait("Operation", "SendTemplated"), Trait("Kind", "Integration")]
     public class SendTemplatedEmailTest
     {
-        private readonly StoresFixture storeFixture;
+        private readonly EmailServicesFixture storeFixture;
         private readonly IEmailSender emailSender;
 
-        public SendTemplatedEmailTest(StoresFixture fixture)
+        public SendTemplatedEmailTest(EmailServicesFixture fixture)
         {
             this.storeFixture = fixture;
             this.emailSender = this.storeFixture.Services.GetRequiredService<IEmailSender>();
@@ -38,11 +38,7 @@ namespace Proffer.Email.Integration.Test
         public async Task SendNotificationWithWithCC()
         {
             await this.emailSender.SendTemplatedEmailAsync(
-                new EmailAddress
-                {
-                    DisplayName = "Sender user test cc",
-                    Email = "no-reply@proffer-dotnet.org"
-                },
+                this.storeFixture.DefaultSender,
                 "Notification1",
                 new { },
                 Enumerable.Empty<IEmailAttachment>(),
@@ -63,11 +59,7 @@ namespace Proffer.Email.Integration.Test
         public async Task SendNotificationWithWithBbc()
         {
             await this.emailSender.SendTemplatedEmailAsync(
-                new EmailAddress
-                {
-                    DisplayName = "Sender user test cc",
-                    Email = "no-reply@proffer-dotnet.org"
-                },
+                this.storeFixture.DefaultSender,
                 "Notification1",
                 new { },
                 Enumerable.Empty<IEmailAttachment>(),
@@ -94,11 +86,7 @@ namespace Proffer.Email.Integration.Test
             var pdf = new EmailAttachment("Sample.pdf", data, "application", "pdf");
 
             await this.emailSender.SendTemplatedEmailAsync(
-                new EmailAddress
-                {
-                    DisplayName = "test user attachm ments",
-                    Email = "no-reply@proffer-dotnet.org"
-                },
+                this.storeFixture.DefaultSender,
                 "Notification1",
                 new { },
                 new List<IEmailAttachment> { image, pdf },
