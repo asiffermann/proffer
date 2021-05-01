@@ -1,4 +1,4 @@
-name: .NET
+name: Continuous Integration
 
 on:
   push:
@@ -45,16 +45,27 @@ jobs:
       run: dotnet build --no-restore --configuration Release -p:Version=${{ steps.gitversion.outputs.fullSemVer }}
 
     - name: Test
-      run: dotnet test --no-build --configuration Release --collect "Code coverage" --logger trx --results-directory "tests-results"
+      run: dotnet test --no-build --configuration Release --logger trx --collect:"XPlat Code Coverage" --results-directory "tests-results"
       env:
         "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
 
-    - name: Upload test results
+    - name: Upload tests results artifacts
       uses: actions/upload-artifact@v2
       with:
         name: tests-results
         path: tests-results
       if: ${{ always() }}
+
+    - name: Get path to the lcov code coverage file
+      id: get-lcov-path
+      shell: bash
+      run: printf '::set-output name=lcov-path::%s\n' tests-results/*/coverage.info
+
+    - name: Upload coverage to Coveralls
+      uses: coverallsapp/github-action@v1.1.2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ${{ steps.get-lcov-path.outputs.lcov-path }}
 
     - name: Pack
       run: dotnet pack --no-build --configuration Release --output ./packages -p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}

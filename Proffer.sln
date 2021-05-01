@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		coverlet.runsettings = coverlet.runsettings
 		gitversion.yml = gitversion.yml
 		LICENSE = LICENSE
 		README.md = README.md
