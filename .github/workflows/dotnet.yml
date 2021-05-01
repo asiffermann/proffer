@@ -45,7 +45,7 @@ jobs:
       run: dotnet build --no-restore --configuration Release -p:Version=${{ steps.gitversion.outputs.fullSemVer }}
 
     - name: Test
-      run: dotnet test --no-build --configuration Release --logger trx --results-directory "tests-results"
+      run: dotnet test --no-build --configuration Release --collect "Code coverage" --logger trx --results-directory "tests-results"
       env:
         "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
 
