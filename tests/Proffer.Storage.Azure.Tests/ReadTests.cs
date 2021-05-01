@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System.IO;
     using System.Threading.Tasks;
@@ -20,8 +20,9 @@ namespace Proffer.Storage.Azure.Test
             this.storeFixture = fixture;
         }
 
-        [Theory(DisplayName = nameof(ReadAllTextFromRootFile)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ReadAllTextFromRootFile(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.ReadAllTextAsync))]
+        public async Task Should_ReadAllText_When_PathIsRootFile(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -34,8 +35,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(expectedText, actualText);
         }
 
-        [Theory(DisplayName = nameof(ReadAllTextFromRootFile)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ReadAllTextFromSubdirectoryFile(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.ReadAllTextAsync))]
+        public async Task Should_ReadAllText_When_PathIsNestedFile(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -48,8 +50,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(expectedText, actualText);
         }
 
-        [Theory(DisplayName = nameof(ReadAllBytesFromSubdirectoryFile)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ReadAllBytesFromSubdirectoryFile(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.ReadAllBytesAsync))]
+        public async Task Should_ReadAllBytes_When_PathIsNestedFile(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -64,8 +67,9 @@ namespace Proffer.Storage.Azure.Test
             }
         }
 
-        [Theory(DisplayName = nameof(ReadAllBytesFromSubdirectoryFileUsingFileReference)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ReadAllBytesFromSubdirectoryFileUsingFileReference(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IFileReference.ReadAllBytesAsync))]
+        public async Task Should_ReadAllBytes_With_FileReference(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -83,8 +87,9 @@ namespace Proffer.Storage.Azure.Test
         }
 
 
-        [Theory(DisplayName = nameof(ReadFileFromSubdirectoryFile)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ReadFileFromSubdirectoryFile(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IFileReference.ReadAsync))]
+        public async Task Should_Read_With_FileReference(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -104,8 +109,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(expectedText, actualText);
         }
 
-        [Theory(DisplayName = nameof(ReadAllTextFromSubdirectoryFileUsingFileReference)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ReadAllTextFromSubdirectoryFileUsingFileReference(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IFileReference.ReadAllTextAsync))]
+        public async Task Should_ReadAllText_With_FileReference(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -121,8 +127,9 @@ namespace Proffer.Storage.Azure.Test
         }
 
 
-        [Theory(DisplayName = nameof(ListThenReadAllTextFromSubdirectoryFile)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ListThenReadAllTextFromSubdirectoryFile(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.ReadAllTextAsync))]
+        public async Task Should_ReadAllText_With_EachListingFileReference(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 

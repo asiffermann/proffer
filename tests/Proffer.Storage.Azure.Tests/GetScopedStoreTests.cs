@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System;
     using System.Text;
@@ -11,18 +11,19 @@ namespace Proffer.Storage.Azure.Test
     [IntegrationTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
+    [Feature(nameof(IStorageFactory.GetScopedStore))]
     [Collection(nameof(AzureCollection))]
-    public class ScopedStoresTests
+    public class GetScopedStoreTests
     {
         private readonly AzureFixture storeFixture;
 
-        public ScopedStoresTests(AzureFixture fixture)
+        public GetScopedStoreTests(AzureFixture fixture)
         {
             this.storeFixture = fixture;
         }
 
-        [Theory(DisplayName = nameof(ScopedStoreUpdate)), InlineData("ScopedStore1"), InlineData("ScopedStore2")]
-        public async Task ScopedStoreUpdate(string storeName)
+        [Theory, InlineData("ScopedStore1"), InlineData("ScopedStore2")]
+        public async Task Should_UpdateFile_With_ScopedStore(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 

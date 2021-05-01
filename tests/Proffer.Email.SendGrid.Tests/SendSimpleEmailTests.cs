@@ -1,4 +1,4 @@
-namespace Proffer.Email.SendGrid.Test
+namespace Proffer.Email.SendGrid.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -13,30 +13,34 @@ namespace Proffer.Email.SendGrid.Test
     [IntegrationTest]
     [Feature(nameof(Email))]
     [Feature(nameof(SendGrid))]
+    [Feature(nameof(IEmailSender.SendEmailAsync))]
     [Collection(nameof(SendGridCollection))]
-    public class SendSimpleEmailTest
+    public class SendSimpleEmailTests
     {
         private readonly SendGridFixture storeFixture;
         private readonly IEmailSender emailSender;
 
-        public SendSimpleEmailTest(SendGridFixture fixture)
+        public SendSimpleEmailTests(SendGridFixture fixture)
         {
             this.storeFixture = fixture;
             this.emailSender = this.storeFixture.Services.GetRequiredService<IEmailSender>();
         }
 
         [Fact]
-        public async Task Send()
+        public async Task Should_SendEmail_With_SimpleArguments()
         {
-            await this.emailSender.SendEmailAsync("Simple mail", "Hello, it's a simple mail", new EmailAddress
-            {
-                DisplayName = "test user",
-                Email = "tests@proffer-dotnet.org"
-            });
+            await this.emailSender.SendEmailAsync(
+                "Simple mail",
+                "Hello, it's a simple mail",
+                new EmailAddress
+                {
+                    DisplayName = "test user",
+                    Email = "tests@proffer-dotnet.org"
+                });
         }
 
         [Fact]
-        public async Task SendWithReplyTo()
+        public async Task Should_SendEmail_With_ReplyTo()
         {
             await this.emailSender.SendEmailAsync(
                 this.storeFixture.DefaultSender,
@@ -54,7 +58,7 @@ namespace Proffer.Email.SendGrid.Test
         }
 
         [Fact]
-        public async Task SendWithCC()
+        public async Task Should_SendEmail_With_CarbonCopyRecipients()
         {
             await this.emailSender.SendEmailAsync(
                 this.storeFixture.DefaultSender,
@@ -75,7 +79,7 @@ namespace Proffer.Email.SendGrid.Test
         }
 
         [Fact]
-        public async Task SendWithBcc()
+        public async Task Should_SendEmail_With_BlackCarbonCopyRecipients()
         {
             await this.emailSender.SendEmailAsync(
                 this.storeFixture.DefaultSender,
@@ -96,7 +100,7 @@ namespace Proffer.Email.SendGrid.Test
         }
 
         [Fact]
-        public async Task SendWithAttachments()
+        public async Task Should_SendEmail_With_Attachments()
         {
             byte[] data = System.IO.File.ReadAllBytes(@"Attachments/beach.jpeg");
             var image = new EmailAttachment("Beach.jpeg", data, "image", "jpeg");
@@ -117,7 +121,7 @@ namespace Proffer.Email.SendGrid.Test
         }
 
         [Fact]
-        public async Task ErrorSendWithCCDuplicates()
+        public async Task Should_Throw_With_CarbonCopyRecipientsDuplicates()
         {
             await Assert.ThrowsAsync<ArgumentException>(() =>
                  this.emailSender.SendEmailAsync(

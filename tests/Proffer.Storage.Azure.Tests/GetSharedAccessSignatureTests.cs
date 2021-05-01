@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -17,18 +17,19 @@ namespace Proffer.Storage.Azure.Test
     [IntegrationTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
+    [Feature(nameof(IStore.GetSharedAccessSignatureAsync))]
     [Collection(nameof(AzureCollection))]
-    public class SharedAccessTests
+    public class GetSharedAccessSignatureTests
     {
         private readonly AzureFixture storeFixture;
 
-        public SharedAccessTests(AzureFixture fixture)
+        public GetSharedAccessSignatureTests(AzureFixture fixture)
         {
             this.storeFixture = fixture;
         }
 
-        [Theory(DisplayName = nameof(StoreSharedAccess)), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task StoreSharedAccess(string storeName)
+        [Theory, InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListFiles_With_SharedAccessSignature(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
             IOptions<AzureParsedOptions> options = this.storeFixture.Services.GetRequiredService<IOptions<AzureParsedOptions>>();

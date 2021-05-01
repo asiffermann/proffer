@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using Proffer.Testing;
     using Xunit;

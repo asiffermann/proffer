@@ -1,6 +1,7 @@
-namespace Proffer.Email.SendGrid.Test
+namespace Proffer.Email.SendGrid.Tests
 {
     using System.Collections.Generic;
+    using System.IO;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Proffer.Email.Internal;
@@ -60,7 +61,7 @@ namespace Proffer.Email.SendGrid.Test
         {
             services
                 .AddStorage(this.Configuration)
-                .AddFileSystemStorage(this.BasePath)
+                .AddFileSystemStorage(Path.Combine(this.BasePath, "Stores"))
                 .AddTemplating()
                 .AddHandlebars()
                 .AddEmail(this.Configuration)

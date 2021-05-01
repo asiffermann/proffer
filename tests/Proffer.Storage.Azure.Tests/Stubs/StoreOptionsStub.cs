@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test.Stubs
+namespace Proffer.Storage.Azure.Tests.Stubs
 {
     using System.Collections.Generic;
     using System.Linq;

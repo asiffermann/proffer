@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,6 +10,7 @@ namespace Proffer.Storage.Azure.Test
     [IntegrationTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
+    [Feature(nameof(IStore.ListAsync))]
     [Collection(nameof(AzureCollection))]
     public class ListTests
     {
@@ -20,8 +21,8 @@ namespace Proffer.Storage.Azure.Test
             this.storeFixture = fixture;
         }
 
-        [Theory(DisplayName = nameof(ListRootFiles)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ListRootFiles(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListRootFiles_When_PathIsNull(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -39,8 +40,8 @@ namespace Proffer.Storage.Azure.Test
             Assert.Empty(unexpectedFiles);
         }
 
-        [Theory(DisplayName = nameof(ListEmptyPathFiles)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ListEmptyPathFiles(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListRootFiles_When_PathIsEmpty(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -58,8 +59,8 @@ namespace Proffer.Storage.Azure.Test
             Assert.Empty(unexpectedFiles);
         }
 
-        [Theory(DisplayName = nameof(ListSubDirectoryFiles)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ListSubDirectoryFiles(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListDirectoryFiles_When_PathIsDirectory(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -77,8 +78,8 @@ namespace Proffer.Storage.Azure.Test
             Assert.Empty(unexpectedFiles);
         }
 
-        [Theory(DisplayName = nameof(ListSubDirectoryFilesWithTrailingSlash)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ListSubDirectoryFilesWithTrailingSlash(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListDirectoryFiles_When_PathIsDirectoryWithTrailingSlash(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -96,8 +97,8 @@ namespace Proffer.Storage.Azure.Test
             Assert.Empty(unexpectedFiles);
         }
 
-        [Theory(DisplayName = nameof(ExtensionGlobbing)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ExtensionGlobbing(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListMatchingFiles_When_SearchPatternIsExtensionGlobbing(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -115,8 +116,8 @@ namespace Proffer.Storage.Azure.Test
             Assert.Empty(unexpectedFiles);
         }
 
-        [Theory(DisplayName = nameof(FileNameGlobbing)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task FileNameGlobbing(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListMatchingFiles_When_SearchPatternIsFileNameGlobbing(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -134,8 +135,8 @@ namespace Proffer.Storage.Azure.Test
             Assert.Empty(unexpectedFiles);
         }
 
-        [Theory(DisplayName = nameof(FileNameGlobbingAtRoot)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task FileNameGlobbingAtRoot(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_ListMatchingFiles_When_SearchPatternIsFileNameGlobbing_And_PathIsEmpty(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 

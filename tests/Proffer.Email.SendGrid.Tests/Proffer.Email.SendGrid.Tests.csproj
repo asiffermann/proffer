@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Templates\*.*;Attachments\*.*;appsettings.json;appsettings.*.json">
+    <None Update="Stores\Templates\*.*;Stores\Attachments\*.*;appsettings.json;appsettings.*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

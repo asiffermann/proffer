@@ -1,4 +1,4 @@
-namespace Proffer.Email.SendGrid.Test
+namespace Proffer.Email.SendGrid.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -13,20 +13,21 @@ namespace Proffer.Email.SendGrid.Test
     [IntegrationTest]
     [Feature(nameof(Email))]
     [Feature(nameof(SendGrid))]
+    [Feature(nameof(IEmailSender.SendTemplatedEmailAsync))]
     [Collection(nameof(SendGridCollection))]
-    public class SendTemplatedEmailTest
+    public class SendTemplatedEmailTests
     {
         private readonly SendGridFixture storeFixture;
         private readonly IEmailSender emailSender;
 
-        public SendTemplatedEmailTest(SendGridFixture fixture)
+        public SendTemplatedEmailTests(SendGridFixture fixture)
         {
             this.storeFixture = fixture;
             this.emailSender = this.storeFixture.Services.GetRequiredService<IEmailSender>();
         }
 
         [Fact]
-        public async Task SendNotification1()
+        public async Task Should_SendTemplatedEmail_With_SimpleArguments()
         {
             await this.emailSender.SendTemplatedEmailAsync(
                 "Notification1",
@@ -39,7 +40,7 @@ namespace Proffer.Email.SendGrid.Test
         }
 
         [Fact]
-        public async Task SendNotificationWithWithCC()
+        public async Task Should_SendTemplatedEmail_With_CarbonCopyRecipients()
         {
             await this.emailSender.SendTemplatedEmailAsync(
                 this.storeFixture.DefaultSender,
@@ -60,7 +61,7 @@ namespace Proffer.Email.SendGrid.Test
         }
 
         [Fact]
-        public async Task SendNotificationWithWithBbc()
+        public async Task Should_SendTemplatedEmail_With_BlackCarbonCopyRecipients()
         {
             await this.emailSender.SendTemplatedEmailAsync(
                 this.storeFixture.DefaultSender,
@@ -81,7 +82,7 @@ namespace Proffer.Email.SendGrid.Test
         }
 
         [Fact]
-        public async Task SendNotificationWithAttachments()
+        public async Task Should_SendTemplatedEmail_With_Attachments()
         {
             byte[] data = System.IO.File.ReadAllBytes(@"Attachments/beach.jpeg");
             var image = new EmailAttachment("Beach.jpeg", data, "image", "jpeg");

@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System;
     using System.IO;
@@ -13,17 +13,18 @@ namespace Proffer.Storage.Azure.Test
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Collection(nameof(AzureCollection))]
-    public class UpdateTests
+    public class SaveTests
     {
         private readonly AzureFixture storeFixture;
 
-        public UpdateTests(AzureFixture fixture)
+        public SaveTests(AzureFixture fixture)
         {
             this.storeFixture = fixture;
         }
 
-        [Theory(DisplayName = nameof(WriteAllText)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task WriteAllText(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.SaveAsync))]
+        public async Task Should_SaveFileContent_With_ByteArray(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -38,8 +39,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(textToWrite, readFromWrittenFile);
         }
 
-        [Theory(DisplayName = nameof(ETagShouldBeTheSameWithSameContent)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ETagShouldBeTheSameWithSameContent(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.SaveAsync))]
+        public async Task Should_PreserveETag_When_SavingSameContent(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -53,8 +55,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(savedReference.Properties.ETag, readReference.Properties.ETag);
         }
 
-        [Theory(DisplayName = nameof(ETagShouldBeDifferentWithDifferentContent)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ETagShouldBeDifferentWithDifferentContent(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.SaveAsync))]
+        public async Task Should_ChangeETag_When_SavingDifferentContent(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -69,8 +72,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.NotEqual(savedReference.Properties.ETag, updatedReference.Properties.ETag);
         }
 
-        [Theory(DisplayName = nameof(SaveStream)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task SaveStream(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IStore.SaveAsync))]
+        public async Task Should_SaveFileContent_With_Stream(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -85,8 +89,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(textToWrite, readFromWrittenFile);
         }
 
-        [Theory(DisplayName = nameof(AddMetatadaRoundtrip)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task AddMetatadaRoundtrip(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IFileReference.SavePropertiesAsync))]
+        public async Task Should_SaveProperties_When_AddingMetadata(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -109,8 +114,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(id, actualId);
         }
 
-        [Theory(DisplayName = nameof(SaveMetatadaRoundtrip)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task SaveMetatadaRoundtrip(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IFileReference.SavePropertiesAsync))]
+        public async Task Should_SaveProperties_When_SettingMetadata(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -133,8 +139,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(id, actualId);
         }
 
-        [Theory(DisplayName = nameof(SaveEncodedMetatadaRoundtrip)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task SaveEncodedMetatadaRoundtrip(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IFileReference.SavePropertiesAsync))]
+        public async Task Should_SaveProperties_With_PreservedEncoding(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 
@@ -157,8 +164,9 @@ namespace Proffer.Storage.Azure.Test
             Assert.Equal(name, actualName);
         }
 
-        [Theory(DisplayName = nameof(ListMetatadaRoundtrip)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task ListMetatadaRoundtrip(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Feature(nameof(IFileReference.SavePropertiesAsync))]
+        public async Task Should_GetMetadata_When_ListingFiles_With_UpdatedMetadata(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 

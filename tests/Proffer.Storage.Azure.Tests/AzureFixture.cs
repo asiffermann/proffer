@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Proffer.Storage.Azure.Test
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
     using Proffer.Storage.Azure.Configuration;
-    using Proffer.Storage.Azure.Test.Stubs;
+    using Proffer.Storage.Azure.Tests.Stubs;
     using Proffer.Storage.Configuration;
     using Proffer.Storage.FileSystem.Configuration;
     using Proffer.Testing;

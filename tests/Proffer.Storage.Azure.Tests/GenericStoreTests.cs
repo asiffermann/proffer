@@ -1,9 +1,9 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
-    using Proffer.Storage.Azure.Test.Stubs;
+    using Proffer.Storage.Azure.Tests.Stubs;
     using Storage;
     using Xunit;
     using Xunit.Categories;
@@ -11,18 +11,19 @@ namespace Proffer.Storage.Azure.Test
     [IntegrationTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
+    [Feature("IStore<TOptions>")]
     [Collection(nameof(AzureCollection))]
-    public class GenericIStoreTests
+    public class GenericStoreTests
     {
         private readonly AzureFixture storeFixture;
 
-        public GenericIStoreTests(AzureFixture fixture)
+        public GenericStoreTests(AzureFixture fixture)
         {
             this.storeFixture = fixture;
         }
 
         [Fact]
-        public async Task GenericListRootFiles()
+        public async Task Should_ListFiles_With_GenericStore()
         {
             IStore<StoreOptionsStub> store = this.storeFixture.Services.GetRequiredService<IStore<StoreOptionsStub>>();
 

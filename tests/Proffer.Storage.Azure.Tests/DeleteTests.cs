@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Test
+namespace Proffer.Storage.Azure.Tests
 {
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +9,7 @@ namespace Proffer.Storage.Azure.Test
     [IntegrationTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
+    [Feature(nameof(IFileReference.DeleteAsync))]
     [Collection(nameof(AzureCollection))]
     public class DeleteTests
     {
@@ -19,8 +20,8 @@ namespace Proffer.Storage.Azure.Test
             this.storeFixture = fixture;
         }
 
-        [Theory(DisplayName = nameof(Delete)), InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task Delete(string storeName)
+        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        public async Task Should_DeleteFile(string storeName)
         {
             IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
 

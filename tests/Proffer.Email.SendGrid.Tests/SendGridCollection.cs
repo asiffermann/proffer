@@ -1,4 +1,4 @@
-namespace Proffer.Email.SendGrid.Test
+namespace Proffer.Email.SendGrid.Tests
 {
     using Proffer.Testing;
     using Xunit;
