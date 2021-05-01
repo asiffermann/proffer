@@ -3,6 +3,7 @@ namespace Proffer.Storage
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -19,7 +20,7 @@ namespace Proffer.Storage
         /// Initializes the store by creating a container in its <see cref="IStorageProvider"/>.
         /// </summary>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        Task InitAsync();
+        Task InitAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lists the files under <paramref name="path"/>.

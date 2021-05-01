@@ -2,13 +2,12 @@ namespace Proffer.Storage.Azure.Tests
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+    using global::Azure;
+    using global::Azure.Storage.Blobs;
+    using global::Azure.Storage.Blobs.Models;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Auth;
-    using Microsoft.WindowsAzure.Storage.Blob;
     using Proffer.Storage.Azure.Configuration;
     using Storage;
     using Xunit;
@@ -37,34 +36,26 @@ namespace Proffer.Storage.Azure.Tests
             IStore store = storageFactory.GetStore(storeName);
 
             options.Value.ParsedStores.TryGetValue(storeName, out AzureStoreOptions storeOptions);
+            var containerClientReference = new BlobContainerClient(storeOptions.ConnectionString, storeOptions.FolderName);
 
             string sharedAccessSignature = await store.GetSharedAccessSignatureAsync(new SharedAccessPolicy
             {
-                ExpiryTime = DateTime.UtcNow.AddHours(24),
+                ExpiryTime = DateTime.UtcNow.AddHours(1),
                 Permissions = SharedAccessPermissions.List,
             });
 
-            var account = CloudStorageAccount.Parse(storeOptions.ConnectionString);            
+            var credentials = new AzureSasCredential(sharedAccessSignature);
+            var containerClient = new BlobContainerClient(containerClientReference.Uri, credentials);
 
-            var accountSAS = new StorageCredentials(sharedAccessSignature);
-            var accountWithSAS = new CloudStorageAccount(accountSAS, account.Credentials.AccountName, endpointSuffix: null, useHttps: true);
-            CloudBlobClient blobClientWithSAS = accountWithSAS.CreateCloudBlobClient();
-            CloudBlobContainer containerWithSAS = blobClientWithSAS.GetContainerReference(storeOptions.FolderName);
-
-            BlobContinuationToken continuationToken = null;
-            var results = new List<IListBlobItem>();
-
-            do
+            var results = new List<BlobItem>();
+            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
             {
-                BlobResultSegment response = await containerWithSAS.ListBlobsSegmentedAsync(continuationToken);
-                continuationToken = response.ContinuationToken;
-                results.AddRange(response.Results);
+                results.Add(blobItem);
             }
-            while (continuationToken != null);
 
-            IFileReference[] filesFromStore = await store.ListAsync(null, false, false);
+            IFileReference[] filesFromStore = await store.ListAsync(null, recursive: true, false);
 
-            Assert.Equal(filesFromStore.Length, results.OfType<ICloudBlob>().Count());
+            Assert.Equal(filesFromStore.Length, results.Count);
         }
     }
 }

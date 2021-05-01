@@ -3,8 +3,10 @@ namespace Proffer.Storage.Azure.Internal
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
+    using global::Azure;
+    using global::Azure.Storage.Blobs;
+    using global::Azure.Storage.Blobs.Models;
+    using global::Azure.Storage.Sas;
 
     /// <summary>
     /// A reference of a stored file at a given path on Azure Storage.
@@ -12,39 +14,31 @@ namespace Proffer.Storage.Azure.Internal
     /// <seealso cref="IFileReference" />
     public class AzureFileReference : IFileReference
     {
+        private readonly BlobClient blobClient;
         private Lazy<AzureFileProperties> propertiesLazy;
         private bool withMetadata;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureFileReference"/> class.
+        /// Initializes a new instance of the <see cref="AzureFileReference" /> class.
         /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="cloudBlob">The Azure Storage blob.</param>
-        /// <param name="withMetadata">If set to <c>true</c>, the metadata for the file have been fetched.</param>
-        public AzureFileReference(string path, ICloudBlob cloudBlob, bool withMetadata)
+        /// <param name="blobClient">The Azure Storage blob client.</param>
+        /// <param name="properties">The properties, if fetched.</param>
+        public AzureFileReference(BlobClient blobClient, AzureFileProperties properties = null)
         {
-            this.Path = path;
-            this.CloudBlob = cloudBlob;
-            this.withMetadata = withMetadata;
+            this.blobClient = blobClient;
+            this.withMetadata = properties != null;
+
+            this.Path = blobClient.Name;
+
             this.propertiesLazy = new Lazy<AzureFileProperties>(() =>
             {
-                if (withMetadata && cloudBlob.Metadata != null && cloudBlob.Properties != null)
+                if (this.withMetadata)
                 {
-                    return new AzureFileProperties(cloudBlob);
+                    return properties;
                 }
 
                 throw new InvalidOperationException("Metadata are not loaded, please use withMetadata option");
             });
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AzureFileReference"/> class.
-        /// </summary>
-        /// <param name="cloudBlob">The Azure Storage blob.</param>
-        /// <param name="withMetadata">If set to <c>true</c>, the metadata for the file have been fetched.</param>
-        public AzureFileReference(ICloudBlob cloudBlob, bool withMetadata)
-            : this(cloudBlob.Name, cloudBlob, withMetadata)
-        {
         }
 
         /// <summary>
@@ -60,12 +54,7 @@ namespace Proffer.Storage.Azure.Internal
         /// <summary>
         /// Gets the public URL.
         /// </summary>
-        public string PublicUrl => this.CloudBlob.Uri.ToString();
-
-        /// <summary>
-        /// Gets the Azure Storage blob.
-        /// </summary>
-        public ICloudBlob CloudBlob { get; }
+        public string PublicUrl => this.blobClient.Uri.ToString();
 
         /// <summary>
         /// Deletes the file.
@@ -73,7 +62,7 @@ namespace Proffer.Storage.Azure.Internal
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task DeleteAsync() => this.CloudBlob.DeleteAsync();
+        public Task DeleteAsync() => this.blobClient.DeleteAsync();
 
         /// <summary>
         /// Reads the file content.
@@ -90,7 +79,7 @@ namespace Proffer.Storage.Azure.Internal
         public async ValueTask<MemoryStream> ReadInMemoryAsync()
         {
             var memoryStream = new MemoryStream();
-            await this.CloudBlob.DownloadRangeToStreamAsync(memoryStream, null, null);
+            await this.blobClient.DownloadToAsync(memoryStream);
             memoryStream.Seek(0, SeekOrigin.Begin);
             return memoryStream;
         }
@@ -102,13 +91,14 @@ namespace Proffer.Storage.Azure.Internal
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task UpdateAsync(Stream stream) => this.CloudBlob.UploadFromStreamAsync(stream);
+        public Task UpdateAsync(Stream stream) => this.blobClient.UploadAsync(stream);
+        // TODO: Properties
 
         /// <summary>
         /// Reads the file content into the given stream.
         /// </summary>
         /// <param name="targetStream">The target stream.</param>
-        public async Task ReadToStreamAsync(Stream targetStream) => await this.CloudBlob.DownloadRangeToStreamAsync(targetStream, null, null);
+        public async Task ReadToStreamAsync(Stream targetStream) => await this.blobClient.DownloadToAsync(targetStream);
 
         /// <summary>
         /// Reads the file content.
@@ -118,7 +108,7 @@ namespace Proffer.Storage.Azure.Internal
         /// </returns>
         public async ValueTask<string> ReadAllTextAsync()
         {
-            using (var reader = new StreamReader(await this.CloudBlob.OpenReadAsync(AccessCondition.GenerateEmptyCondition(), new BlobRequestOptions(), new OperationContext())))
+            using (var reader = new StreamReader(await this.blobClient.OpenReadAsync()))
             {
                 return await reader.ReadToEndAsync();
             }
@@ -149,14 +139,9 @@ namespace Proffer.Storage.Azure.Internal
         /// </returns>
         public ValueTask<string> GetSharedAccessSignature(ISharedAccessPolicy policy)
         {
-            var adHocPolicy = new SharedAccessBlobPolicy()
-            {
-                SharedAccessStartTime = policy.StartTime,
-                SharedAccessExpiryTime = policy.ExpiryTime,
-                Permissions = AzureStore.FromGenericToAzure(policy.Permissions),
-            };
+            Uri sasUri = this.blobClient.GenerateSasUri(FromGenericToAzure(policy.Permissions), policy.ExpiryTime.GetValueOrDefault());
 
-            return new ValueTask<string>(this.CloudBlob.GetSharedAccessSignature(adHocPolicy));
+            return new ValueTask<string>(sasUri.ToString());
         }
 
         /// <summary>
@@ -170,10 +155,47 @@ namespace Proffer.Storage.Azure.Internal
                 return;
             }
 
-            await this.CloudBlob.FetchAttributesAsync();
+            Response<BlobProperties> refreshedProperties = await this.blobClient.GetPropertiesAsync();
 
-            this.propertiesLazy = new Lazy<AzureFileProperties>(() => new AzureFileProperties(this.CloudBlob));
+            this.propertiesLazy = new Lazy<AzureFileProperties>(() => new AzureFileProperties(this.blobClient, refreshedProperties));
             this.withMetadata = true;
+        }
+
+        private static BlobSasPermissions FromGenericToAzure(SharedAccessPermissions permissions)
+        {
+            BlobSasPermissions result = 0;
+
+            if (permissions.HasFlag(SharedAccessPermissions.Add))
+            {
+                result |= BlobSasPermissions.Add;
+            }
+
+            if (permissions.HasFlag(SharedAccessPermissions.Create))
+            {
+                result |= BlobSasPermissions.Create;
+            }
+
+            if (permissions.HasFlag(SharedAccessPermissions.Delete))
+            {
+                result |= BlobSasPermissions.Delete;
+            }
+
+            if (permissions.HasFlag(SharedAccessPermissions.List))
+            {
+                result |= BlobSasPermissions.List;
+            }
+
+            if (permissions.HasFlag(SharedAccessPermissions.Read))
+            {
+                result |= BlobSasPermissions.Read;
+            }
+
+            if (permissions.HasFlag(SharedAccessPermissions.Write))
+            {
+                result |= BlobSasPermissions.Write;
+            }
+
+            return result;
         }
     }
 }

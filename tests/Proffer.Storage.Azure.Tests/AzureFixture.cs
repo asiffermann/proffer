@@ -4,10 +4,11 @@ namespace Proffer.Storage.Azure.Tests
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using global::Azure.Storage;
+    using global::Azure.Storage.Blobs;
+    using global::Azure.Storage.Sas;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
     using Proffer.Storage.Azure.Configuration;
     using Proffer.Storage.Azure.Tests.Stubs;
     using Proffer.Storage.Configuration;
@@ -67,12 +68,8 @@ namespace Proffer.Storage.Azure.Tests
         {
             foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.AzureParsedOptions.ParsedStores)
             {
-                var cloudStorageAccount = CloudStorageAccount.Parse(parsedStoreKvp.Value.ConnectionString);
-
-                CloudBlobClient client = cloudStorageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = client.GetContainerReference(parsedStoreKvp.Value.FolderName);
-
-                container.DeleteIfExistsAsync().Wait();
+                var containerClient = new BlobContainerClient(parsedStoreKvp.Value.ConnectionString, parsedStoreKvp.Value.FolderName);
+                containerClient.DeleteIfExists();
             }
 
             if (Directory.Exists(this.FileSystemRootPath))
@@ -112,7 +109,7 @@ namespace Proffer.Storage.Azure.Tests
         {
             var process = Process.Start(new ProcessStartInfo("robocopy.exe")
             {
-                Arguments = $"\"{Path.Combine(this.BasePath, "SampleDirectory")}\" \"{absolutePath}\" /MIR"
+                Arguments = $"\"{Path.Combine(this.BasePath, "Stores", "DefaultContent")}\" \"{absolutePath}\" /MIR"
             });
 
             if (!process.WaitForExit(30000))
@@ -128,31 +125,66 @@ namespace Proffer.Storage.Azure.Tests
 
             foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.AzureParsedOptions.ParsedStores)
             {
-                var cloudStorageAccount = CloudStorageAccount.Parse(parsedStoreKvp.Value.ConnectionString);
-                string cloudStoragekey = cloudStorageAccount.Credentials.ExportBase64EncodedKey();
-                string containerName = parsedStoreKvp.Value.FolderName;
+                var containerClient = new BlobContainerClient(parsedStoreKvp.Value.ConnectionString, parsedStoreKvp.Value.FolderName);
+                containerClient.CreateIfNotExists();
 
-                string containerUrl = cloudStorageAccount.BlobStorageUri.PrimaryUri.ToString() + containerName;
+                string defaultContentPath = Path.Combine(this.BasePath, "Stores", "DefaultContent", "*");
+                string sasToken = GetAccountSasToken(parsedStoreKvp.Value.ConnectionString);
 
-                CloudBlobClient client = cloudStorageAccount.CreateCloudBlobClient();
+                string arguments = $"copy \"{defaultContentPath}\" \"{containerClient.Uri}?{sasToken}\" --recursive";
 
-                CloudBlobContainer container = client.GetContainerReference(containerName);
-                container.CreateIfNotExistsAsync().Wait();
-
-                string defaultContentPath = Path.Combine(this.BasePath, "Stores", "DefaultContent");
-
-                string arguments = $"copy '{defaultContentPath}' '{containerUrl}?{cloudStoragekey}' --recursive";
-                var process = Process.Start(new ProcessStartInfo(azcopy)
+                var processStartInfo = new ProcessStartInfo(azcopy)
                 {
-                    Arguments = arguments
-                });
+                    Arguments = arguments,
+                    RedirectStandardOutput = true
+                };
 
-                if (!process.WaitForExit(30000))
+                using (var process = Process.Start(processStartInfo))
                 {
-                    process.Kill();
-                    throw new TimeoutException($"Azure Store '{parsedStoreKvp.Key}' was not reset properly.");
+                    if (!process.WaitForExit(30000))
+                    {
+                        process.Kill();
+                        throw new TimeoutException($"Azure Store '{parsedStoreKvp.Key}' was not reset properly.");
+                    }
+
+                    using (StreamReader reader = process.StandardOutput)
+                    {
+                        string result = reader.ReadToEnd();
+                        Console.Write(result);
+                    }
                 }
             }
+        }
+
+        private static string GetAccountSasToken(string connectionString)
+        {
+            var sasBuilder = new AccountSasBuilder()
+            {
+                Services = AccountSasServices.Blobs | AccountSasServices.Files,
+                ResourceTypes = AccountSasResourceTypes.All,
+                ExpiresOn = DateTimeOffset.UtcNow.AddHours(1),
+                Protocol = SasProtocol.Https
+            };
+
+            sasBuilder.SetPermissions(AccountSasPermissions.Read | AccountSasPermissions.Write);
+
+            (string accountName, string accountKey) = GetKeyValueFromConnectionString(connectionString);
+
+            return sasBuilder.ToSasQueryParameters(new StorageSharedKeyCredential(accountName, accountKey)).ToString();
+        }
+
+        private static (string accountName, string accountKey) GetKeyValueFromConnectionString(string connectionString)
+        {
+            IDictionary<string, string> settings = new Dictionary<string, string>();
+            string[] splitted = connectionString.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string nameValue in splitted)
+            {
+                string[] splittedNameValue = nameValue.Split(new char[] { '=' }, 2);
+                settings.Add(splittedNameValue[0], splittedNameValue[1]);
+            }
+
+            return (settings["AccountName"], settings["AccountKey"]);
         }
     }
 }

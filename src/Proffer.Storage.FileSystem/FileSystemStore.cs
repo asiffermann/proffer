@@ -6,6 +6,7 @@ namespace Proffer.Storage.FileSystem
     using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -49,7 +50,7 @@ namespace Proffer.Storage.FileSystem
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task InitAsync()
+        public Task InitAsync(CancellationToken cancellationToken = default)
         {
             if (!Directory.Exists(this.AbsolutePath))
             {

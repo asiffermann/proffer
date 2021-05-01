@@ -4,7 +4,6 @@ namespace Proffer.Storage.Azure.Internal
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
-    using Microsoft.WindowsAzure.Storage.Blob;
 
     /// <summary>
     /// Represents a directory in a being-listed <see cref="AzureStore"/>.
@@ -44,17 +43,6 @@ namespace Proffer.Storage.Azure.Internal
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureListDirectoryWrapper"/> class.
-        /// </summary>
-        /// <param name="blobDirectory">The Azure Storage blob directory.</param>
-        /// <param name="parent">The parent directory.</param>
-        public AzureListDirectoryWrapper(CloudBlobDirectory blobDirectory, AzureListDirectoryWrapper parent = null)
-        {
-            this.ParentDirectory = parent;
-            this.fullName = blobDirectory.Prefix;
-        }
-
-        /// <summary>
         /// A string containing the full path of the directory.
         /// </summary>
         public override string FullName => this.fullName;
@@ -76,7 +64,7 @@ namespace Proffer.Storage.Azure.Internal
         /// Collection of files and directories
         /// </returns>
         public override IEnumerable<FileSystemInfoBase> EnumerateFileSystemInfos()
-            => this.files.Values.Select(file => new AzureListFileWrapper(file.CloudBlob, this));
+            => this.files.Values.Select(file => new AzureListFileWrapper(file, this));
 
         /// <summary>
         /// Returns an instance of <see cref="DirectoryInfoBase" /> that represents a subdirectory.
@@ -95,6 +83,6 @@ namespace Proffer.Storage.Azure.Internal
         /// <returns>
         /// Instance of <see cref="FileInfoBase" /> even if file does not exist
         /// </returns>
-        public override FileInfoBase GetFile(string path) => new AzureListFileWrapper(this.files[path].CloudBlob, this);
+        public override FileInfoBase GetFile(string path) => new AzureListFileWrapper(this.files[path], this);
     }
 }

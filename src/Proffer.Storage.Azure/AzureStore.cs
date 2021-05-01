@@ -5,10 +5,12 @@ namespace Proffer.Storage.Azure
     using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
+    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Blob;
-    using Microsoft.WindowsAzure.Storage.Core;
+    using global::Azure;
+    using global::Azure.Storage.Blobs;
+    using global::Azure.Storage.Blobs.Models;
+    using global::Azure.Storage.Sas;
     using Proffer.Storage.Azure.Configuration;
 
     /// <summary>
@@ -18,8 +20,7 @@ namespace Proffer.Storage.Azure
     public class AzureStore : IStore
     {
         private readonly AzureStoreOptions storeOptions;
-        private readonly Lazy<CloudBlobClient> client;
-        private readonly Lazy<CloudBlobContainer> container;
+        private readonly BlobContainerClient container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AzureStore"/> class.
@@ -30,8 +31,7 @@ namespace Proffer.Storage.Azure
             storeOptions.Validate();
 
             this.storeOptions = storeOptions;
-            this.client = new Lazy<CloudBlobClient>(() => CloudStorageAccount.Parse(storeOptions.ConnectionString).CreateCloudBlobClient());
-            this.container = new Lazy<CloudBlobContainer>(() => this.client.Value.GetContainerReference(storeOptions.FolderName));
+            this.container = new BlobContainerClient(storeOptions.ConnectionString, storeOptions.FolderName);
         }
 
         /// <summary>
@@ -45,16 +45,16 @@ namespace Proffer.Storage.Azure
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task InitAsync()
+        public Task InitAsync(CancellationToken cancellationToken = default)
         {
-            BlobContainerPublicAccessType accessType = this.storeOptions.AccessLevel switch
+            PublicAccessType accessType = this.storeOptions.AccessLevel switch
             {
-                Storage.Configuration.AccessLevel.Public => BlobContainerPublicAccessType.Container,
-                Storage.Configuration.AccessLevel.Confidential => BlobContainerPublicAccessType.Blob,
-                _ => BlobContainerPublicAccessType.Off,
+                Storage.Configuration.AccessLevel.Public => PublicAccessType.BlobContainer,
+                Storage.Configuration.AccessLevel.Confidential => PublicAccessType.Blob,
+                _ => PublicAccessType.None,
             };
 
-            return this.container.Value.CreateIfNotExistsAsync(accessType, null, null);
+            return this.container.CreateIfNotExistsAsync(accessType, cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -68,38 +68,15 @@ namespace Proffer.Storage.Azure
         /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, bool recursive, bool withMetadata)
         {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                path = null;
-            }
-            else
-            {
-                if (!path.EndsWith("/"))
+            List<BlobItem> results = await this.GetBlobItems(CleanPath(path), recursive, withMetadata);
+
+            return results
+                .Select(blobItem =>
                 {
-                    path += "/";
-                }
-            }
-
-            BlobContinuationToken continuationToken = null;
-            var results = new List<IListBlobItem>();
-
-            do
-            {
-                BlobResultSegment response = await this.container.Value.ListBlobsSegmentedAsync(
-                    path,
-                    recursive,
-                    withMetadata ? BlobListingDetails.Metadata : BlobListingDetails.None,
-                    null,
-                    continuationToken,
-                    new BlobRequestOptions(),
-                    new OperationContext());
-
-                continuationToken = response.ContinuationToken;
-                results.AddRange(response.Results);
-            }
-            while (continuationToken != null);
-
-            return results.OfType<ICloudBlob>().Select(blob => new Internal.AzureFileReference(blob, withMetadata: withMetadata)).ToArray();
+                    BlobClient blobClient = this.container.GetBlobClient(blobItem.Name);
+                    return new Internal.AzureFileReference(blobClient, new Internal.AzureFileProperties(blobClient, blobItem));
+                })
+                .ToArray();
         }
 
         /// <summary>
@@ -114,17 +91,7 @@ namespace Proffer.Storage.Azure
         /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, string searchPattern, bool recursive, bool withMetadata)
         {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                path = null;
-            }
-            else
-            {
-                if (!path.EndsWith("/"))
-                {
-                    path += "/";
-                }
-            }
+            path = CleanPath(path);
 
             string prefix = path;
             int firstWildCard = searchPattern.IndexOf('*');
@@ -137,28 +104,14 @@ namespace Proffer.Storage.Azure
             var matcher = new Microsoft.Extensions.FileSystemGlobbing.Matcher(StringComparison.Ordinal);
             matcher.AddInclude(searchPattern);
 
-            var operationContext = new OperationContext();
-            BlobContinuationToken continuationToken = null;
-            var results = new List<IListBlobItem>();
+            List<BlobItem> results = await this.GetBlobItems(prefix, recursive, withMetadata);
 
-            do
-            {
-                BlobResultSegment response = await this.container.Value.ListBlobsSegmentedAsync(
-                    prefix,
-                    recursive,
-                    withMetadata ? BlobListingDetails.Metadata : BlobListingDetails.None,
-                    null,
-                    continuationToken,
-                    new BlobRequestOptions(),
-                    new OperationContext());
-
-                continuationToken = response.ContinuationToken;
-                results.AddRange(response.Results);
-            }
-            while (continuationToken != null);
-
-            var pathMap = results.OfType<ICloudBlob>()
-                .Select(blob => new Internal.AzureFileReference(blob, withMetadata: withMetadata))
+            var pathMap = results
+                .Select(blobItem =>
+                {
+                    BlobClient blobClient = this.container.GetBlobClient(blobItem.Name);
+                    return new Internal.AzureFileReference(blobClient, new Internal.AzureFileProperties(blobClient, blobItem));
+                })
                 .ToDictionary(x => Path.GetFileName(x.Path));
 
             Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult filteredResults = matcher.Execute(new Internal.AzureListDirectoryWrapper(path, pathMap));
@@ -252,7 +205,7 @@ namespace Proffer.Storage.Azure
         /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         public async ValueTask<IFileReference> SaveAsync(byte[] data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
         {
-            using (var stream = new SyncMemoryStream(data, 0, data.Length))
+            using (var stream = new MemoryStream(data, 0, data.Length))
             {
                 return await this.SaveAsync(stream, file, contentType, overwritePolicy, metadata);
             }
@@ -272,53 +225,58 @@ namespace Proffer.Storage.Azure
         /// <exception cref="Exceptions.FileAlreadyExistsException"></exception>
         public async ValueTask<IFileReference> SaveAsync(Stream data, IPrivateFileReference file, string contentType, OverwritePolicy overwritePolicy = OverwritePolicy.Always, IDictionary<string, string> metadata = null)
         {
-            bool uploadBlob = true;
-            CloudBlockBlob blockBlob = this.container.Value.GetBlockBlobReference(file.Path);
-            bool blobExists = await blockBlob.ExistsAsync();
+            BlobClient blobClient = this.container.GetBlobClient(file.Path);
+            bool blobExists = await blobClient.ExistsAsync();
 
+            bool uploadBlob = true;
             if (blobExists)
             {
-                if (overwritePolicy == OverwritePolicy.Never)
+                switch (overwritePolicy)
                 {
-                    throw new Exceptions.FileAlreadyExistsException(this.Name, file.Path);
-                }
+                    case OverwritePolicy.Always:
+                        uploadBlob = true;
+                        break;
 
-                await blockBlob.FetchAttributesAsync();
+                    case OverwritePolicy.IfContentModified:
+                        Response<BlobProperties> properties = await blobClient.GetPropertiesAsync();
+                        using (var md5 = MD5.Create())
+                        {
+                            data.Seek(0, SeekOrigin.Begin);
+                            string contentMD5 = Convert.ToBase64String(md5.ComputeHash(data));
+                            data.Seek(0, SeekOrigin.Begin);
 
-                if (overwritePolicy == OverwritePolicy.IfContentModified)
-                {
-                    using (var md5 = MD5.Create())
-                    {
-                        data.Seek(0, SeekOrigin.Begin);
-                        string contentMD5 = Convert.ToBase64String(md5.ComputeHash(data));
-                        data.Seek(0, SeekOrigin.Begin);
-                        uploadBlob = contentMD5 != blockBlob.Properties.ContentMD5;
-                    }
-                }
-            }
+                            uploadBlob = contentMD5 != Convert.ToBase64String(properties.Value.ContentHash);
+                        }
 
-            if (metadata != null)
-            {
-                foreach (KeyValuePair<string, string> kvp in metadata)
-                {
-                    blockBlob.Metadata.Add(kvp.Key, kvp.Value);
+                        break;
+
+                    case OverwritePolicy.Never:
+                    default:
+                        throw new Exceptions.FileAlreadyExistsException(this.Name, file.Path);
                 }
             }
 
             if (uploadBlob)
             {
-                await blockBlob.UploadFromStreamAsync(data);
+                var blobUploadOptions = new BlobUploadOptions
+                {
+                    HttpHeaders = new BlobHttpHeaders
+                    {
+                        ContentType = contentType
+                    }
+                };
+
+                if (metadata != null)
+                {
+                    blobUploadOptions.Metadata = metadata;
+                }
+
+                await blobClient.UploadAsync(data, blobUploadOptions);
             }
 
-            var reference = new Internal.AzureFileReference(blockBlob, withMetadata: true);
+            Response<BlobProperties> refreshedProperties = await blobClient.GetPropertiesAsync();
 
-            if (reference.Properties.ContentType != contentType)
-            {
-                reference.Properties.ContentType = contentType;
-                await reference.SavePropertiesAsync();
-            }
-
-            return reference;
+            return new Internal.AzureFileReference(blobClient, new Internal.AzureFileProperties(blobClient, refreshedProperties));
         }
 
         /// <summary>
@@ -330,48 +288,43 @@ namespace Proffer.Storage.Azure
         /// </returns>
         public ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy policy)
         {
-            var adHocPolicy = new SharedAccessBlobPolicy()
-            {
-                SharedAccessStartTime = policy.StartTime,
-                SharedAccessExpiryTime = policy.ExpiryTime,
-                Permissions = FromGenericToAzure(policy.Permissions),
-            };
+            Uri sasUri = this.container.GenerateSasUri(FromGenericToAzure(policy.Permissions), policy.ExpiryTime.GetValueOrDefault());
 
-            return new ValueTask<string>(this.container.Value.GetSharedAccessSignature(adHocPolicy));
+            return new ValueTask<string>(sasUri.Query);
         }
 
-        internal static SharedAccessBlobPermissions FromGenericToAzure(SharedAccessPermissions permissions)
+        private static BlobContainerSasPermissions FromGenericToAzure(SharedAccessPermissions permissions)
         {
-            SharedAccessBlobPermissions result = SharedAccessBlobPermissions.None;
+            BlobContainerSasPermissions result = 0;
 
             if (permissions.HasFlag(SharedAccessPermissions.Add))
             {
-                result |= SharedAccessBlobPermissions.Add;
+                result |= BlobContainerSasPermissions.Add;
             }
 
             if (permissions.HasFlag(SharedAccessPermissions.Create))
             {
-                result |= SharedAccessBlobPermissions.Create;
+                result |= BlobContainerSasPermissions.Create;
             }
 
             if (permissions.HasFlag(SharedAccessPermissions.Delete))
             {
-                result |= SharedAccessBlobPermissions.Delete;
+                result |= BlobContainerSasPermissions.Delete;
             }
 
             if (permissions.HasFlag(SharedAccessPermissions.List))
             {
-                result |= SharedAccessBlobPermissions.List;
+                result |= BlobContainerSasPermissions.List;
             }
 
             if (permissions.HasFlag(SharedAccessPermissions.Read))
             {
-                result |= SharedAccessBlobPermissions.Read;
+                result |= BlobContainerSasPermissions.Read;
             }
 
             if (permissions.HasFlag(SharedAccessPermissions.Write))
             {
-                result |= SharedAccessBlobPermissions.Write;
+                result |= BlobContainerSasPermissions.Write;
             }
 
             return result;
@@ -386,43 +339,68 @@ namespace Proffer.Storage.Azure
         {
             try
             {
-                ICloudBlob blob;
+                string blobName = uri.IsAbsoluteUri ? this.container.Uri.MakeRelativeUri(uri).ToString() : uri.ToString();
+                BlobClient blobClient = this.container.GetBlobClient(blobName);
 
-                if (uri.IsAbsoluteUri)
-                {
-                    // When the URI is absolute, we cannot get a simple reference to the blob, so the
-                    // properties and metadata are fetched, even if it was not asked.
-
-                    blob = await this.client.Value.GetBlobReferenceFromServerAsync(uri);
-                    withMetadata = true;
-                }
-                else
-                {
-                    if (withMetadata)
-                    {
-                        blob = await this.container.Value.GetBlobReferenceFromServerAsync(uri.ToString());
-                    }
-                    else
-                    {
-                        blob = this.container.Value.GetBlockBlobReference(uri.ToString());
-                        if (!await blob.ExistsAsync())
-                        {
-                            return null;
-                        }
-                    }
-                }
-
-                return new Internal.AzureFileReference(blob, withMetadata);
-            }
-            catch (StorageException storageException)
-            {
-                if (storageException.RequestInformation.HttpStatusCode == 404)
+                if (!await blobClient.ExistsAsync())
                 {
                     return null;
                 }
 
-                throw;
+                Internal.AzureFileProperties properties = null;
+                if (withMetadata)
+                {
+                    Response<BlobProperties> blobProperties = await blobClient.GetPropertiesAsync();
+                    properties = new Internal.AzureFileProperties(blobClient, blobProperties);
+                }
+
+                return new Internal.AzureFileReference(blobClient, properties);
             }
+            catch (RequestFailedException ex) when (ex.ErrorCode == BlobErrorCode.BlobNotFound)
+            {
+                return null;
+            }
+        }
+
+        private async Task<List<BlobItem>> GetBlobItems(string path, bool recursive, bool withMetadata)
+        {
+            AsyncPageable<BlobHierarchyItem> hierarchy = this.container.GetBlobsByHierarchyAsync(
+                withMetadata ? BlobTraits.Metadata : BlobTraits.None,
+                BlobStates.None,
+                "/",
+                path);
+
+            var results = new List<BlobItem>();
+            await foreach (BlobHierarchyItem blobOrFolder in hierarchy)
+            {
+                if (blobOrFolder.IsBlob)
+                {
+                    results.Add(blobOrFolder.Blob);
+                }
+                else if (blobOrFolder.IsPrefix && recursive)
+                {
+                    results.AddRange(await this.GetBlobItems(blobOrFolder.Prefix, recursive, withMetadata));
+                }
+            }
+
+            return results;
+        }
+
+        private static string CleanPath(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                path = null;
+            }
+            else
+            {
+                if (!path.EndsWith("/"))
+                {
+                    path += "/";
+                }
+            }
+
+            return path;
         }
     }
 }

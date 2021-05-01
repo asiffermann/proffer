@@ -1,7 +1,6 @@
 namespace Proffer.Storage.Azure.Internal
 {
     using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
-    using Microsoft.WindowsAzure.Storage.Blob;
 
     /// <summary>
     /// Represents a file in a being-listed <see cref="AzureStore"/>.
@@ -9,7 +8,7 @@ namespace Proffer.Storage.Azure.Internal
     /// <seealso cref="FileInfoBase" />
     public class AzureListFileWrapper : FileInfoBase
     {
-        private readonly ICloudBlob blob;
+        private readonly AzureFileReference blob;
         private readonly string name;
         private readonly AzureListDirectoryWrapper parent;
 
@@ -18,19 +17,19 @@ namespace Proffer.Storage.Azure.Internal
         /// </summary>
         /// <param name="blob">The Azure Storage blob.</param>
         /// <param name="parent">The parent directory.</param>
-        public AzureListFileWrapper(ICloudBlob blob, AzureListDirectoryWrapper parent)
+        public AzureListFileWrapper(AzureFileReference blob, AzureListDirectoryWrapper parent)
         {
             this.blob = blob;
-            int lastSlash = blob.Name.LastIndexOf('/');
+            int lastSlash = blob.Path.LastIndexOf('/');
 
-            this.name = lastSlash >= 0 ? blob.Name.Substring(lastSlash + 1) : blob.Name;
+            this.name = lastSlash >= 0 ? blob.Path.Substring(lastSlash + 1) : blob.Path;
             this.parent = parent;
         }
 
         /// <summary>
         /// A string containing the full path of the file.
         /// </summary>
-        public override string FullName => this.blob.Name;
+        public override string FullName => this.blob.Path;
 
         /// <summary>
         /// A string containing the name of the file.
