@@ -7,7 +7,7 @@ namespace Proffer.Storage.FileSystem.Properties.Json.Tests
     using Xunit;
     using Xunit.Categories;
 
-    [IntegrationTest]
+    [UnitTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IExtendedPropertiesProvider))]

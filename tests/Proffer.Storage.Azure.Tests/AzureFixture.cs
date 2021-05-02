@@ -112,32 +112,6 @@ namespace Proffer.Storage.Azure.Tests
             this.CopyContentDirectoryTo(contentDirectoryPath, absolutePath);
         }
 
-        private void CopyContentDirectoryTo(string contentDirectoryPath, string destinationPath)
-        {
-            var contentDirectory = new DirectoryInfo(contentDirectoryPath);
-
-            if (!contentDirectory.Exists)
-            {
-                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + contentDirectoryPath);
-            }
-
-            FileInfo[] files = contentDirectory.GetFiles();
-            DirectoryInfo[] directories = contentDirectory.GetDirectories();
-
-            Directory.CreateDirectory(destinationPath);
-            foreach (FileInfo file in files)
-            {
-                string destinationFilePath = Path.Combine(destinationPath, file.Name);
-                file.CopyTo(destinationFilePath, false);
-            }
-
-            foreach (DirectoryInfo subDirectory in directories)
-            {
-                string subDirectoryDestinationPath = Path.Combine(destinationPath, subDirectory.Name);
-                this.CopyContentDirectoryTo(subDirectory.FullName, subDirectoryDestinationPath);
-            }
-        }
-
         private void ResetAzureStores()
         {
             string azcopy = Environment.ExpandEnvironmentVariables(this.Configuration["AzCopy10Command"]);
