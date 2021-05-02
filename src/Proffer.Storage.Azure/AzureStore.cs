@@ -4,6 +4,7 @@ namespace Proffer.Storage.Azure
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Net;
     using System.Security.Cryptography;
     using System.Threading;
     using System.Threading.Tasks;
@@ -268,7 +269,11 @@ namespace Proffer.Storage.Azure
 
                 if (metadata != null)
                 {
-                    blobUploadOptions.Metadata = metadata;
+                    blobUploadOptions.Metadata = new Dictionary<string, string>();
+                    foreach (KeyValuePair<string, string> meta in metadata)
+                    {
+                        blobUploadOptions.Metadata[meta.Key] = WebUtility.HtmlEncode(meta.Value);
+                    }
                 }
 
                 await blobClient.UploadAsync(data, blobUploadOptions);
@@ -339,7 +344,14 @@ namespace Proffer.Storage.Azure
         {
             try
             {
-                string blobName = uri.IsAbsoluteUri ? this.container.Uri.MakeRelativeUri(uri).ToString() : uri.ToString();
+                string blobName = uri.ToString();
+                if (uri.IsAbsoluteUri)
+                {
+                    string containerUri = this.container.Uri.ToString();
+                    string blobUri = uri.ToString();
+                    blobName = WebUtility.UrlDecode(blobUri.Substring(containerUri.Length).Trim('/').Trim('\\'));
+                }
+
                 BlobClient blobClient = this.container.GetBlobClient(blobName);
 
                 if (!await blobClient.ExistsAsync())

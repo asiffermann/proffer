@@ -54,8 +54,9 @@ jobs:
       env:
         "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
         "ConnectionStrings:ConnectionStringFromAppSettings": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
-        "Storage:Providers:FirstAzure:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
-        "Storage:Stores:Store4:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "Storage:Providers:CustomConnectionString:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "Storage:Stores:CustomConnectionString:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "Storage:ScopedStores:ScopedCustomConnectionString:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
         "AzCopy10Command": "azcopy_v10"
 
     - name: Install ReportGenerator

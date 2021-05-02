@@ -27,8 +27,18 @@
   <ItemGroup>
     <ProjectReference Include="..\Proffer.Testing\Proffer.Testing.csproj" />
     <ProjectReference Include="..\..\src\Proffer.Storage.Azure\Proffer.Storage.Azure.csproj" />
-    <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem\Proffer.Storage.FileSystem.csproj" />
-    <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem.Properties.Json\Proffer.Storage.FileSystem.Properties.Json.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Stores\DefaultContent\Delete\ToDelete.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\DefaultContent\Delete\ToSurvive.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\DefaultContent\Delete\ToSurvive2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

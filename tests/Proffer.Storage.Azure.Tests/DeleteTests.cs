@@ -1,7 +1,6 @@
 namespace Proffer.Storage.Azure.Tests
 {
     using System.Threading.Tasks;
-    using Microsoft.Extensions.DependencyInjection;
     using Storage;
     using Xunit;
     using Xunit.Categories;
@@ -11,21 +10,19 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Azure))]
     [Feature(nameof(IFileReference.DeleteAsync))]
     [Collection(nameof(AzureCollection))]
-    public class DeleteTests
+    public class DeleteTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture storeFixture;
+        private readonly AzureFixture fixture;
 
         public DeleteTests(AzureFixture fixture)
         {
-            this.storeFixture = fixture;
+            this.fixture = fixture;
         }
 
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        public async Task Should_DeleteFile(string storeName)
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        public async Task Should_DeleteFile_With_FileReference(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             IFileReference file = await store.GetAsync("Delete/ToDelete.txt");
 
@@ -33,6 +30,19 @@ namespace Proffer.Storage.Azure.Tests
 
             Assert.Null(await store.GetAsync("Delete/ToDelete.txt"));
             Assert.NotNull(await store.GetAsync("Delete/ToSurvive.txt"));
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        public async Task Should_DeleteFile_With_Store(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
+
+            IFileReference file = await store.GetAsync("Delete/ToDelete2.txt");
+
+            await store.DeleteAsync(file);
+
+            Assert.Null(await store.GetAsync("Delete/ToDelete2.txt"));
+            Assert.NotNull(await store.GetAsync("Delete/ToSurvive2.txt"));
         }
     }
 }

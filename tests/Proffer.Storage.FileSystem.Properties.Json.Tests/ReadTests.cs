@@ -33,7 +33,6 @@ namespace Proffer.Storage.FileSystem.Properties.Json.Tests
             var fileInfo = new System.IO.FileInfo("Stores/DefaultContent/SubDirectory/TextFile2.txt");
 
             Assert.Equal(fileInfo.Length, file.Properties.Length);
-            Assert.Equal(new DateTimeOffset(fileInfo.LastWriteTimeUtc, default), file.Properties.LastModified);
         }
     }
 }

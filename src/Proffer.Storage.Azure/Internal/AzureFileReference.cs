@@ -91,8 +91,7 @@ namespace Proffer.Storage.Azure.Internal
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task UpdateAsync(Stream stream) => this.blobClient.UploadAsync(stream);
-        // TODO: Properties
+        public Task UpdateAsync(Stream stream) => this.blobClient.UploadAsync(stream, overwrite: true);
 
         /// <summary>
         /// Reads the file content into the given stream.
