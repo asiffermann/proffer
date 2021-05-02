@@ -1,4 +1,4 @@
-name: .NET
+name: Continuous Integration
 
 on:
   push:
@@ -44,8 +44,37 @@ jobs:
     - name: Build
       run: dotnet build --no-restore --configuration Release -p:Version=${{ steps.gitversion.outputs.fullSemVer }}
 
+    - name: Install AzCopy
+      uses: kheiakiyama/install-azcopy-action@v1.0.3
+      with:
+        version: 'v10'
+
     - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal
+      run: dotnet test --no-build --configuration Release --logger trx --collect "XPlat Code Coverage" --results-directory "tests-results" --settings coverlet.runsettings
+      env:
+        "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
+        "ConnectionStrings:ConnectionStringFromAppSettings": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "Storage:Providers:FirstAzure:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "Storage:Stores:Store4:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+        "AzCopy10Command": "azcopy_v10"
+
+    - name: Upload tests results artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: tests-results
+        path: tests-results
+      if: ${{ always() }}
+
+    - name: Get path to the lcov code coverage file
+      id: get-lcov-path
+      shell: bash
+      run: printf '::set-output name=lcov-path::%s\n' tests-results/*/coverage.info
+
+    - name: Upload coverage to Coveralls
+      uses: coverallsapp/github-action@v1.1.2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ${{ steps.get-lcov-path.outputs.lcov-path }}
 
     - name: Pack
       run: dotnet pack --no-build --configuration Release --output ./packages -p:PackageVersion=${{ steps.gitversion.outputs.fullSemVer }}

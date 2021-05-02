@@ -6,6 +6,7 @@ namespace Proffer.Storage.Internal
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -43,8 +44,8 @@ namespace Proffer.Storage.Internal
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task InitAsync()
-            => this.innerStore.InitAsync();
+        public Task InitAsync(CancellationToken cancellationToken = default)
+            => this.innerStore.InitAsync(cancellationToken);
 
         /// <summary>
         /// Deletes the file.

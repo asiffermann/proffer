@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		coverlet.runsettings = coverlet.runsettings
 		gitversion.yml = gitversion.yml
 		LICENSE = LICENSE
 		README.md = README.md
@@ -45,6 +46,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.SendGrid", "src\Proffer.Email.SendGrid\Proffer.Email.SendGrid.csproj", "{71EB6650-2C03-4DA2-89FA-C4443CB0FB2A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.Smtp", "src\Proffer.Email.Smtp\Proffer.Email.Smtp.csproj", "{60BA8317-9CDB-4002-9E43-88EB8BBB3280}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EB0DAEC2-2EEE-4833-8180-353882615CEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Testing", "tests\Proffer.Testing\Proffer.Testing.csproj", "{815899B8-C129-469A-B169-2A59E65181F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.Azure.Tests", "tests\Proffer.Storage.Azure.Tests\Proffer.Storage.Azure.Tests.csproj", "{E41AF4E2-9692-4BF2-BDBB-3F36A2135ADB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.SendGrid.Tests", "tests\Proffer.Email.SendGrid.Tests\Proffer.Email.SendGrid.Tests.csproj", "{A1BABC33-523C-419B-8407-67A3BCE53737}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +109,18 @@ Global
 		{60BA8317-9CDB-4002-9E43-88EB8BBB3280}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60BA8317-9CDB-4002-9E43-88EB8BBB3280}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60BA8317-9CDB-4002-9E43-88EB8BBB3280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815899B8-C129-469A-B169-2A59E65181F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E41AF4E2-9692-4BF2-BDBB-3F36A2135ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41AF4E2-9692-4BF2-BDBB-3F36A2135ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41AF4E2-9692-4BF2-BDBB-3F36A2135ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41AF4E2-9692-4BF2-BDBB-3F36A2135ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1BABC33-523C-419B-8407-67A3BCE53737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1BABC33-523C-419B-8407-67A3BCE53737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1BABC33-523C-419B-8407-67A3BCE53737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1BABC33-523C-419B-8407-67A3BCE53737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +139,9 @@ Global
 		{D930DB6F-D3EF-4274-AC56-48268B68F6C2} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
 		{71EB6650-2C03-4DA2-89FA-C4443CB0FB2A} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
 		{60BA8317-9CDB-4002-9E43-88EB8BBB3280} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
+		{815899B8-C129-469A-B169-2A59E65181F1} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
+		{E41AF4E2-9692-4BF2-BDBB-3F36A2135ADB} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
+		{A1BABC33-523C-419B-8407-67A3BCE53737} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E14A063-006D-442F-BBA4-C9CF12D2438A}
