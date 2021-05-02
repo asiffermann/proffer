@@ -74,8 +74,6 @@ namespace Proffer.Storage.FileSystem.Tests
                 Directory.Delete(this.FixtureBasePath, true);
             }
 
-            Directory.CreateDirectory(this.FixtureBasePath);
-
             if (Directory.Exists(this.FileSystemRootPath))
             {
                 Directory.Delete(this.FileSystemRootPath, true);
@@ -98,6 +96,9 @@ namespace Proffer.Storage.FileSystem.Tests
         private void ResetStores()
         {
             this.DeleteRootResources();
+
+            Directory.CreateDirectory(this.FixtureBasePath);
+
             this.ResetFileSystemStores();
         }
 

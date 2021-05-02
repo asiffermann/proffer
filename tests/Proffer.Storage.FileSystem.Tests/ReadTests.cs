@@ -9,13 +9,21 @@ namespace Proffer.Storage.FileSystem.Tests
     [UnitTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
+    [Collection(nameof(FileSystemCollection))]
     public class ReadTests : Abstract.StoreTestsBase
     {
+        private readonly FileSystemFixture fixture;
+
+        public ReadTests(FileSystemFixture fixture)
+        {
+            this.fixture = fixture;
+        }
+
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.ReadAllTextAsync))]
-        public async Task Should_ReadAllText_When_PathIsRootFile(string storeName, FileSystemFixture fixture)
+        public async Task Should_ReadAllText_When_PathIsRootFile(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string expectedText = "42";
 
@@ -26,9 +34,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.ReadAllTextAsync))]
-        public async Task Should_ReadAllText_When_PathIsNestedFile(string storeName, FileSystemFixture fixture)
+        public async Task Should_ReadAllText_When_PathIsNestedFile(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string expectedText = ">42";
 
@@ -39,9 +47,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.ReadAllBytesAsync))]
-        public async Task Should_ReadAllBytes_When_PathIsNestedFile(string storeName, FileSystemFixture fixture)
+        public async Task Should_ReadAllBytes_When_PathIsNestedFile(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string expectedText = ">42";
 
@@ -54,9 +62,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IFileReference.ReadAllBytesAsync))]
-        public async Task Should_ReadAllBytes_With_FileReference(string storeName, FileSystemFixture fixture)
+        public async Task Should_ReadAllBytes_With_FileReference(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string expectedText = ">42";
 
@@ -72,9 +80,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IFileReference.ReadAsync))]
-        public async Task Should_Read_With_FileReference(string storeName, FileSystemFixture fixture)
+        public async Task Should_Read_With_FileReference(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string expectedText = ">42";
 
@@ -92,9 +100,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IFileReference.ReadAllTextAsync))]
-        public async Task Should_ReadAllText_With_FileReference(string storeName, FileSystemFixture fixture)
+        public async Task Should_ReadAllText_With_FileReference(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string expectedText = ">42";
 
@@ -108,9 +116,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.ReadAllTextAsync))]
-        public async Task Should_ReadAllText_With_EachListingFileReference(string storeName, FileSystemFixture fixture)
+        public async Task Should_ReadAllText_With_EachListingFileReference(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string expectedText = ">42";
 

@@ -4,37 +4,25 @@ namespace Proffer.Storage.FileSystem.Tests.Abstract
 
     public abstract class StoreTestsBase
     {
-        public static TheoryData<string, FileSystemFixture> ConfiguredStoreNames
-        {
-            get
+        public static TheoryData<string> ConfiguredStoreNames
+            => new()
             {
-                var fixture = new FileSystemFixture();
-                return new TheoryData<string, FileSystemFixture>
-                {
-                    { "Basic", fixture },
-                    { "NamedProvider", fixture },
-                    { "CustomRootPathNamedProvider", fixture },
-                    { "CustomFolderName", fixture },
-                    { "CustomRootPath", fixture },
-                    { "CustomRootPathWithFolder", fixture }
-                };
-            }
-        }
+                { "Basic" },
+                { "NamedProvider" },
+                { "CustomRootPathNamedProvider" },
+                { "CustomFolderName" },
+                { "CustomRootPath" },
+                { "CustomRootPathWithFolder" }
+            };
 
-        public static TheoryData<string, FileSystemFixture> ConfiguredScopedStoreNames
-        {
-            get
+        public static TheoryData<string> ConfiguredScopedStoreNames
+            => new()
             {
-                var fixture = new FileSystemFixture();
-                return new TheoryData<string, FileSystemFixture>
-                {
-                    { "ScopedBasic", fixture },
-                    { "ScopedNamedProvider", fixture },
-                    { "ScopedCustomRootPathNamedProvider", fixture },
-                    { "ScopedCustomRootPath", fixture },
-                };
-            }
-        }
+                { "ScopedBasic" },
+                { "ScopedNamedProvider" },
+                { "ScopedCustomRootPathNamedProvider" },
+                { "ScopedCustomRootPath" },
+            };
     }
 }
 

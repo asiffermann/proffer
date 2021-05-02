@@ -10,12 +10,20 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IStore.ListAsync))]
+    [Collection(nameof(FileSystemCollection))]
     public class ListTests : Abstract.StoreTestsBase
     {
-        [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_ListRootFiles_When_PathIsNull(string storeName, FileSystemFixture fixture)
+        private readonly FileSystemFixture fixture;
+
+        public ListTests(FileSystemFixture fixture)
         {
-            IStore store = fixture.GetStore(storeName);
+            this.fixture = fixture;
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        public async Task Should_ListRootFiles_When_PathIsNull(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
 
             string[] expected = new string[] { "TextFile.txt", "template.hbs" };
 
@@ -30,9 +38,9 @@ namespace Proffer.Storage.FileSystem.Tests
         }
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_ListRootFiles_When_PathIsEmpty(string storeName, FileSystemFixture fixture)
+        public async Task Should_ListRootFiles_When_PathIsEmpty(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string[] expected = new string[] { "TextFile.txt", "template.hbs" };
 
@@ -47,9 +55,9 @@ namespace Proffer.Storage.FileSystem.Tests
         }
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_ListDirectoryFiles_When_PathIsDirectory(string storeName, FileSystemFixture fixture)
+        public async Task Should_ListDirectoryFiles_When_PathIsDirectory(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string[] expected = new string[] { "SubDirectory/TextFile2.txt" };
 
@@ -64,9 +72,9 @@ namespace Proffer.Storage.FileSystem.Tests
         }
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_ListDirectoryFiles_When_PathIsDirectoryWithTrailingSlash(string storeName, FileSystemFixture fixture)
+        public async Task Should_ListDirectoryFiles_When_PathIsDirectoryWithTrailingSlash(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string[] expected = new string[] { "SubDirectory/TextFile2.txt" };
 
@@ -81,9 +89,9 @@ namespace Proffer.Storage.FileSystem.Tests
         }
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_ListMatchingFiles_When_SearchPatternIsExtensionGlobbing(string storeName, FileSystemFixture fixture)
+        public async Task Should_ListMatchingFiles_When_SearchPatternIsExtensionGlobbing(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string[] expected = new string[] { "Globbing/template.hbs", "Globbing/template-header.hbs" };
 
@@ -98,9 +106,9 @@ namespace Proffer.Storage.FileSystem.Tests
         }
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_ListMatchingFiles_When_SearchPatternIsFileNameGlobbing(string storeName, FileSystemFixture fixture)
+        public async Task Should_ListMatchingFiles_When_SearchPatternIsFileNameGlobbing(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string[] expected = new string[] { "Globbing/template.hbs", "Globbing/template.mustache" };
 
@@ -115,9 +123,9 @@ namespace Proffer.Storage.FileSystem.Tests
         }
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_ListMatchingFiles_When_SearchPatternIsFileNameGlobbing_And_PathIsEmpty(string storeName, FileSystemFixture fixture)
+        public async Task Should_ListMatchingFiles_When_SearchPatternIsFileNameGlobbing_And_PathIsEmpty(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string[] expected = new string[] { "template.hbs" };
 

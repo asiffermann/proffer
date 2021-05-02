@@ -10,13 +10,21 @@ namespace Proffer.Storage.FileSystem.Tests
     [UnitTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
+    [Collection(nameof(FileSystemCollection))]
     public class SaveTests : Abstract.StoreTestsBase
     {
+        private readonly FileSystemFixture fixture;
+
+        public SaveTests(FileSystemFixture fixture)
+        {
+            this.fixture = fixture;
+        }
+
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.SaveAsync))]
-        public async Task Should_SaveFileContent_With_ByteArray(string storeName, FileSystemFixture fixture)
+        public async Task Should_SaveFileContent_With_ByteArray(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
             string textToWrite = "The answer is 42";
             string filePath = "Update/42.txt";
 
@@ -29,9 +37,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.SaveAsync))]
-        public async Task Should_ChangeETag_When_SavingDifferentContent(string storeName, FileSystemFixture fixture)
+        public async Task Should_ChangeETag_When_SavingDifferentContent(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
             string textToWrite = "ETag Test Compute";
             string filePath = "Update/etag-different.txt";
             string textToUpdate = "ETag Test Compute 2";
@@ -44,9 +52,9 @@ namespace Proffer.Storage.FileSystem.Tests
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.SaveAsync))]
-        public async Task Should_SaveFileContent_With_Stream(string storeName, FileSystemFixture fixture)
+        public async Task Should_SaveFileContent_With_Stream(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
             string textToWrite = "The answer is 42";
             string filePath = "Update/42-2.txt";
 

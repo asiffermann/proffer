@@ -10,12 +10,20 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IStorageFactory.GetScopedStore))]
+    [Collection(nameof(FileSystemCollection))]
     public class GetScopedStoreTests : Abstract.StoreTestsBase
     {
-        [Theory, MemberData(nameof(ConfiguredScopedStoreNames))]
-        public async Task Should_UpdateFile_With_ScopedStore(string storeName, FileSystemFixture fixture)
+        private readonly FileSystemFixture fixture;
+
+        public GetScopedStoreTests(FileSystemFixture fixture)
         {
-            IStore store = fixture.GetScopedStore(storeName);
+            this.fixture = fixture;
+        }
+
+        [Theory, MemberData(nameof(ConfiguredScopedStoreNames))]
+        public async Task Should_UpdateFile_With_ScopedStore(string storeName)
+        {
+            IStore store = this.fixture.GetScopedStore(storeName);
 
             await store.InitAsync();
 

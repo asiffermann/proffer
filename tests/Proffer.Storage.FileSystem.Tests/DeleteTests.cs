@@ -9,12 +9,20 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IFileReference.DeleteAsync))]
+    [Collection(nameof(FileSystemCollection))]
     public class DeleteTests : Abstract.StoreTestsBase
     {
-        [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_DeleteFile_With_FileReference(string storeName, FileSystemFixture fixture)
+        private readonly FileSystemFixture fixture;
+
+        public DeleteTests(FileSystemFixture fixture)
         {
-            IStore store = fixture.GetStore(storeName);
+            this.fixture = fixture;
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        public async Task Should_DeleteFile_With_FileReference(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
 
             IFileReference file = await store.GetAsync("Delete/ToDelete.txt");
 
@@ -25,16 +33,16 @@ namespace Proffer.Storage.FileSystem.Tests
         }
 
         [Theory, MemberData(nameof(ConfiguredStoreNames))]
-        public async Task Should_DeleteFile_With_Store(string storeName, FileSystemFixture fixture)
+        public async Task Should_DeleteFile_With_Store(string storeName)
         {
-            IStore store = fixture.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
-            IFileReference file = await store.GetAsync("Delete/ToDelete.txt");
+            IFileReference file = await store.GetAsync("Delete/ToDelete2.txt");
 
             await store.DeleteAsync(file);
 
-            Assert.Null(await store.GetAsync("Delete/ToDelete.txt"));
-            Assert.NotNull(await store.GetAsync("Delete/ToSurvive.txt"));
+            Assert.Null(await store.GetAsync("Delete/ToDelete2.txt"));
+            Assert.NotNull(await store.GetAsync("Delete/ToSurvive2.txt"));
         }
     }
 }

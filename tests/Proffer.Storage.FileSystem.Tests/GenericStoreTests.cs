@@ -15,17 +15,17 @@ namespace Proffer.Storage.FileSystem.Tests
     [Collection(nameof(FileSystemCollection))]
     public class GenericStoreTests
     {
-        private readonly FileSystemFixture storeFixture;
+        private readonly FileSystemFixture fixture;
 
         public GenericStoreTests(FileSystemFixture fixture)
         {
-            this.storeFixture = fixture;
+            this.fixture = fixture;
         }
 
         [Fact]
         public async Task Should_ListFiles_With_GenericStore()
         {
-            IStore<FileSystemStoreOptionsStub> store = this.storeFixture.Services.GetRequiredService<IStore<FileSystemStoreOptionsStub>>();
+            IStore<FileSystemStoreOptionsStub> store = this.fixture.Services.GetRequiredService<IStore<FileSystemStoreOptionsStub>>();
 
             string[] expected = new string[] { "TextFile.txt", "template.hbs" };
 
