@@ -10,7 +10,7 @@ namespace Proffer.Storage
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class FileSystemStorageServiceCollectionExtensions
     {
         /// <summary>
         /// Registers the Proffer.Storage services to the File System on the given root path.

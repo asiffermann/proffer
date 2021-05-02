@@ -16,7 +16,7 @@ namespace Proffer.Storage.Azure.Tests
     using Proffer.Testing;
     using Storage;
 
-    public class AzureFixture : ServiceProviderFixture
+    public class AzureFixture : ServiceProviderFixtureBase
     {
         public AzureFixture()
         {

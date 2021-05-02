@@ -9,7 +9,7 @@ namespace Proffer.Storage
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class StorageServiceCollectionExtensions
     {
         /// <summary>
         /// Registers Proffer.Storage services.

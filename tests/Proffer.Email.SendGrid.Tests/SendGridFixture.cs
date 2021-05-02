@@ -9,7 +9,7 @@ namespace Proffer.Email.SendGrid.Tests
     using Storage;
     using Templating;
 
-    public class SendGridFixture : ServiceProviderFixture
+    public class SendGridFixture : ServiceProviderFixtureBase
     {
         public const string FirstRecipient = "tests@getproffer.net";
         public const string SecondRecipient = "hello@getproffer.net";

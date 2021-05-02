@@ -6,11 +6,39 @@ namespace Proffer.Testing
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.PlatformAbstractions;
 
-    public abstract class ServiceProviderFixture : IDisposable
+    public abstract class ServiceProviderFixtureBase : IDisposable
     {
         private bool disposedValue;
 
-        public ServiceProviderFixture()
+        public ServiceProviderFixtureBase(bool build = true)
+        {
+            if (build)
+            {
+                this.Build();
+            }
+        }
+
+        public string Id { get; private set; }
+
+        public string BasePath { get; private set; }
+
+        public IConfigurationRoot Configuration { get; private set; }
+
+        public IServiceProvider Services { get; private set; }
+
+        public void Dispose()
+        {
+            this.Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected abstract void ConfigureServices(IServiceCollection services);
+
+        protected virtual void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData) { }
+
+        protected virtual void OnDispose() { }
+
+        protected void Build()
         {
             this.Id = Guid.NewGuid().ToString("N").ToLower();
             this.BasePath = PlatformServices.Default.Application.ApplicationBasePath;
@@ -20,7 +48,7 @@ namespace Proffer.Testing
 
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(this.BasePath)
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile("appsettings.development.json", optional: true)
                 .AddInMemoryCollection(inMemoryCollectionData)
                 .AddEnvironmentVariables();
@@ -36,26 +64,6 @@ namespace Proffer.Testing
 
             this.Services = services.BuildServiceProvider();
         }
-
-        public string Id { get; }
-
-        public string BasePath { get; }
-
-        public IConfigurationRoot Configuration { get; }
-
-        public IServiceProvider Services { get; }
-
-        public void Dispose()
-        {
-            this.Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected abstract void ConfigureServices(IServiceCollection services);
-
-        protected virtual void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData) { }
-
-        protected virtual void OnDispose() { }
 
         private void Dispose(bool disposing)
         {

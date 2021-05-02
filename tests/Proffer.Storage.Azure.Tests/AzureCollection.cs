@@ -1,8 +1,7 @@
 namespace Proffer.Storage.Azure.Tests
 {
-    using Proffer.Testing;
     using Xunit;
 
     [CollectionDefinition(nameof(AzureCollection))]
-    public class AzureCollection : ServiceProviderCollection<AzureFixture> { }
+    public class AzureCollection : ICollectionFixture<AzureFixture> { }
 }
