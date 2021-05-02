@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Proffer.Testing\Proffer.Testing.csproj" />
     <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem.Server\Proffer.Storage.FileSystem.Server.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem.Properties.Json\Proffer.Storage.FileSystem.Properties.Json.csproj" />
   </ItemGroup>
   
 </Project>
