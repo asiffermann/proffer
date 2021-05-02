@@ -36,7 +36,7 @@ namespace Proffer.Storage.FileSystem.Tests
 
             IOptions<FileSystemParsedOptions> options = fixture.Services.GetService<IOptions<FileSystemParsedOptions>>();
 
-            Assert.Equal(PlatformServices.Default.Application.ApplicationBasePath.Trim('\\'), options.Value.RootPath);
+            Assert.Equal(PlatformServices.Default.Application.ApplicationBasePath.Trim('\\').Trim('/'), options.Value.RootPath);
         }
 
         [Fact]
