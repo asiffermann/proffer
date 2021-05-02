@@ -12,15 +12,6 @@ namespace Proffer.Storage.Exceptions
         /// Initializes a new instance of the <see cref="BadProviderConfiguration"/> class.
         /// </summary>
         /// <param name="providerName">The name of the provider.</param>
-        public BadProviderConfiguration(string providerName) 
-            : base($"The provider '{providerName}' was not properly configured.")
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BadProviderConfiguration"/> class.
-        /// </summary>
-        /// <param name="providerName">The name of the provider.</param>
         /// <param name="details">The details.</param>
         public BadProviderConfiguration(string providerName, string details)
             : base($"The providerName '{providerName}' was not properly configured. {details}")

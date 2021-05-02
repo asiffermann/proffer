@@ -76,17 +76,13 @@ namespace Proffer.Storage.Configuration
         /// Binds the provider instance options.
         /// </summary>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
-        public void BindProviderInstanceOptions(ProviderInstanceOptions providerInstanceOptions)
-        {
-        }
+        public void BindProviderInstanceOptions(ProviderInstanceOptions providerInstanceOptions) { }
 
         /// <summary>
         /// Binds the store options.
         /// </summary>
         /// <param name="storeOptions">The store options.</param>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
-        public void BindStoreOptions(StoreOptions storeOptions, ProviderInstanceOptions providerInstanceOptions)
-        {
-        }
+        public void BindStoreOptions(StoreOptions storeOptions, ProviderInstanceOptions providerInstanceOptions) { }
     }
 }

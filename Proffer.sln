@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		.runsettings = .runsettings
 		coverlet.runsettings = coverlet.runsettings
 		gitversion.yml = gitversion.yml
 		LICENSE = LICENSE
@@ -55,7 +56,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.Azure.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.SendGrid.Tests", "tests\Proffer.Email.SendGrid.Tests\Proffer.Email.SendGrid.Tests.csproj", "{A1BABC33-523C-419B-8407-67A3BCE53737}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Storage.Tests", "tests\Proffer.Storage.Tests\Proffer.Storage.Tests.csproj", "{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.Tests", "tests\Proffer.Storage.Tests\Proffer.Storage.Tests.csproj", "{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

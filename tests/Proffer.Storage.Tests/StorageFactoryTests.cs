@@ -97,6 +97,19 @@ namespace Proffer.Storage.Tests
         }
 
         [Fact]
+        public void Should_Throw_When_GettingUnknownScopedStore()
+        {
+            string storeName = "UnknownScopedStore";
+
+            var fixture = new SimpleServiceProviderFixture(
+                (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
+
+            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+
+            Assert.Throws<StoreNotFoundException>(() => storageFactory.GetScopedStore(storeName, Guid.NewGuid()));
+        }
+
+        [Fact]
         public void Should_Throw_When_GettingScopedStore_With_BadFormat()
         {
             string sectionName = "BadStorage";
