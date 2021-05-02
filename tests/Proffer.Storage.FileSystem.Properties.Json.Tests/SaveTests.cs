@@ -10,8 +10,7 @@ namespace Proffer.Storage.FileSystem.Properties.Json.Tests
     [UnitTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
-    [Feature(nameof(IExtendedPropertiesProvider))]
-    
+    [Feature(nameof(IExtendedPropertiesProvider))]    
     [Collection(nameof(FileSystemPropertiesJsonCollection))]
     public class SaveTests : Abstract.ConfiguredStoresTestsBase
     {
@@ -148,6 +147,30 @@ namespace Proffer.Storage.FileSystem.Properties.Json.Tests
                     actualId = aFile.Properties.Metadata["id"];
                 }
             }
+
+            Assert.Equal(id, actualId);
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        [Feature(nameof(IFileReference.SavePropertiesAsync))]
+        public async Task Should_SaveProperties_When_SavingContent(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
+
+            string testFile = "Metadata/TextFile.txt";
+
+            IFileReference file = await store.GetAsync(testFile, withMetadata: true);
+
+            string id = Guid.NewGuid().ToString();
+
+            file.Properties.Metadata["SavingContentId"] = id;
+
+            string textToWrite = "Hello";
+            await store.SaveAsync(Encoding.UTF8.GetBytes(textToWrite), file, "text/plain", metadata: file.Properties.Metadata);
+
+            file = await store.GetAsync(testFile, withMetadata: true);
+
+            string actualId = file.Properties.Metadata["SavingContentId"];
 
             Assert.Equal(id, actualId);
         }

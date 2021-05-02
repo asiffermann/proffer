@@ -26,7 +26,7 @@ namespace Proffer.Storage.FileSystem.Internal
         /// <summary>
         /// Gets the last modified time.
         /// </summary>
-        public DateTimeOffset? LastModified => new DateTimeOffset(this.fileInfo.LastWriteTimeUtc, TimeZoneInfo.Local.BaseUtcOffset);
+        public DateTimeOffset? LastModified => new DateTimeOffset(this.fileInfo.LastWriteTimeUtc, default);
 
         /// <summary>
         /// Gets the length of the content.
