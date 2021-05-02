@@ -26,12 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Proffer.Testing\Proffer.Testing.csproj" />
-    <ProjectReference Include="..\Proffer.Storage.Tests\Proffer.Storage.Tests.csproj" />
     <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem\Proffer.Storage.FileSystem.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mocks\" />
   </ItemGroup>
 
 </Project>
