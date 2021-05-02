@@ -19,6 +19,8 @@ namespace Proffer.Storage.Tests.Stubs
 
         public string Name => this.storeOptions.Name;
 
+        public string FolderName => this.storeOptions.FolderName;
+
         public Task InitAsync(CancellationToken cancellationToken = default)
             => Task.CompletedTask;
 
