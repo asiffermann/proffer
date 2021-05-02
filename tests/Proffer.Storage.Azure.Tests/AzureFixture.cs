@@ -107,15 +107,34 @@ namespace Proffer.Storage.Azure.Tests
 
         private void ResetFileSystemStore(string storeName, string absolutePath)
         {
-            var process = Process.Start(new ProcessStartInfo("robocopy.exe")
-            {
-                Arguments = $"\"{Path.Combine(this.BasePath, "Stores", "DefaultContent")}\" \"{absolutePath}\" /MIR"
-            });
+            string contentDirectoryPath = Path.Combine(this.BasePath, "Stores", "DefaultContent");
 
-            if (!process.WaitForExit(30000))
+            this.CopyContentDirectoryTo(contentDirectoryPath, absolutePath);
+        }
+
+        private void CopyContentDirectoryTo(string contentDirectoryPath, string destinationPath)
+        {
+            var contentDirectory = new DirectoryInfo(contentDirectoryPath);
+
+            if (!contentDirectory.Exists)
             {
-                process.Kill();
-                throw new TimeoutException($"FileSystem Store '{storeName}' was not reset properly.");
+                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + contentDirectoryPath);
+            }
+
+            FileInfo[] files = contentDirectory.GetFiles();
+            DirectoryInfo[] directories = contentDirectory.GetDirectories();
+
+            Directory.CreateDirectory(destinationPath);
+            foreach (FileInfo file in files)
+            {
+                string destinationFilePath = Path.Combine(destinationPath, file.Name);
+                file.CopyTo(destinationFilePath, false);
+            }
+
+            foreach (DirectoryInfo subDirectory in directories)
+            {
+                string subDirectoryDestinationPath = Path.Combine(destinationPath, subDirectory.Name);
+                this.CopyContentDirectoryTo(subDirectory.FullName, subDirectoryDestinationPath);
             }
         }
 
