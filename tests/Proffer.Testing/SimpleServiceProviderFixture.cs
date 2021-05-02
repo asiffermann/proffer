@@ -6,10 +6,10 @@ namespace Proffer.Testing
 
     public class SimpleServiceProviderFixture : ServiceProviderFixtureBase
     {
-        private readonly Action<IServiceCollection> configureServices;
+        private readonly Action<IServiceCollection, SimpleServiceProviderFixture> configureServices;
         private readonly IDictionary<string, string> inMemoryConfiguration;
 
-        public SimpleServiceProviderFixture(Action<IServiceCollection> configureServices, IDictionary<string, string> inMemoryConfiguration = null)
+        public SimpleServiceProviderFixture(Action<IServiceCollection, SimpleServiceProviderFixture> configureServices, Dictionary<string, string> inMemoryConfiguration = null)
             : base(false)
         {
             this.configureServices = configureServices;
@@ -18,7 +18,7 @@ namespace Proffer.Testing
         }
 
         protected override void ConfigureServices(IServiceCollection services)
-            => this.configureServices(services);
+            => this.configureServices(services, this);
 
         protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
         {

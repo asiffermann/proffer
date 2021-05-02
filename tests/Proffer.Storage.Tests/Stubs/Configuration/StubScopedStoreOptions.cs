@@ -4,6 +4,6 @@ namespace Proffer.Storage.Tests.Stubs.Configuration
 
     public class StubScopedStoreOptions : StubStoreOptions, IScopedStoreOptions
     {
-        public string FolderNameFormat => "Stub-{0}";
+        public string FolderNameFormat { get; set; }
     }
 }
