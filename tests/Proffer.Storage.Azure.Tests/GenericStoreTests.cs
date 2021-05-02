@@ -15,17 +15,17 @@ namespace Proffer.Storage.Azure.Tests
     [Collection(nameof(AzureCollection))]
     public class GenericStoreTests
     {
-        private readonly AzureFixture storeFixture;
+        private readonly AzureFixture fixture;
 
         public GenericStoreTests(AzureFixture fixture)
         {
-            this.storeFixture = fixture;
+            this.fixture = fixture;
         }
 
         [Fact]
         public async Task Should_ListFiles_With_GenericStore()
         {
-            IStore<StoreOptionsStub> store = this.storeFixture.Services.GetRequiredService<IStore<StoreOptionsStub>>();
+            IStore<AzureStoreOptionsStub> store = this.fixture.Services.GetRequiredService<IStore<AzureStoreOptionsStub>>();
 
             string[] expected = new string[] { "TextFile.txt", "template.hbs" };
 

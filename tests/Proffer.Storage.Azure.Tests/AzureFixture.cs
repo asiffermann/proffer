@@ -4,6 +4,7 @@ namespace Proffer.Storage.Azure.Tests
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using global::Azure.Storage;
     using global::Azure.Storage.Blobs;
     using global::Azure.Storage.Sas;
@@ -12,165 +13,105 @@ namespace Proffer.Storage.Azure.Tests
     using Proffer.Storage.Azure.Configuration;
     using Proffer.Storage.Azure.Tests.Stubs;
     using Proffer.Storage.Configuration;
-    using Proffer.Storage.FileSystem.Configuration;
     using Proffer.Testing;
     using Storage;
 
-    public class AzureFixture : ServiceProviderFixture
+    public class AzureFixture : ServiceProviderFixtureBase
     {
         public AzureFixture()
         {
-            this.StorageOptions = this.Services.GetService<IOptions<StorageOptions>>().Value;
-            this.AzureParsedOptions = this.Services.GetService<IOptions<AzureParsedOptions>>().Value;
-            this.FileSystemParsedOptions = this.Services.GetService<IOptions<FileSystemParsedOptions>>().Value;
-            this.TestStoreOptions = this.Services.GetService<IOptions<StoreOptionsStub>>().Value.ParseStoreOptions<FileSystemParsedOptions, FileSystemProviderInstanceOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>(this.FileSystemParsedOptions);
+            this.ParsedOptions = this.Services.GetService<IOptions<AzureParsedOptions>>().Value;
+            this.GenericStoreOptions = this.Services.GetService<IOptions<AzureStoreOptionsStub>>().Value
+                .ParseStoreOptions<AzureParsedOptions, AzureProviderInstanceOptions, AzureStoreOptions, AzureScopedStoreOptions>(this.ParsedOptions);
 
-            this.ResetStores();
+            this.InitStores();
         }
 
-        public string FileSystemRootPath => Path.Combine(this.BasePath, "FileVault");
+        public AzureParsedOptions ParsedOptions { get; }
 
-        public string FileSystemSecondaryRootPath => Path.Combine(this.BasePath, "FileVault2");
+        public AzureStoreOptions GenericStoreOptions { get; }
 
-        public StorageOptions StorageOptions { get; }
+        private string AzCopy => Environment.ExpandEnvironmentVariables(this.Configuration["AzCopy10Command"]);
 
-        public AzureParsedOptions AzureParsedOptions { get; }
+        private string ConnectionString => this.ParsedOptions.ConnectionStrings.Values.First();
 
-        public FileSystemParsedOptions FileSystemParsedOptions { get; }
+        public IStore GetStore(string storeName)
+        {
+            IStorageFactory storageFactory = this.Services.GetRequiredService<IStorageFactory>();
 
-        public FileSystemStoreOptions TestStoreOptions { get; }
+            return storageFactory.GetStore(storeName);
+        }
+
+        public IStore GetScopedStore(string storeName)
+        {
+            IStorageFactory storageFactory = this.Services.GetRequiredService<IStorageFactory>();
+
+            return storageFactory.GetScopedStore(storeName, Guid.NewGuid());
+        }
 
         protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
         {
-            inMemoryCollectionData.Add("Storage:Stores:Store3:FolderName", $"Store3-{this.Id}");
-            inMemoryCollectionData.Add("Storage:Stores:Store4:FolderName", $"Store4-{this.Id}");
-            inMemoryCollectionData.Add("Storage:Stores:Store5:FolderName", $"Store5-{this.Id}");
-            inMemoryCollectionData.Add("Storage:Stores:Store6:FolderName", $"Store6-{this.Id}");
+            inMemoryCollectionData.Add("Storage:Stores:CustomConnectionStringProvider:FolderName", $"ccsp-{this.Id}");
+            inMemoryCollectionData.Add("Storage:Stores:CustomConnectionString:FolderName", $"ccs-{this.Id}");
+            inMemoryCollectionData.Add("Storage:Stores:ReferenceConnectionStringProvider:FolderName", $"rcsp-{this.Id}");
+            inMemoryCollectionData.Add("Storage:Stores:ReferenceConnectionString:FolderName", $"rcs-{this.Id}");
         }
 
         protected override void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddStorage(this.Configuration)
-                .AddAzureStorage()
-                .AddFileSystemStorage(this.FileSystemRootPath)
-                .AddFileSystemExtendedProperties();
+                .AddAzureStorage();
 
-            services.Configure<StoreOptionsStub>(o => { });
+            services.Configure<AzureStoreOptionsStub>(o => o.ConnectionString = this.ConnectionString);
         }
 
         protected override void OnDispose()
         {
-            this.DeleteRootResources();
-        }
-
-        private void DeleteRootResources()
-        {
-            foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.AzureParsedOptions.ParsedStores)
+            foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.ParsedOptions.ParsedStores)
             {
-                var containerClient = new BlobContainerClient(parsedStoreKvp.Value.ConnectionString, parsedStoreKvp.Value.FolderName);
-                containerClient.DeleteIfExists();
-            }
-
-            if (Directory.Exists(this.FileSystemRootPath))
-            {
-                Directory.Delete(this.FileSystemRootPath, true);
-            }
-
-            if (Directory.Exists(this.FileSystemSecondaryRootPath))
-            {
-                Directory.Delete(this.FileSystemSecondaryRootPath, true);
+                var containerClient = new BlobContainerClient(this.ConnectionString, parsedStoreKvp.Value.FolderName);
+                containerClient.Delete();
             }
         }
 
-        private void ResetStores()
+        private void InitStores()
         {
-            this.DeleteRootResources();
-            this.ResetAzureStores();
-            this.ResetFileSystemStores();
-        }
-
-        private void ResetFileSystemStores()
-        {
-            if (!Directory.Exists(this.FileSystemRootPath))
+            this.InitStore(this.GenericStoreOptions);
+            foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.ParsedOptions.ParsedStores)
             {
-                Directory.CreateDirectory(this.FileSystemRootPath);
-            }
-
-            foreach (KeyValuePair<string, FileSystemStoreOptions> parsedStoreKvp in this.FileSystemParsedOptions.ParsedStores)
-            {
-                this.ResetFileSystemStore(parsedStoreKvp.Key, parsedStoreKvp.Value.AbsolutePath);
-            }
-
-            this.ResetFileSystemStore(this.TestStoreOptions.Name, this.TestStoreOptions.AbsolutePath);
-        }
-
-        private void ResetFileSystemStore(string storeName, string absolutePath)
-        {
-            string contentDirectoryPath = Path.Combine(this.BasePath, "Stores", "DefaultContent");
-
-            this.CopyContentDirectoryTo(contentDirectoryPath, absolutePath);
-        }
-
-        private void CopyContentDirectoryTo(string contentDirectoryPath, string destinationPath)
-        {
-            var contentDirectory = new DirectoryInfo(contentDirectoryPath);
-
-            if (!contentDirectory.Exists)
-            {
-                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + contentDirectoryPath);
-            }
-
-            FileInfo[] files = contentDirectory.GetFiles();
-            DirectoryInfo[] directories = contentDirectory.GetDirectories();
-
-            Directory.CreateDirectory(destinationPath);
-            foreach (FileInfo file in files)
-            {
-                string destinationFilePath = Path.Combine(destinationPath, file.Name);
-                file.CopyTo(destinationFilePath, false);
-            }
-
-            foreach (DirectoryInfo subDirectory in directories)
-            {
-                string subDirectoryDestinationPath = Path.Combine(destinationPath, subDirectory.Name);
-                this.CopyContentDirectoryTo(subDirectory.FullName, subDirectoryDestinationPath);
+                this.InitStore(parsedStoreKvp.Value);
             }
         }
 
-        private void ResetAzureStores()
+        private void InitStore(AzureStoreOptions storeOptions)
         {
-            string azcopy = Environment.ExpandEnvironmentVariables(this.Configuration["AzCopy10Command"]);
+            var containerClient = new BlobContainerClient(storeOptions.ConnectionString, storeOptions.FolderName);
+            containerClient.CreateIfNotExists();
 
-            foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.AzureParsedOptions.ParsedStores)
+            string defaultContentPath = Path.Combine(this.BasePath, "Stores", "DefaultContent", "*");
+            string sasToken = GetAccountSasToken(storeOptions.ConnectionString);
+
+            string arguments = $"copy \"{defaultContentPath}\" \"{containerClient.Uri}?{sasToken}\" --recursive";
+
+            var processStartInfo = new ProcessStartInfo(this.AzCopy)
             {
-                var containerClient = new BlobContainerClient(parsedStoreKvp.Value.ConnectionString, parsedStoreKvp.Value.FolderName);
-                containerClient.CreateIfNotExists();
+                Arguments = arguments,
+                RedirectStandardOutput = true
+            };
 
-                string defaultContentPath = Path.Combine(this.BasePath, "Stores", "DefaultContent", "*");
-                string sasToken = GetAccountSasToken(parsedStoreKvp.Value.ConnectionString);
-
-                string arguments = $"copy \"{defaultContentPath}\" \"{containerClient.Uri}?{sasToken}\" --recursive";
-
-                var processStartInfo = new ProcessStartInfo(azcopy)
+            using (var process = Process.Start(processStartInfo))
+            {
+                if (!process.WaitForExit(30000))
                 {
-                    Arguments = arguments,
-                    RedirectStandardOutput = true
-                };
+                    process.Kill();
+                    throw new TimeoutException($"Azure Store '{storeOptions.Name}' was not reset properly.");
+                }
 
-                using (var process = Process.Start(processStartInfo))
+                using (StreamReader reader = process.StandardOutput)
                 {
-                    if (!process.WaitForExit(30000))
-                    {
-                        process.Kill();
-                        throw new TimeoutException($"Azure Store '{parsedStoreKvp.Key}' was not reset properly.");
-                    }
-
-                    using (StreamReader reader = process.StandardOutput)
-                    {
-                        string result = reader.ReadToEnd();
-                        Console.Write(result);
-                    }
+                    string result = reader.ReadToEnd();
+                    //Console.Write(result);
                 }
             }
         }

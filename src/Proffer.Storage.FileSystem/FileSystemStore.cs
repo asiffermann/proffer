@@ -219,7 +219,7 @@ namespace Proffer.Storage.FileSystem
         {
             using (var stream = new MemoryStream(data, 0, data.Length))
             {
-                return await this.SaveAsync(stream, file, contentType, overwritePolicy);
+                return await this.SaveAsync(stream, file, contentType, overwritePolicy, metadata);
             }
         }
 
@@ -271,11 +271,14 @@ namespace Proffer.Storage.FileSystem
             {
                 foreach (KeyValuePair<string, string> kvp in metadata)
                 {
-                    properties.Metadata.Add(kvp.Key, kvp.Value);
+                    properties.Metadata[kvp.Key] = kvp.Value;
                 }
             }
 
-            await fileReference.SavePropertiesAsync();
+            if (this.extendedPropertiesProvider.GetType() != typeof(NoExtendedPropertiesProvider))
+            {
+                await fileReference.SavePropertiesAsync();
+            }
 
             return fileReference;
         }

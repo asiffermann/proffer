@@ -35,7 +35,7 @@ namespace Proffer.Email.SendGrid.Tests
                 new EmailAddress
                 {
                     DisplayName = "test user",
-                    Email = "tests@proffer-dotnet.org"
+                    Email = "tests@getproffer.net"
                 });
         }
 
@@ -47,13 +47,13 @@ namespace Proffer.Email.SendGrid.Tests
                 new EmailAddress
                 {
                     DisplayName = "Reply Address",
-                    Email = "tests@proffer-dotnet.org"
+                    Email = "tests@getproffer.net"
                 },
                 "Simple mail", "Hello, it's a simple mail", false,
                 new EmailAddress
                 {
                     DisplayName = "test user",
-                    Email = "hello@proffer-dotnet.org"
+                    Email = "hello@getproffer.net"
                 });
         }
 

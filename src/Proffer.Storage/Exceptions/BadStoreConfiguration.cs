@@ -14,15 +14,6 @@ namespace Proffer.Storage.Exceptions
         /// Initializes a new instance of the <see cref="BadStoreConfiguration"/> class.
         /// </summary>
         /// <param name="storeName">The name of the store.</param>
-        public BadStoreConfiguration(string storeName) 
-            : base($"The store '{storeName}' was not properly configured.")
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BadStoreConfiguration"/> class.
-        /// </summary>
-        /// <param name="storeName">The name of the store.</param>
         /// <param name="details">The details.</param>
         public BadStoreConfiguration(string storeName, string details)
             : base($"The store '{storeName}' was not properly configured. {details}")

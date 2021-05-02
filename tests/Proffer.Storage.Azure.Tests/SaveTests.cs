@@ -5,6 +5,7 @@ namespace Proffer.Storage.Azure.Tests
     using System.Text;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
+    using Proffer.Storage.Exceptions;
     using Storage;
     using Xunit;
     using Xunit.Categories;
@@ -13,39 +14,20 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Collection(nameof(AzureCollection))]
-    public class SaveTests
+    public class SaveTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture storeFixture;
+        private readonly AzureFixture fixture;
 
         public SaveTests(AzureFixture fixture)
         {
-            this.storeFixture = fixture;
+            this.fixture = fixture;
         }
 
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        [Feature(nameof(IStore.SaveAsync))]
-        public async Task Should_SaveFileContent_With_ByteArray(string storeName)
-        {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
-            string textToWrite = "The answer is 42";
-            string filePath = "Update/42.txt";
-
-            await store.SaveAsync(Encoding.UTF8.GetBytes(textToWrite), filePath, "text/plain");
-
-            string readFromWrittenFile = await store.ReadAllTextAsync(filePath);
-
-            Assert.Equal(textToWrite, readFromWrittenFile);
-        }
-
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.SaveAsync))]
         public async Task Should_PreserveETag_When_SavingSameContent(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
             string textToWrite = "ETag Test Compute";
             string filePath = "Update/etag-same.txt";
 
@@ -55,13 +37,12 @@ namespace Proffer.Storage.Azure.Tests
             Assert.Equal(savedReference.Properties.ETag, readReference.Properties.ETag);
         }
 
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IStore.SaveAsync))]
         public async Task Should_ChangeETag_When_SavingDifferentContent(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
+            IStore store = this.fixture.GetStore(storeName);
 
-            IStore store = storageFactory.GetStore(storeName);
             string textToWrite = "ETag Test Compute";
             string filePath = "Update/etag-different.txt";
             string textToUpdate = "ETag Test Compute 2";
@@ -72,30 +53,11 @@ namespace Proffer.Storage.Azure.Tests
             Assert.NotEqual(savedReference.Properties.ETag, updatedReference.Properties.ETag);
         }
 
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
-        [Feature(nameof(IStore.SaveAsync))]
-        public async Task Should_SaveFileContent_With_Stream(string storeName)
-        {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
-            string textToWrite = "The answer is 42";
-            string filePath = "Update/42-2.txt";
-
-            await store.SaveAsync(new MemoryStream(Encoding.UTF8.GetBytes(textToWrite)), filePath, "text/plain");
-
-            string readFromWrittenFile = await store.ReadAllTextAsync(filePath);
-
-            Assert.Equal(textToWrite, readFromWrittenFile);
-        }
-
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IFileReference.SavePropertiesAsync))]
         public async Task Should_SaveProperties_When_AddingMetadata(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string testFile = "Metadata/TextFile.txt";
 
@@ -114,13 +76,11 @@ namespace Proffer.Storage.Azure.Tests
             Assert.Equal(id, actualId);
         }
 
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IFileReference.SavePropertiesAsync))]
         public async Task Should_SaveProperties_When_SettingMetadata(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string testFile = "Metadata/TextFile.txt";
 
@@ -139,13 +99,11 @@ namespace Proffer.Storage.Azure.Tests
             Assert.Equal(id, actualId);
         }
 
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IFileReference.SavePropertiesAsync))]
         public async Task Should_SaveProperties_With_PreservedEncoding(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string testFile = "Metadata/TextFile.txt";
 
@@ -164,13 +122,11 @@ namespace Proffer.Storage.Azure.Tests
             Assert.Equal(name, actualName);
         }
 
-        [Theory, InlineData("Store1"), InlineData("Store2"), InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
         [Feature(nameof(IFileReference.SavePropertiesAsync))]
         public async Task Should_GetMetadata_When_ListingFiles_With_UpdatedMetadata(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            IStore store = storageFactory.GetStore(storeName);
+            IStore store = this.fixture.GetStore(storeName);
 
             string testFile = "Metadata/TextFile.txt";
 
@@ -195,6 +151,92 @@ namespace Proffer.Storage.Azure.Tests
             }
 
             Assert.Equal(id, actualId);
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        [Feature(nameof(IFileReference.SavePropertiesAsync))]
+        public async Task Should_SaveProperties_When_SavingContent(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
+
+            string testFile = "Metadata/TextFile.txt";
+
+            IFileReference file = await store.GetAsync(testFile, withMetadata: true);
+
+            string id = Guid.NewGuid().ToString();
+
+            file.Properties.Metadata["SavingContentId"] = id;
+
+            string textToWrite = "Hello";
+            await store.SaveAsync(Encoding.UTF8.GetBytes(textToWrite), file, "text/plain", metadata: file.Properties.Metadata);
+
+            file = await store.GetAsync(testFile, withMetadata: true);
+
+            string actualId = file.Properties.Metadata["SavingContentId"];
+
+            Assert.Equal(id, actualId);
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        [Feature(nameof(IStore.SaveAsync))]
+        public async Task Should_SaveFileContent_With_ByteArray(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
+            string textToWrite = "The answer is 42";
+            string filePath = "Update/42.txt";
+
+            await store.SaveAsync(Encoding.UTF8.GetBytes(textToWrite), filePath, "text/plain");
+
+            string readFromWrittenFile = await store.ReadAllTextAsync(filePath);
+
+            Assert.Equal(textToWrite, readFromWrittenFile);
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        [Feature(nameof(IStore.SaveAsync))]
+        public async Task Should_SaveFileContent_With_Stream(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
+            string textToWrite = "The answer is 42";
+            string filePath = "Update/42-2.txt";
+
+            await store.SaveAsync(new MemoryStream(Encoding.UTF8.GetBytes(textToWrite)), filePath, "text/plain");
+
+            string readFromWrittenFile = await store.ReadAllTextAsync(filePath);
+
+            Assert.Equal(textToWrite, readFromWrittenFile);
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        [Feature(nameof(IStore.SaveAsync))]
+        public async Task Should_Throw_With_ExistingFile_When_PassingNever(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
+            string filePath = "TextFile.txt";
+
+            await Assert.ThrowsAsync<FileAlreadyExistsException>(
+                async () => await store.SaveAsync(
+                    new MemoryStream(Encoding.UTF8.GetBytes("The answer is 42")),
+                    filePath,
+                    "text/plain",
+                    OverwritePolicy.Never));
+        }
+
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
+        [Feature(nameof(IFileReference.UpdateAsync))]
+        public async Task Should_UpdateFileContent_With_FileRefence(string storeName)
+        {
+            IStore store = this.fixture.GetStore(storeName);
+            string textToWrite = "The answer is 42";
+            string filePath = "Update/TextFile.txt";
+
+            IFileReference file = await store.GetAsync(filePath);
+
+            await file.UpdateAsync(new MemoryStream(Encoding.UTF8.GetBytes(textToWrite)));
+
+            string readFromWrittenFile = await store.ReadAllTextAsync(filePath);
+
+            Assert.Equal(textToWrite, readFromWrittenFile);
         }
     }
 }

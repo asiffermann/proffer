@@ -18,20 +18,20 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Azure))]
     [Feature(nameof(IStore.GetSharedAccessSignatureAsync))]
     [Collection(nameof(AzureCollection))]
-    public class GetSharedAccessSignatureTests
+    public class GetSharedAccessSignatureTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture storeFixture;
+        private readonly AzureFixture fixture;
 
         public GetSharedAccessSignatureTests(AzureFixture fixture)
         {
-            this.storeFixture = fixture;
+            this.fixture = fixture;
         }
 
-        [Theory, InlineData("Store3"), InlineData("Store4"), InlineData("Store5"), InlineData("Store6")]
+        [Theory, MemberData(nameof(ConfiguredStoreNames))]
         public async Task Should_ListFiles_With_SharedAccessSignature(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-            IOptions<AzureParsedOptions> options = this.storeFixture.Services.GetRequiredService<IOptions<AzureParsedOptions>>();
+            IStorageFactory storageFactory = this.fixture.Services.GetRequiredService<IStorageFactory>();
+            IOptions<AzureParsedOptions> options = this.fixture.Services.GetRequiredService<IOptions<AzureParsedOptions>>();
 
             IStore store = storageFactory.GetStore(storeName);
 

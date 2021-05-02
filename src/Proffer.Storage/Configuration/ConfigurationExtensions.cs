@@ -162,6 +162,7 @@ namespace Proffer.Storage.Configuration
         {
             if (!(storeOptions is TStoreOptions parsedStoreOptions))
             {
+                // TODO: Add a warning log
                 parsedStoreOptions = new TStoreOptions
                 {
                     Name = storeOptions.Name,

@@ -1,5 +1,6 @@
 namespace Proffer.Storage.FileSystem
 {
+    using System.IO;
     using Microsoft.Extensions.Options;
     using Proffer.Storage.FileSystem.Configuration;
     using Proffer.Storage.Internal;
@@ -46,9 +47,16 @@ namespace Proffer.Storage.FileSystem
         /// A configured <see cref="IStore" />.
         /// </returns>
         protected override IStore BuildStoreInternal(string storeName, FileSystemStoreOptions storeOptions)
-            => new FileSystemStore(
+        {
+            if (!Path.IsPathRooted(storeOptions.RootPath))
+            {
+                storeOptions.RootPath = Path.Combine(this.Options.RootPath, storeOptions.RootPath);
+            }
+
+            return new FileSystemStore(
                 storeOptions,
                 this.publicUrlProvider,
                 this.extendedPropertiesProvider);
+        }
     }
 }

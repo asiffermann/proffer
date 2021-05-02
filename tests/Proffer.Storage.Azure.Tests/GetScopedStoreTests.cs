@@ -1,9 +1,7 @@
 namespace Proffer.Storage.Azure.Tests
 {
-    using System;
     using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.Extensions.DependencyInjection;
     using Storage;
     using Xunit;
     using Xunit.Categories;
@@ -13,22 +11,19 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Azure))]
     [Feature(nameof(IStorageFactory.GetScopedStore))]
     [Collection(nameof(AzureCollection))]
-    public class GetScopedStoreTests
+    public class GetScopedStoreTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture storeFixture;
+        private readonly AzureFixture fixture;
 
         public GetScopedStoreTests(AzureFixture fixture)
         {
-            this.storeFixture = fixture;
+            this.fixture = fixture;
         }
 
-        [Theory, InlineData("ScopedStore1"), InlineData("ScopedStore2")]
+        [Theory, MemberData(nameof(ConfiguredScopedStoreNames))]
         public async Task Should_UpdateFile_With_ScopedStore(string storeName)
         {
-            IStorageFactory storageFactory = this.storeFixture.Services.GetRequiredService<IStorageFactory>();
-
-            var formatArg = Guid.NewGuid();
-            IStore store = storageFactory.GetScopedStore(storeName, formatArg);
+            IStore store = this.fixture.GetScopedStore(storeName);
 
             await store.InitAsync();
 

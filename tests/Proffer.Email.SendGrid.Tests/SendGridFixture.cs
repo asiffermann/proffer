@@ -9,10 +9,10 @@ namespace Proffer.Email.SendGrid.Tests
     using Storage;
     using Templating;
 
-    public class SendGridFixture : ServiceProviderFixture
+    public class SendGridFixture : ServiceProviderFixtureBase
     {
-        public const string FirstRecipient = "tests@proffer-dotnet.org";
-        public const string SecondRecipient = "hello@proffer-dotnet.org";
+        public const string FirstRecipient = "tests@getproffer.net";
+        public const string SecondRecipient = "hello@getproffer.net";
 
         public SendGridFixture()
         {
@@ -39,10 +39,10 @@ namespace Proffer.Email.SendGrid.Tests
                     },
                 },
                 TemplateStorage = storeName,
-                DefaultSender = new Internal.EmailAddress
+                DefaultSender = new EmailAddress
                 {
                     DisplayName = "Proffer",
-                    Email = "no-reply@proffer-dotnet.org"
+                    Email = "no-reply@getproffer.net"
                 },
                 Mockup = new MockupOptions
                 {
