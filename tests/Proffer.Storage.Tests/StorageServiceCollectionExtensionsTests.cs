@@ -2,7 +2,6 @@ namespace Proffer.Storage.Tests
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Proffer.Storage.Configuration;
@@ -13,7 +12,7 @@ namespace Proffer.Storage.Tests
 
     [UnitTest]
     [Feature(nameof(Storage))]
-    [Feature(nameof(StubStorageServiceCollectionExtensions))]
+    [Feature(nameof(StorageServiceCollectionExtensions))]
     public class StorageServiceCollectionExtensionsTests
     {
         [Fact]
@@ -143,7 +142,7 @@ namespace Proffer.Storage.Tests
                 connectionStrings.Add(connectionStringName, connectionStringValue);
 
                 string connectionStringsPrefix = "ConnectionStrings";
-                string configurationPrefix = (i % 2) == 0 ? connectionStringsPrefix : $"Storage:{connectionStringsPrefix}";
+                string configurationPrefix = ( i % 2 ) == 0 ? connectionStringsPrefix : $"Storage:{connectionStringsPrefix}";
 
                 inMemoryConfiguration.Add($"{configurationPrefix}:{connectionStringName}", connectionStringValue);
             }
@@ -164,7 +163,13 @@ namespace Proffer.Storage.Tests
 
             Assert.All(
                 storageOptions.Value.ConnectionStrings,
-                kvp => Assert.Equal(connectionStrings[kvp.Key], kvp.Value));
+                kvp =>
+                {
+                    if (connectionStrings.ContainsKey(kvp.Key))
+                    {
+                        Assert.Equal(connectionStrings[kvp.Key], kvp.Value);
+                    }
+                });
         }
     }
 }
