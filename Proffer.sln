@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.Azure", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem", "src\Proffer.Storage.FileSystem\Proffer.Storage.FileSystem.csproj", "{F53D7921-7828-4AF6-BE1E-DB81E80A65CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.ExtendedProperties.FileSystem", "src\Proffer.Storage.FileSystem.ExtendedProperties.FileSystem\Proffer.Storage.FileSystem.ExtendedProperties.FileSystem.csproj", "{E72BC0D9-6BD2-4D8D-8A59-ABB2815B1E85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.Properties.Json", "src\Proffer.Storage.FileSystem.Properties.Json\Proffer.Storage.FileSystem.Properties.Json.csproj", "{E72BC0D9-6BD2-4D8D-8A59-ABB2815B1E85}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.Server", "src\Proffer.Storage.FileSystem.Server\Proffer.Storage.FileSystem.Server.csproj", "{BB8C05EF-BC14-4C92-9B07-2A616BA0FF45}"
 EndProject
@@ -58,6 +58,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.Tests", "tests\Proffer.Storage.Tests\Proffer.Storage.Tests.csproj", "{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.Tests", "tests\Proffer.Storage.FileSystem.Tests\Proffer.Storage.FileSystem.Tests.csproj", "{62473356-141D-438C-8D51-D34191F08A26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Storage.FileSystem.Properties.Json.Tests", "tests\Proffer.Storage.FileSystem.Properties.Json.Tests\Proffer.Storage.FileSystem.Properties.Json.Tests.csproj", "{1C21F39F-1045-4890-820E-F4328A2BAF86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,6 +135,10 @@ Global
 		{62473356-141D-438C-8D51-D34191F08A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62473356-141D-438C-8D51-D34191F08A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62473356-141D-438C-8D51-D34191F08A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C21F39F-1045-4890-820E-F4328A2BAF86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C21F39F-1045-4890-820E-F4328A2BAF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C21F39F-1045-4890-820E-F4328A2BAF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C21F39F-1045-4890-820E-F4328A2BAF86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +162,7 @@ Global
 		{A1BABC33-523C-419B-8407-67A3BCE53737} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 		{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 		{62473356-141D-438C-8D51-D34191F08A26} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
+		{1C21F39F-1045-4890-820E-F4328A2BAF86} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E14A063-006D-442F-BBA4-C9CF12D2438A}

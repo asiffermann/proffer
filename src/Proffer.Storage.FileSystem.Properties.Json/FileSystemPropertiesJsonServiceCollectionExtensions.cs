@@ -2,14 +2,14 @@ namespace Proffer.Storage
 {
     using System;
     using FileSystem;
-    using FileSystem.ExtendedProperties.FileSystem;
-    using FileSystem.ExtendedProperties.FileSystem.Internal;
     using Microsoft.Extensions.DependencyInjection;
+    using Proffer.Storage.FileSystem.Properties.Json;
+    using Proffer.Storage.FileSystem.Properties.Json.Internal;
 
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class FileSystemPropertiesJsonServiceCollectionExtensions
     {
         /// <summary>
         /// Registers a File System extended properties provider that stores it in JSON files.
@@ -19,7 +19,7 @@ namespace Proffer.Storage
         /// <returns>
         /// The service collection.
         /// </returns>
-        public static IServiceCollection AddFileSystemExtendedProperties(this IServiceCollection services, Action<FileSystemExtendedPropertiesOptions> configure = null)
+        public static IServiceCollection AddFileSystemExtendedProperties(this IServiceCollection services, Action<FileSystemPropertiesJsonOptions> configure = null)
         {
             if (configure == null)
             {

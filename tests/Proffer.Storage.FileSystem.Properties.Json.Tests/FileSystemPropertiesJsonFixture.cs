@@ -1,23 +1,19 @@
-namespace Proffer.Storage.FileSystem.Tests
+namespace Proffer.Storage.FileSystem.Properties.Json.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Proffer.Storage.Configuration;
     using Proffer.Storage.FileSystem.Configuration;
-    using Proffer.Storage.FileSystem.Tests.Stubs;
     using Proffer.Testing;
     using Storage;
 
-    public class FileSystemFixture : ServiceProviderFixtureBase
+    public class FileSystemPropertiesJsonFixture : ServiceProviderFixtureBase
     {
-        public FileSystemFixture()
+        public FileSystemPropertiesJsonFixture()
         {
             this.ParsedOptions = this.Services.GetService<IOptions<FileSystemParsedOptions>>().Value;
-            this.TestStoreOptions = this.Services.GetService<IOptions<FileSystemStoreOptionsStub>>().Value
-                .ParseStoreOptions<FileSystemParsedOptions, FileSystemProviderInstanceOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>(this.ParsedOptions);
 
             this.ResetStores();
         }
@@ -29,8 +25,6 @@ namespace Proffer.Storage.FileSystem.Tests
         public string SecondaryRootPath => Path.Combine(this.FixtureBasePath, "FileVault2");
 
         public FileSystemParsedOptions ParsedOptions { get; }
-
-        public FileSystemStoreOptions TestStoreOptions { get; }
 
         public IStore GetStore(string storeName)
         {
@@ -54,9 +48,8 @@ namespace Proffer.Storage.FileSystem.Tests
         {
             services
                 .AddStorage(this.Configuration)
-                .AddFileSystemStorage(this.RootPath);
-
-            services.Configure<FileSystemStoreOptionsStub>(o => { });
+                .AddFileSystemStorage(this.RootPath)
+                .AddFileSystemExtendedProperties();
         }
 
         protected override void OnDispose()
@@ -115,8 +108,6 @@ namespace Proffer.Storage.FileSystem.Tests
 
                 this.ResetFileSystemStore(parsedStoreKvp.Value.AbsolutePath);
             }
-
-            this.ResetFileSystemStore(this.TestStoreOptions.AbsolutePath);
         }
 
         private void ResetFileSystemStore(string absolutePath)

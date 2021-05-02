@@ -1,9 +1,9 @@
-namespace Proffer.Storage.FileSystem.ExtendedProperties.FileSystem
+namespace Proffer.Storage.FileSystem.Properties.Json
 {
     /// <summary>
     /// Options for an <see cref="Internal.ExtendedPropertiesProvider"/>.
     /// </summary>
-    public class FileSystemExtendedPropertiesOptions
+    public class FileSystemPropertiesJsonOptions
     {
         /// <summary>
         /// Gets or sets the folder name format.

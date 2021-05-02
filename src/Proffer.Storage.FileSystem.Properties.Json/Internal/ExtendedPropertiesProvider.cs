@@ -1,4 +1,4 @@
-namespace Proffer.Storage.FileSystem.ExtendedProperties.FileSystem.Internal
+namespace Proffer.Storage.FileSystem.Properties.Json.Internal
 {
     using System.IO;
     using System.Threading.Tasks;
@@ -11,13 +11,13 @@ namespace Proffer.Storage.FileSystem.ExtendedProperties.FileSystem.Internal
     /// </summary>
     public class ExtendedPropertiesProvider : IExtendedPropertiesProvider
     {
-        private readonly FileSystemExtendedPropertiesOptions options;
+        private readonly FileSystemPropertiesJsonOptions options;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendedPropertiesProvider"/> class.
         /// </summary>
         /// <param name="options">The options.</param>
-        public ExtendedPropertiesProvider(IOptions<FileSystemExtendedPropertiesOptions> options)
+        public ExtendedPropertiesProvider(IOptions<FileSystemPropertiesJsonOptions> options)
         {
             this.options = options.Value;
         }
