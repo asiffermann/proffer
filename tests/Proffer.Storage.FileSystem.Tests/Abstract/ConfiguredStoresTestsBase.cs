@@ -2,7 +2,7 @@ namespace Proffer.Storage.FileSystem.Tests.Abstract
 {
     using Xunit;
 
-    public abstract class StoreTestsBase
+    public abstract class ConfiguredStoresTestsBase
     {
         public static TheoryData<string> ConfiguredStoreNames
             => new()

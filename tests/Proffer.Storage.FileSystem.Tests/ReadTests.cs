@@ -10,7 +10,7 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Collection(nameof(FileSystemCollection))]
-    public class ReadTests : Abstract.StoreTestsBase
+    public class ReadTests : Abstract.ConfiguredStoresTestsBase
     {
         private readonly FileSystemFixture fixture;
 

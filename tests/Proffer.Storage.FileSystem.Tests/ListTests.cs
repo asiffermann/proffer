@@ -11,7 +11,7 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IStore.ListAsync))]
     [Collection(nameof(FileSystemCollection))]
-    public class ListTests : Abstract.StoreTestsBase
+    public class ListTests : Abstract.ConfiguredStoresTestsBase
     {
         private readonly FileSystemFixture fixture;
 

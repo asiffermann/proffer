@@ -7,7 +7,6 @@ namespace Proffer.Storage.FileSystem.Tests
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.PlatformAbstractions;
-    using Proffer.Storage.Configuration;
     using Proffer.Storage.FileSystem.Configuration;
     using Proffer.Testing;
     using Xunit;
@@ -36,7 +35,7 @@ namespace Proffer.Storage.FileSystem.Tests
 
             IOptions<FileSystemParsedOptions> options = fixture.Services.GetService<IOptions<FileSystemParsedOptions>>();
 
-            Assert.Equal(PlatformServices.Default.Application.ApplicationBasePath.Trim('\\').Trim('/'), options.Value.RootPath);
+            Assert.Equal(PlatformServices.Default.Application.ApplicationBasePath.TrimEnd('\\').TrimEnd('/'), options.Value.RootPath);
         }
 
         [Fact]
