@@ -275,7 +275,10 @@ namespace Proffer.Storage.FileSystem
                 }
             }
 
-            await fileReference.SavePropertiesAsync();
+            if (this.extendedPropertiesProvider.GetType() != typeof(NoExtendedPropertiesProvider))
+            {
+                await fileReference.SavePropertiesAsync();
+            }
 
             return fileReference;
         }

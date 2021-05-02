@@ -2,6 +2,7 @@ namespace Proffer.Testing
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.PlatformAbstractions;

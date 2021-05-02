@@ -41,6 +41,9 @@ namespace Proffer.Storage
         {
             services.AddSingleton<IConfigureOptions<FileSystemParsedOptions>, ConfigureProviderOptions<FileSystemParsedOptions, FileSystemProviderInstanceOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>>();
             services.TryAddEnumerable(ServiceDescriptor.Transient<IStorageProvider, FileSystemStorageProvider>());
+
+            services.TryAddTransient<IExtendedPropertiesProvider, NoExtendedPropertiesProvider>();
+
             return services;
         }
     }

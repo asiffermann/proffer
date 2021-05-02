@@ -58,6 +58,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.SendGrid.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.Tests", "tests\Proffer.Storage.Tests\Proffer.Storage.Tests.csproj", "{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Storage.FileSystem.Tests", "tests\Proffer.Storage.FileSystem.Tests\Proffer.Storage.FileSystem.Tests.csproj", "{62473356-141D-438C-8D51-D34191F08A26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +130,10 @@ Global
 		{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62473356-141D-438C-8D51-D34191F08A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62473356-141D-438C-8D51-D34191F08A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62473356-141D-438C-8D51-D34191F08A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62473356-141D-438C-8D51-D34191F08A26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +156,7 @@ Global
 		{E41AF4E2-9692-4BF2-BDBB-3F36A2135ADB} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 		{A1BABC33-523C-419B-8407-67A3BCE53737} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 		{1BBECE5A-7008-4D23-9DC6-FEC42AB57D85} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
+		{62473356-141D-438C-8D51-D34191F08A26} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E14A063-006D-442F-BBA4-C9CF12D2438A}
