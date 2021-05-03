@@ -4,8 +4,8 @@ on:
   workflow_run:
     workflows: ["Continuous Integration"]
     branches:
-      - !trunk
-      - !releases/*
+      - '!trunk'
+      - '!releases/*'
     types:
       - completed
 

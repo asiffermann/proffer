@@ -1,6 +1,6 @@
 # Proffer
 
-[![Continuous Integration](https://github.com/asiffermann/proffer/actions/workflows/dotnet.yml/badge.svg)](https://github.com/asiffermann/proffer/actions/workflows/dotnet.yml) [![CodeQL](https://github.com/asiffermann/proffer/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/asiffermann/proffer/actions/workflows/codeql-analysis.yml) [![Coverage Status](https://coveralls.io/repos/github/asiffermann/proffer/badge.svg?branch=trunk)](https://coveralls.io/github/asiffermann/proffer?branch=trunk)
+[![Continuous Integration](https://github.com/asiffermann/proffer/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/asiffermann/proffer/actions/workflows/continuous-integration.yml) [![CodeQL](https://github.com/asiffermann/proffer/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/asiffermann/proffer/actions/workflows/codeql-analysis.yml) [![Coverage Status](https://coveralls.io/repos/github/asiffermann/proffer/badge.svg)](https://coveralls.io/github/asiffermann/proffer)
 
 | Package  |  Current version  | Downloads  |
 |---|---|---|
