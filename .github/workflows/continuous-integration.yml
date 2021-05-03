@@ -43,8 +43,6 @@ jobs:
           useConfigFile: true
           configFilePath: gitversion.yml
 
-      - run: echo Version ${{ steps.gitversion.outputs.fullSemVer }}
-
   build:
     name: Build & Package
 
