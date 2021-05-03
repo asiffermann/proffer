@@ -1,4 +1,4 @@
-name: Unit Test Results
+name: Unit tests results (external PRs)
 
 on:
    workflow_run:
@@ -8,7 +8,7 @@ on:
 
 jobs:
    unit-tests-results:
-      name: Unit Tests Results
+      name: Publish unit tests results
       runs-on: ubuntu-latest
       if: >
          github.event.workflow_run.conclusion != 'skipped' && (
@@ -17,7 +17,7 @@ jobs:
          )
 
       steps:
-         - name: Download Artifacts
+         - name: Download artifacts
            uses: actions/github-script@v3
            with:
               script: |
@@ -46,7 +46,7 @@ jobs:
                     }
                  }
 
-         - name: Extract Artifacts
+         - name: Extract artifacts
            run: |
               for file in artifacts/*.zip
               do
@@ -58,7 +58,7 @@ jobs:
                 fi
               done
 
-         - name: Publish Unit Test Results
+         - name: Publish unit tests results
            uses: EnricoMi/publish-unit-test-result-action@v1.15
            with:
               commit: ${{ github.event.workflow_run.head_sha }}
