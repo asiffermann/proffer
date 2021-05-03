@@ -80,6 +80,7 @@ jobs:
         ( github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository )
       with:
         files: tests-results/*.junit.xml
+        check_name: "Unit tests results"
 
     - name: Upload coverage to Coveralls
       uses: coverallsapp/github-action@v1.1.2

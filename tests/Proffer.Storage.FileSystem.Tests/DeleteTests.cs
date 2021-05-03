@@ -42,7 +42,7 @@ namespace Proffer.Storage.FileSystem.Tests
             await store.DeleteAsync(file);
 
             Assert.Null(await store.GetAsync("Delete/ToDelete2.txt"));
-            Assert.NotNull(await store.GetAsync("Delete/ToSurvive2.txt"));
+            Assert.Null(await store.GetAsync("Delete/ToSurvive2.txt"));
         }
     }
 }
