@@ -50,7 +50,7 @@ jobs:
         version: 'v10'
 
     - name: Test
-      run: dotnet test --no-build --configuration Debug --logger:"junit;LogFilePath=../../tests-results/{assembly}.junit.xml" --collect "XPlat Code Coverage" --results-directory "tests-results" --settings coverlet.runsettings
+      run: dotnet test --no-build --configuration Release --logger:"junit;LogFilePath=../../tests-results/{assembly}.junit.xml" --collect "XPlat Code Coverage" --results-directory "tests-results" --settings coverlet.runsettings
       env:
         "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
         "ConnectionStrings:ConnectionStringFromAppSettings": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
