@@ -5,7 +5,7 @@ on:
     workflows: ["Continuous Integration"]
     branches:
       - trunk
-      - "releases/*"
+      - releases/*
     types:
       - completed
 
