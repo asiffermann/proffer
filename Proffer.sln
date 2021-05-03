@@ -16,11 +16,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A08DBB7E-DDD4-49BB-9A49-5E3FB88EE878}"
+	ProjectSection(SolutionItems) = preProject
+		.github\Dependabot.yml = .github\Dependabot.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4E4394F6-91C7-43E2-BEDA-B7F8EBBA2C68}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		.github\workflows\third-party-tests-results.yml = .github\workflows\third-party-tests-results.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage", "src\Proffer.Storage\Proffer.Storage.csproj", "{0CA36021-3FA3-4688-8D61-A2B8A0FB168C}"
@@ -61,7 +65,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.Properties.Json.Tests", "tests\Proffer.Storage.FileSystem.Properties.Json.Tests\Proffer.Storage.FileSystem.Properties.Json.Tests.csproj", "{1C21F39F-1045-4890-820E-F4328A2BAF86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Storage.FileSystem.Server.Tests", "tests\Proffer.Storage.FileSystem.Server.Tests\Proffer.Storage.FileSystem.Server.Tests.csproj", "{FDA33857-554F-4616-A674-06417AD6A0AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.Server.Tests", "tests\Proffer.Storage.FileSystem.Server.Tests\Proffer.Storage.FileSystem.Server.Tests.csproj", "{FDA33857-554F-4616-A674-06417AD6A0AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

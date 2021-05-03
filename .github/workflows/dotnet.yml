@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ trunk ]
 
+env:
+  # Stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
 jobs:
   build:
     name: Build, Test & Package
@@ -50,7 +56,7 @@ jobs:
         version: 'v10'
 
     - name: Test
-      run: dotnet test --no-build --configuration Release --collect "XPlat Code Coverage" --results-directory "tests-results" --settings coverlet.runsettings
+      run: dotnet test --no-build --configuration Release --logger:"junit;LogFilePath=../../tests-results/{assembly}.junit.xml" --collect "XPlat Code Coverage" --results-directory "tests-results" --settings coverlet.runsettings
       env:
         "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
         "ConnectionStrings:ConnectionStringFromAppSettings": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
@@ -71,6 +77,17 @@ jobs:
         name: tests-results
         path: tests-results
       if: ${{ always() }}
+
+    - name: Publish unit tests results
+      uses: EnricoMi/publish-unit-test-result-action@v1.15
+      if: >
+        always() &&
+        github.event.sender.login != 'dependabot[bot]' &&
+        ( github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository )
+      with:
+        files: tests-results/*.junit.xml
+        check_name: "Unit tests results"
+        comment_on_pr: false
 
     - name: Upload coverage to Coveralls
       uses: coverallsapp/github-action@v1.1.2

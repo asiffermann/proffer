@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JunitXml.TestLogger" Version="3.0.87" />
     <PackageReference Include="xunit.categories" Version="2.0.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />

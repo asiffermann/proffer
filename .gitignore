@@ -350,5 +350,5 @@ MigrationBackup/
 .ionide/
 
 /packages
-/tests-results
+tests-results
 appsettings.development.json
