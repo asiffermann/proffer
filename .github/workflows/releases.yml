@@ -17,7 +17,6 @@ jobs:
 
     outputs:
       fullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}
-      preReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}
 
     steps:
       - name: Checkout
@@ -66,7 +65,6 @@ jobs:
         with:
           tag: ${{ needs.gitversion.outputs.fullSemVer }}
           commit: ${{ github.sha }}
-          prerelease: ${{ needs.gitversion.outputs.preReleaseTag == '' }}
           draft: true
           body: ${{ env.commitMessage }}
           artifacts: '*.nupkg'
