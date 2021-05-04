@@ -47,6 +47,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
@@ -58,7 +60,7 @@ jobs:
 
       - name: Get commit message
         run: |
-          echo "commitMessages=git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD" >> $GITHUB_ENV
+          echo commitMessages=git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> $GITHUB_ENV
 
       - name: Create release
         uses: ncipollo/release-action@v1
