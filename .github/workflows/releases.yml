@@ -47,27 +47,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
           workflow: continuous-integration.yml
-          run_id: ${{ github.event.workflow_run.id }}
+          branch: ${{ github.ref }}
           name: packages
-          branch: ${{ github.event.inputs.ref }}
 
-      - name: Get commit message
-        run: |
-           echo commitMessage=$(git log --format=%B -n 1 ${{ github.sha }}) >> $GITHUB_ENV
+      - name: Get commit log
+        run: git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD > log-since-last-tag.md
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ needs.gitversion.outputs.fullSemVer }}
           commit: ${{ github.sha }}
-          prerelease: ${{ github.event_name == 'workflow_dispatch' }}
-          draft: false
-          body: ${{ env.commitMessage }}
+          draft: true
+          bodyFile: log-since-last-tag.md
           artifacts: '*.nupkg'
           discussionCategory: Releases
           allowUpdates: true

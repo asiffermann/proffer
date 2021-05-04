@@ -112,15 +112,15 @@ jobs:
             --logger "junit;LogFilePath=../../tests-results/{assembly}.junit.xml" \
             --collect "XPlat Code Coverage" \
             --results-directory tests-results \
-            --filter "$TestFilter"
+            --filter "$TEST_FILTER"
         env:
+          TEST_FILTER: ${{ steps.test_run_filter.outputs.value }}
           Email:Provider:Parameters:Key: ${{ secrets.SENDGRIDKEY }}
           ConnectionStrings:ConnectionStringFromAppSettings: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           Storage:Providers:CustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           Storage:Stores:CustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           Storage:ScopedStores:ScopedCustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           AzCopy10Command: azcopy_v10
-          TestFilter: ${{ steps.test_run_filter.outputs.value }}
 
       - name: Install ReportGenerator
         run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.8
