@@ -41,9 +41,11 @@ jobs:
           useConfigFile: true
           configFilePath: gitversion.yml
 
-      - uses: ouzi-dev/commit-status-updater@v1.0.7
+      - name: Push semver status check
+        uses: ouzi-dev/commit-status-updater@v1.0.7
         with:
           status: success
+          name: 'Continuous Integration / SemVer'
           description: ${{ steps.gitversion.outputs.fullSemVer }}
 
   build:
