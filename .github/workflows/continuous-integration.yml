@@ -11,9 +11,7 @@ on:
       - releases/*
 
 env:
-  # Stop wasting time caching packages
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  # Disable sending usage data to Microsoft
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
@@ -99,8 +97,25 @@ jobs:
         with:
           version: v10
 
+      - name: Determine test run filter
+        id: test_run_filter
+        uses: actions/github-script@v3
+        with:
+          result-encoding: string
+          script: |
+            if (github.event.sender.login != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) {
+              return 'Category=UnitTest';
+            }
+            return 'Category=UnitTest|Category=IntegrationTest';
+
       - name: Test
-        run: dotnet test --no-build -c Release --logger "junit;LogFilePath=../../tests-results/{assembly}.junit.xml" --collect "XPlat Code Coverage" --results-directory tests-results --settings coverlet.runsettings
+        run: |
+          dotnet test --no-build -c Release \
+            --settings coverlet.runsettings \
+            --logger "junit;LogFilePath=../../tests-results/{assembly}.junit.xml" \
+            --collect "XPlat Code Coverage" \
+            --results-directory tests-results \
+            --filter ${{ steps.test_run_filter.outputs.result }}
         env:
           Email:Provider:Parameters:Key: ${{ secrets.SENDGRIDKEY }}
           ConnectionStrings:ConnectionStringFromAppSettings: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
