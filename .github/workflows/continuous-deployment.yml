@@ -1,4 +1,4 @@
-name: Continuous deployment
+name: Continuous Deployment
 
 on:
   workflow_run:
@@ -10,9 +10,7 @@ on:
       - completed
 
 env:
-  # Stop wasting time caching packages
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  # Disable sending usage data to Microsoft
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
@@ -34,6 +32,7 @@ jobs:
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
+          workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
 
@@ -62,6 +61,7 @@ jobs:
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
+          workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
 

@@ -25,6 +25,7 @@ jobs:
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
+          workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: tests-results
 

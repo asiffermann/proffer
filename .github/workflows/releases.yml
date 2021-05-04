@@ -1,6 +1,7 @@
 name: Releases
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ['Continuous Integration']
     branches:
@@ -48,6 +49,7 @@ jobs:
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
+          workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
 
@@ -60,7 +62,7 @@ jobs:
         with:
           tag: ${{ needs.gitversion.outputs.fullSemVer }}
           commit: ${{ github.sha }}
-          prerelease: false
+          prerelease: ${{ github.event_name == 'workflow_dispatch' }}
           draft: false
           body: ${{ env.commitMessage }}
           artifacts: '*.nupkg'
