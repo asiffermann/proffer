@@ -39,6 +39,8 @@ jobs:
   create-release:
     name: Create GitHub release
 
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
     needs: gitversion
     runs-on: ubuntu-latest
 
