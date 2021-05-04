@@ -17,6 +17,7 @@ jobs:
 
     outputs:
       fullSemVer: ${{ steps.gitversion.outputs.fullSemVer }}
+      preReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}
 
     steps:
       - name: Checkout
@@ -54,12 +55,10 @@ jobs:
           workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
-          branch: ${{ github.event.inputs.ref }}
+          branch: ${{ github.ref }}
 
       - name: Get commit message
         run: |
-          echo "${{ github.event.inputs }}"
-          echo "commitMessage=$(git log --format=%B -n 1 ${{ github.sha }})"
           echo "commitMessage=$(git log --format=%B -n 1 ${{ github.sha }})" >> $GITHUB_ENV
 
       - name: Create release
@@ -67,8 +66,8 @@ jobs:
         with:
           tag: ${{ needs.gitversion.outputs.fullSemVer }}
           commit: ${{ github.sha }}
-          prerelease: ${{ github.event_name == 'workflow_dispatch' }}
-          draft: false
+          prerelease: ${{ needs.gitversion.outputs.preReleaseTag == '' }}
+          draft: true
           body: ${{ env.commitMessage }}
           artifacts: '*.nupkg'
           discussionCategory: Releases
