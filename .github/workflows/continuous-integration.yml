@@ -98,7 +98,7 @@ jobs:
           version: v10
 
       - name: Determine test run filter
-        uses: haya14busa/action-cond@v1.0.0
+        uses: haya14busa/action-cond@v1.0.2
         id: test_run_filter
         with:
           if_true: 'Category=UnitTest|Category=IntegrationTest'
