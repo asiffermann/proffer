@@ -58,7 +58,7 @@ jobs:
 
       - name: Get commit message
         run: |
-          echo "commitMessage=$(git log --format=%B -n 1 ${{ github.sha }})" >> $GITHUB_ENV
+          echo "commitMessages=git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD" >> $GITHUB_ENV
 
       - name: Create release
         uses: ncipollo/release-action@v1
@@ -66,7 +66,7 @@ jobs:
           tag: ${{ needs.gitversion.outputs.fullSemVer }}
           commit: ${{ github.sha }}
           draft: true
-          body: ${{ env.commitMessage }}
+          body: ${{ env.commitMessages }}
           artifacts: '*.nupkg'
           discussionCategory: Releases
           allowUpdates: true
