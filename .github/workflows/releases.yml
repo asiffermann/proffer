@@ -39,6 +39,8 @@ jobs:
   create-release:
     name: Create GitHub release
 
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
     needs: gitversion
     runs-on: ubuntu-latest
 
@@ -52,6 +54,7 @@ jobs:
           workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
+          branch: ${{ github.event.inputs.ref }}
 
       - name: Get commit message
         run: |
