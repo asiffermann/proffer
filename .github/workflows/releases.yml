@@ -58,7 +58,7 @@ jobs:
 
       - name: Get commit message
         run: |
-          echo "${{ github.event.inputs.ref }}"
+          echo "${{ github.event.inputs }}"
           echo "commitMessage=$(git log --format=%B -n 1 ${{ github.sha }})"
           echo "commitMessage=$(git log --format=%B -n 1 ${{ github.sha }})" >> $GITHUB_ENV
 
