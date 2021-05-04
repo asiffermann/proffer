@@ -99,16 +99,16 @@ jobs:
 
       - name: Determine test run filter
         id: test_run_filter
-        uses: actions/github-script@v3
+        uses: actions/github-script@v4.0.2
         with:
           result-encoding: string
           script: |
-            if ( github.event.sender.login != 'dependabot[bot]' && (
-              github.event_name != 'pull_request' ||
-              github.event.pull_request.head.repo.full_name == github.repository
-              )
-              return 'Category=UnitTest';
-            return 'Category=UnitTest|Category=IntegrationTest';
+            if (github.event.sender.login != 'dependabot[bot]'
+              && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) {
+                return 'Category=UnitTest'
+              }
+
+            return 'Category=UnitTest|Category=IntegrationTest'
 
       - name: Test
         run: |
