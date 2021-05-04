@@ -103,9 +103,11 @@ jobs:
         with:
           result-encoding: string
           script: |
-            if (github.event.sender.login != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) {
+            if ( github.event.sender.login != 'dependabot[bot]' && (
+              github.event_name != 'pull_request' ||
+              github.event.pull_request.head.repo.full_name == github.repository
+              )
               return 'Category=UnitTest';
-            }
             return 'Category=UnitTest|Category=IntegrationTest';
 
       - name: Test
