@@ -36,7 +36,7 @@ branches:
   pull-request:
     regex: ^(pull|pull\-requests|pr)[/-]
     mode: ContinuousDelivery
-    tag: PR
+    tag: pull-request-
     source-branches: ['topic', 'trunk']
     pre-release-weight: 30000
   develop:
