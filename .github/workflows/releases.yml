@@ -55,7 +55,7 @@ jobs:
 
       - name: Get commit message
         run: |
-           echo ::set-env name=commitMessage::$(git log --format=%B -n 1 ${{ github.sha }})
+           echo commitMessage=$(git log --format=%B -n 1 ${{ github.sha }}) >> $GITHUB_ENV
 
       - name: Create release
         uses: ncipollo/release-action@v1

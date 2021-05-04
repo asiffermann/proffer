@@ -103,10 +103,7 @@ jobs:
         with:
           if_true: 'Category=UnitTest|Category=IntegrationTest'
           if_false: 'Category=UnitTest'
-          cond: >
-            always() &&
-            github.event.sender.login != 'dependabot[bot]' &&
-            ( github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository )
+          cond: ${{ github.event.sender.login != 'dependabot[bot]' && ( github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository ) }}
 
       - name: Test
         run: |
@@ -123,7 +120,7 @@ jobs:
           Storage:Stores:CustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           Storage:ScopedStores:ScopedCustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           AzCopy10Command: azcopy_v10
-          TestFilter: ${{ steps.test_run_filter.outputs.result }}
+          TestFilter: ${{ steps.test_run_filter.outputs.value }}
 
       - name: Install ReportGenerator
         run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.8
