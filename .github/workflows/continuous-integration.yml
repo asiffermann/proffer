@@ -34,7 +34,7 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.9
         with:
-          versionSpec: "5.x"
+          versionSpec: 5.x
 
       - name: Determine Version
         id: gitversion
@@ -97,23 +97,23 @@ jobs:
       - name: Install AzCopy
         uses: kheiakiyama/install-azcopy-action@v1.0.3
         with:
-          version: "v10"
+          version: v10
 
       - name: Test
         run: dotnet test --no-build -c Release --logger "junit;LogFilePath=../../tests-results/{assembly}.junit.xml" --collect "XPlat Code Coverage" --results-directory tests-results --settings coverlet.runsettings
         env:
-          "Email:Provider:Parameters:Key": ${{ secrets.SENDGRIDKEY }}
-          "ConnectionStrings:ConnectionStringFromAppSettings": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
-          "Storage:Providers:CustomConnectionString:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
-          "Storage:Stores:CustomConnectionString:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
-          "Storage:ScopedStores:ScopedCustomConnectionString:ConnectionString": ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
-          "AzCopy10Command": "azcopy_v10"
+          Email:Provider:Parameters:Key: ${{ secrets.SENDGRIDKEY }}
+          ConnectionStrings:ConnectionStringFromAppSettings: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+          Storage:Providers:CustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+          Storage:Stores:CustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+          Storage:ScopedStores:ScopedCustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
+          AzCopy10Command: azcopy_v10
 
       - name: Install ReportGenerator
         run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.8
 
       - name: Merge lcov files
-        run: reportgenerator "-reports:tests-results/**/*.info" "-targetdir:tests-results" -reporttypes:lcov
+        run: reportgenerator -reports:tests-results/**/*.info -targetdir:tests-results -reporttypes:lcov
 
       - name: Upload tests results artifacts
         uses: actions/upload-artifact@v2
@@ -130,7 +130,7 @@ jobs:
           ( github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository )
         with:
           files: tests-results/*.junit.xml
-          check_name: "Unit tests results"
+          check_name: Unit tests results
           comment_on_pr: false
 
       - name: Upload coverage to Coveralls

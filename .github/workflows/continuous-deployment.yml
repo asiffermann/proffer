@@ -2,7 +2,7 @@ name: Continuous deployment
 
 on:
   workflow_run:
-    workflows: ["Continuous Integration"]
+    workflows: ['Continuous Integration']
     branches:
       - trunk
       - releases/*
