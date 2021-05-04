@@ -120,7 +120,7 @@ jobs:
           Storage:Stores:CustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           Storage:ScopedStores:ScopedCustomConnectionString:ConnectionString: ${{ secrets.AZURESTORAGETESTSCONNECTIONSTRING }}
           AzCopy10Command: azcopy_v10
-          TestFilter: ${{ steps.test_run_filter.outputs.result }}
+          TestFilter: ${{ steps.test_run_filter.outputs.value }}
 
       - name: Install ReportGenerator
         run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.8
