@@ -17,7 +17,7 @@ jobs:
   publish-to-gpr:
     name: Publish to GitHub Packages
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow != 'Releases' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.name != 'Releases' }}
 
     runs-on: ubuntu-latest
 
@@ -53,7 +53,7 @@ jobs:
     if: >
       github.event.workflow_run.conclusion == 'success' && (
         contains(github.ref, 'releases') ||
-        ( github.event.workflow == 'Releases' && github.ref == 'trunk' )
+        ( github.event.workflow_run.name == 'Releases' && github.ref == 'trunk' )
       )
 
     runs-on: ubuntu-latest
