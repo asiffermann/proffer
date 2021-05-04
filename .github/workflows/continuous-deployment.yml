@@ -1,4 +1,4 @@
-name: Continuous deployment
+name: Continuous Deployment
 
 on:
   workflow_run:
@@ -34,6 +34,7 @@ jobs:
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
+          workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
 
@@ -62,6 +63,7 @@ jobs:
       - name: Download packages artifact
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
+          workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
 
