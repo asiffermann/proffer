@@ -2,7 +2,7 @@ name: Continuous Deployment
 
 on:
   workflow_run:
-    workflows: ['Continuous Integration']
+    workflows: ['Continuous Integration', 'Releases']
     branches:
       - trunk
       - releases/*
@@ -12,12 +12,13 @@ on:
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
+  PACKAGES_ALREADY_PUBLISHED: ${{ github.event.workflow == 'Releases' && contains(github.ref, 'releases') }}
 
 jobs:
   publish-to-gpr:
     name: Publish to GitHub Packages
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.ref, 'trunk') }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && !env.PACKAGES_ALREADY_PUBLISHED }}
 
     runs-on: ubuntu-latest
 
@@ -33,7 +34,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
           workflow: continuous-integration.yml
-          run_id: ${{ github.event.workflow_run.id }}
+          branch: ${{ github.ref }}
           name: packages
 
       - name: Setup .NET
@@ -50,7 +51,7 @@ jobs:
   publish-to-nuget:
     name: Publish to NuGet.org
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.ref, 'releases') }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && contains(github.ref, 'releases') && !env.PACKAGES_ALREADY_PUBLISHED }}
 
     runs-on: ubuntu-latest
 
@@ -62,7 +63,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2.14.0
         with:
           workflow: continuous-integration.yml
-          run_id: ${{ github.event.workflow_run.id }}
+          branch: ${{ github.ref }}
           name: packages
 
       - name: Setup .NET
