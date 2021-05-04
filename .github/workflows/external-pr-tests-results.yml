@@ -3,9 +3,6 @@ name: Unit tests results (external PRs)
 on:
   workflow_run:
     workflows: ['Continuous Integration']
-    branches:
-      - '!trunk'
-      - '!releases/*'
     types:
       - completed
 
