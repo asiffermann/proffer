@@ -17,14 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A08DBB7E-DDD4-49BB-9A49-5E3FB88EE878}"
 	ProjectSection(SolutionItems) = preProject
-		.github\Dependabot.yml = .github\Dependabot.yml
+		.github\dependabot.yml = .github\dependabot.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4E4394F6-91C7-43E2-BEDA-B7F8EBBA2C68}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
-		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
-		.github\workflows\third-party-tests-results.yml = .github\workflows\third-party-tests-results.yml
+		.github\workflows\continuous-deployment.yml = .github\workflows\continuous-deployment.yml
+		.github\workflows\continuous-integration.yml = .github\workflows\continuous-integration.yml
+		.github\workflows\external-pr-tests-results.yml = .github\workflows\external-pr-tests-results.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage", "src\Proffer.Storage\Proffer.Storage.csproj", "{0CA36021-3FA3-4688-8D61-A2B8A0FB168C}"

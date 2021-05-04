@@ -1,0 +1,37 @@
+name: Unit tests results (external PRs)
+
+on:
+  workflow_run:
+    workflows: ['Continuous Integration']
+    branches:
+      - '!trunk'
+      - '!releases/*'
+    types:
+      - completed
+
+jobs:
+  unit-tests-results:
+    name: Publish unit tests results
+
+    runs-on: ubuntu-latest
+
+    if: >
+      github.event.workflow_run.conclusion != 'skipped' && (
+        github.event.sender.login == 'dependabot[bot]' ||
+        github.event.workflow_run.head_repository.full_name != github.repository
+      )
+
+    steps:
+      - name: Download packages artifact
+        uses: dawidd6/action-download-artifact@v2.14.0
+        with:
+          run_id: ${{ github.event.workflow_run.id }}
+          name: tests-results
+
+      - name: Publish unit tests results
+        uses: EnricoMi/publish-unit-test-result-action@v1.15
+        with:
+          commit: ${{ github.event.workflow_run.head_sha }}
+          files: artifacts/tests-results/*.junit.xml
+          check_name: Unit tests results
+          comment_on_pr: false
