@@ -54,6 +54,7 @@ jobs:
           workflow: continuous-integration.yml
           run_id: ${{ github.event.workflow_run.id }}
           name: packages
+          branch: ${{ github.event.inputs.ref }}
 
       - name: Get commit message
         run: |
