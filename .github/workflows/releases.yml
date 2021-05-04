@@ -58,9 +58,8 @@ jobs:
           name: packages
           branch: ${{ github.ref }}
 
-      - name: Get commit message
-        run: |
-          echo commitMessages=git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> $GITHUB_ENV
+      - name: Get commit log
+        run: git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD > log-since-last-tag.md
 
       - name: Create release
         uses: ncipollo/release-action@v1
@@ -68,7 +67,7 @@ jobs:
           tag: ${{ needs.gitversion.outputs.fullSemVer }}
           commit: ${{ github.sha }}
           draft: true
-          body: ${{ env.commitMessages }}
+          bodyFile: log-since-last-tag.md
           artifacts: '*.nupkg'
           discussionCategory: Releases
           allowUpdates: true
