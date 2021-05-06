@@ -3,6 +3,7 @@ namespace Proffer.Storage.Internal
     using System;
     using Configuration;
     using Microsoft.Extensions.Options;
+    using Proffer.Configuration;
 
     /// <summary>
     /// A base provider to handle and build file stores pointing on a particular storage system location.
@@ -14,7 +15,7 @@ namespace Proffer.Storage.Internal
     /// <seealso cref="IStorageProvider" />
     public abstract class StorageProviderBase<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions> : IStorageProvider
         where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>, new()
-        where TInstanceOptions : class, IProviderInstanceOptions, new()
+        where TInstanceOptions : class, IProviderOptions, new()
         where TStoreOptions : class, IStoreOptions, new()
         where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
     {

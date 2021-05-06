@@ -2,6 +2,7 @@ namespace Proffer.Storage.FileSystem.Tests.Stubs
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Proffer.Configuration;
     using Proffer.Storage.Configuration;
 
     public class FileSystemStoreOptionsStub : IStoreOptions

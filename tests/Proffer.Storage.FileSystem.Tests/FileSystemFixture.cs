@@ -17,7 +17,7 @@ namespace Proffer.Storage.FileSystem.Tests
         {
             this.ParsedOptions = this.Services.GetService<IOptions<FileSystemParsedOptions>>().Value;
             this.TestStoreOptions = this.Services.GetService<IOptions<FileSystemStoreOptionsStub>>().Value
-                .ParseStoreOptions<FileSystemParsedOptions, FileSystemProviderInstanceOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>(this.ParsedOptions);
+                .ParseStoreOptions<FileSystemParsedOptions, FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>(this.ParsedOptions);
 
             this.ResetStores();
         }

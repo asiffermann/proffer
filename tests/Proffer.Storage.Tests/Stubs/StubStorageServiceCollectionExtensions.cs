@@ -12,7 +12,7 @@ namespace Proffer.Storage
         public static IServiceCollection AddStubStorage(this IServiceCollection services)
         {
             services
-                .AddSingleton<IConfigureOptions<StubParsedOptions>, ConfigureProviderOptions<StubParsedOptions, StubProviderInstanceOptions, StubStoreOptions, StubScopedStoreOptions>>()
+                .AddSingleton<IConfigureOptions<StubParsedOptions>, ConfigureProviderOptions<StubParsedOptions, StubProviderOptions, StubStoreOptions, StubScopedStoreOptions>>()
                 .TryAddEnumerable(ServiceDescriptor.Transient<IStorageProvider, StubStorageProvider>());
 
             return services;

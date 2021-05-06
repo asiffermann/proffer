@@ -8,7 +8,7 @@ namespace Proffer.Storage.FileSystem.Configuration
     /// Typed File System options parsed from the dynamic configuration.
     /// </summary>
     /// <seealso cref="IParsedOptions{TInstanceOptions, TStoreOptions, TScopedStoreOptions}" />
-    public class FileSystemParsedOptions : IParsedOptions<FileSystemProviderInstanceOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>
+    public class FileSystemParsedOptions : IParsedOptions<FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>
     {
         /// <summary>
         /// Gets the name.
@@ -23,7 +23,7 @@ namespace Proffer.Storage.FileSystem.Configuration
         /// <summary>
         /// Gets or sets the parsed provider instances options.
         /// </summary>
-        public IReadOnlyDictionary<string, FileSystemProviderInstanceOptions> ParsedProviderInstances { get; set; }
+        public IReadOnlyDictionary<string, FileSystemProviderOptions> ParsedProviders { get; set; }
 
         /// <summary>
         /// Gets or sets the parsed stores options.
@@ -44,7 +44,7 @@ namespace Proffer.Storage.FileSystem.Configuration
         /// Binds the provider instance options.
         /// </summary>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
-        public void BindProviderInstanceOptions(FileSystemProviderInstanceOptions providerInstanceOptions)
+        public void BindProviderOptions(FileSystemProviderOptions providerInstanceOptions)
         {
             if (string.IsNullOrEmpty(providerInstanceOptions.RootPath))
             {
@@ -64,7 +64,7 @@ namespace Proffer.Storage.FileSystem.Configuration
         /// </summary>
         /// <param name="storeOptions">The store options.</param>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
-        public void BindStoreOptions(FileSystemStoreOptions storeOptions, FileSystemProviderInstanceOptions providerInstanceOptions = null)
+        public void BindStoreOptions(FileSystemStoreOptions storeOptions, FileSystemProviderOptions providerInstanceOptions = null)
         {
             if (string.IsNullOrEmpty(storeOptions.RootPath))
             {

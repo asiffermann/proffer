@@ -3,6 +3,7 @@ namespace Proffer.Storage.Internal
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Extensions.Options;
+    using Proffer.Configuration;
     using Proffer.Storage.Configuration;
 
     /// <summary>
@@ -144,7 +145,7 @@ namespace Proffer.Storage.Internal
             }
             else if (!string.IsNullOrEmpty(configuration.ProviderName))
             {
-                this.options.ParsedProviderInstances.TryGetValue(configuration.ProviderName, out ProviderInstanceOptions providerInstanceOptions);
+                this.options.ParsedProviders.TryGetValue(configuration.ProviderName, out ProviderOptions providerInstanceOptions);
                 if (providerInstanceOptions != null)
                 {
                     providerTypeName = providerInstanceOptions.Type;

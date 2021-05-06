@@ -3,6 +3,7 @@ namespace Proffer.Storage.Configuration
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Extensions.Configuration;
+    using Proffer.Configuration;
 
     /// <summary>
     /// Extensions methods to parse and bind options.
@@ -41,7 +42,7 @@ namespace Proffer.Storage.Configuration
         /// <returns>The typed store configuration.</returns>
         /// <exception cref="Exceptions.StoreNotFoundException"></exception>
         public static TStoreOptions GetStoreConfiguration<TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions> parsedOptions, string storeName, bool throwIfNotFound = true)
-            where TInstanceOptions : class, IProviderInstanceOptions
+            where TInstanceOptions : class, IProviderOptions
             where TStoreOptions : class, IStoreOptions
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {
@@ -71,7 +72,7 @@ namespace Proffer.Storage.Configuration
         /// <returns>The typed scoped store configuration.</returns>
         /// <exception cref="Exceptions.StoreNotFoundException"></exception>
         public static TScopedStoreOptions GetScopedStoreConfiguration<TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions> parsedOptions, string storeName, bool throwIfNotFound = true)
-            where TInstanceOptions : class, IProviderInstanceOptions
+            where TInstanceOptions : class, IProviderOptions
             where TStoreOptions : class, IStoreOptions
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {
@@ -93,19 +94,19 @@ namespace Proffer.Storage.Configuration
         /// Computes the specified options.
         /// </summary>
         /// <typeparam name="TParsedOptions">The type of the parsed options.</typeparam>
-        /// <typeparam name="TInstanceOptions">The type of the provider instance options.</typeparam>
+        /// <typeparam name="TProviderOptions">The type of the provider instance options.</typeparam>
         /// <typeparam name="TStoreOptions">The type of the store options.</typeparam>
         /// <typeparam name="TScopedStoreOptions">The type of the scoped store options.</typeparam>
-        /// <param name="parsedProviderInstance">The parsed provider instance options.</param>
+        /// <param name="providerOptions">The provider options.</param>
         /// <param name="options">The options.</param>
         /// <exception cref="Exceptions.BadProviderConfiguration"></exception>
-        public static void Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this TInstanceOptions parsedProviderInstance, TParsedOptions options)
-            where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>
-            where TInstanceOptions : class, IProviderInstanceOptions, new()
+        public static void Compute<TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions>(this TProviderOptions providerOptions, TParsedOptions options)
+            where TParsedOptions : class, IParsedOptions<TProviderOptions, TStoreOptions, TScopedStoreOptions>
+            where TProviderOptions : class, IProviderOptions, new()
             where TStoreOptions : class, IStoreOptions, new()
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {
-            options.BindProviderInstanceOptions(parsedProviderInstance);
+            options.BindProviderOptions(providerOptions);
         }
 
         /// <summary>
@@ -120,7 +121,7 @@ namespace Proffer.Storage.Configuration
         /// <exception cref="Exceptions.BadStoreConfiguration"></exception>
         public static void Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this TStoreOptions parsedStore, TParsedOptions options)
             where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>
-            where TInstanceOptions : class, IProviderInstanceOptions, new()
+            where TInstanceOptions : class, IProviderOptions, new()
             where TStoreOptions : class, IStoreOptions, new()
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {
@@ -132,7 +133,7 @@ namespace Proffer.Storage.Configuration
             TInstanceOptions instanceOptions = null;
             if (!string.IsNullOrEmpty(parsedStore.ProviderName))
             {
-                options.ParsedProviderInstances.TryGetValue(parsedStore.ProviderName, out instanceOptions);
+                options.ParsedProviders.TryGetValue(parsedStore.ProviderName, out instanceOptions);
                 if (instanceOptions == null)
                 {
                     return;
@@ -156,7 +157,7 @@ namespace Proffer.Storage.Configuration
         /// <returns>The parsed store options.</returns>
         public static TStoreOptions ParseStoreOptions<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this IStoreOptions storeOptions, TParsedOptions options)
             where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>, new()
-            where TInstanceOptions : class, IProviderInstanceOptions, new()
+            where TInstanceOptions : class, IProviderOptions, new()
             where TStoreOptions : class, IStoreOptions, new()
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {

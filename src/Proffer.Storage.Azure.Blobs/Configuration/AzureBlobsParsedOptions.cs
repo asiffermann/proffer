@@ -7,7 +7,7 @@ namespace Proffer.Storage.Azure.Blobs.Configuration
     /// Typed Azure Blobs options parsed from the dynamic configuration.
     /// </summary>
     /// <seealso cref="IParsedOptions{TInstanceOptions, TStoreOptions, TScopedStoreOptions}" />
-    public class AzureBlobsParsedOptions : IParsedOptions<AzureBlobsProviderInstanceOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>
+    public class AzureBlobsParsedOptions : IParsedOptions<AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>
     {
         /// <summary>
         /// Gets the name.
@@ -22,7 +22,7 @@ namespace Proffer.Storage.Azure.Blobs.Configuration
         /// <summary>
         /// Gets or sets the parsed provider instances options.
         /// </summary>
-        public IReadOnlyDictionary<string, AzureBlobsProviderInstanceOptions> ParsedProviderInstances { get; set; }
+        public IReadOnlyDictionary<string, AzureBlobsProviderOptions> ParsedProviders { get; set; }
 
         /// <summary>
         /// Gets or sets the parsed stores options.
@@ -39,7 +39,7 @@ namespace Proffer.Storage.Azure.Blobs.Configuration
         /// </summary>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
         /// <exception cref="Exceptions.BadProviderConfiguration"></exception>
-        public void BindProviderInstanceOptions(AzureBlobsProviderInstanceOptions providerInstanceOptions)
+        public void BindProviderOptions(AzureBlobsProviderOptions providerInstanceOptions)
         {
             if (!string.IsNullOrEmpty(providerInstanceOptions.ConnectionStringName)
                 && string.IsNullOrEmpty(providerInstanceOptions.ConnectionString))
@@ -61,7 +61,7 @@ namespace Proffer.Storage.Azure.Blobs.Configuration
         /// <param name="storeOptions">The store options.</param>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
         /// <exception cref="Exceptions.BadStoreConfiguration"></exception>
-        public void BindStoreOptions(AzureBlobsStoreOptions storeOptions, AzureBlobsProviderInstanceOptions providerInstanceOptions = null)
+        public void BindStoreOptions(AzureBlobsStoreOptions storeOptions, AzureBlobsProviderOptions providerInstanceOptions = null)
         {
             storeOptions.FolderName = storeOptions.FolderName.ToLowerInvariant();
 

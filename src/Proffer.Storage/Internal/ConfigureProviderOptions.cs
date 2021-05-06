@@ -3,19 +3,20 @@ namespace Proffer.Storage.Internal
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Extensions.Options;
+    using Proffer.Configuration;
     using Proffer.Storage.Configuration;
 
     /// <summary>
     /// Configures a provider <typeparamref name="TParsedOptions"/> from generic <see cref="StorageOptions"/>.
     /// </summary>
     /// <typeparam name="TParsedOptions">The type of the parsed options.</typeparam>
-    /// <typeparam name="TInstanceOptions">The type of the provider instance options.</typeparam>
+    /// <typeparam name="TProviderOptions">The type of the provider instance options.</typeparam>
     /// <typeparam name="TStoreOptions">The type of the store options.</typeparam>
     /// <typeparam name="TScopedStoreOptions">The type of the scoped store options.</typeparam>
     /// <seealso cref="IConfigureOptions{TParsedOptions}" />
-    public class ConfigureProviderOptions<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions> : IConfigureOptions<TParsedOptions>
-        where TParsedOptions : class, IParsedOptions<TInstanceOptions, TStoreOptions, TScopedStoreOptions>
-        where TInstanceOptions : class, IProviderInstanceOptions, new()
+    public class ConfigureProviderOptions<TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions> : IConfigureOptions<TParsedOptions>
+        where TParsedOptions : class, IParsedOptions<TProviderOptions, TStoreOptions, TScopedStoreOptions>
+        where TProviderOptions : class, IProviderOptions, new()
         where TStoreOptions : class, IStoreOptions, new()
         where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions, new()
     {
@@ -45,19 +46,19 @@ namespace Proffer.Storage.Internal
 
             options.ConnectionStrings = this.storageOptions.ConnectionStrings;
 
-            options.ParsedProviderInstances = this.storageOptions.Providers.Parse<TInstanceOptions>()
+            options.ParsedProviders = this.storageOptions.Providers.Parse<TProviderOptions>()
                 .Where(kvp => kvp.Value.Type == options.Name)
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-            foreach (KeyValuePair<string, TInstanceOptions> parsedProviderInstance in options.ParsedProviderInstances)
+            foreach (KeyValuePair<string, TProviderOptions> providerOptions in options.ParsedProviders)
             {
-                parsedProviderInstance.Value.Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(options);
+                providerOptions.Value.Compute<TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions>(options);
             }
 
             IReadOnlyDictionary<string, TStoreOptions> parsedStores = this.storageOptions.Stores.Parse<TStoreOptions>();
             foreach (KeyValuePair<string, TStoreOptions> parsedStore in parsedStores)
             {
-                parsedStore.Value.Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(options);
+                parsedStore.Value.Compute<TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions>(options);
             }
 
             options.ParsedStores = parsedStores
@@ -67,7 +68,7 @@ namespace Proffer.Storage.Internal
             IReadOnlyDictionary<string, TScopedStoreOptions> parsedScopedStores = this.storageOptions.ScopedStores.Parse<TScopedStoreOptions>();
             foreach (KeyValuePair<string, TScopedStoreOptions> parsedScopedStore in parsedScopedStores)
             {
-                parsedScopedStore.Value.Compute<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(options);
+                parsedScopedStore.Value.Compute<TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions>(options);
             }
 
             options.ParsedScopedStores = parsedScopedStores

@@ -9,7 +9,7 @@ namespace Proffer.Storage.Azure.Blobs
     /// A provider to handle and build file stores pointing on an Azure Storage account.
     /// </summary>
     /// <seealso cref="StorageProviderBase{TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions}" />
-    public class AzureBlobsStorageProvider : StorageProviderBase<AzureBlobsParsedOptions, AzureBlobsProviderInstanceOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>
+    public class AzureBlobsStorageProvider : StorageProviderBase<AzureBlobsParsedOptions, AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>
     {
         /// <summary>
         /// The <see cref="AzureBlobsStorageProvider"/> name.

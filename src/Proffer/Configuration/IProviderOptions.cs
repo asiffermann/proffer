@@ -1,10 +1,10 @@
-namespace Proffer.Storage.Configuration
+namespace Proffer.Configuration
 {
     /// <summary>
-    /// Options for an instance of <see cref="IStorageProvider"/>.
+    /// Options of a provider.
     /// </summary>
     /// <seealso cref="INamedElementOptions" />
-    public interface IProviderInstanceOptions : INamedElementOptions
+    public interface IProviderOptions : INamedElementOptions
     {
         /// <summary>
         /// Gets the type.

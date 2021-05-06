@@ -20,7 +20,7 @@ namespace Proffer.Storage
         public static IServiceCollection AddAzureStorage(this IServiceCollection services)
         {
             services
-                .AddSingleton<IConfigureOptions<AzureBlobsParsedOptions>, ConfigureProviderOptions<AzureBlobsParsedOptions, AzureBlobsProviderInstanceOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>>()
+                .AddSingleton<IConfigureOptions<AzureBlobsParsedOptions>, ConfigureProviderOptions<AzureBlobsParsedOptions, AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>>()
                 .TryAddEnumerable(ServiceDescriptor.Transient<IStorageProvider, AzureBlobsStorageProvider>());
 
             return services;

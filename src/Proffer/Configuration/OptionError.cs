@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Configuration
+namespace Proffer.Configuration
 {
     /// <summary>
     /// A generic error reported from the options validation.

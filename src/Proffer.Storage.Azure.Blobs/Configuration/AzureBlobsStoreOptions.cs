@@ -2,13 +2,15 @@ namespace Proffer.Storage.Azure.Blobs.Configuration
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Proffer.Azure.Configuration;
+    using Proffer.Configuration;
     using Proffer.Storage.Configuration;
 
     /// <summary>
     /// Options for an <see cref="AzureBlobsStore"/>.
     /// </summary>
     /// <seealso cref="StoreOptions" />
-    public class AzureBlobsStoreOptions : StoreOptions
+    public class AzureBlobsStoreOptions : StoreOptions, IAzureStorageOptions
     {
         /// <summary>
         /// Gets or sets the connection string.

@@ -3,19 +3,20 @@ namespace Proffer.Storage.Configuration
     using System;
     using System.Collections.Generic;
     using Microsoft.Extensions.Configuration;
+    using Proffer.Configuration;
 
     /// <summary>
     /// The Proffer.Storage options with providers and stores.
     /// </summary>
     /// <seealso cref="IParsedOptions{TInstanceOptions, TStoreOptions, TScopedStoreOptions}" />
-    public class StorageOptions : IParsedOptions<ProviderInstanceOptions, StoreOptions, ScopedStoreOptions>
+    public class StorageOptions : IParsedOptions<ProviderOptions, StoreOptions, ScopedStoreOptions>
     {
         /// <summary>
         /// The default configuration section name.
         /// </summary>
         public const string DefaultConfigurationSectionName = "Storage";
 
-        private readonly Lazy<IReadOnlyDictionary<string, ProviderInstanceOptions>> parsedProviderInstances;
+        private readonly Lazy<IReadOnlyDictionary<string, ProviderOptions>> parsedProviders;
         private readonly Lazy<IReadOnlyDictionary<string, StoreOptions>> parsedStores;
         private readonly Lazy<IReadOnlyDictionary<string, ScopedStoreOptions>> parsedScopedStores;
 
@@ -24,8 +25,8 @@ namespace Proffer.Storage.Configuration
         /// </summary>
         public StorageOptions()
         {
-            this.parsedProviderInstances = new Lazy<IReadOnlyDictionary<string, ProviderInstanceOptions>>(
-                () => this.Providers.Parse<ProviderInstanceOptions>());
+            this.parsedProviders = new Lazy<IReadOnlyDictionary<string, ProviderOptions>>(
+                () => this.Providers.Parse<ProviderOptions>());
             this.parsedStores = new Lazy<IReadOnlyDictionary<string, StoreOptions>>(
                 () => this.Stores.Parse<StoreOptions>());
             this.parsedScopedStores = new Lazy<IReadOnlyDictionary<string, ScopedStoreOptions>>(
@@ -60,7 +61,7 @@ namespace Proffer.Storage.Configuration
         /// <summary>
         /// Gets or sets the parsed provider instances options.
         /// </summary>
-        public IReadOnlyDictionary<string, ProviderInstanceOptions> ParsedProviderInstances { get => this.parsedProviderInstances.Value; set { } }
+        public IReadOnlyDictionary<string, ProviderOptions> ParsedProviders { get => this.parsedProviders.Value; set { } }
 
         /// <summary>
         /// Gets or sets the parsed stores options.
@@ -76,13 +77,13 @@ namespace Proffer.Storage.Configuration
         /// Binds the provider instance options.
         /// </summary>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
-        public void BindProviderInstanceOptions(ProviderInstanceOptions providerInstanceOptions) { }
+        public void BindProviderOptions(ProviderOptions providerInstanceOptions) { }
 
         /// <summary>
         /// Binds the store options.
         /// </summary>
         /// <param name="storeOptions">The store options.</param>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
-        public void BindStoreOptions(StoreOptions storeOptions, ProviderInstanceOptions providerInstanceOptions) { }
+        public void BindStoreOptions(StoreOptions storeOptions, ProviderOptions providerInstanceOptions) { }
     }
 }

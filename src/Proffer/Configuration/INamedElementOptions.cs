@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Configuration
+namespace Proffer.Configuration
 {
     /// <summary>
     /// A named element from the options (provider or scope).

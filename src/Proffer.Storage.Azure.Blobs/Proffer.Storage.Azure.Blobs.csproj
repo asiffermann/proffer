@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Proffer.Azure\Proffer.Azure.csproj" />
     <ProjectReference Include="..\Proffer.Storage\Proffer.Storage.csproj" />
   </ItemGroup>
 

@@ -4,6 +4,7 @@ namespace Proffer.Storage.Tests
     using System.Linq;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
+    using Proffer.Configuration;
     using Proffer.Storage.Configuration;
     using Proffer.Storage.Exceptions;
     using Proffer.Storage.Tests.Stubs.Configuration;

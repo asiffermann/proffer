@@ -10,7 +10,7 @@ namespace Proffer.Storage.FileSystem
     /// A provider to handle and build file stores pointing on a File System directory.
     /// </summary>
     /// <seealso cref="StorageProviderBase{TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions}" />
-    public class FileSystemStorageProvider : StorageProviderBase<FileSystemParsedOptions, FileSystemProviderInstanceOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>
+    public class FileSystemStorageProvider : StorageProviderBase<FileSystemParsedOptions, FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>
     {
         /// <summary>
         /// The <see cref="FileSystemStorageProvider"/> name.

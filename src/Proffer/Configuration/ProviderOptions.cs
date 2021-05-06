@@ -1,10 +1,10 @@
-namespace Proffer.Storage.Configuration
+namespace Proffer.Configuration
 {
     /// <summary>
-    /// Generic options for an instance of <see cref="IStorageProvider"/>.
+    /// Standard options for a provider.
     /// </summary>
-    /// <seealso cref="IProviderInstanceOptions" />
-    public class ProviderInstanceOptions : IProviderInstanceOptions
+    /// <seealso cref="IProviderOptions" />
+    public class ProviderOptions : IProviderOptions
     {
         /// <summary>
         /// Gets or sets the name.

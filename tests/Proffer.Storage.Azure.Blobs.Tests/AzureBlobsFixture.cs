@@ -22,7 +22,7 @@ namespace Proffer.Storage.Azure.Blobs.Tests
         {
             this.ParsedOptions = this.Services.GetService<IOptions<AzureBlobsParsedOptions>>().Value;
             this.GenericStoreOptions = this.Services.GetService<IOptions<AzureBlobsStoreOptionsStub>>().Value
-                .ParseStoreOptions<AzureBlobsParsedOptions, AzureBlobsProviderInstanceOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>(this.ParsedOptions);
+                .ParseStoreOptions<AzureBlobsParsedOptions, AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>(this.ParsedOptions);
 
             this.InitStores();
         }
