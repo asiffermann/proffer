@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Internal
+namespace Proffer.Storage.Azure.Blobs.Internal
 {
     using System;
     using System.IO;
@@ -9,28 +9,28 @@ namespace Proffer.Storage.Azure.Internal
     using global::Azure.Storage.Sas;
 
     /// <summary>
-    /// A reference of a stored file at a given path on Azure Storage.
+    /// A reference of a stored file at a given path on Azure Blobs.
     /// </summary>
     /// <seealso cref="IFileReference" />
-    public class AzureFileReference : IFileReference
+    public class AzureBlobsFileReference : IFileReference
     {
         private readonly BlobClient blobClient;
-        private Lazy<AzureFileProperties> propertiesLazy;
+        private Lazy<AzureBlobsFileProperties> propertiesLazy;
         private bool withMetadata;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureFileReference" /> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsFileReference" /> class.
         /// </summary>
-        /// <param name="blobClient">The Azure Storage blob client.</param>
+        /// <param name="blobClient">The Azure Blobs client.</param>
         /// <param name="properties">The properties, if fetched.</param>
-        public AzureFileReference(BlobClient blobClient, AzureFileProperties properties = null)
+        public AzureBlobsFileReference(BlobClient blobClient, AzureBlobsFileProperties properties = null)
         {
             this.blobClient = blobClient;
             this.withMetadata = properties != null;
 
             this.Path = blobClient.Name;
 
-            this.propertiesLazy = new Lazy<AzureFileProperties>(() =>
+            this.propertiesLazy = new Lazy<AzureBlobsFileProperties>(() =>
             {
                 if (this.withMetadata)
                 {
@@ -156,7 +156,7 @@ namespace Proffer.Storage.Azure.Internal
 
             Response<BlobProperties> refreshedProperties = await this.blobClient.GetPropertiesAsync();
 
-            this.propertiesLazy = new Lazy<AzureFileProperties>(() => new AzureFileProperties(this.blobClient, refreshedProperties));
+            this.propertiesLazy = new Lazy<AzureBlobsFileProperties>(() => new AzureBlobsFileProperties(this.blobClient, refreshedProperties));
             this.withMetadata = true;
         }
 

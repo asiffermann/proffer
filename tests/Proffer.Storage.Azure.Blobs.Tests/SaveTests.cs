@@ -1,10 +1,9 @@
-namespace Proffer.Storage.Azure.Tests
+namespace Proffer.Storage.Azure.Blobs.Tests
 {
     using System;
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.Extensions.DependencyInjection;
     using Proffer.Storage.Exceptions;
     using Storage;
     using Xunit;
@@ -13,12 +12,12 @@ namespace Proffer.Storage.Azure.Tests
     [IntegrationTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
-    [Collection(nameof(AzureCollection))]
+    [Collection(nameof(AzureBlobsCollection))]
     public class SaveTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture fixture;
+        private readonly AzureBlobsFixture fixture;
 
-        public SaveTests(AzureFixture fixture)
+        public SaveTests(AzureBlobsFixture fixture)
         {
             this.fixture = fixture;
         }

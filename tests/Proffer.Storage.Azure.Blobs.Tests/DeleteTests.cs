@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Tests
+namespace Proffer.Storage.Azure.Blobs.Tests
 {
     using System.Threading.Tasks;
     using Storage;
@@ -9,12 +9,12 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Feature(nameof(IFileReference.DeleteAsync))]
-    [Collection(nameof(AzureCollection))]
+    [Collection(nameof(AzureBlobsCollection))]
     public class DeleteTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture fixture;
+        private readonly AzureBlobsFixture fixture;
 
-        public DeleteTests(AzureFixture fixture)
+        public DeleteTests(AzureBlobsFixture fixture)
         {
             this.fixture = fixture;
         }

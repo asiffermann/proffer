@@ -1,12 +1,12 @@
-namespace Proffer.Storage.Azure.Configuration
+namespace Proffer.Storage.Azure.Blobs.Configuration
 {
     using Proffer.Storage.Configuration;
 
     /// <summary>
-    /// Options for an instance of <see cref="AzureStorageProvider"/>.
+    /// Options for an instance of <see cref="AzureBlobsStorageProvider"/>.
     /// </summary>
     /// <seealso cref="ProviderInstanceOptions" />
-    public class AzureProviderInstanceOptions : ProviderInstanceOptions
+    public class AzureBlobsProviderInstanceOptions : ProviderInstanceOptions
     {
         /// <summary>
         /// Gets or sets the connection string.

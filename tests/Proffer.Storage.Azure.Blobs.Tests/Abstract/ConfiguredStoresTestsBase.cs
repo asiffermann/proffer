@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Tests.Abstract
+namespace Proffer.Storage.Azure.Blobs.Tests.Abstract
 {
     using Xunit;
 

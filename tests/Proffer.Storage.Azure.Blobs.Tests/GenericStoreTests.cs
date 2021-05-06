@@ -1,9 +1,9 @@
-namespace Proffer.Storage.Azure.Tests
+namespace Proffer.Storage.Azure.Blobs.Tests
 {
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
-    using Proffer.Storage.Azure.Tests.Stubs;
+    using Proffer.Storage.Azure.Blobs.Tests.Stubs;
     using Storage;
     using Xunit;
     using Xunit.Categories;
@@ -12,12 +12,12 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Feature("IStore<TOptions>")]
-    [Collection(nameof(AzureCollection))]
+    [Collection(nameof(AzureBlobsCollection))]
     public class GenericStoreTests
     {
-        private readonly AzureFixture fixture;
+        private readonly AzureBlobsFixture fixture;
 
-        public GenericStoreTests(AzureFixture fixture)
+        public GenericStoreTests(AzureBlobsFixture fixture)
         {
             this.fixture = fixture;
         }
@@ -25,7 +25,7 @@ namespace Proffer.Storage.Azure.Tests
         [Fact]
         public async Task Should_ListFiles_With_GenericStore()
         {
-            IStore<AzureStoreOptionsStub> store = this.fixture.Services.GetRequiredService<IStore<AzureStoreOptionsStub>>();
+            IStore<AzureBlobsStoreOptionsStub> store = this.fixture.Services.GetRequiredService<IStore<AzureBlobsStoreOptionsStub>>();
 
             string[] expected = new string[] { "TextFile.txt", "template.hbs" };
 

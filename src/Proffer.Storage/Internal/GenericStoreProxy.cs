@@ -1,13 +1,13 @@
 namespace Proffer.Storage.Internal
 {
-    using Configuration;
-    using Dawn;
-    using Microsoft.Extensions.Options;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
+    using Configuration;
+    using Dawn;
+    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// Generic <see cref="IStore"/> proxy to allow direct dependency injection of a <see cref="IStore{TOptions}"/>.

@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Tests
+namespace Proffer.Storage.Azure.Blobs.Tests
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,12 +10,12 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Feature(nameof(IStore.ListAsync))]
-    [Collection(nameof(AzureCollection))]
+    [Collection(nameof(AzureBlobsCollection))]
     public class ListTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture fixture;
+        private readonly AzureBlobsFixture fixture;
 
-        public ListTests(AzureFixture fixture)
+        public ListTests(AzureBlobsFixture fixture)
         {
             this.fixture = fixture;
         }

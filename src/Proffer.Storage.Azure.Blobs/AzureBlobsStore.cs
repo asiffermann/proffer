@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure
+namespace Proffer.Storage.Azure.Blobs
 {
     using System;
     using System.Collections.Generic;
@@ -12,22 +12,22 @@ namespace Proffer.Storage.Azure
     using global::Azure.Storage.Blobs;
     using global::Azure.Storage.Blobs.Models;
     using global::Azure.Storage.Sas;
-    using Proffer.Storage.Azure.Configuration;
+    using Proffer.Storage.Azure.Blobs.Configuration;
 
     /// <summary>
-    /// An Azure store allows to save, list or read files on a container in its configured <see cref="AzureStorageProvider"/>.
+    /// An Azure store allows to save, list or read files on a container in its configured <see cref="AzureBlobsStorageProvider"/>.
     /// </summary>
     /// <seealso cref="IStore" />
-    public class AzureStore : IStore
+    public class AzureBlobsStore : IStore
     {
-        private readonly AzureStoreOptions storeOptions;
+        private readonly AzureBlobsStoreOptions storeOptions;
         private readonly BlobContainerClient container;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureStore"/> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsStore"/> class.
         /// </summary>
         /// <param name="storeOptions">The store options.</param>
-        public AzureStore(AzureStoreOptions storeOptions)
+        public AzureBlobsStore(AzureBlobsStoreOptions storeOptions)
         {
             storeOptions.Validate();
 
@@ -75,7 +75,7 @@ namespace Proffer.Storage.Azure
                 .Select(blobItem =>
                 {
                     BlobClient blobClient = this.container.GetBlobClient(blobItem.Name);
-                    return new Internal.AzureFileReference(blobClient, new Internal.AzureFileProperties(blobClient, blobItem));
+                    return new Internal.AzureBlobsFileReference(blobClient, new Internal.AzureBlobsFileProperties(blobClient, blobItem));
                 })
                 .ToArray();
         }
@@ -111,11 +111,11 @@ namespace Proffer.Storage.Azure
                 .Select(blobItem =>
                 {
                     BlobClient blobClient = this.container.GetBlobClient(blobItem.Name);
-                    return new Internal.AzureFileReference(blobClient, new Internal.AzureFileProperties(blobClient, blobItem));
+                    return new Internal.AzureBlobsFileReference(blobClient, new Internal.AzureBlobsFileProperties(blobClient, blobItem));
                 })
                 .ToDictionary(x => Path.GetFileName(x.Path));
 
-            Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult filteredResults = matcher.Execute(new Internal.AzureListDirectoryWrapper(path, pathMap));
+            Microsoft.Extensions.FileSystemGlobbing.PatternMatchingResult filteredResults = matcher.Execute(new Internal.AzureBlobsListDirectoryWrapper(path, pathMap));
 
             return filteredResults.Files.Select(x => pathMap[x.Path]).ToArray();
         }
@@ -149,7 +149,7 @@ namespace Proffer.Storage.Azure
         /// <param name="file">The reference holding the file path.</param>
         public async Task DeleteAsync(IPrivateFileReference file)
         {
-            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
+            Internal.AzureBlobsFileReference fileReference = await this.InternalGetAsync(file);
             await fileReference.DeleteAsync();
         }
 
@@ -162,7 +162,7 @@ namespace Proffer.Storage.Azure
         /// </returns>
         public async ValueTask<Stream> ReadAsync(IPrivateFileReference file)
         {
-            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
+            Internal.AzureBlobsFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadInMemoryAsync();
         }
 
@@ -175,7 +175,7 @@ namespace Proffer.Storage.Azure
         /// </returns>
         public async ValueTask<byte[]> ReadAllBytesAsync(IPrivateFileReference file)
         {
-            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
+            Internal.AzureBlobsFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadAllBytesAsync();
         }
 
@@ -188,7 +188,7 @@ namespace Proffer.Storage.Azure
         /// </returns>
         public async ValueTask<string> ReadAllTextAsync(IPrivateFileReference file)
         {
-            Internal.AzureFileReference fileReference = await this.InternalGetAsync(file);
+            Internal.AzureBlobsFileReference fileReference = await this.InternalGetAsync(file);
             return await fileReference.ReadAllTextAsync();
         }
 
@@ -281,7 +281,7 @@ namespace Proffer.Storage.Azure
 
             Response<BlobProperties> refreshedProperties = await blobClient.GetPropertiesAsync();
 
-            return new Internal.AzureFileReference(blobClient, new Internal.AzureFileProperties(blobClient, refreshedProperties));
+            return new Internal.AzureBlobsFileReference(blobClient, new Internal.AzureBlobsFileProperties(blobClient, refreshedProperties));
         }
 
         /// <summary>
@@ -335,12 +335,12 @@ namespace Proffer.Storage.Azure
             return result;
         }
 
-        private ValueTask<Internal.AzureFileReference> InternalGetAsync(IPrivateFileReference file, bool withMetadata = false)
+        private ValueTask<Internal.AzureBlobsFileReference> InternalGetAsync(IPrivateFileReference file, bool withMetadata = false)
         {
             return this.InternalGetAsync(new Uri(file.Path, UriKind.Relative), withMetadata);
         }
 
-        private async ValueTask<Internal.AzureFileReference> InternalGetAsync(Uri uri, bool withMetadata)
+        private async ValueTask<Internal.AzureBlobsFileReference> InternalGetAsync(Uri uri, bool withMetadata)
         {
             try
             {
@@ -359,14 +359,14 @@ namespace Proffer.Storage.Azure
                     return null;
                 }
 
-                Internal.AzureFileProperties properties = null;
+                Internal.AzureBlobsFileProperties properties = null;
                 if (withMetadata)
                 {
                     Response<BlobProperties> blobProperties = await blobClient.GetPropertiesAsync();
-                    properties = new Internal.AzureFileProperties(blobClient, blobProperties);
+                    properties = new Internal.AzureBlobsFileProperties(blobClient, blobProperties);
                 }
 
-                return new Internal.AzureFileReference(blobClient, properties);
+                return new Internal.AzureBlobsFileReference(blobClient, properties);
             }
             catch (RequestFailedException ex) when (ex.ErrorCode == BlobErrorCode.BlobNotFound)
             {

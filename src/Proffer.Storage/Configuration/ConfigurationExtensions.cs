@@ -160,7 +160,7 @@ namespace Proffer.Storage.Configuration
             where TStoreOptions : class, IStoreOptions, new()
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {
-            if (!(storeOptions is TStoreOptions parsedStoreOptions))
+            if (!( storeOptions is TStoreOptions parsedStoreOptions ))
             {
                 // TODO: Add a warning log
                 parsedStoreOptions = new TStoreOptions

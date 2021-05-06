@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Proffer.Testing\Proffer.Testing.csproj" />
-    <ProjectReference Include="..\..\src\Proffer.Storage.Azure\Proffer.Storage.Azure.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Storage.Azure.Blobs\Proffer.Storage.Azure.Blobs.csproj" />
   </ItemGroup>
 
   <ItemGroup>

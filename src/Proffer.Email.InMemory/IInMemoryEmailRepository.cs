@@ -10,7 +10,7 @@ namespace Proffer.Email.InMemory
         /// <summary>
         /// Gets the emails store.
         /// </summary>
-        IReadOnlyCollection<InMemoryEmail> Store { get;}
+        IReadOnlyCollection<InMemoryEmail> Store { get; }
 
         /// <summary>
         /// Saves the specified email in the store.

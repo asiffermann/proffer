@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Internal
+namespace Proffer.Storage.Azure.Blobs.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -6,33 +6,33 @@ namespace Proffer.Storage.Azure.Internal
     using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
     /// <summary>
-    /// Represents a directory in a being-listed <see cref="AzureStore"/>.
+    /// Represents a directory in a being-listed <see cref="AzureBlobsStore"/>.
     /// </summary>
     /// <seealso cref="DirectoryInfoBase" />
-    public class AzureListDirectoryWrapper : DirectoryInfoBase
+    public class AzureBlobsListDirectoryWrapper : DirectoryInfoBase
     {
         private readonly string name;
         private readonly string fullName;
         private readonly string path;
-        private readonly Dictionary<string, AzureFileReference> files;
+        private readonly Dictionary<string, AzureBlobsFileReference> files;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureListDirectoryWrapper"/> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsListDirectoryWrapper"/> class.
         /// </summary>
         /// <param name="childrens">The childrens.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "FileSystemGlobbing abstractions")]
-        public AzureListDirectoryWrapper(FileSystemInfoBase childrens)
+        public AzureBlobsListDirectoryWrapper(FileSystemInfoBase childrens)
         {
             this.fullName = "root";
             this.ParentDirectory = null;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureListDirectoryWrapper"/> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsListDirectoryWrapper"/> class.
         /// </summary>
         /// <param name="path">The directory path.</param>
         /// <param name="files">The files.</param>
-        public AzureListDirectoryWrapper(string path, Dictionary<string, AzureFileReference> files)
+        public AzureBlobsListDirectoryWrapper(string path, Dictionary<string, AzureBlobsFileReference> files)
         {
             this.path = path ?? "";
             this.files = files;
@@ -64,7 +64,7 @@ namespace Proffer.Storage.Azure.Internal
         /// Collection of files and directories
         /// </returns>
         public override IEnumerable<FileSystemInfoBase> EnumerateFileSystemInfos()
-            => this.files.Values.Select(file => new AzureListFileWrapper(file, this));
+            => this.files.Values.Select(file => new AzureBlobsListFileWrapper(file, this));
 
         /// <summary>
         /// Returns an instance of <see cref="DirectoryInfoBase" /> that represents a subdirectory.
@@ -83,6 +83,6 @@ namespace Proffer.Storage.Azure.Internal
         /// <returns>
         /// Instance of <see cref="FileInfoBase" /> even if file does not exist
         /// </returns>
-        public override FileInfoBase GetFile(string path) => new AzureListFileWrapper(this.files[path], this);
+        public override FileInfoBase GetFile(string path) => new AzureBlobsListFileWrapper(this.files[path], this);
     }
 }

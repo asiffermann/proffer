@@ -1,28 +1,28 @@
-namespace Proffer.Storage.Azure.Internal
+namespace Proffer.Storage.Azure.Blobs.Internal
 {
     using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
     /// <summary>
-    /// Represents a file in a being-listed <see cref="AzureStore"/>.
+    /// Represents a file in a being-listed <see cref="AzureBlobsStore"/>.
     /// </summary>
     /// <seealso cref="FileInfoBase" />
-    public class AzureListFileWrapper : FileInfoBase
+    public class AzureBlobsListFileWrapper : FileInfoBase
     {
-        private readonly AzureFileReference blob;
+        private readonly AzureBlobsFileReference blob;
         private readonly string name;
-        private readonly AzureListDirectoryWrapper parent;
+        private readonly AzureBlobsListDirectoryWrapper parent;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureListFileWrapper"/> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsListFileWrapper"/> class.
         /// </summary>
-        /// <param name="blob">The Azure Storage blob.</param>
+        /// <param name="file">The file reference.</param>
         /// <param name="parent">The parent directory.</param>
-        public AzureListFileWrapper(AzureFileReference blob, AzureListDirectoryWrapper parent)
+        public AzureBlobsListFileWrapper(AzureBlobsFileReference file, AzureBlobsListDirectoryWrapper parent)
         {
-            this.blob = blob;
-            int lastSlash = blob.Path.LastIndexOf('/');
+            this.blob = file;
+            int lastSlash = file.Path.LastIndexOf('/');
 
-            this.name = lastSlash >= 0 ? blob.Path.Substring(lastSlash + 1) : blob.Path;
+            this.name = lastSlash >= 0 ? file.Path.Substring(lastSlash + 1) : file.Path;
             this.parent = parent;
         }
 

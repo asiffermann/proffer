@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Storage.Azure</AssemblyName>
-    <PackageId>Proffer.Storage.Azure</PackageId>
-    <Description>Azure Storage provider for Proffer.Storage abstractions.</Description>
+    <AssemblyName>Proffer.Storage.Azure.Blobs</AssemblyName>
+    <PackageId>Proffer.Storage.Azure.Blobs</PackageId>
+    <Description>Azure Blobs provider for Proffer.Storage abstractions.</Description>
     <Product>Proffer</Product>
     <Authors>Adrien Siffermann</Authors>
     <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>

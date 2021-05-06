@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Tests
+namespace Proffer.Storage.Azure.Blobs.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -10,26 +10,26 @@ namespace Proffer.Storage.Azure.Tests
     using global::Azure.Storage.Sas;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Proffer.Storage.Azure.Configuration;
-    using Proffer.Storage.Azure.Tests.Stubs;
+    using Proffer.Storage.Azure.Blobs.Configuration;
+    using Proffer.Storage.Azure.Blobs.Tests.Stubs;
     using Proffer.Storage.Configuration;
     using Proffer.Testing;
     using Storage;
 
-    public class AzureFixture : ServiceProviderFixtureBase
+    public class AzureBlobsFixture : ServiceProviderFixtureBase
     {
-        public AzureFixture()
+        public AzureBlobsFixture()
         {
-            this.ParsedOptions = this.Services.GetService<IOptions<AzureParsedOptions>>().Value;
-            this.GenericStoreOptions = this.Services.GetService<IOptions<AzureStoreOptionsStub>>().Value
-                .ParseStoreOptions<AzureParsedOptions, AzureProviderInstanceOptions, AzureStoreOptions, AzureScopedStoreOptions>(this.ParsedOptions);
+            this.ParsedOptions = this.Services.GetService<IOptions<AzureBlobsParsedOptions>>().Value;
+            this.GenericStoreOptions = this.Services.GetService<IOptions<AzureBlobsStoreOptionsStub>>().Value
+                .ParseStoreOptions<AzureBlobsParsedOptions, AzureBlobsProviderInstanceOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>(this.ParsedOptions);
 
             this.InitStores();
         }
 
-        public AzureParsedOptions ParsedOptions { get; }
+        public AzureBlobsParsedOptions ParsedOptions { get; }
 
-        public AzureStoreOptions GenericStoreOptions { get; }
+        public AzureBlobsStoreOptions GenericStoreOptions { get; }
 
         private string AzCopy => Environment.ExpandEnvironmentVariables(this.Configuration["AzCopy10Command"]);
 
@@ -63,12 +63,12 @@ namespace Proffer.Storage.Azure.Tests
                 .AddStorage(this.Configuration)
                 .AddAzureStorage();
 
-            services.Configure<AzureStoreOptionsStub>(o => o.ConnectionString = this.ConnectionString);
+            services.Configure<AzureBlobsStoreOptionsStub>(o => o.ConnectionString = this.ConnectionString);
         }
 
         protected override void OnDispose()
         {
-            foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.ParsedOptions.ParsedStores)
+            foreach (KeyValuePair<string, AzureBlobsStoreOptions> parsedStoreKvp in this.ParsedOptions.ParsedStores)
             {
                 var containerClient = new BlobContainerClient(this.ConnectionString, parsedStoreKvp.Value.FolderName);
                 containerClient.Delete();
@@ -78,13 +78,13 @@ namespace Proffer.Storage.Azure.Tests
         private void InitStores()
         {
             this.InitStore(this.GenericStoreOptions);
-            foreach (KeyValuePair<string, AzureStoreOptions> parsedStoreKvp in this.ParsedOptions.ParsedStores)
+            foreach (KeyValuePair<string, AzureBlobsStoreOptions> parsedStoreKvp in this.ParsedOptions.ParsedStores)
             {
                 this.InitStore(parsedStoreKvp.Value);
             }
         }
 
-        private void InitStore(AzureStoreOptions storeOptions)
+        private void InitStore(AzureBlobsStoreOptions storeOptions)
         {
             var containerClient = new BlobContainerClient(storeOptions.ConnectionString, storeOptions.FolderName);
             containerClient.CreateIfNotExists();

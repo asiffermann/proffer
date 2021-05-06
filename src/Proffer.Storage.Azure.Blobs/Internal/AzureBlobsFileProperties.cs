@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Internal
+namespace Proffer.Storage.Azure.Blobs.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -10,10 +10,10 @@ namespace Proffer.Storage.Azure.Internal
     using global::Azure.Storage.Blobs.Models;
 
     /// <summary>
-    /// File common properties with metadata stored on Azure Storage.
+    /// File common properties with metadata stored on Azure Blobs.
     /// </summary>
     /// <seealso cref="IFileProperties" />
-    public class AzureFileProperties : IFileProperties
+    public class AzureBlobsFileProperties : IFileProperties
     {
         private const string DefaultCacheControl = "max-age=300, must-revalidate";
         private readonly BlobClient blobClient;
@@ -21,22 +21,22 @@ namespace Proffer.Storage.Azure.Internal
         private Dictionary<string, string> decodedMetadata;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureFileProperties" /> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsFileProperties" /> class.
         /// </summary>
-        /// <param name="blobClient">The Azure Storage blob client.</param>
+        /// <param name="blobClient">The Azure Blobs client.</param>
         /// <param name="blobProperties">The blob properties.</param>
-        public AzureFileProperties(BlobClient blobClient, BlobProperties blobProperties)
+        public AzureBlobsFileProperties(BlobClient blobClient, BlobProperties blobProperties)
         {
             this.blobClient = blobClient;
             this.ExtractProperties(blobProperties);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureFileProperties"/> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsFileProperties"/> class.
         /// </summary>
-        /// <param name="blobClient">The Azure Storage blob client.</param>
+        /// <param name="blobClient">The Azure Blobs client.</param>
         /// <param name="blobItem">The blob item from listing.</param>
-        public AzureFileProperties(BlobClient blobClient, BlobItem blobItem)
+        public AzureBlobsFileProperties(BlobClient blobClient, BlobItem blobItem)
         {
             this.blobClient = blobClient;
             this.ExtractProperties(blobItem);

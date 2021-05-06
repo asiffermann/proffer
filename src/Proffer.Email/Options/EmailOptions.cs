@@ -5,7 +5,7 @@ namespace Proffer.Email
     /// <summary>
     /// The Proffer.Email options with providers.
     /// </summary>
-    public class EmailOptions 
+    public class EmailOptions
     {
         /// <summary>
         /// The default configuration section name.

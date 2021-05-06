@@ -161,7 +161,7 @@ namespace Proffer.Storage.FileSystem.Internal
             return this.extendedPropertiesProvider.SaveExtendedPropertiesAsync(
                 this.store.AbsolutePath,
                 this,
-                (this.Properties as FileSystemFileProperties).ExtendedProperties);
+                ( this.Properties as FileSystemFileProperties ).ExtendedProperties);
         }
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace Proffer.Storage
         /// <returns>The service collection.</returns>
         public static IServiceCollection AddFileSystemStorage(this IServiceCollection services)
         {
-            return services              
+            return services
                 .Configure<FileSystemParsedOptions>(options => options.RootPath = System.IO.Directory.GetCurrentDirectory())
                 .AddFileSystemStorageServices();
         }

@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Tests
+namespace Proffer.Storage.Azure.Blobs.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Proffer.Storage.Azure.Tests
     using global::Azure.Storage.Blobs.Models;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Proffer.Storage.Azure.Configuration;
+    using Proffer.Storage.Azure.Blobs.Configuration;
     using Storage;
     using Xunit;
     using Xunit.Categories;
@@ -17,12 +17,12 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Feature(nameof(IStore.GetSharedAccessSignatureAsync))]
-    [Collection(nameof(AzureCollection))]
+    [Collection(nameof(AzureBlobsCollection))]
     public class GetSharedAccessSignatureTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture fixture;
+        private readonly AzureBlobsFixture fixture;
 
-        public GetSharedAccessSignatureTests(AzureFixture fixture)
+        public GetSharedAccessSignatureTests(AzureBlobsFixture fixture)
         {
             this.fixture = fixture;
         }
@@ -31,11 +31,11 @@ namespace Proffer.Storage.Azure.Tests
         public async Task Should_ListFiles_With_SharedAccessSignature(string storeName)
         {
             IStorageFactory storageFactory = this.fixture.Services.GetRequiredService<IStorageFactory>();
-            IOptions<AzureParsedOptions> options = this.fixture.Services.GetRequiredService<IOptions<AzureParsedOptions>>();
+            IOptions<AzureBlobsParsedOptions> options = this.fixture.Services.GetRequiredService<IOptions<AzureBlobsParsedOptions>>();
 
             IStore store = storageFactory.GetStore(storeName);
 
-            options.Value.ParsedStores.TryGetValue(storeName, out AzureStoreOptions storeOptions);
+            options.Value.ParsedStores.TryGetValue(storeName, out AzureBlobsStoreOptions storeOptions);
             var containerClientReference = new BlobContainerClient(storeOptions.ConnectionString, storeOptions.FolderName);
 
             string sharedAccessSignature = await store.GetSharedAccessSignatureAsync(new SharedAccessPolicy

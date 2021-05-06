@@ -1,4 +1,4 @@
-namespace Proffer.Storage.Azure.Tests
+namespace Proffer.Storage.Azure.Blobs.Tests
 {
     using System.Text;
     using System.Threading.Tasks;
@@ -10,12 +10,12 @@ namespace Proffer.Storage.Azure.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Feature(nameof(IStorageFactory.GetScopedStore))]
-    [Collection(nameof(AzureCollection))]
+    [Collection(nameof(AzureBlobsCollection))]
     public class GetScopedStoreTests : Abstract.ConfiguredStoresTestsBase
     {
-        private readonly AzureFixture fixture;
+        private readonly AzureBlobsFixture fixture;
 
-        public GetScopedStoreTests(AzureFixture fixture)
+        public GetScopedStoreTests(AzureBlobsFixture fixture)
         {
             this.fixture = fixture;
         }

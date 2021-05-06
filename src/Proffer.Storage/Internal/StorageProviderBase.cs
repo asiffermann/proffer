@@ -61,7 +61,7 @@ namespace Proffer.Storage.Internal
         public IStore BuildStore(string storeName, IStoreOptions storeOptions)
         {
             return this.BuildStoreInternal(
-                storeName, 
+                storeName,
                 storeOptions.ParseStoreOptions<TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions>(this.Options));
         }
 

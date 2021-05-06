@@ -1,18 +1,18 @@
-namespace Proffer.Storage.Azure.Configuration
+namespace Proffer.Storage.Azure.Blobs.Configuration
 {
     using System.Collections.Generic;
     using Proffer.Storage.Configuration;
 
     /// <summary>
-    /// Typed Azure Storage options parsed from the dynamic configuration.
+    /// Typed Azure Blobs options parsed from the dynamic configuration.
     /// </summary>
     /// <seealso cref="IParsedOptions{TInstanceOptions, TStoreOptions, TScopedStoreOptions}" />
-    public class AzureParsedOptions : IParsedOptions<AzureProviderInstanceOptions, AzureStoreOptions, AzureScopedStoreOptions>
+    public class AzureBlobsParsedOptions : IParsedOptions<AzureBlobsProviderInstanceOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>
     {
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name => AzureStorageProvider.ProviderName;
+        public string Name => AzureBlobsStorageProvider.ProviderName;
 
         /// <summary>
         /// Gets or sets the connection strings.
@@ -22,24 +22,24 @@ namespace Proffer.Storage.Azure.Configuration
         /// <summary>
         /// Gets or sets the parsed provider instances options.
         /// </summary>
-        public IReadOnlyDictionary<string, AzureProviderInstanceOptions> ParsedProviderInstances { get; set; }
+        public IReadOnlyDictionary<string, AzureBlobsProviderInstanceOptions> ParsedProviderInstances { get; set; }
 
         /// <summary>
         /// Gets or sets the parsed stores options.
         /// </summary>
-        public IReadOnlyDictionary<string, AzureStoreOptions> ParsedStores { get; set; }
+        public IReadOnlyDictionary<string, AzureBlobsStoreOptions> ParsedStores { get; set; }
 
         /// <summary>
         /// Gets or sets the parsed scoped stores options.
         /// </summary>
-        public IReadOnlyDictionary<string, AzureScopedStoreOptions> ParsedScopedStores { get; set; }
+        public IReadOnlyDictionary<string, AzureBlobsScopedStoreOptions> ParsedScopedStores { get; set; }
 
         /// <summary>
         /// Binds the provider instance options.
         /// </summary>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
         /// <exception cref="Exceptions.BadProviderConfiguration"></exception>
-        public void BindProviderInstanceOptions(AzureProviderInstanceOptions providerInstanceOptions)
+        public void BindProviderInstanceOptions(AzureBlobsProviderInstanceOptions providerInstanceOptions)
         {
             if (!string.IsNullOrEmpty(providerInstanceOptions.ConnectionStringName)
                 && string.IsNullOrEmpty(providerInstanceOptions.ConnectionString))
@@ -61,7 +61,7 @@ namespace Proffer.Storage.Azure.Configuration
         /// <param name="storeOptions">The store options.</param>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
         /// <exception cref="Exceptions.BadStoreConfiguration"></exception>
-        public void BindStoreOptions(AzureStoreOptions storeOptions, AzureProviderInstanceOptions providerInstanceOptions = null)
+        public void BindStoreOptions(AzureBlobsStoreOptions storeOptions, AzureBlobsProviderInstanceOptions providerInstanceOptions = null)
         {
             storeOptions.FolderName = storeOptions.FolderName.ToLowerInvariant();
 
@@ -71,7 +71,7 @@ namespace Proffer.Storage.Azure.Configuration
                 if (!this.ConnectionStrings.ContainsKey(storeOptions.ConnectionStringName))
                 {
                     throw new Exceptions.BadStoreConfiguration(
-                        storeOptions.Name, 
+                        storeOptions.Name,
                         $"The ConnectionString '{storeOptions.ConnectionStringName}' cannot be found. Did you call AddStorage with the ConfigurationRoot?");
                 }
 

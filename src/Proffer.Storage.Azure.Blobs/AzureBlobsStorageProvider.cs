@@ -1,7 +1,7 @@
-namespace Proffer.Storage.Azure
+namespace Proffer.Storage.Azure.Blobs
 {
     using Microsoft.Extensions.Options;
-    using Proffer.Storage.Azure.Configuration;
+    using Proffer.Storage.Azure.Blobs.Configuration;
     using Proffer.Storage.Internal;
     using Storage;
 
@@ -9,18 +9,18 @@ namespace Proffer.Storage.Azure
     /// A provider to handle and build file stores pointing on an Azure Storage account.
     /// </summary>
     /// <seealso cref="StorageProviderBase{TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions}" />
-    public class AzureStorageProvider : StorageProviderBase<AzureParsedOptions, AzureProviderInstanceOptions, AzureStoreOptions, AzureScopedStoreOptions>
+    public class AzureBlobsStorageProvider : StorageProviderBase<AzureBlobsParsedOptions, AzureBlobsProviderInstanceOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>
     {
         /// <summary>
-        /// The <see cref="AzureStorageProvider"/> name.
+        /// The <see cref="AzureBlobsStorageProvider"/> name.
         /// </summary>
         public const string ProviderName = "Azure";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AzureStorageProvider"/> class.
+        /// Initializes a new instance of the <see cref="AzureBlobsStorageProvider"/> class.
         /// </summary>
         /// <param name="options">The options.</param>
-        public AzureStorageProvider(IOptions<AzureParsedOptions> options)
+        public AzureBlobsStorageProvider(IOptions<AzureBlobsParsedOptions> options)
             : base(options)
         {
         }
@@ -38,6 +38,6 @@ namespace Proffer.Storage.Azure
         /// <returns>
         /// A configured <see cref="IStore" />.
         /// </returns>
-        protected override IStore BuildStoreInternal(string storeName, AzureStoreOptions storeOptions) => new AzureStore(storeOptions);
+        protected override IStore BuildStoreInternal(string storeName, AzureBlobsStoreOptions storeOptions) => new AzureBlobsStore(storeOptions);
     }
 }

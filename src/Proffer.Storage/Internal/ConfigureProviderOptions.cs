@@ -1,9 +1,9 @@
 namespace Proffer.Storage.Internal
 {
-    using Proffer.Storage.Configuration;
-    using Microsoft.Extensions.Options;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.Extensions.Options;
+    using Proffer.Storage.Configuration;
 
     /// <summary>
     /// Configures a provider <typeparamref name="TParsedOptions"/> from generic <see cref="StorageOptions"/>.
