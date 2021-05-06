@@ -89,11 +89,11 @@ namespace Proffer.Email.Smtp
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(from.DisplayName, from.Email));
 
-            if(replyTo != null)
+            if (replyTo != null)
             {
                 message.ReplyTo.Add(new MailboxAddress(replyTo.DisplayName, replyTo.Email));
             }
-            
+
             foreach (IEmailAddress recipient in recipients)
             {
                 message.To.Add(new MailboxAddress(recipient.DisplayName, recipient.Email));

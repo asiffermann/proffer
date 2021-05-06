@@ -32,14 +32,14 @@ namespace Proffer.Storage
         /// <returns>The service collection.</returns>
         public static IServiceCollection AddFileSystemStorage(this IServiceCollection services)
         {
-            return services              
+            return services
                 .Configure<FileSystemParsedOptions>(options => options.RootPath = System.IO.Directory.GetCurrentDirectory())
                 .AddFileSystemStorageServices();
         }
 
         private static IServiceCollection AddFileSystemStorageServices(this IServiceCollection services)
         {
-            services.AddSingleton<IConfigureOptions<FileSystemParsedOptions>, ConfigureProviderOptions<FileSystemParsedOptions, FileSystemProviderInstanceOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>>();
+            services.AddSingleton<IConfigureOptions<FileSystemParsedOptions>, ConfigureProviderOptions<FileSystemParsedOptions, FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>>();
             services.TryAddEnumerable(ServiceDescriptor.Transient<IStorageProvider, FileSystemStorageProvider>());
 
             services.TryAddTransient<IExtendedPropertiesProvider, NoExtendedPropertiesProvider>();

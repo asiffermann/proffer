@@ -3,6 +3,7 @@ namespace Proffer.Storage.Exceptions
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Proffer.Configuration;
 
     /// <summary>
     /// Thrown when a store was not properly configured.
@@ -25,7 +26,7 @@ namespace Proffer.Storage.Exceptions
         /// </summary>
         /// <param name="storeName">The name of the store.</param>
         /// <param name="errors">The errors.</param>
-        public BadStoreConfiguration(string storeName, IEnumerable<Configuration.IOptionError> errors)
+        public BadStoreConfiguration(string storeName, IEnumerable<IOptionError> errors)
             : this(storeName, string.Join(" | ", errors.Select(e => e.ErrorMessage)))
         {
             this.Errors = errors;
@@ -34,6 +35,6 @@ namespace Proffer.Storage.Exceptions
         /// <summary>
         /// Gets the validation errors.
         /// </summary>
-        public IEnumerable<Configuration.IOptionError> Errors { get; }
+        public IEnumerable<IOptionError> Errors { get; }
     }
 }

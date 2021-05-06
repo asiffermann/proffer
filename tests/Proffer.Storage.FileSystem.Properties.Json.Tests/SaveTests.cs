@@ -10,7 +10,7 @@ namespace Proffer.Storage.FileSystem.Properties.Json.Tests
     [UnitTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
-    [Feature(nameof(IExtendedPropertiesProvider))]    
+    [Feature(nameof(IExtendedPropertiesProvider))]
     [Collection(nameof(FileSystemPropertiesJsonCollection))]
     public class SaveTests : Abstract.ConfiguredStoresTestsBase
     {

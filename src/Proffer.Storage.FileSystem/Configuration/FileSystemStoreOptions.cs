@@ -3,6 +3,7 @@ namespace Proffer.Storage.FileSystem.Configuration
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Proffer.Configuration;
     using Proffer.Storage.Configuration;
 
     /// <summary>

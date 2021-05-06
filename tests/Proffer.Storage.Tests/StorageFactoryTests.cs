@@ -187,7 +187,7 @@ namespace Proffer.Storage.Tests
                 });
 
             IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
-            
+
             bool storeFound = storageFactory.TryGetStore(storeName, out IStore store);
 
             Assert.False(storeFound);

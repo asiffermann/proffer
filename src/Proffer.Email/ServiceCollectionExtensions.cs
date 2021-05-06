@@ -45,7 +45,7 @@ namespace Proffer.Email
         public static IServiceCollection AddEmail(this IServiceCollection services, IConfigurationRoot configurationRoot, string sectionName = EmailOptions.DefaultConfigurationSectionName)
         {
             return services
-                .Configure<EmailOptions>(configurationRoot.GetSection(sectionName))                
+                .Configure<EmailOptions>(configurationRoot.GetSection(sectionName))
                 .AddEmail();
         }
     }

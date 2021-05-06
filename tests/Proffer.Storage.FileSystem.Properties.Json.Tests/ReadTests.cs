@@ -1,6 +1,5 @@
 namespace Proffer.Storage.FileSystem.Properties.Json.Tests
 {
-    using System;
     using System.Threading.Tasks;
     using Storage;
     using Xunit;

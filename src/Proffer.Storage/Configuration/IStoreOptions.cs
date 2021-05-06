@@ -1,6 +1,7 @@
 namespace Proffer.Storage.Configuration
 {
     using System.Collections.Generic;
+    using Proffer.Configuration;
 
     /// <summary>
     /// Options for an <see cref="IStore"/>.

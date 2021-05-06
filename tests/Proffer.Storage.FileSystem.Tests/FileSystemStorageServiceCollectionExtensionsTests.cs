@@ -60,7 +60,7 @@ namespace Proffer.Storage.FileSystem.Tests
                     { $"Storage:Stores:{storeName}:ProviderType", "FileSystem" }
                 });
 
-            IOptions < FileSystemParsedOptions> options = fixture.Services.GetService<IOptions<FileSystemParsedOptions>>();
+            IOptions<FileSystemParsedOptions> options = fixture.Services.GetService<IOptions<FileSystemParsedOptions>>();
 
             IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
             IStore store = storageFactory.GetStore(storeName);

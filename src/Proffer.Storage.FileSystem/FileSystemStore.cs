@@ -1,6 +1,5 @@
 namespace Proffer.Storage.FileSystem
 {
-    using Proffer.Storage.FileSystem.Configuration;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -8,6 +7,7 @@ namespace Proffer.Storage.FileSystem
     using System.Security.Cryptography;
     using System.Threading;
     using System.Threading.Tasks;
+    using Proffer.Storage.FileSystem.Configuration;
 
     /// <summary>
     /// A File System store allows to save, list or read files on a container in its configured <see cref="FileSystemStorageProvider"/>.
@@ -71,7 +71,7 @@ namespace Proffer.Storage.FileSystem
         /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, bool recursive, bool withMetadata)
         {
-            string directoryPath = (string.IsNullOrEmpty(path) || path == "/" || path == "\\") ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
+            string directoryPath = ( string.IsNullOrEmpty(path) || path == "/" || path == "\\" ) ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
 
             var result = new List<IFileReference>();
             if (Directory.Exists(directoryPath))
@@ -101,7 +101,7 @@ namespace Proffer.Storage.FileSystem
         /// </returns>
         public async ValueTask<IFileReference[]> ListAsync(string path, string searchPattern, bool recursive, bool withMetadata)
         {
-            string directoryPath = (string.IsNullOrEmpty(path) || path == "/" || path == "\\") ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
+            string directoryPath = ( string.IsNullOrEmpty(path) || path == "/" || path == "\\" ) ? this.AbsolutePath : Path.Combine(this.AbsolutePath, path);
 
             var result = new List<IFileReference>();
             if (Directory.Exists(directoryPath))
@@ -251,9 +251,9 @@ namespace Proffer.Storage.FileSystem
             var properties = fileReference.Properties as Internal.FileSystemFileProperties;
             (string ETag, string ContentMD5) = ComputeHashes(data);
 
-            if (!fileExists 
+            if (!fileExists
                 || overwritePolicy == OverwritePolicy.Always
-                || (overwritePolicy == OverwritePolicy.IfContentModified && properties.ContentMD5 != ContentMD5))
+                || ( overwritePolicy == OverwritePolicy.IfContentModified && properties.ContentMD5 != ContentMD5 ))
             {
                 this.EnsurePathExists(fileReference.FileSystemPath);
 

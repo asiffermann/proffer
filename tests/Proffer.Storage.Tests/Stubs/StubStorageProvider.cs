@@ -5,7 +5,7 @@ namespace Proffer.Storage.Tests.Stubs
     using Proffer.Storage.Internal;
     using Proffer.Storage.Tests.Stubs.Configuration;
 
-    public class StubStorageProvider : StorageProviderBase<StubParsedOptions, StubProviderInstanceOptions, StubStoreOptions, StubScopedStoreOptions>
+    public class StubStorageProvider : StorageProviderBase<StubParsedOptions, StubProviderOptions, StubStoreOptions, StubScopedStoreOptions>
     {
         public const string ProviderName = "Stub";
 

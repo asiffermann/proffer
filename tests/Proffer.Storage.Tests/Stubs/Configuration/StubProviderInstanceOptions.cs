@@ -1,8 +1,8 @@
 namespace Proffer.Storage.Tests.Stubs.Configuration
 {
-    using Proffer.Storage.Configuration;
+    using Proffer.Configuration;
 
-    public class StubProviderInstanceOptions : ProviderInstanceOptions
-    {        
+    public class StubProviderOptions : ProviderOptions
+    {
     }
 }
