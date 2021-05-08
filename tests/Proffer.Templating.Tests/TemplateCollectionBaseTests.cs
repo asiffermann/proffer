@@ -50,7 +50,7 @@ namespace Proffer.Templating.Tests
             string result = await templateCollection.ApplySimpleTemplate("Simple string context");
 
             Assert.NotNull(result);
-            Assert.Equal("Hello templating world!\r\n\r\nThis is the context: Simple string context", result);
+            Assert.Equal("This is the context: Simple string context", result);
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace Proffer.Templating.Tests
             string result = await templateCollection.ApplyTemplateInFolder("Simple string context");
 
             Assert.NotNull(result);
-            Assert.Equal("Hello templating world!\r\n\r\nThis is the context: Simple string context", result);
+            Assert.Equal("Simple string context, you are in a folder.", result);
         }
     }
 }

@@ -1,3 +1,1 @@
-Hello templating world!
-
-This is the context: {0}
+{0}, you are in a folder.
