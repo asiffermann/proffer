@@ -14,7 +14,7 @@ namespace Proffer.Email.SendGrid.Tests
     [Feature(nameof(Email))]
     [Feature(nameof(SendGrid))]
     [Feature(nameof(IEmailSender.SendEmailAsync))]
-    [Collection(nameof(SendGridCollection))]
+    [Collection(nameof(SendGridTestCollection))]
     public class SendSimpleEmailTests
     {
         private readonly SendGridFixture storeFixture;

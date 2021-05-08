@@ -9,7 +9,7 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IFileReference.DeleteAsync))]
-    [Collection(nameof(FileSystemCollection))]
+    [Collection(nameof(FileSystemTestCollection))]
     public class DeleteTests : Abstract.ConfiguredStoresTestsBase
     {
         private readonly FileSystemFixture fixture;

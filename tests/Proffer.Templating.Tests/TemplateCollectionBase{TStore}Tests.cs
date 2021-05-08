@@ -34,7 +34,7 @@ namespace Proffer.Templating.Tests
         {
             public TypedStoreTemplateCollection(TypedStore store, ITemplateLoaderFactory templateLoaderFactory)
                 : base(store, templateLoaderFactory)
-            {                
+            {
             }
 
             public Task<string> ApplyNewTemplate(DateTime context)

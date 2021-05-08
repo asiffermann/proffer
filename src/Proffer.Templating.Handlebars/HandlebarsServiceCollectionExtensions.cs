@@ -6,16 +6,16 @@ namespace Proffer.Templating
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class HandlebarsServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers Proffer.Templating services.
+        /// Registers the Proffer.Templating services to use <see cref="HandlebarsDotNet"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddTemplating(this IServiceCollection services)
+        public static IServiceCollection AddHandlebars(this IServiceCollection services)
         {
-            services.TryAddTransient<ITemplateLoaderFactory, Internal.TemplateLoaderFactory>();
+            services.TryAddEnumerable(ServiceDescriptor.Transient<ITemplateProvider, Handlebars.HandlebarsTemplateProvider>());
             return services;
         }
     }

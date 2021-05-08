@@ -10,7 +10,7 @@ namespace Proffer.Storage.Azure.Blobs.Tests
     [IntegrationTest]
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
-    [Collection(nameof(AzureBlobsCollection))]
+    [Collection(nameof(AzureBlobsTestCollection))]
     public class ReadTests : Abstract.ConfiguredStoresTestsBase
     {
         private readonly AzureBlobsFixture fixture;

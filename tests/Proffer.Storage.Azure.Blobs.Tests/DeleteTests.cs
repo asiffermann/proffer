@@ -9,7 +9,7 @@ namespace Proffer.Storage.Azure.Blobs.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Feature(nameof(IFileReference.DeleteAsync))]
-    [Collection(nameof(AzureBlobsCollection))]
+    [Collection(nameof(AzureBlobsTestCollection))]
     public class DeleteTests : Abstract.ConfiguredStoresTestsBase
     {
         private readonly AzureBlobsFixture fixture;

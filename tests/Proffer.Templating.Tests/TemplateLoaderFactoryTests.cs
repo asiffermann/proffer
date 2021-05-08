@@ -9,7 +9,7 @@ namespace Proffer.Templating.Tests
     [UnitTest]
     [Feature(nameof(Templating))]
     [Feature(nameof(ITemplateLoaderFactory))]
-    [Collection(nameof(TemplatingCollection))]
+    [Collection(nameof(TemplatingTestCollection))]
     public class TemplateLoaderFactoryTests
     {
         private readonly TemplatingFixture fixture;
