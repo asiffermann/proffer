@@ -1,4 +1,4 @@
-namespace Proffer.Templating.Handlerbars.Tests.Stubs
+namespace Proffer.Templating.Mustache.Tests.Stubs
 {
     public class TitleBodyContext
     {

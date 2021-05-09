@@ -1,21 +1,22 @@
 namespace Proffer.Templating.Mustache
 {
     using System;
+    using System.Collections.Generic;
     using global::Mustache;
 
     /// <summary>
     /// A template reference can be executed on a specific context using <see cref="global::Mustache"/>.
     /// </summary>
     /// <seealso cref="ITemplate" />
-    public class MustacheSharpTemplate : ITemplate
+    public class MustacheTemplate : ITemplate
     {
         private readonly Generator compiledTemplate;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MustacheSharpTemplate"/> class.
+        /// Initializes a new instance of the <see cref="MustacheTemplate"/> class.
         /// </summary>
         /// <param name="templateContent">Content of the template.</param>
-        public MustacheSharpTemplate(string templateContent)
+        public MustacheTemplate(string templateContent)
         {
             var compiler = new FormatCompiler();
 
@@ -29,8 +30,18 @@ namespace Proffer.Templating.Mustache
         /// <returns>
         /// The templated result.
         /// </returns>
+        /// <exception cref="InvalidContextException"></exception>
         public string Apply(object context)
-            => this.compiledTemplate.Render(context);
+        {
+            try
+            {
+                return this.compiledTemplate.Render(context);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                throw new InvalidContextException(ex);
+            }
+        }
 
         /// <summary>
         /// Applies the specified context on the template with format provider.
@@ -40,7 +51,17 @@ namespace Proffer.Templating.Mustache
         /// <returns>
         /// The templated result.
         /// </returns>
+        /// <exception cref="InvalidContextException"></exception>
         public string Apply(object context, IFormatProvider formatProvider)
-            => this.compiledTemplate.Render(formatProvider, context);
+        {
+            try
+            {
+                return this.compiledTemplate.Render(formatProvider, context);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                throw new InvalidContextException(ex);
+            }
+        }
     }
 }

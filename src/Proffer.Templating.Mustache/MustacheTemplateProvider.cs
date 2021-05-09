@@ -7,12 +7,12 @@ namespace Proffer.Templating.Mustache
     /// A provider handles and compiles templates using <see cref="global::Mustache"/>.
     /// </summary>
     /// <seealso cref="ITemplateProvider" />
-    public class MustacheSharpTemplateProvider : ITemplateProvider, ITemplateProviderScope
+    public class MustacheTemplateProvider : ITemplateProvider, ITemplateProviderScope
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MustacheSharpTemplateProvider"/> class.
+        /// Initializes a new instance of the <see cref="MustacheTemplateProvider"/> class.
         /// </summary>
-        public MustacheSharpTemplateProvider()
+        public MustacheTemplateProvider()
         {
             this.MimeTypes = new HashSet<string>() { "text/x-mustache-template" };
             this.Extensions = new HashSet<string>() { ".mustache" };
@@ -36,7 +36,7 @@ namespace Proffer.Templating.Mustache
         /// A new <see cref="ITemplate" /> compiled from the content.
         /// </returns>
         public ITemplate Compile(string templateContent)
-            => new MustacheSharpTemplate(templateContent);
+            => new MustacheTemplate(templateContent);
 
         /// <summary>
         /// Creates a template provider scope.

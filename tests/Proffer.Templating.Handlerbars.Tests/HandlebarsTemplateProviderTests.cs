@@ -30,7 +30,7 @@ namespace Proffer.Templating.Handlebars.Tests
 
             Assert.NotNull(template);
 
-            string result = template.Apply(null);
+            string result = template.Apply(new { Title = "Sample title", Body = "Sample body" });
 
             Assert.NotNull(result);
             Assert.NotEmpty(result);

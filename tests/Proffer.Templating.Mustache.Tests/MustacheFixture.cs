@@ -1,4 +1,4 @@
-namespace Proffer.Templating.Handlebars.Tests
+namespace Proffer.Templating.Mustache.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,12 +7,12 @@ namespace Proffer.Templating.Handlebars.Tests
     using Microsoft.Extensions.DependencyInjection;
     using Proffer.Storage;
     using Proffer.Templating;
-    using Proffer.Templating.Handlerbars.Tests.Stubs;
+    using Proffer.Templating.Mustache.Tests.Stubs;
     using Proffer.Testing;
 
-    public class HandlebarsFixture : ServiceProviderFixtureBase
+    public class MustacheFixture : ServiceProviderFixtureBase
     {
-        public HandlebarsFixture()
+        public MustacheFixture()
         {
             this.Templates = this.Services.GetRequiredService<TemplateCollection>();
         }
@@ -27,15 +27,16 @@ namespace Proffer.Templating.Handlebars.Tests
                 .AddStorage(this.Configuration)
                 .AddFileSystemStorage(this.StorageRootPath)
                 .AddTemplating()
-                .AddHandlebars()
+                .AddMustache()
                 .AddTransient<TemplateCollection>()
-                .AddTransient<HandlebarsTemplateProvider>();
+                .AddTransient<MustacheTemplateProvider>();
         }
 
         protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
         {
             inMemoryCollectionData.Add("Storage:Stores:Templates:ProviderType", "FileSystem");
             inMemoryCollectionData.Add("Storage:Stores:OtherTemplates:ProviderType", "FileSystem");
+            inMemoryCollectionData.Add("Storage:Stores:Partials:ProviderType", "FileSystem");
         }
 
         public class TemplateCollection : TemplateCollectionBase
@@ -44,9 +45,6 @@ namespace Proffer.Templating.Handlebars.Tests
                 : base("Templates", storageFactory, templateLoaderFactory)
             {
             }
-
-            public Task<string> Format(FormatContext context)
-                => this.LoadAndApplyTemplate("Helpers/Format", context);
 
             public Task<string> TitleBody(object context, IFormatProvider formatProvider = null)
                 => this.LoadAndApplyTemplate("TitleBody", context, formatProvider);

@@ -99,7 +99,7 @@ namespace Proffer.Templating.Internal
                     string fileName = path.Last();
                     if (fileName.StartsWith("_") && provider.Extensions.Any(ext => fileName.EndsWith(ext)))
                     {
-                        string partialName = System.IO.Path.GetFileNameWithoutExtension(fileName.Substring(1));
+                        string partialName = Path.GetFileNameWithoutExtension(fileName.Substring(1));
                         scope.RegisterPartial(partialName, await this.store.ReadAllTextAsync(file));
                     }
                 }
