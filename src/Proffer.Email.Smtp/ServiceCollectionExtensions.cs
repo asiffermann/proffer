@@ -1,5 +1,6 @@
 namespace Proffer.Email
 {
+    using MailKit.Net.Smtp;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Smtp;
@@ -17,6 +18,7 @@ namespace Proffer.Email
         public static IServiceCollection AddSmtpEmail(this IServiceCollection services)
         {
             services.TryAddEnumerable(ServiceDescriptor.Transient<IEmailProviderType, SmtpEmailProviderType>());
+            services.AddTransient<ISmtpClient, SmtpClient>();
             return services;
         }
     }

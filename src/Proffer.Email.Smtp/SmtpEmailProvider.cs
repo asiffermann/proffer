@@ -4,8 +4,10 @@ namespace Proffer.Email.Smtp
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Dawn;
     using MailKit.Net.Smtp;
     using MailKit.Security;
+    using Microsoft.Extensions.DependencyInjection;
     using MimeKit;
 
     /// <summary>
@@ -18,26 +20,32 @@ namespace Proffer.Email.Smtp
         private readonly int port;
         private readonly string username;
         private readonly string password;
+        private readonly IServiceProvider serviceProvider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SmtpEmailProvider"/> class.
+        /// Initializes a new instance of the <see cref="SmtpEmailProvider" /> class.
         /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
         /// <param name="options">The options.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public SmtpEmailProvider(IEmailProviderOptions options)
+        public SmtpEmailProvider(IServiceProvider serviceProvider, IEmailProviderOptions options)
         {
-            this.host = options.Parameters["Host"];
-            if (string.IsNullOrWhiteSpace(this.host))
-            {
-                throw new ArgumentNullException("Host");
-            }
+            this.host = Guard.Argument(options.Parameters["Host"], "Host").NotNull().NotEmpty().NotWhiteSpace();
+            this.port = Guard.Argument(options.Parameters["Port"], "Port").NotNull().NotEmpty().NotWhiteSpace()
+                .Modify((portString) =>
+                {
+                    if (int.TryParse(portString, out int port))
+                    {
+                        return port;
+                    }
 
-            string portString = options.Parameters["Port"];
-            if (string.IsNullOrWhiteSpace(portString) || !int.TryParse(portString, out this.port))
-            {
-                throw new ArgumentException("Port");
-            }
+                    return (int?)null;
+                })
+                .NotNull()
+                .Value;
+
+            this.serviceProvider = serviceProvider;
 
             this.username = options.Parameters["UserName"];
             this.password = options.Parameters["Password"];
@@ -129,7 +137,7 @@ namespace Proffer.Email.Smtp
                 textBodyPart.ContentTransferEncoding = ContentEncoding.Base64;
             }
 
-            using (var client = new SmtpClient())
+            using (ISmtpClient client = this.serviceProvider.GetRequiredService<ISmtpClient>())
             {
                 await client.ConnectAsync(this.host, this.port, SecureSocketOptions.None);
 
