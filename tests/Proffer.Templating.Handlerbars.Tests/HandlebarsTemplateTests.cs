@@ -2,7 +2,6 @@ namespace Proffer.Templating.Handlebars.Tests
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Threading.Tasks;
     using Newtonsoft.Json.Linq;
     using Proffer.Templating.Handlerbars.Tests.Stubs;

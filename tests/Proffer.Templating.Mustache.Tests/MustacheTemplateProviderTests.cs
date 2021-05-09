@@ -1,11 +1,9 @@
 namespace Proffer.Templating.Mustache.Tests
 {
     using System;
-    using System.IO;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
     using Proffer.Storage;
-    using Proffer.Testing;
     using Xunit;
     using Xunit.Categories;
 
