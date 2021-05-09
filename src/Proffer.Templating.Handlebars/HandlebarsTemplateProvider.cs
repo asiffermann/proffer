@@ -57,8 +57,14 @@ namespace Proffer.Templating.Handlebars
 
                 this.handlebars.RegisterHelper("format", (writer, context, arguments) =>
                 {
-                    if (arguments.Length <= 1)
+                    if (arguments.Length == 0 || arguments[0] == null)
                     {
+                        return;
+                    }
+
+                    if (arguments.Length == 1)
+                    {
+                        writer.WriteSafeString(arguments[0].ToString());
                         return;
                     }
 
@@ -78,19 +84,13 @@ namespace Proffer.Templating.Handlebars
                         }
                     }
 
-                    var date = arguments[0] as DateTime?;
-                    if (date.HasValue)
+                    if (arguments[0] is IFormattable formattable)
                     {
-                        writer.WriteSafeString(date.Value.ToString(format, culture));
+                        writer.WriteSafeString(formattable.ToString(format, culture));
                         return;
                     }
 
-                    decimal? number = arguments[0] as decimal?;
-                    if (number.HasValue)
-                    {
-                        writer.WriteSafeString(number.Value.ToString(format, culture));
-                        return;
-                    }
+                    writer.WriteSafeString(string.Format(format, arguments[0]));
                 });
             }
 

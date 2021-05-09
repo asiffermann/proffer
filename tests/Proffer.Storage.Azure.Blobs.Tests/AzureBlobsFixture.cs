@@ -20,8 +20,8 @@ namespace Proffer.Storage.Azure.Blobs.Tests
     {
         public AzureBlobsFixture()
         {
-            this.ParsedOptions = this.Services.GetService<IOptions<AzureBlobsParsedOptions>>().Value;
-            this.GenericStoreOptions = this.Services.GetService<IOptions<AzureBlobsStoreOptionsStub>>().Value
+            this.ParsedOptions = this.Services.GetRequiredService<IOptions<AzureBlobsParsedOptions>>().Value;
+            this.GenericStoreOptions = this.Services.GetRequiredService<IOptions<AzureBlobsStoreOptionsStub>>().Value
                 .ParseStoreOptions<AzureBlobsParsedOptions, AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions>(this.ParsedOptions);
 
             this.InitStores();

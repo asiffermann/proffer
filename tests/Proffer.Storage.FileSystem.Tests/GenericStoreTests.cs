@@ -12,7 +12,7 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature("IStore<TOptions>")]
-    [Collection(nameof(FileSystemCollection))]
+    [Collection(nameof(FileSystemTestCollection))]
     public class GenericStoreTests
     {
         private readonly FileSystemFixture fixture;

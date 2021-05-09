@@ -12,7 +12,7 @@ namespace Proffer.Storage.Azure.Blobs.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(Azure))]
     [Feature("IStore<TOptions>")]
-    [Collection(nameof(AzureBlobsCollection))]
+    [Collection(nameof(AzureBlobsTestCollection))]
     public class GenericStoreTests
     {
         private readonly AzureBlobsFixture fixture;

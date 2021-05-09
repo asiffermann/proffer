@@ -19,7 +19,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             IStore store = storageFactory.GetStore("DefaultStore");
 
@@ -32,7 +32,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             IStore store = storageFactory.GetStore("DefaultProviderStore");
 
@@ -45,7 +45,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             bool storeFound = storageFactory.TryGetStore("DefaultProviderStore", out IStore store);
 
@@ -59,7 +59,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             bool storeFound = storageFactory.TryGetStore("DefaultProviderStore", out IStore store, "Stub");
 
@@ -73,7 +73,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             string storeName = Guid.NewGuid().ToString();
             IStore store = storageFactory.GetStore(storeName, new GenericStoreOptionsStub { Name = storeName });
@@ -87,7 +87,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             var scopedStoreId = Guid.NewGuid();
             IStore store = storageFactory.GetScopedStore("StubScopedStore", scopedStoreId);
@@ -104,7 +104,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             Assert.Throws<StoreNotFoundException>(() => storageFactory.GetScopedStore(storeName, Guid.NewGuid()));
         }
@@ -124,7 +124,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:ScopedStores:{storeName}:FolderNameFormat", "Missing argument {0} {1}" }
                 });
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             Assert.Throws<BadScopedStoreConfiguration>(() => storageFactory.GetScopedStore(storeName, Guid.NewGuid()));
         }
@@ -135,7 +135,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             bool storeFound = storageFactory.TryGetStore("DefaultProviderStore", out IStore store, "BadProvider");
 
@@ -151,7 +151,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             bool storeFound = storageFactory.TryGetStore(storeName, out IStore store);
 
@@ -167,7 +167,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             Assert.Throws<StoreNotFoundException>(() => storageFactory.GetStore(storeName));
         }
@@ -186,7 +186,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:ProviderName", providerName }
                 });
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             bool storeFound = storageFactory.TryGetStore(storeName, out IStore store);
 
@@ -208,7 +208,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:ProviderName", providerName }
                 });
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             Assert.Throws<BadProviderConfiguration>(() => storageFactory.GetStore(storeName));
         }
@@ -227,7 +227,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:ProviderType", providerType }
                 });
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             bool storeFound = storageFactory.TryGetStore(storeName, out IStore store);
 
@@ -249,7 +249,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:ProviderType", providerType }
                 });
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             Assert.Throws<ProviderNotFoundException>(() => storageFactory.GetStore(storeName));
         }
@@ -267,7 +267,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:AccessLevel", "Private" }
                 });
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             bool storeFound = storageFactory.TryGetStore(storeName, out IStore store);
 
@@ -288,7 +288,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:AccessLevel", "Private" }
                 });
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             Assert.Throws<BadStoreConfiguration>(() => storageFactory.GetStore(storeName));
         }

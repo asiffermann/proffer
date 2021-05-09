@@ -20,7 +20,7 @@ namespace Proffer.Storage.Tests
         {
             var fixture = new SimpleServiceProviderFixture((sp, f) => sp.AddStorage().AddStubStorage());
 
-            IStore<GenericStoreOptionsStub> genericStore = fixture.Services.GetService<IStore<GenericStoreOptionsStub>>();
+            IStore<GenericStoreOptionsStub> genericStore = fixture.Services.GetRequiredService<IStore<GenericStoreOptionsStub>>();
 
             Assert.NotNull(genericStore);
         }
@@ -30,7 +30,7 @@ namespace Proffer.Storage.Tests
         {
             var fixture = new SimpleServiceProviderFixture((sp, f) => sp.AddStorage().AddStubStorage());
 
-            IStorageFactory storageFactory = fixture.Services.GetService<IStorageFactory>();
+            IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
 
             Assert.NotNull(storageFactory);
         }
@@ -52,7 +52,7 @@ namespace Proffer.Storage.Tests
                     { $"Storage:Stores:{expectedStoreName}:ProviderName", expectedProviderName }
                 });
 
-            IOptions<StorageOptions> storageOptions = fixture.Services.GetService<IOptions<StorageOptions>>();
+            IOptions<StorageOptions> storageOptions = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
 
             Assert.NotNull(storageOptions);
             Assert.NotNull(storageOptions.Value);
@@ -82,7 +82,7 @@ namespace Proffer.Storage.Tests
                     { $"Storage:Stores:{expectedStoreName}:ProviderName", expectedProviderName }
                 });
 
-            IOptions<StorageOptions> storageOptions = fixture.Services.GetService<IOptions<StorageOptions>>();
+            IOptions<StorageOptions> storageOptions = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
 
             Assert.NotNull(storageOptions);
             Assert.NotNull(storageOptions.Value);
@@ -114,7 +114,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{expectedStoreName}:ProviderType", expectedProviderType }
                 });
 
-            IOptions<StorageOptions> storageOptions = fixture.Services.GetService<IOptions<StorageOptions>>();
+            IOptions<StorageOptions> storageOptions = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
 
             Assert.NotNull(storageOptions);
             Assert.NotNull(storageOptions.Value);
@@ -156,7 +156,7 @@ namespace Proffer.Storage.Tests
                 },
                 inMemoryConfiguration);
 
-            IOptions<StorageOptions> storageOptions = fixture.Services.GetService<IOptions<StorageOptions>>();
+            IOptions<StorageOptions> storageOptions = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
 
             Assert.NotNull(storageOptions);
             Assert.NotNull(storageOptions.Value);

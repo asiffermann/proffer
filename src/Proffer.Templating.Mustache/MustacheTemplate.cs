@@ -8,15 +8,15 @@ namespace Proffer.Templating.Mustache
     /// A template reference can be executed on a specific context using <see cref="global::Mustache"/>.
     /// </summary>
     /// <seealso cref="ITemplate" />
-    public class MustacheSharpTemplate : ITemplate
+    public class MustacheTemplate : ITemplate
     {
         private readonly Generator compiledTemplate;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MustacheSharpTemplate"/> class.
+        /// Initializes a new instance of the <see cref="MustacheTemplate"/> class.
         /// </summary>
         /// <param name="templateContent">Content of the template.</param>
-        public MustacheSharpTemplate(string templateContent)
+        public MustacheTemplate(string templateContent)
         {
             var compiler = new FormatCompiler();
 

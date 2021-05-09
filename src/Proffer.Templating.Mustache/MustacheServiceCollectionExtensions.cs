@@ -6,7 +6,7 @@ namespace Proffer.Templating
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class MustacheServiceCollectionExtensions
     {
         /// <summary>
         /// Registers the Proffer.Templating services to use <see cref="global::Mustache"/>.
@@ -15,7 +15,7 @@ namespace Proffer.Templating
         /// <returns>The service collection.</returns>
         public static IServiceCollection AddMustache(this IServiceCollection services)
         {
-            services.TryAddEnumerable(ServiceDescriptor.Transient<ITemplateProvider, Mustache.MustacheSharpTemplateProvider>());
+            services.TryAddEnumerable(ServiceDescriptor.Transient<ITemplateProvider, Mustache.MustacheTemplateProvider>());
             return services;
         }
     }

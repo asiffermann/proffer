@@ -1,6 +1,7 @@
 namespace Proffer.Templating.Internal
 {
     using System.Collections.Generic;
+    using Dawn;
     using Microsoft.Extensions.Caching.Memory;
     using Storage;
 
@@ -32,17 +33,25 @@ namespace Proffer.Templating.Internal
         /// A <see cref="ITemplateLoader" /> that loads templates from the given <see cref="IStore" />.
         /// </returns>
         public ITemplateLoader Create(IStore store)
-            => new TemplateLoader(store, this.providers, this.memoryCache);
+        {
+            Guard.Argument(store, nameof(store)).NotNull();
+            return new TemplateLoader(store, this.providers, this.memoryCache);
+        }
 
         /// <summary>
         /// Creates a template loader from the specified store with the specified cache scope.
         /// </summary>
         /// <param name="store">The store.</param>
-        /// <param name="scope">The cache scope.</param>
+        /// <param name="scope">The scope.</param>
         /// <returns>
         /// A <see cref="ITemplateLoader" /> that loads templates from the given <see cref="IStore" />.
         /// </returns>
+        /// <remarks>Don't know what was the purpose of this override...</remarks>
         public ITemplateLoader Create(IStore store, string scope)
-            => new TemplateLoader(store, this.providers, this.memoryCache);
+        {
+            Guard.Argument(store, nameof(store)).NotNull();
+            Guard.Argument(scope, nameof(scope)).NotNull().NotEmpty();
+            return new TemplateLoader(store, this.providers, this.memoryCache);
+        }
     }
 }

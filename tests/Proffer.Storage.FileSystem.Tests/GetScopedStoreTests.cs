@@ -10,7 +10,7 @@ namespace Proffer.Storage.FileSystem.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IStorageFactory.GetScopedStore))]
-    [Collection(nameof(FileSystemCollection))]
+    [Collection(nameof(FileSystemTestCollection))]
     public class GetScopedStoreTests : Abstract.ConfiguredStoresTestsBase
     {
         private readonly FileSystemFixture fixture;

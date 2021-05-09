@@ -9,7 +9,7 @@ namespace Proffer.Storage.FileSystem.Properties.Json.Tests
     [Feature(nameof(Storage))]
     [Feature(nameof(FileSystem))]
     [Feature(nameof(IExtendedPropertiesProvider))]
-    [Collection(nameof(FileSystemPropertiesJsonCollection))]
+    [Collection(nameof(FileSystemPropertiesJsonTestCollection))]
     public class ReadTests : Abstract.ConfiguredStoresTestsBase
     {
         private readonly FileSystemPropertiesJsonFixture fixture;
