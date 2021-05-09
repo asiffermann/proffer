@@ -24,7 +24,7 @@ namespace Proffer.Storage.Tests
         //    var fixture = new SimpleServiceProviderFixture(
         //        (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-        //    IOptions<StorageOptions> options = fixture.Services.GetService<IOptions<StorageOptions>>();
+        //    IOptions<StorageOptions> options = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
 
         //    IEnumerable<IOptionError> errors = options.Value.ParsedStores
         //        .SelectMany(s => s.Value.Validate(throwOnError: false));
@@ -38,7 +38,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-            IOptions<StubParsedOptions> options = fixture.Services.GetService<IOptions<StubParsedOptions>>();
+            IOptions<StubParsedOptions> options = fixture.Services.GetRequiredService<IOptions<StubParsedOptions>>();
 
             IEnumerable<IOptionError> errors = options.Value.ParsedStores
                 .SelectMany(s => s.Value.Validate(throwOnError: false));
@@ -61,7 +61,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:ProviderType", providerType }
                 });
 
-            IOptions<StubParsedOptions> options = fixture.Services.GetService<IOptions<StubParsedOptions>>();
+            IOptions<StubParsedOptions> options = fixture.Services.GetRequiredService<IOptions<StubParsedOptions>>();
             StubStoreOptions storeOptions = options.Value.ParsedStores[storeName];
 
             IEnumerable<IOptionError> errors = storeOptions.Validate(throwOnError: false);
@@ -84,7 +84,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:Name", storeName },
                 });
 
-            IOptions<StorageOptions> options = fixture.Services.GetService<IOptions<StorageOptions>>();
+            IOptions<StorageOptions> options = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
             StoreOptions storeOptions = options.Value.ParsedStores[storeName];
 
             IEnumerable<IOptionError> errors = storeOptions.Validate(throwOnError: false);
@@ -108,7 +108,7 @@ namespace Proffer.Storage.Tests
         //            { $"{sectionName}:Stores:{storeName}:ProviderType", "Stub" },
         //        });
 
-        //    IOptions<StorageOptions> options = fixture.Services.GetService<IOptions<StorageOptions>>();
+        //    IOptions<StorageOptions> options = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
         //    StoreOptions storeOptions = options.Value.ParsedStores[storeName];
 
         //    IEnumerable<IOptionError> errors = storeOptions.Validate(throwOnError: false);
@@ -130,7 +130,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:ProviderType", "Stub" },
                 });
 
-            IOptions<StubParsedOptions> options = fixture.Services.GetService<IOptions<StubParsedOptions>>();
+            IOptions<StubParsedOptions> options = fixture.Services.GetRequiredService<IOptions<StubParsedOptions>>();
             StubStoreOptions storeOptions = options.Value.ParsedStores[storeName];
 
             IEnumerable<IOptionError> errors = storeOptions.Validate(throwOnError: false);
@@ -151,7 +151,7 @@ namespace Proffer.Storage.Tests
                     { $"{sectionName}:Stores:{storeName}:Name", storeName },
                 });
 
-            IOptions<StorageOptions> options = fixture.Services.GetService<IOptions<StorageOptions>>();
+            IOptions<StorageOptions> options = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
             StoreOptions storeOptions = options.Value.ParsedStores[storeName];
 
             Assert.Throws<BadStoreConfiguration>(() => storeOptions.Validate());

@@ -1,7 +1,6 @@
 namespace Proffer.Templating.Mustache
 {
     using System;
-    using System.Collections.Generic;
     using global::Mustache;
 
     /// <summary>
@@ -30,18 +29,8 @@ namespace Proffer.Templating.Mustache
         /// <returns>
         /// The templated result.
         /// </returns>
-        /// <exception cref="InvalidContextException"></exception>
         public string Apply(object context)
-        {
-            try
-            {
-                return this.compiledTemplate.Render(context);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                throw new InvalidContextException(ex);
-            }
-        }
+            => this.compiledTemplate.Render(context);
 
         /// <summary>
         /// Applies the specified context on the template with format provider.
@@ -51,17 +40,7 @@ namespace Proffer.Templating.Mustache
         /// <returns>
         /// The templated result.
         /// </returns>
-        /// <exception cref="InvalidContextException"></exception>
         public string Apply(object context, IFormatProvider formatProvider)
-        {
-            try
-            {
-                return this.compiledTemplate.Render(formatProvider, context);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                throw new InvalidContextException(ex);
-            }
-        }
+            => this.compiledTemplate.Render(formatProvider, context);
     }
 }

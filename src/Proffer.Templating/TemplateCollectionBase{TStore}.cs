@@ -17,6 +17,12 @@ namespace Proffer.Templating
         public TemplateCollectionBase(TStore store, ITemplateLoaderFactory templateLoaderFactory)
             : base(templateLoaderFactory.Create(store.Store))
         {
+            this.Store = store;
         }
+
+        /// <summary>
+        /// Gets the templates store.
+        /// </summary>
+        protected new TStore Store { get; }
     }
 }

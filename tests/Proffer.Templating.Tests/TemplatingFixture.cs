@@ -1,5 +1,6 @@
 namespace Proffer.Templating.Tests
 {
+    using System.Collections.Generic;
     using System.IO;
     using Microsoft.Extensions.DependencyInjection;
     using Proffer.Storage;
@@ -16,6 +17,12 @@ namespace Proffer.Templating.Tests
                 .AddFileSystemStorage(this.StorageRootPath)
                 .AddTemplating()
                 .AddStubTemplating();
+        }
+
+        protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
+        {
+            inMemoryCollectionData.Add("Storage:Stores:Templates:ProviderType", "FileSystem");
+            inMemoryCollectionData.Add("Storage:Stores:OtherTemplates:ProviderType", "FileSystem");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Proffer.Storage.FileSystem.Properties.Json.Tests
     {
         public FileSystemPropertiesJsonFixture()
         {
-            this.ParsedOptions = this.Services.GetService<IOptions<FileSystemParsedOptions>>().Value;
+            this.ParsedOptions = this.Services.GetRequiredService<IOptions<FileSystemParsedOptions>>().Value;
 
             this.ResetStores();
         }

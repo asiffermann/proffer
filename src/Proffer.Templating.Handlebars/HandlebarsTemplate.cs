@@ -1,7 +1,6 @@
 namespace Proffer.Templating.Handlebars
 {
     using System;
-    using System.Collections.Generic;
     using HandlebarsDotNet;
 
     /// <summary>
@@ -38,18 +37,8 @@ namespace Proffer.Templating.Handlebars
         /// <returns>
         /// The templated result.
         /// </returns>
-        /// <exception cref="InvalidContextException"></exception>
         public string Apply(object context)
-        {
-            try
-            {
-                return this.compiledTemplate(context);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                throw new InvalidContextException(ex);
-            }
-        }
+            => this.compiledTemplate(context);
 
         /// <summary>
         /// Applies the specified context on the template with format provider.
@@ -59,17 +48,7 @@ namespace Proffer.Templating.Handlebars
         /// <returns>
         /// The templated result.
         /// </returns>
-        /// <exception cref="InvalidContextException"></exception>
         public string Apply(object context, IFormatProvider formatProvider)
-        {
-            try
-            {
-                return this.compiledTemplate(context);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                throw new InvalidContextException(ex);
-            }
-        }
+            => this.compiledTemplate(context);
     }
 }

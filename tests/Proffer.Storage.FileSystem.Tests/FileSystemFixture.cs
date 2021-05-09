@@ -15,8 +15,8 @@ namespace Proffer.Storage.FileSystem.Tests
     {
         public FileSystemFixture()
         {
-            this.ParsedOptions = this.Services.GetService<IOptions<FileSystemParsedOptions>>().Value;
-            this.TestStoreOptions = this.Services.GetService<IOptions<FileSystemStoreOptionsStub>>().Value
+            this.ParsedOptions = this.Services.GetRequiredService<IOptions<FileSystemParsedOptions>>().Value;
+            this.TestStoreOptions = this.Services.GetRequiredService<IOptions<FileSystemStoreOptionsStub>>().Value
                 .ParseStoreOptions<FileSystemParsedOptions, FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions>(this.ParsedOptions);
 
             this.ResetStores();

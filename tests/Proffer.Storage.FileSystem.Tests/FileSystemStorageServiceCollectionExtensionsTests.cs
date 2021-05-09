@@ -22,7 +22,7 @@ namespace Proffer.Storage.FileSystem.Tests
         {
             var fixture = new SimpleServiceProviderFixture((sp, f) => sp.AddStorage().AddFileSystemStorage());
 
-            IEnumerable<IStorageProvider> providers = fixture.Services.GetService<IEnumerable<IStorageProvider>>();
+            IEnumerable<IStorageProvider> providers = fixture.Services.GetRequiredService<IEnumerable<IStorageProvider>>();
 
             Assert.Single(providers);
             Assert.Equal("FileSystem", providers.First().Name);
@@ -33,7 +33,7 @@ namespace Proffer.Storage.FileSystem.Tests
         {
             var fixture = new SimpleServiceProviderFixture((sp, f) => sp.AddStorage().AddFileSystemStorage());
 
-            IOptions<FileSystemParsedOptions> options = fixture.Services.GetService<IOptions<FileSystemParsedOptions>>();
+            IOptions<FileSystemParsedOptions> options = fixture.Services.GetRequiredService<IOptions<FileSystemParsedOptions>>();
 
             Assert.Equal(PlatformServices.Default.Application.ApplicationBasePath.TrimEnd('\\').TrimEnd('/'), options.Value.RootPath);
         }
@@ -44,7 +44,7 @@ namespace Proffer.Storage.FileSystem.Tests
             string rootPath = "C:/Custom";
             var fixture = new SimpleServiceProviderFixture((sp, f) => sp.AddStorage().AddFileSystemStorage(rootPath));
 
-            IOptions<FileSystemParsedOptions> options = fixture.Services.GetService<IOptions<FileSystemParsedOptions>>();
+            IOptions<FileSystemParsedOptions> options = fixture.Services.GetRequiredService<IOptions<FileSystemParsedOptions>>();
 
             Assert.Equal(rootPath, options.Value.RootPath);
         }
@@ -60,7 +60,7 @@ namespace Proffer.Storage.FileSystem.Tests
                     { $"Storage:Stores:{storeName}:ProviderType", "FileSystem" }
                 });
 
-            IOptions<FileSystemParsedOptions> options = fixture.Services.GetService<IOptions<FileSystemParsedOptions>>();
+            IOptions<FileSystemParsedOptions> options = fixture.Services.GetRequiredService<IOptions<FileSystemParsedOptions>>();
 
             IStorageFactory storageFactory = fixture.Services.GetRequiredService<IStorageFactory>();
             IStore store = storageFactory.GetStore(storeName);

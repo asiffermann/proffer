@@ -24,7 +24,7 @@ namespace Proffer.Storage.Tests
             var fixture = new SimpleServiceProviderFixture(
                 (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage().AddTransient<PublicStore>());
 
-            PublicStore publicStore = fixture.Services.GetService<PublicStore>();
+            PublicStore publicStore = fixture.Services.GetRequiredService<PublicStore>();
 
             Assert.NotNull(publicStore);
             Assert.NotNull(publicStore.Store);

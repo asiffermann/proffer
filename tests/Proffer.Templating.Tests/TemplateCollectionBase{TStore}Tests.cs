@@ -37,14 +37,16 @@ namespace Proffer.Templating.Tests
             {
             }
 
-            public Task<string> ApplyNewTemplate(DateTime context)
+            public async Task<string> NewTemplate(DateTime context)
             {
-                return this.LoadAndApplyTemplate("NewTemplate", context);
+                await this.Store.CreateTemplateAsync();
+                return await this.LoadAndApplyTemplate("NewTemplate", context);
             }
 
-            public Task<string> ApplyNewTemplate(DateTime context, IFormatProvider formatProvider)
+            public async Task<string> NewTemplate(DateTime context, IFormatProvider formatProvider)
             {
-                return this.LoadAndApplyTemplate("NewTemplate", context, formatProvider);
+                await this.Store.CreateTemplateAsync();
+                return await this.LoadAndApplyTemplate("NewTemplate", context, formatProvider);
             }
         }
 
@@ -61,15 +63,13 @@ namespace Proffer.Templating.Tests
                         .AddStubTemplating()
                         .AddTransient<TypedStore>()
                         .AddTransient<TypedStoreTemplateCollection>();
-                });
+                },
+                new() { { "Storage:Stores:OtherTemplates:ProviderType", "FileSystem" } });
 
-            TypedStore store = fixture.Services.GetService<TypedStore>();
-            await store.CreateTemplateAsync();
-
-            TypedStoreTemplateCollection templateCollection = fixture.Services.GetService<TypedStoreTemplateCollection>();
+            TypedStoreTemplateCollection templateCollection = fixture.Services.GetRequiredService<TypedStoreTemplateCollection>();
 
             DateTime now = DateTime.Now.Date;
-            string result = await templateCollection.ApplyNewTemplate(now);
+            string result = await templateCollection.NewTemplate(now);
 
             Assert.NotNull(result);
             Assert.Equal($"Hello typed store template! Today is {now}.", result);
@@ -88,15 +88,16 @@ namespace Proffer.Templating.Tests
                         .AddStubTemplating()
                         .AddTransient<TypedStore>()
                         .AddTransient<TypedStoreTemplateCollection>();
-                });
+                },
+                new() { { "Storage:Stores:OtherTemplates:ProviderType", "FileSystem" } });
 
-            TypedStore store = fixture.Services.GetService<TypedStore>();
+            TypedStore store = fixture.Services.GetRequiredService<TypedStore>();
             await store.CreateTemplateAsync();
 
-            TypedStoreTemplateCollection templateCollection = fixture.Services.GetService<TypedStoreTemplateCollection>();
+            TypedStoreTemplateCollection templateCollection = fixture.Services.GetRequiredService<TypedStoreTemplateCollection>();
 
             DateTime now = DateTime.Now.Date;
-            string result = await templateCollection.ApplyNewTemplate(now, CultureInfo.GetCultureInfo("fr-FR"));
+            string result = await templateCollection.NewTemplate(now, CultureInfo.GetCultureInfo("fr-FR"));
 
             Assert.NotNull(result);
             Assert.Equal($"Hello typed store template! Today is {now:dd/MM/yyyy HH:mm:ss}.", result);

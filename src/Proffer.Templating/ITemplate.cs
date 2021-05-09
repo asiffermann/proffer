@@ -12,7 +12,6 @@ namespace Proffer.Templating
         /// </summary>
         /// <param name="context">The context.</param>
         /// <returns>The templated result.</returns>
-        /// <exception cref="InvalidContextException"></exception>
         string Apply(object context);
 
         /// <summary>
@@ -23,7 +22,6 @@ namespace Proffer.Templating
         /// <returns>
         /// The templated result.
         /// </returns>
-        /// <exception cref="InvalidContextException"></exception>
         string Apply(object context, IFormatProvider formatProvider);
     }
 }

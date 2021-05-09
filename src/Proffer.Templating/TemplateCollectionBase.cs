@@ -17,7 +17,8 @@ namespace Proffer.Templating
         /// <param name="templateLoaderFactory">The template loader factory.</param>
         public TemplateCollectionBase(string storeName, IStorageFactory storageFactory, ITemplateLoaderFactory templateLoaderFactory)
         {
-            this.Loader = templateLoaderFactory.Create(storageFactory.GetStore(storeName));
+            this.Store = storageFactory.GetStore(storeName);
+            this.Loader = templateLoaderFactory.Create(this.Store);
         }
 
         /// <summary>
@@ -30,9 +31,14 @@ namespace Proffer.Templating
         }
 
         /// <summary>
-        /// Gets the loader.
+        /// Gets the templates loader.
         /// </summary>
         public ITemplateLoader Loader { get; }
+
+        /// <summary>
+        /// Gets the templates store.
+        /// </summary>
+        protected virtual IStore Store { get; }
 
         /// <summary>
         /// Loads the template and applies context.

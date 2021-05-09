@@ -20,12 +20,12 @@ namespace Proffer.Templating.Tests
             {
             }
 
-            public Task<string> ApplySimpleTemplate(string context)
+            public Task<string> Simple(string context)
             {
                 return this.LoadAndApplyTemplate("SimpleTemplate", context);
             }
 
-            public Task<string> ApplyTemplateInFolder(string context)
+            public Task<string> InFolder(string context)
             {
                 return this.LoadAndApplyTemplate("SubFolder/TemplateInFolder", context);
             }
@@ -43,11 +43,12 @@ namespace Proffer.Templating.Tests
                         .AddTemplating()
                         .AddStubTemplating()
                         .AddTransient<TemplateCollection>();
-                });
+                },
+                new() { { "Storage:Stores:Templates:ProviderType", "FileSystem" } });
 
-            TemplateCollection templateCollection = fixture.Services.GetService<TemplateCollection>();
+            TemplateCollection templateCollection = fixture.Services.GetRequiredService<TemplateCollection>();
 
-            string result = await templateCollection.ApplySimpleTemplate("Simple string context");
+            string result = await templateCollection.Simple("Simple string context");
 
             Assert.NotNull(result);
             Assert.Equal("This is the context: Simple string context", result);
@@ -65,11 +66,12 @@ namespace Proffer.Templating.Tests
                         .AddTemplating()
                         .AddStubTemplating()
                         .AddTransient<TemplateCollection>();
-                });
+                },
+                new() { { "Storage:Stores:Templates:ProviderType", "FileSystem" } });
 
-            TemplateCollection templateCollection = fixture.Services.GetService<TemplateCollection>();
+            TemplateCollection templateCollection = fixture.Services.GetRequiredService<TemplateCollection>();
 
-            string result = await templateCollection.ApplyTemplateInFolder("Simple string context");
+            string result = await templateCollection.InFolder("Simple string context");
 
             Assert.NotNull(result);
             Assert.Equal("Simple string context, you are in a folder.", result);
