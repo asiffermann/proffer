@@ -136,7 +136,7 @@ jobs:
         if: ${{ always() }}
 
       - name: Publish unit tests results
-        uses: EnricoMi/publish-unit-test-result-action@v1.15
+        uses: EnricoMi/publish-unit-test-result-action@v1.16
         if: >
           always() &&
           github.event.sender.login != 'dependabot[bot]' &&
@@ -144,7 +144,6 @@ jobs:
         with:
           files: tests-results/*.junit.xml
           check_name: Unit tests results
-          comment_on_pr: false
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v1.1.2
