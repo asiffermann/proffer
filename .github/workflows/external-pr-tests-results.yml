@@ -32,4 +32,3 @@ jobs:
           commit: ${{ github.event.workflow_run.head_sha }}
           files: '*.junit.xml'
           check_name: Unit tests results
-          comment_on_pr: false
