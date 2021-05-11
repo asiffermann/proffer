@@ -4,6 +4,7 @@ namespace Proffer.Email.Internal
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Dawn;
     using Microsoft.Extensions.Options;
     using Storage;
     using Templating;
@@ -32,7 +33,14 @@ namespace Proffer.Email.Internal
             IStorageFactory storageFactory,
             ITemplateLoaderFactory templateLoaderFactory)
         {
-            this.options = options.Value;
+            this.options = Guard.Argument(options.Value, nameof(EmailOptions))
+                .NotNull()
+                .Member(
+                    o => o.Provider,
+                    a => a
+                        .NotNull()
+                        .Member(po => po.Type, pa => pa.NotNull().NotEmpty()))
+                .Value;
 
             IEmailProviderType providerType = emailProviderTypes
                 .FirstOrDefault(x => x.Name == this.options.Provider.Type);
