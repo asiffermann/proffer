@@ -54,11 +54,6 @@ namespace Proffer.Email.Internal
             if (!string.IsNullOrWhiteSpace(this.options.TemplateStorage))
             {
                 IStore store = storageFactory.GetStore(this.options.TemplateStorage);
-                if (store == null)
-                {
-                    throw new ArgumentNullException("TemplateStorage", $"There is no file store configured with name {this.options.TemplateStorage}. Unable to initialize email templating.");
-                }
-
                 this.templateLoader = templateLoaderFactory.Create(store);
             }
         }

@@ -8,7 +8,7 @@ namespace Proffer.Email
     {
         public static IServiceCollection AddStubEmail(this IServiceCollection services)
         {
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IEmailProviderType, StubEmailProviderType>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IEmailProviderType, StubEmailProviderType>());
             return services;
         }
     }
