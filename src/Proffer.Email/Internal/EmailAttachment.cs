@@ -1,3 +1,5 @@
+using Dawn;
+
 namespace Proffer.Email.Internal
 {
     /// <summary>
@@ -9,8 +11,27 @@ namespace Proffer.Email.Internal
         /// <summary>
         /// Initializes a new instance of the <see cref="EmailAttachment"/> class.
         /// </summary>
-        public EmailAttachment()
+        public EmailAttachment() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmailAttachment" /> class.
+        /// </summary>
+        /// <param name="fileName">The file name.</param>
+        /// <param name="data">The file content.</param>
+        /// <param name="contentType">The content-type.</param>
+        public EmailAttachment(string fileName, byte[] data, string contentType)
         {
+            Guard.Argument(fileName, nameof(fileName)).NotNull().NotEmpty();
+            Guard.Argument(data, nameof(data)).NotNull().NotEmpty();
+            Guard.Argument(contentType, nameof(contentType)).NotNull().NotEmpty().Contains("/");
+
+            this.FileName = fileName;
+            this.Data = data;
+
+            string[] contentTypeParts = contentType.Split('/');
+
+            this.MediaType = contentTypeParts[0];
+            this.MediaSubtype = contentTypeParts[1];
         }
 
         /// <summary>
@@ -22,6 +43,11 @@ namespace Proffer.Email.Internal
         /// <param name="mediaSubtype">The media subtype.</param>
         public EmailAttachment(string fileName, byte[] data, string mediaType, string mediaSubtype)
         {
+            Guard.Argument(fileName, nameof(fileName)).NotNull().NotEmpty();
+            Guard.Argument(data, nameof(data)).NotNull().NotEmpty();
+            Guard.Argument(mediaType, nameof(mediaType)).NotNull().NotEmpty();
+            Guard.Argument(mediaSubtype, nameof(mediaSubtype)).NotNull().NotEmpty();
+
             this.FileName = fileName;
             this.Data = data;
             this.MediaType = mediaType;

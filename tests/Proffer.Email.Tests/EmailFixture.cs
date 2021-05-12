@@ -13,11 +13,25 @@ namespace Proffer.Email.Tests
 
     public class EmailFixture : ServiceProviderFixtureBase
     {
+        private readonly IDictionary<string, string> inMemoryConfiguration;
+
+        public EmailFixture(Dictionary<string, string> inMemoryConfiguration = null)
+            : base(false)
+        {
+            this.inMemoryConfiguration = inMemoryConfiguration;
+            this.Build();
+
+            IStorageFactory storageFactory = this.Services.GetRequiredService<IStorageFactory>();
+            this.Attachments = storageFactory.GetStore("Attachments");
+        }
+
         public string StorageRootPath => Path.Combine(this.BasePath, "Stores");
 
         public Mock<IEmailProviderType> ProviderTypeMock { get; private set; }
 
         public Mock<IEmailProvider> ProviderMock { get; private set; }
+
+        public IStore Attachments { get; }
 
         public void Verify(
             IEmailAddress sender = null,
@@ -26,7 +40,6 @@ namespace Proffer.Email.Tests
             List<IEmailAddress> bccRecipients = null,
             string subject = null,
             string bodyText = null,
-            bool plainTextOnly = false,
             string bodyHtml = null,
             List<IEmailAttachment> attachments = null,
             IEmailAddress replyTo = null)
@@ -64,9 +77,9 @@ namespace Proffer.Email.Tests
                     It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(recipients, e)),
                     It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(ccRecipients, e)),
                     It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(bccRecipients, e)),
-                    subject ?? It.IsAny<string>(),
-                    bodyText ?? It.IsAny<string>(),
-                    bodyHtml == null && !plainTextOnly ? ( bodyText == null ? It.IsAny<string>() : $"<html><header></header><body>{bodyText}</body></html>" ) : bodyHtml,
+                    It.Is<string>(s => subject == null || subject == s),
+                    It.Is<string>(bt => bodyText == null || bodyText == bt),
+                    It.Is<string>(bh => bodyHtml == null || bodyHtml == bh),
                     It.Is<IEnumerable<IEmailAttachment>>(a => attachmentsEqual(attachments, a)),
                     It.Is<IEmailAddress>(e => replyTo == null || emailComparer.Equals(replyTo, e))),
                 Times.Once);
@@ -77,6 +90,7 @@ namespace Proffer.Email.Tests
             services
                 .AddStorage(this.Configuration)
                 .AddFileSystemStorage(this.StorageRootPath)
+                .AddFileSystemExtendedProperties()
                 .AddTemplating()
                 .AddHandlebars()
                 .AddEmail(this.Configuration);
@@ -99,6 +113,16 @@ namespace Proffer.Email.Tests
         protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
         {
             inMemoryCollectionData["Email:Provider:Type"] = "Mock";
+
+            if (this.inMemoryConfiguration == null)
+            {
+                return;
+            }
+
+            foreach (KeyValuePair<string, string> kvp in this.inMemoryConfiguration)
+            {
+                inMemoryCollectionData.Add(kvp.Key, kvp.Value);
+            }
         }
 
         private abstract class EqualityComparerBase<T> : EqualityComparer<T>

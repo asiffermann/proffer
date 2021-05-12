@@ -167,7 +167,7 @@ namespace Proffer.Email.Internal
               bcc,
               subject,
               message,
-              string.Format("<html><header></header><body>{0}</body></html>", message),
+              $"<!DOCTYPE html><html><head><title>{subject}</title></head><body>{message}</body></html>",
               attachments);
         }
 
