@@ -34,7 +34,7 @@ namespace Proffer.Email.Tests
 
             string subject = "Hello!";
             string message = "Message in plain text";
-            var firstRecipient = new EmailAddress { Email = "recipient-1@getproffer.net" };
+            var firstRecipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
 
             await emailSender.SendEmailAsync(subject, message, firstRecipient);
 
@@ -54,7 +54,7 @@ namespace Proffer.Email.Tests
 
             string subject = "Hello!";
             string message = "Message in plain text";
-            var firstRecipient = new EmailAddress { Email = "recipient-1@getproffer.net" };
+            var firstRecipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
 
             await emailSender.SendEmailAsync(
                 options.DefaultSender,
