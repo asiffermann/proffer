@@ -290,13 +290,9 @@ namespace Proffer.Email.Internal
             {
                 foreach (IEmailAddress recipient in recipients)
                 {
-                    string[] emailParts = recipient.Email.Split('@');
-                    if (emailParts.Length != 2)
-                    {
-                        throw new NotSupportedException("Bad recipient email.");
-                    }
+                    var mailAddress = new System.Net.Mail.MailAddress(recipient.Email);
 
-                    string domain = emailParts[1];
+                    string domain = mailAddress.Host;
 
                     if (!this.options.Mockup.Exceptions.Emails.Contains(recipient.Email)
                         && !this.options.Mockup.Exceptions.Domains.Contains(domain))
