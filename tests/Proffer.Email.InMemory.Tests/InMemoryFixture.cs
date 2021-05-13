@@ -1,4 +1,4 @@
-namespace Proffer.Email.Tests
+namespace Proffer.Email.InMemory.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -6,17 +6,17 @@ namespace Proffer.Email.Tests
     using System.Linq;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Moq;
     using Proffer.Email.Internal;
     using Proffer.Storage;
     using Proffer.Templating;
     using Proffer.Testing;
+    using Xunit;
 
-    public class EmailFixture : ServiceProviderFixtureBase
+    public class InMemoryFixture : ServiceProviderFixtureBase
     {
         private readonly IDictionary<string, string> inMemoryConfiguration;
 
-        public EmailFixture(Dictionary<string, string> inMemoryConfiguration = null)
+        public InMemoryFixture(Dictionary<string, string> inMemoryConfiguration = null)
             : base(false)
         {
             this.inMemoryConfiguration = inMemoryConfiguration;
@@ -24,13 +24,12 @@ namespace Proffer.Email.Tests
 
             IStorageFactory storageFactory = this.Services.GetRequiredService<IStorageFactory>();
             this.Attachments = storageFactory.GetStore("Attachments");
+            this.Emails = this.Services.GetRequiredService<IInMemoryEmailRepository>();
         }
 
         public string StorageRootPath => Path.Combine(this.BasePath, "Stores");
 
-        public Mock<IEmailProviderType> ProviderTypeMock { get; private set; }
-
-        public Mock<IEmailProvider> ProviderMock { get; private set; }
+        public IInMemoryEmailRepository Emails { get; }
 
         public IStore Attachments { get; }
 
@@ -72,18 +71,19 @@ namespace Proffer.Email.Tests
                     return !firstNotSecond.Any() && !secondNotFirst.Any();
                 };
 
-            this.ProviderMock.Verify(
-                p => p.SendEmailAsync(
-                    It.Is(sender, emailComparer),
-                    It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(recipients, e)),
-                    It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(ccRecipients, e)),
-                    It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(bccRecipients, e)),
-                    It.Is<string>(s => subject == null || subject == s),
-                    It.Is<string>(bt => bodyText == null || bodyText == bt),
-                    It.Is<string>(bh => bodyHtml == null || bodyHtml == bh),
-                    It.Is<IEnumerable<IEmailAttachment>>(a => attachmentsEqual(attachments, a)),
-                    It.Is<IEmailAddress>(e => replyTo == null || emailComparer.Equals(replyTo, e))),
-                Times.Once);
+            bool emailWasStored = this.Emails.Store
+                .Where(e => emailComparer.Equals(sender, e.From))
+                .Where(e => emailsEqual(recipients, e.To))
+                .Where(e => emailsEqual(ccRecipients, e.Cc))
+                .Where(e => emailsEqual(bccRecipients, e.Bcc))
+                .Where(e => subject == null || subject == e.Subject)
+                .Where(e => bodyText == null || bodyText == e.MessageText)
+                .Where(e => bodyHtml == null || bodyHtml == e.MessageHtml)
+                .Where(e => attachmentsEqual(attachments, e.Attachments))
+                .Where(e => replyTo == null || emailComparer.Equals(replyTo, e.ReplyTo))
+                .Any();
+
+            Assert.True(emailWasStored);
         }
 
         protected override void ConfigureServices(IServiceCollection services)
@@ -94,27 +94,12 @@ namespace Proffer.Email.Tests
                 .AddFileSystemExtendedProperties()
                 .AddTemplating()
                 .AddHandlebars()
-                .AddEmail(this.Configuration);
-
-            this.ProviderMock = new Mock<IEmailProvider>();
-
-            this.ProviderTypeMock = new Mock<IEmailProviderType>();
-
-            this.ProviderTypeMock
-                .SetupGet(pt => pt.Name)
-                .Returns("Mock");
-
-            this.ProviderTypeMock
-                .Setup(pt => pt.BuildProvider(It.IsAny<IEmailProviderOptions>()))
-                .Returns(this.ProviderMock.Object);
-
-            services.AddSingleton(sp => this.ProviderTypeMock.Object);
+                .AddEmail(this.Configuration)
+                .AddInMemoryEmail();
         }
 
         protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
         {
-            inMemoryCollectionData["Email:Provider:Type"] = "Mock";
-
             if (this.inMemoryConfiguration == null)
             {
                 return;

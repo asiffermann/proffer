@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Stores\.Attachments-extended-properties\beach.jpeg.json" />
+    <None Include="Stores\.Attachments-extended-properties\sample.pdf.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Stores\**\*.*;appsettings.json;appsettings.*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Proffer.Testing\Proffer.Testing.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Email.InMemory\Proffer.Email.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Templating.Handlebars\Proffer.Templating.Handlebars.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem\Proffer.Storage.FileSystem.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem.Properties.Json\Proffer.Storage.FileSystem.Properties.Json.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Stores\.Attachments-extended-properties\beach.jpeg.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\.Attachments-extended-properties\sample.pdf.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\Attachments\beach.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\Attachments\sample.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\Templates\TemplatedEmail-BodyHtml.hbs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\Templates\TemplatedEmail-BodyText.hbs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Stores\Templates\TemplatedEmail-Subject.hbs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

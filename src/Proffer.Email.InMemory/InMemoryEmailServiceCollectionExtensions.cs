@@ -7,7 +7,7 @@ namespace Proffer.Email
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class InMemoryEmailServiceCollectionExtensions
     {
         /// <summary>
         /// Registers the Proffer.Email services to an in-memory collection.
