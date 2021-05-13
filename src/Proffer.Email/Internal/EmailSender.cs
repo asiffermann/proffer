@@ -290,9 +290,7 @@ namespace Proffer.Email.Internal
             {
                 foreach (IEmailAddress recipient in recipients)
                 {
-                    var mailAddress = new System.Net.Mail.MailAddress(recipient.Email);
-
-                    string domain = mailAddress.Host;
+                    var domain = new System.Net.Mail.MailAddress(recipient.Email).Host;
 
                     if (!this.options.Mockup.Exceptions.Emails.Contains(recipient.Email)
                         && !this.options.Mockup.Exceptions.Domains.Contains(domain))

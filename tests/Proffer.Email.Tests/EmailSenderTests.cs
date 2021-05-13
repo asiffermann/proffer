@@ -310,6 +310,9 @@ namespace Proffer.Email.Tests
         [Bug("https://github.com/asiffermann/proffer/issues/103")]
         [InlineData("bademail.com")]
         [InlineData("joe@jim@bademail.com")]
+        [InlineData("@bademail.com")]
+        [InlineData("bademail@")]
+        [InlineData("@")]
         // TODO: [https://github.com/asiffermann/proffer/issues/103] Add more inline data with bad emails + different emails arguments
         public async Task Should_Throw_With_BadEmail(string badEmail)
         {
@@ -326,7 +329,7 @@ namespace Proffer.Email.Tests
             string message = "Message in plain text";
             var recipient = new EmailAddress(badEmail, "Recipient");
 
-            await Assert.ThrowsAsync<NotSupportedException>(() => emailSender.SendEmailAsync(subject, message, recipient));
+            await Assert.ThrowsAsync<FormatException>(() => emailSender.SendEmailAsync(subject, message, recipient));
         }
 
         [Fact]
