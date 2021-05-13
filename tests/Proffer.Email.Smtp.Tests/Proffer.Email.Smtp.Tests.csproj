@@ -31,8 +31,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SmtpServer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.6" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\Proffer.Testing\Proffer.Testing.csproj" />
-    <ProjectReference Include="..\..\src\Proffer.Email.InMemory\Proffer.Email.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Email.Smtp\Proffer.Email.Smtp.csproj" />
     <ProjectReference Include="..\..\src\Proffer.Templating.Handlebars\Proffer.Templating.Handlebars.csproj" />
     <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem\Proffer.Storage.FileSystem.csproj" />
     <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem.Properties.Json\Proffer.Storage.FileSystem.Properties.Json.csproj" />

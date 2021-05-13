@@ -1,4 +1,4 @@
-namespace Proffer.Email.InMemory.Tests
+namespace Proffer.Email.Smtp.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -6,6 +6,7 @@ namespace Proffer.Email.InMemory.Tests
     using System.Net;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
     using Proffer.Email;
     using Proffer.Email.Internal;
@@ -15,20 +16,26 @@ namespace Proffer.Email.InMemory.Tests
 
     [UnitTest]
     [Feature(nameof(Email))]
-    [Feature(nameof(InMemory))]
-    [Feature(nameof(InMemoryEmailProvider))]
-    [Collection(nameof(InMemoryTestCollection))]
-    public class InMemoryEmailProviderTests
+    [Feature(nameof(Smtp))]
+    [Feature(nameof(SmtpEmailProvider))]
+    [Collection(nameof(SmtpTestCollection))]
+    public class SmtpEmailProviderTests : IAsyncLifetime
     {
-        private readonly InMemoryFixture fixture;
+        private readonly SmtpFixture fixture;
         private readonly IEmailSender emailSender;
         private readonly EmailOptions options;
+        private IHost host;
 
-        public InMemoryEmailProviderTests(InMemoryFixture fixture)
+        public SmtpEmailProviderTests(SmtpFixture fixture)
         {
             this.fixture = fixture;
             this.emailSender = fixture.Services.GetRequiredService<IEmailSender>();
             this.options = fixture.Services.GetRequiredService<IOptions<EmailOptions>>().Value;
+        }
+
+        public async Task InitializeAsync()
+        {
+            this.host = await this.fixture.RunSmtpServer();
         }
 
         [Fact]
@@ -226,6 +233,12 @@ namespace Proffer.Email.InMemory.Tests
                 recipients: new() { recipient },
                 sender: sender,
                 replyTo: replyTo);
+        }
+
+        public Task DisposeAsync()
+        {
+            this.host.Dispose();
+            return Task.CompletedTask;
         }
     }
 }

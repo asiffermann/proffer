@@ -47,8 +47,8 @@ namespace Proffer.Email.Smtp
 
             this.serviceProvider = serviceProvider;
 
-            this.username = options.Parameters["UserName"];
-            this.password = options.Parameters["Password"];
+            options.Parameters.TryGetValue("UserName", out this.username);
+            options.Parameters.TryGetValue("Password", out this.password);
         }
 
         /// <summary>

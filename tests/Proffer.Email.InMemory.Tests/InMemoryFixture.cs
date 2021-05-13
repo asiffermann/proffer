@@ -1,6 +1,5 @@
 namespace Proffer.Email.InMemory.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -14,14 +13,8 @@ namespace Proffer.Email.InMemory.Tests
 
     public class InMemoryFixture : ServiceProviderFixtureBase
     {
-        private readonly IDictionary<string, string> inMemoryConfiguration;
-
-        public InMemoryFixture(Dictionary<string, string> inMemoryConfiguration = null)
-            : base(false)
+        public InMemoryFixture()
         {
-            this.inMemoryConfiguration = inMemoryConfiguration;
-            this.Build();
-
             IStorageFactory storageFactory = this.Services.GetRequiredService<IStorageFactory>();
             this.Attachments = storageFactory.GetStore("Attachments");
             this.Emails = this.Services.GetRequiredService<IInMemoryEmailRepository>();
@@ -52,24 +45,22 @@ namespace Proffer.Email.InMemory.Tests
             bccRecipients ??= new();
             attachments ??= new();
 
-            EmailAddressEqualityComparer emailComparer = new();
+            EmailAddressStrictEqualityComparer emailComparer = new();
             EmailAttachmentEqualityComparer attachmentComparer = new();
 
-            Func<List<IEmailAddress>, IEnumerable<IEmailAddress>, bool> emailsEqual =
-                (expected, actual) =>
-                {
-                    var firstNotSecond = actual.Except(expected, emailComparer).ToList();
-                    var secondNotFirst = expected.Except(actual, emailComparer).ToList();
-                    return !firstNotSecond.Any() && !secondNotFirst.Any();
-                };
+            bool emailsEqual(List<IEmailAddress> expected, IEnumerable<IEmailAddress> actual)
+            {
+                var firstNotSecond = actual.Except(expected, emailComparer).ToList();
+                var secondNotFirst = expected.Except(actual, emailComparer).ToList();
+                return !firstNotSecond.Any() && !secondNotFirst.Any();
+            }
 
-            Func<List<IEmailAttachment>, IEnumerable<IEmailAttachment>, bool> attachmentsEqual =
-                (expected, actual) =>
-                {
-                    var firstNotSecond = actual.Except(expected, attachmentComparer).ToList();
-                    var secondNotFirst = expected.Except(actual, attachmentComparer).ToList();
-                    return !firstNotSecond.Any() && !secondNotFirst.Any();
-                };
+            bool attachmentsEqual(List<IEmailAttachment> expected, IEnumerable<IEmailAttachment> actual)
+            {
+                var firstNotSecond = actual.Except(expected, attachmentComparer).ToList();
+                var secondNotFirst = expected.Except(actual, attachmentComparer).ToList();
+                return !firstNotSecond.Any() && !secondNotFirst.Any();
+            }
 
             bool emailWasStored = this.Emails.Store
                 .Where(e => emailComparer.Equals(sender, e.From))
@@ -96,19 +87,6 @@ namespace Proffer.Email.InMemory.Tests
                 .AddHandlebars()
                 .AddEmail(this.Configuration)
                 .AddInMemoryEmail();
-        }
-
-        protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
-        {
-            if (this.inMemoryConfiguration == null)
-            {
-                return;
-            }
-
-            foreach (KeyValuePair<string, string> kvp in this.inMemoryConfiguration)
-            {
-                inMemoryCollectionData.Add(kvp.Key, kvp.Value);
-            }
         }
     }
 }

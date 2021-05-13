@@ -16,14 +16,17 @@ namespace Proffer.Email.Tests
     {
         private readonly IDictionary<string, string> inMemoryConfiguration;
 
+        public EmailFixture()
+        {
+            this.Init();
+        }
+
         public EmailFixture(Dictionary<string, string> inMemoryConfiguration = null)
             : base(false)
         {
             this.inMemoryConfiguration = inMemoryConfiguration;
             this.Build();
-
-            IStorageFactory storageFactory = this.Services.GetRequiredService<IStorageFactory>();
-            this.Attachments = storageFactory.GetStore("Attachments");
+            this.Init();
         }
 
         public string StorageRootPath => Path.Combine(this.BasePath, "Stores");
@@ -32,7 +35,7 @@ namespace Proffer.Email.Tests
 
         public Mock<IEmailProvider> ProviderMock { get; private set; }
 
-        public IStore Attachments { get; }
+        public IStore Attachments { get; private set; }
 
         public void Verify(
             IEmailAddress sender = null,
@@ -53,7 +56,7 @@ namespace Proffer.Email.Tests
             bccRecipients ??= new();
             attachments ??= new();
 
-            EmailAddressEqualityComparer emailComparer = new();
+            EmailAddressStrictEqualityComparer emailComparer = new();
             EmailAttachmentEqualityComparer attachmentComparer = new();
 
             Func<List<IEmailAddress>, IEnumerable<IEmailAddress>, bool> emailsEqual =
@@ -124,6 +127,12 @@ namespace Proffer.Email.Tests
             {
                 inMemoryCollectionData.Add(kvp.Key, kvp.Value);
             }
+        }
+
+        private void Init()
+        {
+            IStorageFactory storageFactory = this.Services.GetRequiredService<IStorageFactory>();
+            this.Attachments = storageFactory.GetStore("Attachments");
         }
     }
 }

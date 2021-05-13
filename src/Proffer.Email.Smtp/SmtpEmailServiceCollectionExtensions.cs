@@ -8,7 +8,7 @@ namespace Proffer.Email
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class SmtpEmailServiceCollectionExtensions
     {
         /// <summary>
         /// Registers the Proffer.Email services to a SMTP server with <see cref="MailKit"/>.

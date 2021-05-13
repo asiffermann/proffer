@@ -1,7 +1,7 @@
-using System;
-
 namespace Proffer.Email.Smtp
 {
+    using System;
+
     /// <summary>
     /// Builds <see cref="SmtpEmailProvider"/>.
     /// </summary>

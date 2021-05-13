@@ -1,6 +1,8 @@
 namespace Proffer.Email.Internal
 {
+    using System;
     using System.Collections.Generic;
+    using System.Security.Cryptography;
 
     /// <summary>
     /// Supports the comparison of <see cref="IEmailAttachment"/> for equality.
@@ -18,8 +20,21 @@ namespace Proffer.Email.Internal
         protected override IEnumerable<object> GetEqualityComponents(IEmailAttachment obj)
         {
             yield return obj.FileName;
-            yield return obj.Data;
+            yield return ComputeHashes(obj.Data);
             yield return obj.ContentType;
+        }
+
+        private static string ComputeHashes(byte[] buffer)
+        {
+            string contentMD5 = string.Empty;
+
+            using (var md5 = MD5.Create())
+            {
+                byte[] hash = md5.ComputeHash(buffer);
+                contentMD5 = Convert.ToBase64String(hash);
+            }
+
+            return contentMD5;
         }
     }
 }
