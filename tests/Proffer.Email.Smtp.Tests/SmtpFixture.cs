@@ -32,6 +32,7 @@ namespace Proffer.Email.Smtp.Tests
         private readonly List<MimeMessage> emails = new();
         private readonly string smtpUserName = "SmtpUser";
         private readonly string smtpPassword = Guid.NewGuid().ToString();
+        private readonly int smtpPort = new Random().Next(26100, 26800);
 
         public SmtpFixture()
         {
@@ -129,7 +130,7 @@ namespace Proffer.Email.Smtp.Tests
                                         .ServerName("SMTP Server")
                                         .Endpoint(builder =>
                                             builder
-                                                .Port(9025, false)
+                                                .Port(this.smtpPort, false)
                                                 .AllowUnsecureAuthentication()
                                                 .AuthenticationRequired())
                                         .Build();
@@ -163,6 +164,7 @@ namespace Proffer.Email.Smtp.Tests
 
         protected override void AddInMemoryCollectionConfiguration(IDictionary<string, string> inMemoryCollectionData)
         {
+            inMemoryCollectionData.Add("Email:Provider:Parameters:Port", this.smtpPort.ToString());
             inMemoryCollectionData.Add("Email:Provider:Parameters:UserName", this.smtpUserName);
             inMemoryCollectionData.Add("Email:Provider:Parameters:Password", this.smtpPassword);
         }

@@ -235,10 +235,10 @@ namespace Proffer.Email.Smtp.Tests
                 replyTo: replyTo);
         }
 
-        public Task DisposeAsync()
+        public async Task DisposeAsync()
         {
+            await this.host.StopAsync();
             this.host.Dispose();
-            return Task.CompletedTask;
         }
     }
 }
