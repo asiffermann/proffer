@@ -1,11 +1,24 @@
 namespace Proffer.Email.Smtp
 {
+    using System;
+
     /// <summary>
     /// Builds <see cref="SmtpEmailProvider"/>.
     /// </summary>
     /// <seealso cref="IEmailProviderType" />
     public class SmtpEmailProviderType : IEmailProviderType
     {
+        private readonly IServiceProvider serviceProvider;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SmtpEmailProviderType"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public SmtpEmailProviderType(IServiceProvider serviceProvider)
+        {
+            this.serviceProvider = serviceProvider;
+        }
+
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -19,6 +32,6 @@ namespace Proffer.Email.Smtp
         /// A new <see cref="IEmailProvider" />.
         /// </returns>
         public IEmailProvider BuildProvider(IEmailProviderOptions providerOptions)
-            => new SmtpEmailProvider(providerOptions);
+            => new SmtpEmailProvider(this.serviceProvider, providerOptions);
     }
 }

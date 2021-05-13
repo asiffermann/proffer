@@ -1,23 +1,24 @@
 namespace Proffer.Email
 {
-    using InMemory;
+    using MailKit.Net.Smtp;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
+    using Smtp;
 
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class SmtpEmailServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers the Proffer.Email services to an in-memory collection.
+        /// Registers the Proffer.Email services to a SMTP server with <see cref="MailKit"/>.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <returns>The service collection.</returns>
-        public static IServiceCollection AddInMemoryEmail(this IServiceCollection services)
+        public static IServiceCollection AddSmtpEmail(this IServiceCollection services)
         {
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IEmailProviderType, InMemoryEmailProviderType>());
-            services.AddSingleton<IInMemoryEmailRepository, InMemoryEmailRepository>();
+            services.TryAddEnumerable(ServiceDescriptor.Transient<IEmailProviderType, SmtpEmailProviderType>());
+            services.AddTransient<ISmtpClient, SmtpClient>();
             return services;
         }
     }

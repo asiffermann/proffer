@@ -20,6 +20,6 @@ namespace Proffer.Email
         /// <summary>
         /// Gets or sets the disclaimer to add at the end of a mocked up email.
         /// </summary>
-        public string Disclaimer { get; set; } = "This email was originally destined to the following recipents, and was mocked up because it was sent from a test environment.";
+        public string Disclaimer { get; set; } = "This email was originally destined to the following recipients, and was mocked up because it was sent from a test environment.";
     }
 }

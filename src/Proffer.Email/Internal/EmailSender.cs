@@ -4,6 +4,7 @@ namespace Proffer.Email.Internal
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Dawn;
     using Microsoft.Extensions.Options;
     using Storage;
     using Templating;
@@ -32,7 +33,14 @@ namespace Proffer.Email.Internal
             IStorageFactory storageFactory,
             ITemplateLoaderFactory templateLoaderFactory)
         {
-            this.options = options.Value;
+            this.options = Guard.Argument(options.Value, nameof(EmailOptions))
+                .NotNull()
+                .Member(
+                    o => o.Provider,
+                    a => a
+                        .NotNull()
+                        .Member(po => po.Type, pa => pa.NotNull().NotEmpty()))
+                .Value;
 
             IEmailProviderType providerType = emailProviderTypes
                 .FirstOrDefault(x => x.Name == this.options.Provider.Type);
@@ -46,11 +54,6 @@ namespace Proffer.Email.Internal
             if (!string.IsNullOrWhiteSpace(this.options.TemplateStorage))
             {
                 IStore store = storageFactory.GetStore(this.options.TemplateStorage);
-                if (store == null)
-                {
-                    throw new ArgumentNullException("TemplateStorage", $"There is no file store configured with name {this.options.TemplateStorage}. Unable to initialize email templating.");
-                }
-
                 this.templateLoader = templateLoaderFactory.Create(store);
             }
         }
@@ -164,7 +167,7 @@ namespace Proffer.Email.Internal
               bcc,
               subject,
               message,
-              string.Format("<html><header></header><body>{0}</body></html>", message),
+              $"<!DOCTYPE html><html><head><title>{subject}</title></head><body>{message}</body></html>",
               attachments);
         }
 

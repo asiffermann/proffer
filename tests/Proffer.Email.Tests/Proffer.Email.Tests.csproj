@@ -7,14 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Stores\.Attachments-extended-properties\beach.jpeg.json" />
+    <None Include="Stores\.Attachments-extended-properties\sample.pdf.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Stores\**\*.*;appsettings.json;appsettings.*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.6" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,8 +32,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Proffer.Testing\Proffer.Testing.csproj" />
-    <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem.Server\Proffer.Storage.FileSystem.Server.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Email\Proffer.Email.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Templating.Handlebars\Proffer.Templating.Handlebars.csproj" />
+    <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem\Proffer.Storage.FileSystem.csproj" />
     <ProjectReference Include="..\..\src\Proffer.Storage.FileSystem.Properties.Json\Proffer.Storage.FileSystem.Properties.Json.csproj" />
   </ItemGroup>
-  
+
 </Project>
