@@ -38,23 +38,15 @@ namespace Proffer.Email.Tests
         public IStore Attachments { get; private set; }
 
         public void Verify(
-            IEmailAddress sender = null,
-            List<IEmailAddress> recipients = null,
-            List<IEmailAddress> ccRecipients = null,
-            List<IEmailAddress> bccRecipients = null,
-            string subject = null,
-            string bodyText = null,
-            string bodyHtml = null,
-            List<IEmailAttachment> attachments = null,
-            IEmailAddress replyTo = null)
+            IEmail email)
         {
             IOptions<EmailOptions> options = this.Services.GetRequiredService<IOptions<EmailOptions>>();
 
-            sender ??= options.Value.DefaultSender;
-            recipients ??= new();
-            ccRecipients ??= new();
-            bccRecipients ??= new();
-            attachments ??= new();
+            email.From ??= options.Value.DefaultSender;
+            email.Recipients ??= new List<IEmailAddress>();
+            email.CcRecipients ??= new List<IEmailAddress>();
+            email.BccRecipients ??= new List<IEmailAddress>();
+            email.Attachments ??= new List<IEmailAttachment>();
 
             EmailAddressStrictEqualityComparer emailComparer = new();
             EmailAttachmentEqualityComparer attachmentComparer = new();
@@ -75,17 +67,22 @@ namespace Proffer.Email.Tests
                     return !firstNotSecond.Any() && !secondNotFirst.Any();
                 };
 
+            IEmail compareEmail = new Email
+            {
+                Attachments = It.Is<IEnumerable<IEmailAttachment>>(a => attachmentsEqual(email.Attachments.ToList(), a)),
+                BccRecipients = It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(email.BccRecipients.ToList(), e)),
+                BodyHtml = It.Is<string>(bh => email.BodyHtml == null || email.BodyHtml == bh),
+                BodyText = It.Is<string>(bt => email.BodyText == null || email.BodyText == bt),
+                CcRecipients = It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(email.CcRecipients.ToList(), e)),
+                From = It.Is(email.From, emailComparer),
+                Recipients = It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(email.Recipients.ToList(), e)),
+                ReplyTo = It.Is<IEmailAddress>(e => email.ReplyTo == null || emailComparer.Equals(email.ReplyTo, e)),
+                Subject = It.Is<string>(s => email.Subject == null || email.Subject == s)
+            };
+
             this.ProviderMock.Verify(
                 p => p.SendEmailAsync(
-                    It.Is(sender, emailComparer),
-                    It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(recipients, e)),
-                    It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(ccRecipients, e)),
-                    It.Is<IEnumerable<IEmailAddress>>(e => emailsEqual(bccRecipients, e)),
-                    It.Is<string>(s => subject == null || subject == s),
-                    It.Is<string>(bt => bodyText == null || bodyText == bt),
-                    It.Is<string>(bh => bodyHtml == null || bodyHtml == bh),
-                    It.Is<IEnumerable<IEmailAttachment>>(a => attachmentsEqual(attachments, a)),
-                    It.Is<IEmailAddress>(e => replyTo == null || emailComparer.Equals(replyTo, e))),
+                    It.Is<IEmail>(c => compareEmail == null || compareEmail == c)),
                 Times.Once);
         }
 

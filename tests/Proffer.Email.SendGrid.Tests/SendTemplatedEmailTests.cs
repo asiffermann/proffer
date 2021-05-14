@@ -29,56 +29,53 @@ namespace Proffer.Email.SendGrid.Tests
         [Fact]
         public async Task Should_SendTemplatedEmail_With_SimpleArguments()
         {
-            await this.emailSender.SendTemplatedEmailAsync(
-                "Notification1",
-                new { },
+            IEmailBuilder emailBuilder = new EmailBuilder(this.storeFixture.DefaultSender,
                 new EmailAddress
                 {
                     DisplayName = "test user",
                     Email = SendGridFixture.FirstRecipient
-                });
+                }.Yield())
+                .AddSubject("Notification1");
+
+            await this.emailSender.SendTemplatedEmailAsync(emailBuilder.Build(), new { });
         }
 
         [Fact]
         public async Task Should_SendTemplatedEmail_With_CarbonCopyRecipients()
         {
-            await this.emailSender.SendTemplatedEmailAsync(
-                this.storeFixture.DefaultSender,
-                "Notification1",
-                new { },
-                Enumerable.Empty<IEmailAttachment>(),
+            IEmailBuilder emailBuilder = new EmailBuilder(this.storeFixture.DefaultSender,
                 new EmailAddress
                 {
-                    DisplayName = "recipient user",
+                    DisplayName = "recipent user",
                     Email = SendGridFixture.FirstRecipient
-                }.Yield(),
-                new EmailAddress
+                }.Yield())
+                .AddSubject("Notification1")
+                .AddCarbonCopyRecipient(new EmailAddress
                 {
-                    DisplayName = "cc user",
+                    DisplayName = "test user",
                     Email = SendGridFixture.SecondRecipient
-                }.Yield(),
-                Array.Empty<IEmailAddress>());
+                }.Yield());
+
+            await this.emailSender.SendTemplatedEmailAsync(emailBuilder.Build(), new { });
         }
 
         [Fact]
         public async Task Should_SendTemplatedEmail_With_BlackCarbonCopyRecipients()
         {
-            await this.emailSender.SendTemplatedEmailAsync(
-                this.storeFixture.DefaultSender,
-                "Notification1",
-                new { },
-                Enumerable.Empty<IEmailAttachment>(),
+            IEmailBuilder emailBuilder = new EmailBuilder(this.storeFixture.DefaultSender,
                 new EmailAddress
                 {
-                    DisplayName = "recipient user",
+                    DisplayName = "recipent user",
                     Email = SendGridFixture.FirstRecipient
-                }.Yield(),
-                Array.Empty<IEmailAddress>(),
-                new EmailAddress
+                }.Yield())
+                .AddSubject("Notification1")
+                .AddBlackCarbonCopyRecipient(new EmailAddress
                 {
                     DisplayName = "test user",
                     Email = SendGridFixture.SecondRecipient
                 }.Yield());
+
+            await this.emailSender.SendTemplatedEmailAsync(emailBuilder.Build(), new { });
         }
 
         [Fact]
@@ -90,16 +87,16 @@ namespace Proffer.Email.SendGrid.Tests
             data = System.IO.File.ReadAllBytes(@"Stores/Attachments/sample.pdf");
             var pdf = new EmailAttachment("Sample.pdf", data, "application", "pdf");
 
-            await this.emailSender.SendTemplatedEmailAsync(
-                this.storeFixture.DefaultSender,
-                "Notification1",
-                new { },
-                new List<IEmailAttachment> { image, pdf },
+            IEmailBuilder emailBuilder = new EmailBuilder(this.storeFixture.DefaultSender,
                 new EmailAddress
                 {
                     DisplayName = "test user",
                     Email = SendGridFixture.FirstRecipient
-                });
+                }.Yield())
+                .AddSubject("Notification1")
+                .AddAttachment(new List<IEmailAttachment> { image, pdf });
+
+            await this.emailSender.SendTemplatedEmailAsync(emailBuilder.Build(), new { });
         }
     }
 }

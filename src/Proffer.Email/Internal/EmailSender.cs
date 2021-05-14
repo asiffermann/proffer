@@ -61,217 +61,33 @@ namespace Proffer.Email.Internal
         /// <summary>
         /// Sends an email.
         /// </summary>
-        /// <param name="subject">The subject.</param>
-        /// <param name="message">The body as plain text.</param>
-        /// <param name="to">The email recipients.</param>
+        /// <param name="email">Everything about the mail.</param>
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task SendEmailAsync(string subject, string message, params IEmailAddress[] to)
-            => this.SendEmailAsync(this.options.DefaultSender, subject, message, to);
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="message">The body as plain text.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, string subject, string message, params IEmailAddress[] to)
-            => this.SendEmailAsync(from, subject, message, Enumerable.Empty<IEmailAttachment>(), to);
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="message">The body as plain text.</param>
-        /// <param name="plainTextOnly">If set to <c>true</c> the body shoud be sent as plain text only.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEmailAddress replyTo, string subject, string message, bool plainTextOnly, params IEmailAddress[] to)
-            => this.SendEmailAsync(from, replyTo, subject, message, plainTextOnly, Enumerable.Empty<IEmailAttachment>(), to);
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="message">The body as plain text.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, string subject, string message, IEnumerable<IEmailAttachment> attachments, params IEmailAddress[] to)
-            => this.SendEmailAsync(from, subject, message, attachments, to.ToArray(), new IEmailAddress[0], new IEmailAddress[0]);
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="message">The body as plain text.</param>
-        /// <param name="plainTextOnly">If set to <c>true</c> the body shoud be sent as plain text only.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEmailAddress replyTo, string subject, string message, bool plainTextOnly, IEnumerable<IEmailAttachment> attachments, params IEmailAddress[] to)
-            => this.SendEmailAsync(from, subject, message, attachments, to.ToArray(), new IEmailAddress[0], new IEmailAddress[0], replyTo: replyTo, plainTextOnly: plainTextOnly);
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="message">The body as plain text.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <param name="cc">The CC email recipients.</param>
-        /// <param name="bcc">The BCC email recipients.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
-        /// <param name="plainTextOnly">If set to <c>true</c> the body shoud be sent as plain text only.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, string subject, string message, IEnumerable<IEmailAttachment> attachments, IEmailAddress[] to, IEmailAddress[] cc, IEmailAddress[] bcc, IEmailAddress replyTo = null, bool plainTextOnly = false)
+        public Task SendEmailAsync(IEmail email)
         {
-            if (plainTextOnly)
-            {
-                return this.DoMockupAndSendEmailAsync(
-                 from,
-                 replyTo,
-                 to,
-                 cc,
-                 bcc,
-                 subject,
-                 message,
-                 null,
-                 attachments);
-            }
-
-            return this.DoMockupAndSendEmailAsync(
-              from,
-              replyTo,
-              to,
-              cc,
-              bcc,
-              subject,
-              message,
-              $"<!DOCTYPE html><html><head><title>{subject}</title></head><body>{message}</body></html>",
-              attachments);
+            return this.DoMockupAndSendEmailAsync(email);
         }
 
         /// <summary>
-        /// Sends a templated email from the configured default sender email address.
-        /// </summary>
-        /// <typeparam name="T">The type of context to apply on the template.</typeparam>
-        /// <param name="templateKey">The template key.</param>
-        /// <param name="context">The context  to apply on the template.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendTemplatedEmailAsync<T>(string templateKey, T context, params IEmailAddress[] to)
-            => this.SendTemplatedEmailAsync(this.options.DefaultSender, templateKey, context, to);
-
-        /// <summary>
         /// Sends a templated email.
         /// </summary>
         /// <typeparam name="T">The type of context to apply on the template.</typeparam>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="templateKey">The template key.</param>
+        /// <param name="email">Everything about the mail.</param>
         /// <param name="context">The context  to apply on the template.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendTemplatedEmailAsync<T>(IEmailAddress from, string templateKey, T context, params IEmailAddress[] to)
-            => this.SendTemplatedEmailAsync(from, templateKey, context, Enumerable.Empty<IEmailAttachment>(), to);
-
-        /// <summary>
-        /// Sends a templated email.
-        /// </summary>
-        /// <typeparam name="T">The type of context to apply on the template.</typeparam>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
-        /// <param name="templateKey">The template key.</param>
-        /// <param name="context">The context  to apply on the template.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendTemplatedEmailAsync<T>(IEmailAddress from, IEmailAddress replyTo, string templateKey, T context, params IEmailAddress[] to)
-            => this.SendTemplatedEmailAsync(from, replyTo, templateKey, context, Enumerable.Empty<IEmailAttachment>(), to);
-
-        /// <summary>
-        /// Sends a templated email.
-        /// </summary>
-        /// <typeparam name="T">The type of context to apply on the template.</typeparam>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="templateKey">The template key.</param>
-        /// <param name="context">The context  to apply on the template.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendTemplatedEmailAsync<T>(IEmailAddress from, string templateKey, T context, IEnumerable<IEmailAttachment> attachments, params IEmailAddress[] to)
-            => this.SendTemplatedEmailAsync(from, templateKey, context, attachments, to, new IEmailAddress[0], new IEmailAddress[0]);
-
-        /// <summary>
-        /// Sends a templated email.
-        /// </summary>
-        /// <typeparam name="T">The type of context to apply on the template.</typeparam>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
-        /// <param name="templateKey">The template key.</param>
-        /// <param name="context">The context  to apply on the template.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendTemplatedEmailAsync<T>(IEmailAddress from, IEmailAddress replyTo, string templateKey, T context, IEnumerable<IEmailAttachment> attachments, params IEmailAddress[] to)
-            => this.SendTemplatedEmailAsync(from, templateKey, context, attachments, to, new IEmailAddress[0], new IEmailAddress[0], replyTo: replyTo);
-
-        /// <summary>
-        /// Sends a templated email.
-        /// </summary>
-        /// <typeparam name="T">The type of context to apply on the template.</typeparam>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="templateKey">The template key.</param>
-        /// <param name="context">The context  to apply on the template.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="to">The email recipients.</param>
-        /// <param name="cc">The CC email recipients.</param>
-        /// <param name="bcc">The BCC email recipients.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
-        public async Task SendTemplatedEmailAsync<T>(IEmailAddress from, string templateKey, T context, IEnumerable<IEmailAttachment> attachments, IEmailAddress[] to, IEmailAddress[] cc, IEmailAddress[] bcc, IEmailAddress replyTo = null)
+        public async Task SendTemplatedEmailAsync<T>(IEmail email, T context)
         {
-            ITemplate subjectTemplate = await this.GetTemplateAsync(templateKey, EmailTemplateType.Subject);
-            ITemplate textTemplate = await this.GetTemplateAsync(templateKey, EmailTemplateType.BodyText);
-            ITemplate htmlTemplate = await this.GetTemplateAsync(templateKey, EmailTemplateType.BodyHtml);
+            ITemplate subjectTemplate = await this.GetTemplateAsync(email.TemplateDictionary[EmailTemplateType.Subject], EmailTemplateType.Subject);
+            email.Subject = subjectTemplate.Apply(context);
 
-            await this.DoMockupAndSendEmailAsync(
-                from,
-                replyTo,
-                to,
-                cc,
-                bcc,
-                subjectTemplate.Apply(context),
-                textTemplate.Apply(context),
-                htmlTemplate.Apply(context),
-                attachments);
+            ITemplate textTemplate = await this.GetTemplateAsync(email.TemplateDictionary[EmailTemplateType.BodyText], EmailTemplateType.BodyText);
+            email.BodyText = textTemplate.Apply(context);
+
+            ITemplate htmlTemplate = await this.GetTemplateAsync(email.TemplateDictionary[EmailTemplateType.BodyHtml], EmailTemplateType.BodyHtml);
+            email.BodyHtml = htmlTemplate.Apply(context);
+
+            await this.DoMockupAndSendEmailAsync(email);
         }
 
         /// <summary>
@@ -322,45 +138,27 @@ namespace Proffer.Email.Internal
             return finalRecipients;
         }
 
-        private async Task DoMockupAndSendEmailAsync(
-            IEmailAddress from,
-            IEmailAddress replyTo,
-            IEnumerable<IEmailAddress> recipients,
-            IEnumerable<IEmailAddress> ccRecipients,
-            IEnumerable<IEmailAddress> bccRecipients,
-            string subject,
-            string text,
-            string html,
-            IEnumerable<IEmailAttachment> attachments)
+        private async Task DoMockupAndSendEmailAsync(IEmail email)
         {
             var mockedUpRecipients = new List<IEmailAddress>();
 
-            IEnumerable<IEmailAddress> finalToRecipients = this.MockRecipients(recipients, mockedUpRecipients);
-            IEnumerable<IEmailAddress> finalCcRecipients = this.MockRecipients(ccRecipients, mockedUpRecipients);
-            IEnumerable<IEmailAddress> finalBccRecipients = this.MockRecipients(bccRecipients, mockedUpRecipients);
+            email.Recipients = this.MockRecipients(email.Recipients, mockedUpRecipients);
+            email.CcRecipients = this.MockRecipients(email.CcRecipients, mockedUpRecipients);
+            email.BccRecipients = this.MockRecipients(email.BccRecipients, mockedUpRecipients);
 
             if (mockedUpRecipients.Any())
             {
                 string disclaimer = this.options.Mockup.Disclaimer;
                 string joinedMockedUpRecipients = string.Join(", ", mockedUpRecipients.Select(r => $"{r.DisplayName} ({r.Email})"));
 
-                text = string.Concat(text, Environment.NewLine, disclaimer, Environment.NewLine, joinedMockedUpRecipients);
-                if (html != null)
+                email.BodyText = string.Concat(email.BodyText, Environment.NewLine, disclaimer, Environment.NewLine, joinedMockedUpRecipients);
+                if (email.BodyHtml != null)
                 {
-                    html = string.Concat(html, "<br/><i>", disclaimer, "<br/>", joinedMockedUpRecipients, "</i>");
+                    email.BodyHtml = string.Concat(email.BodyHtml, "<br/><i>", disclaimer, "<br/>", joinedMockedUpRecipients, "</i>");
                 }
             }
 
-            await this.provider.SendEmailAsync(
-                from,
-                finalToRecipients,
-                finalCcRecipients,
-                finalBccRecipients,
-                subject,
-                text,
-                html,
-                attachments,
-                replyTo: replyTo);
+            await this.provider.SendEmailAsync(email);
         }
     }
 }

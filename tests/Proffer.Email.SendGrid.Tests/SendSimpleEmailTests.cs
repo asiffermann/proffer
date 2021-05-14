@@ -29,74 +29,91 @@ namespace Proffer.Email.SendGrid.Tests
         [Fact]
         public async Task Should_SendEmail_With_SimpleArguments()
         {
-            await this.emailSender.SendEmailAsync(
-                "Simple mail",
-                "Hello, it's a simple mail",
-                new EmailAddress
+            IEmailBuilder emailBuilder = new EmailBuilder(
+                this.storeFixture.DefaultSender,
+                new List<EmailAddress>()
                 {
-                    DisplayName = "test user",
-                    Email = "tests@getproffer.net"
-                });
+                    new EmailAddress
+                    {
+                        DisplayName = "test user",
+                        Email = "tests@getproffer.net"
+                    }
+                })
+                .AddSubject("Simple mail")
+                .AddBodyText("Hello, it's a simple mail");
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmail_With_ReplyTo()
         {
-            await this.emailSender.SendEmailAsync(
+            IEmailBuilder emailBuilder = new EmailBuilder(
                 this.storeFixture.DefaultSender,
-                new EmailAddress
+                new List<EmailAddress>()
+                {
+                    new EmailAddress
+                    {
+                        DisplayName = "test user",
+                        Email = "tests@getproffer.net"
+                    }
+                })
+                .AddSubject("SendEmail with reply")
+                .AddBodyText("Hello, it's a email with reply")
+                .AddReplyTo(new EmailAddress
                 {
                     DisplayName = "Reply Address",
                     Email = "tests@getproffer.net"
-                },
-                "Simple mail", "Hello, it's a simple mail", false,
-                new EmailAddress
-                {
-                    DisplayName = "test user",
-                    Email = "hello@getproffer.net"
                 });
+
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmail_With_CarbonCopyRecipients()
         {
-            await this.emailSender.SendEmailAsync(
+            IEmailBuilder emailBuilder = new EmailBuilder(
                 this.storeFixture.DefaultSender,
-                "Cc test",
-                "Hello, this is an email with cc recipients",
-                Enumerable.Empty<IEmailAttachment>(),
-                new EmailAddress
+                new List<EmailAddress>()
                 {
-                    DisplayName = "recipient user",
-                    Email = SendGridFixture.FirstRecipient
-                }.Yield(),
-                new EmailAddress
+                    new EmailAddress
+                    {
+                        DisplayName = "test user",
+                        Email = "tests@getproffer.net"
+                    }
+                })
+                .AddSubject("Cc test")
+                .AddBodyText("Hello, it's a cc test")
+                .AddCarbonCopyRecipient(new EmailAddress
                 {
                     DisplayName = "cc user",
                     Email = SendGridFixture.SecondRecipient
-                }.Yield(),
-                Array.Empty<IEmailAddress>());
+                }.Yield());
+
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmail_With_BlackCarbonCopyRecipients()
         {
-            await this.emailSender.SendEmailAsync(
+            IEmailBuilder emailBuilder = new EmailBuilder(
                 this.storeFixture.DefaultSender,
-                "Bcc test",
-                "Hello, this is an email with bcc recipients",
-                Enumerable.Empty<IEmailAttachment>(),
-                new EmailAddress
+                new List<EmailAddress>()
                 {
-                    DisplayName = "recipient user",
-                    Email = SendGridFixture.FirstRecipient
-                }.Yield(),
-                Array.Empty<IEmailAddress>(),
-                new EmailAddress
+                    new EmailAddress
+                    {
+                        DisplayName = "test user",
+                        Email = "tests@getproffer.net"
+                    }
+                })
+                .AddSubject("Bcc test")
+                .AddBodyText("Hello, it's bcc test")
+                .AddBlackCarbonCopyRecipient(new EmailAddress
                 {
-                    DisplayName = "test user",
+                    DisplayName = "bcc user",
                     Email = SendGridFixture.SecondRecipient
                 }.Yield());
+
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
         }
 
         [Fact]
@@ -108,38 +125,42 @@ namespace Proffer.Email.SendGrid.Tests
             data = System.IO.File.ReadAllBytes(@"Stores/Attachments/sample.pdf");
             var pdf = new EmailAttachment("Sample.pdf", data, "application", "pdf");
 
-            await this.emailSender.SendEmailAsync(
+            IEmailBuilder emailBuilder = new EmailBuilder(
                 this.storeFixture.DefaultSender,
-                "Test mail with attachments",
-                "Hello, this is an email with attachments",
-                new List<IEmailAttachment> { image, pdf },
-                new EmailAddress
+                new List<EmailAddress>()
                 {
-                    DisplayName = "test user",
-                    Email = SendGridFixture.FirstRecipient
-                });
+                    new EmailAddress
+                    {
+                        DisplayName = "test user",
+                        Email = "tests@getproffer.net"
+                    }
+                })
+                .AddSubject("Attachment test")
+                .AddBodyText("Hello, it's attachment test")
+                .AddAttachment(new List<IEmailAttachment> { image, pdf });
+
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_Throw_With_CarbonCopyRecipientsDuplicates()
         {
-            await Assert.ThrowsAsync<ArgumentException>(() =>
-                 this.emailSender.SendEmailAsync(
-                     this.storeFixture.DefaultSender,
-                     "Cc test",
-                     "Hello, this is an email with cc recipients",
-                     Enumerable.Empty<IEmailAttachment>(),
-                     new EmailAddress
-                     {
-                         DisplayName = "recipient user",
-                         Email = SendGridFixture.SecondRecipient
-                     }.Yield(),
-                     new EmailAddress
-                     {
-                         DisplayName = "cc user",
-                         Email = SendGridFixture.SecondRecipient
-                     }.Yield(),
-                     Array.Empty<IEmailAddress>()));
+            IEmailBuilder emailBuilder = new EmailBuilder(
+                this.storeFixture.DefaultSender,
+                new EmailAddress
+                {
+                    DisplayName = "recipient user",
+                    Email = SendGridFixture.SecondRecipient
+                }.Yield())
+                .AddSubject("Cc test")
+                .AddBodyText("Hello, this is an email with cc recipients")
+                .AddCarbonCopyRecipient(new EmailAddress
+                {
+                    DisplayName = "cc user",
+                    Email = SendGridFixture.SecondRecipient
+                }.Yield());
+
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
         }
     }
 }

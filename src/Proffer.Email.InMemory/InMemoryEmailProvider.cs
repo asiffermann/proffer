@@ -24,60 +24,23 @@ namespace Proffer.Email.InMemory
         /// <summary>
         /// Sends an email.
         /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
+        /// <param name="email">All informations about the email.</param>
         /// <returns>
         /// A task that represents the asynchronous operation.
         /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, string subject, string bodyText, string bodyHtml)
-            => this.SendEmailAsync(from, recipients, subject, bodyText, bodyHtml, Enumerable.Empty<IEmailAttachment>());
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, string subject, string bodyText, string bodyHtml, IEnumerable<IEmailAttachment> attachments)
-            => this.SendEmailAsync(from, recipients, Enumerable.Empty<IEmailAddress>(), Enumerable.Empty<IEmailAddress>(), subject, bodyText, bodyHtml, Enumerable.Empty<IEmailAttachment>());
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
-        /// <param name="ccRecipients">The CC email recipients.</param>
-        /// <param name="bccRecipients">The BCC email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, IEnumerable<IEmailAddress> ccRecipients, IEnumerable<IEmailAddress> bccRecipients, string subject, string bodyText, string bodyHtml, IEnumerable<IEmailAttachment> attachments, IEmailAddress replyTo = null)
+        public Task SendEmailAsync(IEmail email)
         {
             this.inMemoryEmailRepository.Save(new InMemoryEmail
             {
-                Subject = subject,
-                MessageText = bodyText,
-                MessageHtml = bodyHtml,
-                To = recipients.ToArray(),
-                Cc = ccRecipients.ToArray(),
-                Bcc = bccRecipients.ToArray(),
-                From = from,
-                ReplyTo = replyTo,
-                Attachments = attachments
+                Subject = email.Subject,
+                MessageText = email.BodyText,
+                MessageHtml = email.BodyHtml,
+                To = email.Recipients.ToArray(),
+                Cc = email.CcRecipients.ToArray(),
+                Bcc = email.BccRecipients.ToArray(),
+                From = email.From,
+                ReplyTo = email.ReplyTo,
+                Attachments = email.Attachments
             });
 
             return Task.FromResult(0);

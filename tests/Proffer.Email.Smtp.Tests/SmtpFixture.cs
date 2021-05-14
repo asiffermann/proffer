@@ -44,24 +44,15 @@ namespace Proffer.Email.Smtp.Tests
 
         public IStore Attachments { get; }
 
-        public void Verify(
-            IEmailAddress sender = null,
-            List<IEmailAddress> recipients = null,
-            List<IEmailAddress> ccRecipients = null,
-            List<IEmailAddress> bccRecipients = null,
-            string subject = null,
-            string bodyText = null,
-            string bodyHtml = null,
-            List<IEmailAttachment> attachments = null,
-            IEmailAddress replyTo = null)
+        public void Verify(IEmail email)
         {
             IOptions<EmailOptions> options = this.Services.GetRequiredService<IOptions<EmailOptions>>();
 
-            sender ??= options.Value.DefaultSender;
-            recipients ??= new();
-            ccRecipients ??= new();
-            bccRecipients ??= new();
-            attachments ??= new();
+            email.From ??= options.Value.DefaultSender;
+            email.Recipients ??= new List<IEmailAddress>();
+            email.CcRecipients ??= new List<IEmailAddress>();
+            email.BccRecipients ??= new List<IEmailAddress>();
+            email.Attachments ??= new List<IEmailAttachment>();
 
             EmailAddressStrictEqualityComparer emailStrictComparer = new();
             EmailAddressEqualityComparer emailComparer = new();
@@ -84,15 +75,15 @@ namespace Proffer.Email.Smtp.Tests
             var t = this.emails.First().Attachments.Select(a => ToEmailAttachment(a)).ToList();
 
             bool emailWasStored = this.emails
-                .Where(e => emailStrictComparer.Equals(sender, ToEmailAddress(e.From.FirstOrDefault())))
-                .Where(e => emailsEqual(recipients, e.To.Select(t => ToEmailAddress(t)).ToList()))
-                .Where(e => emailsEqual(ccRecipients, e.Cc.Select(t => ToEmailAddress(t)).ToList()))
-                .Where(e => emailsEqual(bccRecipients, e.Bcc.Select(t => ToEmailAddress(t)).ToList(), emailComparer))
-                .Where(e => subject == null || subject == e.Subject)
-                .Where(e => bodyText == null || bodyText == e.TextBody)
-                .Where(e => bodyHtml == null || bodyHtml == e.HtmlBody)
-                .Where(e => attachmentsEqual(attachments, e.Attachments.Select(a => ToEmailAttachment(a)).ToList()))
-                .Where(e => replyTo == null || emailStrictComparer.Equals(replyTo, ToEmailAddress(e.ReplyTo.FirstOrDefault())))
+                .Where(e => emailStrictComparer.Equals(email.From, ToEmailAddress(e.From.FirstOrDefault())))
+                .Where(e => emailsEqual(email.Recipients.ToList(), e.To.Select(t => ToEmailAddress(t)).ToList()))
+                .Where(e => emailsEqual(email.CcRecipients.ToList(), e.Cc.Select(t => ToEmailAddress(t)).ToList()))
+                .Where(e => emailsEqual(email.BccRecipients.ToList(), e.Bcc.Select(t => ToEmailAddress(t)).ToList(), emailComparer))
+                .Where(e => email.Subject == null || email.Subject == e.Subject)
+                .Where(e => email.BodyText == null || email.BodyText == e.TextBody)
+                .Where(e => email.BodyHtml == null || email.BodyHtml == e.HtmlBody)
+                .Where(e => attachmentsEqual(email.Attachments.ToList(), e.Attachments.Select(a => ToEmailAttachment(a)).ToList()))
+                .Where(e => email.ReplyTo == null || emailStrictComparer.Equals(email.ReplyTo, ToEmailAddress(e.ReplyTo.FirstOrDefault())))
                 .Any();
 
             Assert.True(emailWasStored);
