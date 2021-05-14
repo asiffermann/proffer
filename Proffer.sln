@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Storage.FileSystem.Server.Tests", "tests\Proffer.Storage.FileSystem.Server.Tests\Proffer.Storage.FileSystem.Server.Tests.csproj", "{FDA33857-554F-4616-A674-06417AD6A0AF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Events", "src\Proffer.Events\Proffer.Events.csproj", "{BC8068EB-735C-4F38-B91F-44A71020435C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,10 @@ Global
 		{FDA33857-554F-4616-A674-06417AD6A0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDA33857-554F-4616-A674-06417AD6A0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDA33857-554F-4616-A674-06417AD6A0AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC8068EB-735C-4F38-B91F-44A71020435C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8068EB-735C-4F38-B91F-44A71020435C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8068EB-735C-4F38-B91F-44A71020435C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8068EB-735C-4F38-B91F-44A71020435C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +182,7 @@ Global
 		{62473356-141D-438C-8D51-D34191F08A26} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 		{1C21F39F-1045-4890-820E-F4328A2BAF86} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 		{FDA33857-554F-4616-A674-06417AD6A0AF} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
+		{BC8068EB-735C-4F38-B91F-44A71020435C} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E14A063-006D-442F-BBA4-C9CF12D2438A}
