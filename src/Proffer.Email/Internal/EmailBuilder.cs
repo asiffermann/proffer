@@ -25,6 +25,8 @@ namespace Proffer.Email.Internal
                 { EmailTemplateType.BodyText, string.Empty},
                 { EmailTemplateType.BodyHtml, string.Empty},
             };
+            this.email.BccRecipients = new List<IEmailAddress>();
+            this.email.CcRecipients = new List<IEmailAddress>();
         }
 
         /// <summary>
