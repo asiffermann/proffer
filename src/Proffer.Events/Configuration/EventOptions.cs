@@ -12,7 +12,7 @@ namespace Proffer.Events.Configuration
     /// <seealso cref="IParsedOptions{EventProviderOptions, QueueOptions}" />
     public class EventOptions : IParsedOptions<EventProviderOptions, QueueOptions>
     {
-        private const string DefaultConfigurationSectionName = "Event";
+        internal const string DefaultConfigurationSectionName = "Event";
 
         private readonly Lazy<IReadOnlyDictionary<string, EventProviderOptions>> parsedProviderInstances;
         private readonly Lazy<IReadOnlyDictionary<string, QueueOptions>> parsedQueueOptions;
