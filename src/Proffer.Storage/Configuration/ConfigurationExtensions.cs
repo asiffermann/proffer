@@ -125,11 +125,6 @@ namespace Proffer.Storage.Configuration
             where TStoreOptions : class, IStoreOptions, new()
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {
-            if (string.IsNullOrEmpty(parsedStore.FolderName))
-            {
-                parsedStore.FolderName = parsedStore.Name;
-            }
-
             TInstanceOptions instanceOptions = null;
             if (!string.IsNullOrEmpty(parsedStore.ProviderName))
             {
@@ -185,6 +180,11 @@ namespace Proffer.Storage.Configuration
             {
                 Name = kvp.Key,
             };
+
+            if (options is IStoreOptions storeOptions && string.IsNullOrEmpty(storeOptions.FolderName))
+            {
+                storeOptions.FolderName = options.Name;
+            }
 
             ConfigurationBinder.Bind(kvp.Value, options);
             return options;
