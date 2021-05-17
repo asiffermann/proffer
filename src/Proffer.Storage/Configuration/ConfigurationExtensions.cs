@@ -125,6 +125,11 @@ namespace Proffer.Storage.Configuration
             where TStoreOptions : class, IStoreOptions, new()
             where TScopedStoreOptions : class, TStoreOptions, IScopedStoreOptions
         {
+            if (string.IsNullOrEmpty(parsedStore.FolderName))
+            {
+                parsedStore.FolderName = parsedStore.Name;
+            }
+
             TInstanceOptions instanceOptions = null;
             if (!string.IsNullOrEmpty(parsedStore.ProviderName))
             {
