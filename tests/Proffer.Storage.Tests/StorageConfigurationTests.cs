@@ -17,20 +17,20 @@ namespace Proffer.Storage.Tests
     [Feature(nameof(Configuration))]
     public class StorageConfigurationTests
     {
-        //[Fact(Skip = "Logged issue")]
-        //[Bug("https://github.com/asiffermann/proffer/issues/47")]
-        //public void Should_ValidateStoreOptions_Without_Errors()
-        //{
-        //    var fixture = new SimpleServiceProviderFixture(
-        //        (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
+        [Fact]
+        [Bug("https://github.com/asiffermann/proffer/issues/47")]
+        public void Should_ValidateStoreOptions_Without_Errors()
+        {
+            var fixture = new SimpleServiceProviderFixture(
+                (sp, f) => sp.AddStorage(f.Configuration).AddStubStorage());
 
-        //    IOptions<StorageOptions> options = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
+            IOptions<StorageOptions> options = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
 
-        //    IEnumerable<IOptionError> errors = options.Value.ParsedStores
-        //        .SelectMany(s => s.Value.Validate(throwOnError: false));
+            IEnumerable<IOptionError> errors = options.Value.ParsedStores
+                .SelectMany(s => s.Value.Validate(throwOnError: false));
 
-        //    Assert.Empty(errors);
-        //}
+            Assert.Empty(errors);
+        }
 
         [Fact]
         public void Should_ValidateStubStoreOptions_Without_Errors()
