@@ -66,7 +66,7 @@ namespace Proffer.Storage.Configuration
         /// <summary>
         /// Gets or sets the parsed stores options.
         /// </summary>
-        public IReadOnlyDictionary<string, StoreOptions> ParsedStores { get => FillFolderNameWithStoreNameIfItIsNull(this.parsedStores.Value); set { } }
+        public IReadOnlyDictionary<string, StoreOptions> ParsedStores { get => this.parsedStores.Value; set { } }
 
         /// <summary>
         /// Gets or sets the parsed scoped stores options.
@@ -85,22 +85,5 @@ namespace Proffer.Storage.Configuration
         /// <param name="storeOptions">The store options.</param>
         /// <param name="providerInstanceOptions">The provider instance options.</param>
         public void BindStoreOptions(StoreOptions storeOptions, ProviderOptions providerInstanceOptions) { }
-
-        /// <summary>
-        /// If folder name is null filling it with store name
-        /// </summary>
-        /// <param name="parsedStores">The parsed stores.</param>
-        private IReadOnlyDictionary<string, StoreOptions> FillFolderNameWithStoreNameIfItIsNull(IReadOnlyDictionary<string, StoreOptions> parsedStores)
-        {
-            foreach (var parsedStore in parsedStores)
-            {
-                if (string.IsNullOrEmpty(parsedStore.Value.FolderName))
-                {
-                    parsedStore.Value.FolderName = parsedStore.Value.Name;
-                }
-            }
-
-            return parsedStores;
-        }
     }
 }
