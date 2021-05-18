@@ -33,51 +33,14 @@ namespace Proffer.Email.SendGrid
         /// <summary>
         /// Sends an email.
         /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, string subject, string bodyText, string bodyHtml)
-            => this.SendEmailAsync(from, recipients, subject, bodyText, bodyHtml, Enumerable.Empty<IEmailAttachment>());
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, string subject, string bodyText, string bodyHtml, IEnumerable<IEmailAttachment> attachments)
-            => this.SendEmailAsync(from, recipients, Enumerable.Empty<IEmailAddress>(), Enumerable.Empty<IEmailAddress>(), subject, bodyText, bodyHtml, Enumerable.Empty<IEmailAttachment>());
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
-        /// <param name="ccRecipients">The CC email recipients.</param>
-        /// <param name="bccRecipients">The BCC email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <param name="replyTo">The reply-to email address.</param>
+        /// <param name="email">All informations about the email.</param>
         /// <exception cref="ArgumentException">Each email address should be unique between to, cc, and bcc recipients. We found duplicates.</exception>
         /// <exception cref="Exception">Cannot Send Email: {response.StatusCode}</exception>
-        public async Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, IEnumerable<IEmailAddress> ccRecipients, IEnumerable<IEmailAddress> bccRecipients, string subject, string bodyText, string bodyHtml, IEnumerable<IEmailAttachment> attachments, IEmailAddress replyTo = null)
+        public async Task SendEmailAsync(IEmail email)
         {
-            var allRecipients = new List<IEmailAddress>(recipients);
-            allRecipients.AddRange(ccRecipients);
-            allRecipients.AddRange(bccRecipients);
+            var allRecipients = new List<IEmailAddress>(email.Recipients);
+            allRecipients.AddRange(email.CcRecipients);
+            allRecipients.AddRange(email.BccRecipients);
 
             if (allRecipients.GroupBy(r => r.Email).Count() < allRecipients.Count)
             {
@@ -88,33 +51,33 @@ namespace Proffer.Email.SendGrid
 
             SendGridMessage message;
 
-            if (recipients.Count() == 1)
+            if (email.Recipients.Count() == 1)
             {
-                message = MailHelper.CreateSingleEmail(from.ToSendGridEmail(), recipients.First().ToSendGridEmail(), subject, bodyText, bodyHtml);
+                message = MailHelper.CreateSingleEmail(email.From.ToSendGridEmail(), email.Recipients.First().ToSendGridEmail(), email.Subject, email.BodyText, email.BodyHtml);
             }
             else
             {
                 message = MailHelper.CreateSingleEmailToMultipleRecipients(
-                    from.ToSendGridEmail(),
-                    recipients.Select(email => email.ToSendGridEmail()).ToList(),
-                    subject,
-                    bodyText,
-                    bodyHtml);
+                    email.From.ToSendGridEmail(),
+                    email.Recipients.Select(email => email.ToSendGridEmail()).ToList(),
+                    email.Subject,
+                    email.BodyText,
+                    email.BodyHtml);
             }
 
-            foreach (IEmailAddress ccRecipient in ccRecipients)
+            foreach (IEmailAddress ccRecipient in email.CcRecipients)
             {
                 message.AddCc(ccRecipient.Email, ccRecipient.DisplayName);
             }
 
-            foreach (IEmailAddress bccRecipient in bccRecipients)
+            foreach (IEmailAddress bccRecipient in email.BccRecipients)
             {
                 message.AddBcc(bccRecipient.Email, bccRecipient.DisplayName);
             }
 
-            if (attachments.Any())
+            if (email.Attachments.Any())
             {
-                message.AddAttachments(attachments.Select(a => new Attachment
+                message.AddAttachments(email.Attachments.Select(a => new Attachment
                 {
                     Filename = a.FileName,
                     Type = a.ContentType,
@@ -122,9 +85,9 @@ namespace Proffer.Email.SendGrid
                 }).ToList());
             }
 
-            if (replyTo != null)
+            if (email.ReplyTo != null)
             {
-                message.ReplyTo = replyTo.ToSendGridEmail();
+                message.ReplyTo = email.ReplyTo.ToSendGridEmail();
             }
 
             Response response = await client.SendEmailAsync(message);

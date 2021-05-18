@@ -56,35 +56,6 @@ namespace Proffer.Email.Smtp
         /// </summary>
         /// <param name="from">The sender email address.</param>
         /// <param name="recipients">The email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, string subject, string bodyText, string bodyHtml)
-            => this.SendEmailAsync(from, recipients, subject, bodyText, bodyHtml, Enumerable.Empty<IEmailAttachment>());
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
-        /// <param name="subject">The subject.</param>
-        /// <param name="bodyText">The body as plain text.</param>
-        /// <param name="bodyHtml">The body as HTML.</param>
-        /// <param name="attachments">The file attachments.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// </returns>
-        public Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, string subject, string bodyText, string bodyHtml, IEnumerable<IEmailAttachment> attachments)
-            => this.SendEmailAsync(from, recipients, Enumerable.Empty<IEmailAddress>(), Enumerable.Empty<IEmailAddress>(), subject, bodyText, bodyHtml, Enumerable.Empty<IEmailAttachment>());
-
-        /// <summary>
-        /// Sends an email.
-        /// </summary>
-        /// <param name="from">The sender email address.</param>
-        /// <param name="recipients">The email recipients.</param>
         /// <param name="ccRecipients">The CC email recipients.</param>
         /// <param name="bccRecipients">The BCC email recipients.</param>
         /// <param name="subject">The subject.</param>
@@ -92,40 +63,40 @@ namespace Proffer.Email.Smtp
         /// <param name="bodyHtml">The body as HTML.</param>
         /// <param name="attachments">The file attachments.</param>
         /// <param name="replyTo">The reply-to email address.</param>
-        public async Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, IEnumerable<IEmailAddress> ccRecipients, IEnumerable<IEmailAddress> bccRecipients, string subject, string bodyText, string bodyHtml, IEnumerable<IEmailAttachment> attachments, IEmailAddress replyTo = null)
+        public async Task SendEmailAsync(IEmail email)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(from.DisplayName, from.Email));
+            message.From.Add(new MailboxAddress(email.From.DisplayName, email.From.Email));
 
-            if (replyTo != null)
+            if (email.ReplyTo != null)
             {
-                message.ReplyTo.Add(new MailboxAddress(replyTo.DisplayName, replyTo.Email));
+                message.ReplyTo.Add(new MailboxAddress(email.ReplyTo.DisplayName, email.ReplyTo.Email));
             }
 
-            foreach (IEmailAddress recipient in recipients)
+            foreach (IEmailAddress recipient in email.Recipients)
             {
                 message.To.Add(new MailboxAddress(recipient.DisplayName, recipient.Email));
             }
 
-            foreach (IEmailAddress recipient in ccRecipients)
+            foreach (IEmailAddress recipient in email.CcRecipients)
             {
                 message.Cc.Add(new MailboxAddress(recipient.DisplayName, recipient.Email));
             }
 
-            foreach (IEmailAddress recipient in bccRecipients)
+            foreach (IEmailAddress recipient in email.BccRecipients)
             {
                 message.Bcc.Add(new MailboxAddress(recipient.DisplayName, recipient.Email));
             }
 
-            message.Subject = subject;
+            message.Subject = email.Subject;
 
             var builder = new BodyBuilder
             {
-                TextBody = bodyText,
-                HtmlBody = bodyHtml
+                TextBody = email.BodyText,
+                HtmlBody = email.BodyHtml
             };
 
-            foreach (IEmailAttachment attachment in attachments)
+            foreach (IEmailAttachment attachment in email.Attachments)
             {
                 builder.Attachments.Add(attachment.FileName, attachment.Data, new ContentType(attachment.MediaType, attachment.MediaSubtype));
             }

@@ -34,148 +34,118 @@ namespace Proffer.Email.InMemory.Tests
         [Fact]
         public async Task Should_SendEmailAsync()
         {
-            string subject = "Hello!";
-            string message = "Message in plain text";
             var recipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
+            IEmailBuilder emailBuilder = new EmailBuilder(this.options.DefaultSender, new List<EmailAddress>() { recipient })
+               .AddSubject("Hello!")
+               .AddBodyText("Message in plain text");
 
-            await this.emailSender.SendEmailAsync(subject, message, recipient);
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
 
-            this.fixture.Verify(
-                subject: subject,
-                bodyText: message,
-                bodyHtml: $"<!DOCTYPE html><html><head><title>{subject}</title></head><body>{message}</body></html>",
-                recipients: new() { recipient });
+            emailBuilder.AddBodyHtml($"<!DOCTYPE html><html><head><title>{emailBuilder.Build().Subject}</title></head><body>{emailBuilder.Build().BodyText}</body></html>");
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmailAsync_With_Attachments()
         {
-            string subject = "Hello!";
-            string message = "Message in plain text";
             var recipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
-
             IFileReference beach = await this.fixture.Attachments.GetAsync("beach.jpeg", withMetadata: true);
             IFileReference sample = await this.fixture.Attachments.GetAsync("sample.pdf", withMetadata: true);
 
-            var attachments = new List<IEmailAttachment>
-            {
-                new EmailAttachment(beach.Path, await beach.ReadAllBytesAsync(), beach.Properties.ContentType),
-                new EmailAttachment(sample.Path, await sample.ReadAllBytesAsync(), sample.Properties.ContentType.Split('/')[0], sample.Properties.ContentType.Split('/')[1]),
-            };
+            IEmailBuilder emailBuilder = new EmailBuilder(this.options.DefaultSender, new List<EmailAddress>() { recipient })
+                .AddSubject("Hello!")
+                .AddBodyText("Message in plain text")
+                .AddAttachment(new List<IEmailAttachment>
+                {
+                    new EmailAttachment(beach.Path, await beach.ReadAllBytesAsync(), beach.Properties.ContentType),
+                    new EmailAttachment(sample.Path, await sample.ReadAllBytesAsync(), sample.Properties.ContentType.Split('/')[0], sample.Properties.ContentType.Split('/')[1]),
+                });
 
-            await this.emailSender.SendEmailAsync(this.options.DefaultSender, subject, message, attachments, recipient);
 
-            this.fixture.Verify(
-                subject: subject,
-                bodyText: message,
-                bodyHtml: $"<!DOCTYPE html><html><head><title>{subject}</title></head><body>{message}</body></html>",
-                recipients: new() { recipient },
-                attachments: attachments);
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
+            emailBuilder.AddBodyHtml($"<!DOCTYPE html><html><head><title>{emailBuilder.Build().Subject}</title></head><body>{emailBuilder.Build().BodyText}</body></html>");
+
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmailAsync_With_CarbonCopyRecipients()
         {
-            string subject = "Hello!";
-            string message = "Message in plain text";
             var recipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
             var carbonCopyRecipient = new EmailAddress("cc-recipient@getproffer.net", "Carbon-Copy Recipient");
 
-            await this.emailSender.SendEmailAsync(
-                this.options.DefaultSender,
-                subject,
-                message,
-                Enumerable.Empty<IEmailAttachment>(),
-                new IEmailAddress[] { recipient },
-                new IEmailAddress[] { carbonCopyRecipient },
-                Array.Empty<IEmailAddress>());
+            IEmailBuilder emailBuilder = new EmailBuilder(this.options.DefaultSender, new List<EmailAddress>() { recipient })
+                                            .AddCarbonCopyRecipient(new List<EmailAddress>() { carbonCopyRecipient })
+                                            .AddSubject("Hello!")
+                                            .AddBodyText("Message in plain text");
 
-            this.fixture.Verify(
-                subject: subject,
-                bodyText: message,
-                bodyHtml: $"<!DOCTYPE html><html><head><title>{subject}</title></head><body>{message}</body></html>",
-                recipients: new() { recipient },
-                ccRecipients: new() { carbonCopyRecipient });
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
+
+            emailBuilder.AddBodyHtml($"<!DOCTYPE html><html><head><title>{emailBuilder.Build().Subject}</title></head><body>{emailBuilder.Build().BodyText}</body></html>");
+
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmailAsync_With_BlackCarbonCopyRecipients()
         {
-            string subject = "Hello!";
-            string message = "Message in plain text";
             var recipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
             var blackCarbonCopyRecipient = new EmailAddress("cc-recipient@getproffer.net", "Carbon-Copy Recipient");
 
-            await this.emailSender.SendEmailAsync(
-                this.options.DefaultSender,
-                subject,
-                message,
-                Enumerable.Empty<IEmailAttachment>(),
-                new IEmailAddress[] { recipient },
-                Array.Empty<IEmailAddress>(),
-                new IEmailAddress[] { blackCarbonCopyRecipient });
+            IEmailBuilder emailBuilder = new EmailBuilder(this.options.DefaultSender, new List<EmailAddress>() { recipient })
+                                            .AddBlackCarbonCopyRecipient(new List<EmailAddress>() { blackCarbonCopyRecipient })
+                                            .AddSubject("Hello!")
+                                            .AddBodyText("Message in plain text");
 
-            this.fixture.Verify(
-                subject: subject,
-                bodyText: message,
-                bodyHtml: $"<!DOCTYPE html><html><head><title>{subject}</title></head><body>{message}</body></html>",
-                recipients: new() { recipient },
-                bccRecipients: new() { blackCarbonCopyRecipient });
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
+
+            emailBuilder.AddBodyHtml($"<!DOCTYPE html><html><head><title>{emailBuilder.Build().Subject}</title></head><body>{emailBuilder.Build().BodyText}</body></html>");
+
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmailAsync_With_PlainTextOnly()
         {
-            string subject = "Hello!";
-            string message = "Message in plain text";
             var recipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
+            IEmailBuilder emailBuilder = new EmailBuilder(this.options.DefaultSender, new List<EmailAddress>() { recipient })
+                                            .AddSubject("Hello!")
+                                            .AddBodyText("Message in plain text");
 
-            await this.emailSender.SendEmailAsync(
-                this.options.DefaultSender,
-                this.options.DefaultSender,
-                subject,
-                message,
-                plainTextOnly: true,
-                recipient);
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
 
-            this.fixture.Verify(
-                subject: subject,
-                bodyText: message,
-                recipients: new() { recipient });
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmailAsync_With_ReplyTo()
         {
-            string subject = "Hello!";
-            string message = "Message in plain text";
             var recipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
             var replyTo = new EmailAddress("custom-reply-to@getproffer.net", "Custom Reply-To");
 
-            await this.emailSender.SendEmailAsync(this.options.DefaultSender, replyTo, subject, message, true, recipient);
+            IEmailBuilder emailBuilder = new EmailBuilder(this.options.DefaultSender, new List<EmailAddress>() { recipient })
+                                            .AddSubject("Hello!")
+                                            .AddBodyText("Message in plain text")
+                                            .AddReplyTo(replyTo);
 
-            this.fixture.Verify(
-                subject: subject,
-                bodyText: message,
-                recipients: new() { recipient },
-                replyTo: replyTo);
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
+
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
         public async Task Should_SendEmailAsync_With_Sender()
         {
-            string subject = "Hello!";
-            string message = "Message in plain text";
             var recipient = new EmailAddress("recipient-1@getproffer.net", "Recipient");
             var sender = new EmailAddress("custom-sender@getproffer.net", "Custom Sender");
 
-            await this.emailSender.SendEmailAsync(sender, subject, message, recipient);
+            IEmailBuilder emailBuilder = new EmailBuilder(sender, new List<EmailAddress>() { recipient })
+                                            .AddSubject("Hello!")
+                                            .AddBodyText("Message in plain text");
 
-            this.fixture.Verify(
-                subject: subject,
-                bodyText: message,
-                recipients: new() { recipient },
-                sender: sender);
+            await this.emailSender.SendEmailAsync(emailBuilder.Build());
+
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
@@ -192,13 +162,16 @@ namespace Proffer.Email.InMemory.Tests
 
             var recipient = new EmailAddress("recipient-1@getproffer.net", context.Name);
 
-            await this.emailSender.SendTemplatedEmailAsync(templateKey, context, recipient);
+            IEmailBuilder emailBuilder = new EmailBuilder(this.options.DefaultSender, new List<EmailAddress>() { recipient })
+                                            .AddTemplate(templateKey);
 
-            this.fixture.Verify(
-                subject: $"Hello {context.Name}!",
-                bodyHtml: $"<h1>{WebUtility.HtmlEncode(context.Title)}</h1>{Environment.NewLine}{context.RawHtml}",
-                bodyText: $"{context.Title}{Environment.NewLine}{Environment.NewLine}{context.Message}",
-                recipients: new() { recipient });
+            await this.emailSender.SendTemplatedEmailAsync(emailBuilder.Build(), context);
+
+            emailBuilder.AddSubject($"Hello {context.Name}!")
+                        .AddBodyHtml($"<h1>{WebUtility.HtmlEncode(context.Title)}</h1>{Environment.NewLine}{context.RawHtml}")
+                        .AddBodyText($"{context.Title}{Environment.NewLine}{Environment.NewLine}{context.Message}");
+
+            this.fixture.Verify(emailBuilder.Build());
         }
 
         [Fact]
@@ -217,15 +190,17 @@ namespace Proffer.Email.InMemory.Tests
             var replyTo = new EmailAddress("hello@getproffer.net", "Proffer");
             var recipient = new EmailAddress("recipient-1@getproffer.net", context.Name);
 
-            await this.emailSender.SendTemplatedEmailAsync(sender, replyTo, templateKey, context, recipient);
+            IEmailBuilder emailBuilder = new EmailBuilder(sender, new List<EmailAddress>() { recipient })
+                                            .AddTemplate(templateKey)
+                                            .AddReplyTo(replyTo);
 
-            this.fixture.Verify(
-                subject: $"Hello {context.Name}!",
-                bodyHtml: $"<h1>{WebUtility.HtmlEncode(context.Title)}</h1>{Environment.NewLine}{context.RawHtml}",
-                bodyText: $"{context.Title}{Environment.NewLine}{Environment.NewLine}{context.Message}",
-                recipients: new() { recipient },
-                sender: sender,
-                replyTo: replyTo);
+            await this.emailSender.SendTemplatedEmailAsync(emailBuilder.Build(), context);
+
+            emailBuilder.AddSubject($"Hello {context.Name}!")
+                        .AddBodyHtml($"<h1>{WebUtility.HtmlEncode(context.Title)}</h1>{Environment.NewLine}{context.RawHtml}")
+                        .AddBodyText($"{context.Title}{Environment.NewLine}{Environment.NewLine}{context.Message}");
+
+            this.fixture.Verify(emailBuilder.Build());
         }
     }
 }
