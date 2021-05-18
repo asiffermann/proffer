@@ -136,7 +136,7 @@ jobs:
         if: ${{ always() }}
 
       - name: Publish unit tests results
-        uses: EnricoMi/publish-unit-test-result-action@v1.16
+        uses: EnricoMi/publish-unit-test-result-action@v1.17
         if: >
           always() &&
           github.event.sender.login != 'dependabot[bot]' &&
