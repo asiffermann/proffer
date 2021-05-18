@@ -186,12 +186,13 @@ namespace Proffer.Storage.Configuration
                 Name = kvp.Key,
             };
 
+            ConfigurationBinder.Bind(kvp.Value, options);
+
             if (options is IStoreOptions storeOptions && string.IsNullOrEmpty(storeOptions.FolderName))
             {
                 storeOptions.FolderName = options.Name;
             }
 
-            ConfigurationBinder.Bind(kvp.Value, options);
             return options;
         }
     }
