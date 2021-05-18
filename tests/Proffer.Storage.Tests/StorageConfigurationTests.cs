@@ -27,7 +27,7 @@ namespace Proffer.Storage.Tests
             IOptions<StorageOptions> options = fixture.Services.GetRequiredService<IOptions<StorageOptions>>();
 
             IEnumerable<IOptionError> errors = options.Value.ParsedStores
-                .SelectMany(s => s.Value.Validate(throwOnError: true));
+                .SelectMany(s => s.Value.Validate(throwOnError: false));
 
             Assert.Empty(errors);
         }
