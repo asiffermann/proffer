@@ -3,6 +3,7 @@ namespace Proffer.Events.Internal
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Extensions.Options;
+    using Proffer.Configuration;
     using Proffer.Events.Configuration;
     using Proffer.Events.Configuration.Queue;
 
@@ -126,7 +127,7 @@ namespace Proffer.Events.Internal
             }
             else if (!string.IsNullOrEmpty(configuration.ProviderName))
             {
-                this.options.ProviderOptions.TryGetValue(configuration.ProviderName, out Configuration.Provider.EventProviderOptions providersInstanceOptions);
+                this.options.ProviderOptions.TryGetValue(configuration.ProviderName, out ProviderOptions providersInstanceOptions);
                 if (providersInstanceOptions != null)
                 {
                     providerTypeName = providersInstanceOptions.Type;

@@ -1,7 +1,7 @@
 namespace Proffer.Events.InMemory
 {
     using Microsoft.Extensions.Options;
-    using Proffer.Events.Configuration.Provider;
+    using Proffer.Configuration;
     using Proffer.Events.Configuration.Queue;
     using Proffer.Events.InMemory.Configuration;
     using Proffer.Events.InMemory.Internal;
@@ -11,7 +11,7 @@ namespace Proffer.Events.InMemory
     /// An in memory queue provider
     /// </summary>
     /// <seealso cref="EventsProviderBase{InMemoryParsedOptions, InMemoryProviderInstanceOptions, InMemoryQueueOptions}" />
-    public class InMemoryProvider : EventsProviderBase<InMemoryOptions, EventProviderOptions, QueueOptions>
+    public class InMemoryProvider : EventsProviderBase<InMemoryOptions, ProviderOptions, QueueOptions>
     {
         /// <summary>
         /// The provider name

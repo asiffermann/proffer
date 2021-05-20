@@ -4,6 +4,7 @@ namespace Proffer.Events.Internal
     using Proffer.Events.Configuration;
     using Proffer.Events.Configuration.Queue;
     using Proffer.Events.Configuration.Provider;
+    using Proffer.Configuration;
 
     /// <summary>
     /// A abstract class to implement an EventsProvider 
@@ -14,7 +15,7 @@ namespace Proffer.Events.Internal
     /// <seealso cref="IEventProvider" />
     public abstract class EventsProviderBase<TParsedOptions, TProviderOptions, TQueueOptions> : IEventProvider
             where TParsedOptions : class, IParsedOptions<TProviderOptions, TQueueOptions>, new()
-            where TProviderOptions : class, IEventProviderOptions, new()
+            where TProviderOptions : class, IProviderOptions, new()
             where TQueueOptions : class, IQueueOptions, new()
     {
         /// <summary>

@@ -1,20 +1,22 @@
-namespace Proffer.Events.InMemory
+namespace Proffer.Events.AzureStorage
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.Json;
     using System.Threading.Tasks;
-    using Proffer.Events.Configuration.Queue;
-    using Proffer.Events.InMemory.Internal;
+    using Azure.Storage.Queues;
+    using Proffer.Events.AzureStorage.Configuration;
+    using Proffer.Events.AzureStorage.Internal;
 
     /// <summary>
-    /// An in memory event queuer 
+    /// An Azure stroge event queuer
     /// </summary>
     /// <seealso cref="IEventQueuer" />
-    public class InMemoryEventQueuer : IEventQueuer
+    public class AzureStorageEventQueuer : IEventQueuer
     {
-        private readonly IQueueOptions queueOptions;
+        private readonly AzureStorageQueueOptions queueOptions;
+        private readonly QueueServiceClient queueService;
         private readonly Queue<EventBase> queue = new Queue<EventBase>();
-        private readonly IQueueStorageInMemory storedQueue;
 
         /// <summary>
         /// Gets the name.
@@ -22,18 +24,17 @@ namespace Proffer.Events.InMemory
         public string Name => this.queueOptions.Name;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InMemoryEventQueuer"/> class.
+        /// Initializes a new instance of the <see cref="AzureStorageEventQueuer"/> class.
         /// </summary>
-        /// <param name="storedQueue">The stored queue.</param>
         /// <param name="queueOptions">The queue options.</param>
-        public InMemoryEventQueuer(IQueueStorageInMemory storedQueue, IQueueOptions queueOptions)
+        public AzureStorageEventQueuer(AzureStorageQueueOptions queueOptions)
         {
-            this.storedQueue = storedQueue;
             this.queueOptions = queueOptions;
+            this.queueService = new QueueServiceClient(queueOptions.ConnectionString);
         }
 
         /// <summary>
-        /// Queues the event.
+        /// Queues the event. (uncommited pushed events)
         /// </summary>
         /// <typeparam name="TEvent">The type of the event.</typeparam>
         /// <param name="event">The event.</param>
@@ -46,19 +47,21 @@ namespace Proffer.Events.InMemory
         }
 
         /// <summary>
-        /// Commits the <see cref="EventBase" /> asynchronous.
+        /// Commits the events to the queue storage asynchronous.
         /// </summary>
-        /// <returns></returns>
-        public Task CommitAsync()
+        public async Task CommitAsync()
         {
-            foreach (EventBase eventBase in this.queue)
+            await this.queueService.EnsureQueueIsCreatedAsync(this.queueOptions.Name);
+            QueueClient queueClient = this.queueService.GetQueueClient(this.queueOptions.Name);
+
+            var sendMessagesTaskList = new List<Task>();
+            foreach (EventBase @event in this.queue)
             {
-                this.storedQueue.Add(eventBase);
+                sendMessagesTaskList.Add(queueClient.SendMessageAsync(JsonSerializer.Serialize(@event)));
             }
 
             this.queue.Clear();
-
-            return Task.CompletedTask;
+            await Task.WhenAll(sendMessagesTaskList);
         }
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace Proffer.Events.InMemory
         }
 
         /// <summary>
-        /// Flushes the uncommited messages.
+        /// Flushes the uncommited message.
         /// </summary>
         /// <returns>
         ///     All the events present in the queue when you call this method
@@ -87,5 +90,6 @@ namespace Proffer.Events.InMemory
 
             return messagesList;
         }
+
     }
 }

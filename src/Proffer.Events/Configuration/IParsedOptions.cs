@@ -1,7 +1,7 @@
 namespace Proffer.Events.Configuration
 {
     using System.Collections.Generic;
-    using Proffer.Events.Configuration.Provider;
+    using Proffer.Configuration;
     using Proffer.Events.Configuration.Queue;
 
     /// <summary>
@@ -10,7 +10,7 @@ namespace Proffer.Events.Configuration
     /// <typeparam name="TProviderOptions">The type of the provider instance options.</typeparam>
     /// <typeparam name="TQueueOptions">The type of the store options.</typeparam>
     public interface IParsedOptions<TProviderOptions, TQueueOptions>
-        where TProviderOptions : class, IEventProviderOptions
+        where TProviderOptions : class, IProviderOptions
         where TQueueOptions : class, IQueueOptions
     {
         /// <summary>

@@ -4,7 +4,7 @@ namespace Proffer.Events.Configuration.Provider
     /// Generic options for Event Provider
     /// </summary>
     /// <seealso cref="IEventProviderOptions" />
-    public class EventProviderOptions : IEventProviderOptions
+    public class AzureStorageProviderOptions : IEventProviderOptions
     {
         /// <summary>
         /// Gets the provider type.

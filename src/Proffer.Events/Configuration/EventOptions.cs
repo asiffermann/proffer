@@ -3,18 +3,18 @@ namespace Proffer.Events.Configuration
     using System;
     using System.Collections.Generic;
     using Microsoft.Extensions.Configuration;
-    using Proffer.Events.Configuration.Provider;
+    using Proffer.Configuration;
     using Proffer.Events.Configuration.Queue;
 
     /// <summary>
     /// The Proffer.Events options with providers and stores 
     /// </summary>
     /// <seealso cref="IParsedOptions{EventProviderOptions, QueueOptions}" />
-    public class EventOptions : IParsedOptions<EventProviderOptions, QueueOptions>
+    public class EventOptions : IParsedOptions<ProviderOptions, QueueOptions>
     {
         internal const string DefaultConfigurationSectionName = "Event";
 
-        private readonly Lazy<IReadOnlyDictionary<string, EventProviderOptions>> parsedProviderInstances;
+        private readonly Lazy<IReadOnlyDictionary<string, ProviderOptions>> parsedProviderInstances;
         private readonly Lazy<IReadOnlyDictionary<string, QueueOptions>> parsedQueueOptions;
 
         /// <summary>
@@ -22,8 +22,8 @@ namespace Proffer.Events.Configuration
         /// </summary>
         public EventOptions()
         {
-            this.parsedProviderInstances = new Lazy<IReadOnlyDictionary<string, EventProviderOptions>>(
-                () => this.ProviderConfigurations.Parse<EventProviderOptions>());
+            this.parsedProviderInstances = new Lazy<IReadOnlyDictionary<string, ProviderOptions>>(
+                () => this.ProviderConfigurations.Parse<ProviderOptions>());
             this.parsedQueueOptions = new Lazy<IReadOnlyDictionary<string, QueueOptions>>(
                 () => this.QueueConfigurations.Parse<QueueOptions>());
         }
@@ -56,19 +56,19 @@ namespace Proffer.Events.Configuration
         /// <summary>
         /// Gets or sets the provider options.
         /// </summary>
-        public IReadOnlyDictionary<string, EventProviderOptions> ProviderOptions { get => this.parsedProviderInstances.Value; set { } }
+        public IReadOnlyDictionary<string, ProviderOptions> ProviderOptions { get => this.parsedProviderInstances.Value; set { } }
 
         /// <summary>
         /// Binds the queue options.
         /// </summary>
         /// <param name="queueOptions">The queue options.</param>
         /// <param name="providerOptions">The provider options.</param>
-        public void BindQueueOptions(QueueOptions queueOptions, EventProviderOptions providerOptions) { }
+        public void BindQueueOptions(QueueOptions queueOptions, ProviderOptions providerOptions) { }
 
         /// <summary>
         /// Binds the provider options.
         /// </summary>
         /// <param name="providerOptions">The provider options.</param>
-        public void BindProviderOptions(EventProviderOptions providerOptions) { }
+        public void BindProviderOptions(ProviderOptions providerOptions) { }
     }
 }

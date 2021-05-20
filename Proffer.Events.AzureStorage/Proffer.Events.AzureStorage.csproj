@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Common" Version="12.7.2" />
+    <PackageReference Include="Azure.Storage.Queues" Version="12.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Proffer.Events\Proffer.Events.csproj" />
+  </ItemGroup>
+
+</Project>

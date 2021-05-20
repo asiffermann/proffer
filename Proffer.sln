@@ -89,6 +89,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Events", "src\Proff
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Events.InMemory", "Proffer.Events.InMemory\Proffer.Events.InMemory.csproj", "{A903D134-63DE-4998-B4D3-B94CBB10267F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Events.AzureStorage", "Proffer.Events.AzureStorage\Proffer.Events.AzureStorage.csproj", "{027CEC69-3504-458E-B063-2C6062EFDD97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -211,6 +213,10 @@ Global
 		{A903D134-63DE-4998-B4D3-B94CBB10267F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A903D134-63DE-4998-B4D3-B94CBB10267F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A903D134-63DE-4998-B4D3-B94CBB10267F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027CEC69-3504-458E-B063-2C6062EFDD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027CEC69-3504-458E-B063-2C6062EFDD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027CEC69-3504-458E-B063-2C6062EFDD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027CEC69-3504-458E-B063-2C6062EFDD97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -246,6 +252,7 @@ Global
 		{4677285D-19A7-4B38-B056-1D946A51E47C} = {EB0DAEC2-2EEE-4833-8180-353882615CEC}
 		{BC8068EB-735C-4F38-B91F-44A71020435C} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
 		{A903D134-63DE-4998-B4D3-B94CBB10267F} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
+		{027CEC69-3504-458E-B063-2C6062EFDD97} = {8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E14A063-006D-442F-BBA4-C9CF12D2438A}

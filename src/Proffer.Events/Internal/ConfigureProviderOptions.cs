@@ -2,8 +2,8 @@ namespace Proffer.Events.Internal
 {
     using System.Linq;
     using Microsoft.Extensions.Options;
+    using Proffer.Configuration;
     using Proffer.Events.Configuration;
-    using Proffer.Events.Configuration.Provider;
     using Proffer.Events.Configuration.Queue;
 
     /// <summary>
@@ -15,7 +15,7 @@ namespace Proffer.Events.Internal
     /// <seealso cref="IConfigureOptions{TParsedOptions}" />
     public class ConfigureProviderOptions<TParsedOptions, TProviderOptions, TQueueOptions> : IConfigureOptions<TParsedOptions>
             where TParsedOptions : class, IParsedOptions<TProviderOptions, TQueueOptions>
-            where TProviderOptions : class, IEventProviderOptions, new()
+            where TProviderOptions : class, IProviderOptions, new()
             where TQueueOptions : class, IQueueOptions, new()
 
     {

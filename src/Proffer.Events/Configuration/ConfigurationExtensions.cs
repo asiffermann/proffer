@@ -4,7 +4,6 @@ namespace Proffer.Events.Configuration
     using System.Linq;
     using Microsoft.Extensions.Configuration;
     using Proffer.Configuration;
-    using Proffer.Events.Configuration.Provider;
     using Proffer.Events.Configuration.Queue;
 
     /// <summary>
@@ -28,7 +27,7 @@ namespace Proffer.Events.Configuration
 
         public static void Compute<TParsedOptions, TProviderOptions, TQueueOptions>(this TProviderOptions parsedProviderInstance, TParsedOptions options)
             where TParsedOptions : class, IParsedOptions<TProviderOptions, TQueueOptions>
-            where TProviderOptions : class, IEventProviderOptions, new()
+            where TProviderOptions : class, IProviderOptions, new()
             where TQueueOptions : class, IQueueOptions, new()
         {
             options.BindProviderOptions(parsedProviderInstance);
@@ -36,7 +35,7 @@ namespace Proffer.Events.Configuration
 
         public static void Compute<TParsedOptions, TProviderOptions, TQueueOptions>(this TQueueOptions parsedQueue, TParsedOptions options)
             where TParsedOptions : class, IParsedOptions<TProviderOptions, TQueueOptions>
-            where TProviderOptions : class, IEventProviderOptions, new()
+            where TProviderOptions : class, IProviderOptions, new()
             where TQueueOptions : class, IQueueOptions, new()
         {
             TProviderOptions providerOptions = null;
@@ -67,7 +66,7 @@ namespace Proffer.Events.Configuration
         }
 
         public static TQueueOptions GetQueueConfiguration<TProviderOptions, TQueueOptions>(this IParsedOptions<TProviderOptions, TQueueOptions> parsedOptions, string queueName, bool throwIfNotFound = true)
-            where TProviderOptions : class, IEventProviderOptions
+            where TProviderOptions : class, IProviderOptions
             where TQueueOptions : class, IQueueOptions
         {
             parsedOptions.QueueOptions.TryGetValue(queueName, out var queueOptions);
@@ -86,7 +85,7 @@ namespace Proffer.Events.Configuration
 
         public static TQueueOptions ParseQueueOptions<TParsedOptions, TProviderOptions, TQueueOptions>(this IQueueOptions queueOptions, TParsedOptions options)
             where TParsedOptions : class, IParsedOptions<TProviderOptions, TQueueOptions>, new()
-            where TProviderOptions : class, IEventProviderOptions, new()
+            where TProviderOptions : class, IProviderOptions, new()
             where TQueueOptions : class, IQueueOptions, new()
         {
             if (!( queueOptions is TQueueOptions parsedQueueOptions ))

@@ -3,7 +3,7 @@ namespace Proffer.Events.InMemory
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Microsoft.Extensions.Options;
-    using Proffer.Events.Configuration.Provider;
+    using Proffer.Configuration;
     using Proffer.Events.Configuration.Queue;
     using Proffer.Events.InMemory.Configuration;
     using Proffer.Events.InMemory.Internal;
@@ -21,7 +21,7 @@ namespace Proffer.Events.InMemory
         public static IServiceCollection AddInMemoryQueue(this IServiceCollection services)
         {
             return services
-                .AddSingleton<IConfigureOptions<InMemoryOptions>, ConfigureProviderOptions<InMemoryOptions, EventProviderOptions, QueueOptions>>()
+                .AddSingleton<IConfigureOptions<InMemoryOptions>, ConfigureProviderOptions<InMemoryOptions, ProviderOptions, QueueOptions>>()
                 .AddInMemoryQueueServices()
                 .AddInMemoryQueueStorage();
         }
