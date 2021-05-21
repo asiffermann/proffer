@@ -29,9 +29,9 @@
           <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
         {% endif %}
 
-        {% if site.logo %}
+        {% if site.banner %}
           <a href="{{ "/" | absolute_url }}">
-            <img src="{{site.logo | relative_url}}" alt="Logo" />
+            <img src="{{site.banner | relative_url}}" alt="Banner" />
           </a>
         {% endif %}
 

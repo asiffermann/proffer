@@ -1,6 +1,23 @@
 theme: jekyll-theme-minimal
-title: Proffer
-logo: /assets/img/banner.png
 main_color: "#5c2d91"
 show_downloads: true
 show_title: false
+
+title: Proffer
+logo: /assets/img/logo.png
+banner: /assets/img/banner.png
+
+author: asiffermann
+twitter:
+  username: proffer_dotnet
+  card: summary
+social:
+  links:
+    - https://github.com/asiffermann/proffer
+    - https://twitter.com/proffer_dotnet
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/banner.png
