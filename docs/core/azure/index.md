@@ -4,6 +4,6 @@ This library provides common abstractions for any Proffer provider connected to 
 
 There is not much here until the configuration will be shared across all different projects.
 
-## API Documentation
+## API documentation
 
 - [Proffer.Azure](./api)
