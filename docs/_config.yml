@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
 title: Proffer
 logo: /assets/img/banner.png
-main_color: #5c2d91
+main_color: "#5c2d91"
 show_downloads: true
 show_title: false
