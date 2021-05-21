@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ITemplateLoader
 
 Namespace: Proffer.Templating
@@ -31,7 +27,3 @@ The template name.
 
 [Task&lt;ITemplate&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1)<br>
 The matching .
-
----
-
-[`< Back`](./)

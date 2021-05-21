@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # EqualityComparerBase&lt;T&gt;
 
 Namespace: Proffer
@@ -80,7 +76,3 @@ The object.
 
 [IEnumerable&lt;Object&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 An enumerable containing the properties values.
-
----
-
-[`< Back`](./)

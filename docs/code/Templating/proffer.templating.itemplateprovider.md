@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ITemplateProvider
 
 Namespace: Proffer.Templating
@@ -52,7 +48,3 @@ ITemplateProviderScope CreateScope()
 
 [ITemplateProviderScope](./proffer.templating.itemplateproviderscope)<br>
 A new templating provider scope.
-
----
-
-[`< Back`](./)

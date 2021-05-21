@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # EmailAttachment
 
 Namespace: Proffer.Email.Internal
@@ -127,7 +123,3 @@ The media type.
 
 `mediaSubtype` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The media subtype.
-
----
-
-[`< Back`](./)

@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemParsedOptions
 
 Namespace: Proffer.Storage.FileSystem.Configuration
@@ -129,7 +125,3 @@ The store options.
 
 `providerInstanceOptions` [FileSystemProviderOptions](./proffer.storage.filesystem.configuration.filesystemprovideroptions)<br>
 The provider instance options.
-
----
-
-[`< Back`](./)

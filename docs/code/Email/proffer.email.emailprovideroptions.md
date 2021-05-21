@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # EmailProviderOptions
 
 Namespace: Proffer.Email
@@ -50,7 +46,3 @@ public Dictionary<string, string> Parameters { get; set; }
 ```csharp
 public EmailProviderOptions()
 ```
-
----
-
-[`< Back`](./)

@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemPropertiesJsonOptions
 
 Namespace: Proffer.Storage.FileSystem.Properties.Json
@@ -37,7 +33,3 @@ public string FolderNameFormat { get; set; }
 ```csharp
 public FileSystemPropertiesJsonOptions()
 ```
-
----
-
-[`< Back`](./)

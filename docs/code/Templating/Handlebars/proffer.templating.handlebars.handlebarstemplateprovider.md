@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # HandlebarsTemplateProvider
 
 Namespace: Proffer.Templating.Handlebars
@@ -84,7 +80,3 @@ public ITemplateProviderScope CreateScope()
 ITemplateProviderScope<br>
 
             A new templating provider scope.
-
----
-
-[`< Back`](./)

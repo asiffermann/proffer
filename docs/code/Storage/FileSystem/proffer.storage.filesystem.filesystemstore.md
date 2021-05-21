@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemStore
 
 Namespace: Proffer.Storage.FileSystem
@@ -333,7 +329,3 @@ The policy.
 #### Exceptions
 
 [NotSupportedException](https://docs.microsoft.com/en-us/dotnet/api/system.notsupportedexception)<br>
-
----
-
-[`< Back`](./)

@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsStorageServiceCollectionExtensions
 
 Namespace: Proffer.Storage
@@ -33,7 +29,3 @@ The service collection.
 
 IServiceCollection<br>
 The service collection.
-
----
-
-[`< Back`](./)

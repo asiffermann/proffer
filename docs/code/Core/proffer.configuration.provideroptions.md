@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ProviderOptions
 
 Namespace: Proffer.Configuration
@@ -50,7 +46,3 @@ public string Type { get; set; }
 ```csharp
 public ProviderOptions()
 ```
-
----
-
-[`< Back`](./)

@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsListFileWrapper
 
 Namespace: Proffer.Storage.Azure.Blobs.Internal
@@ -69,7 +65,3 @@ The file reference.
 
 `parent` [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper)<br>
 The parent directory.
-
----
-
-[`< Back`](./)

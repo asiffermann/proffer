@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # NoExtendedPropertiesProvider
 
 Namespace: Proffer.Storage.FileSystem
@@ -71,7 +67,3 @@ The extended properties.
 
 [Task](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task)<br>
 A task that represents the asynchronous operation.
-
----
-
-[`< Back`](./)

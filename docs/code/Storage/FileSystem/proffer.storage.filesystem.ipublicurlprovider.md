@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # IPublicUrlProvider
 
 Namespace: Proffer.Storage.FileSystem
@@ -34,7 +30,3 @@ The reference holding the file path.
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The public URL.
-
----
-
-[`< Back`](./)

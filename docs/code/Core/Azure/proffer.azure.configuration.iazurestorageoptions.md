@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # IAzureStorageOptions
 
 Namespace: Proffer.Azure.Configuration
@@ -37,7 +33,3 @@ public abstract string ConnectionStringName { get; set; }
 #### Property Value
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
----
-
-[`< Back`](./)

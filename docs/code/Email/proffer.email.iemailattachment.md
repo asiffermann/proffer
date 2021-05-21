@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # IEmailAttachment
 
 Namespace: Proffer.Email
@@ -73,7 +69,3 @@ public abstract string ContentType { get; }
 #### Property Value
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
----
-
-[`< Back`](./)

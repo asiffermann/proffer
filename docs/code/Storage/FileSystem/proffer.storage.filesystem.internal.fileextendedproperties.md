@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileExtendedProperties
 
 Namespace: Proffer.Storage.FileSystem.Internal
@@ -85,7 +81,3 @@ Initializes a new instance of the [FileExtendedProperties](./proffer.storage.fil
 ```csharp
 public FileExtendedProperties()
 ```
-
----
-
-[`< Back`](./)

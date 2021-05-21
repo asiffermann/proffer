@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemFileProperties
 
 Namespace: Proffer.Storage.FileSystem.Internal
@@ -118,7 +114,3 @@ The file system path.
 
 `extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties)<br>
 The extended properties.
-
----
-
-[`< Back`](./)

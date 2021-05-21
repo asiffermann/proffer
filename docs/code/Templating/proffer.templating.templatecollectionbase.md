@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # TemplateCollectionBase
 
 Namespace: Proffer.Templating
@@ -96,7 +92,3 @@ The format provider.
 [Task&lt;String&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1)<br>
 
             The templated result.
-
----
-
-[`< Back`](./)

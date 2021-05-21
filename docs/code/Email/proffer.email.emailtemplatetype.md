@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # EmailTemplateType
 
 Namespace: Proffer.Email
@@ -22,7 +18,3 @@ Implements [IComparable](https://docs.microsoft.com/en-us/dotnet/api/system.icom
 | Subject | 0 | The templated subject. |
 | BodyHtml | 1 | The templated body as HTML. |
 | BodyText | 2 | The templated body as plain-text. |
-
----
-
-[`< Back`](./)

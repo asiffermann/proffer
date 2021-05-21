@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # IEmailProviderType
 
 Namespace: Proffer.Email
@@ -45,7 +41,3 @@ The provider options.
 
 [IEmailProvider](./proffer.email.iemailprovider)<br>
 A new .
-
----
-
-[`< Back`](./)

@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # EmailAddress
 
 Namespace: Proffer.Email.Internal
@@ -66,7 +62,3 @@ The email.
 
 `displayName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The display name.
-
----
-
-[`< Back`](./)

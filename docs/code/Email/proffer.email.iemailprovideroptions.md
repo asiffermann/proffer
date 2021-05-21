@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # IEmailProviderOptions
 
 Namespace: Proffer.Email
@@ -37,7 +33,3 @@ public abstract Dictionary<string, string> Parameters { get; set; }
 #### Property Value
 
 [Dictionary&lt;String, String&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2)<br>
-
----
-
-[`< Back`](./)

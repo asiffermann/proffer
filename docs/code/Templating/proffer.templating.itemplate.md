@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ITemplate
 
 Namespace: Proffer.Templating
@@ -61,7 +57,3 @@ The format provider.
 #### Exceptions
 
 [InvalidContextException](./proffer.templating.invalidcontextexception)<br>
-
----
-
-[`< Back`](./)

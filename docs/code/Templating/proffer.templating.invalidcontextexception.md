@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # InvalidContextException
 
 Namespace: Proffer.Templating
@@ -127,7 +123,3 @@ public InvalidContextException(Exception innerException)
 
 `innerException` [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 The inner exception.
-
----
-
-[`< Back`](./)

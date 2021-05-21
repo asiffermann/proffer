@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # InMemoryEmailRepository
 
 Namespace: Proffer.Email.InMemory
@@ -53,7 +49,3 @@ public void Save(InMemoryEmail email)
 
 `email` [InMemoryEmail](./proffer.email.inmemory.inmemoryemail)<br>
 The email.
-
----
-
-[`< Back`](./)

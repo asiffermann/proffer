@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # EmailAddressEqualityComparer
 
 Namespace: Proffer.Email.Internal
@@ -45,7 +41,3 @@ The object.
 [IEnumerable&lt;Object&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 
             An enumerable containing the properties values.
-
----
-
-[`< Back`](./)

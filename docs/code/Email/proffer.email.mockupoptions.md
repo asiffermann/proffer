@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # MockupOptions
 
 Namespace: Proffer.Email
@@ -61,7 +57,3 @@ public string Disclaimer { get; set; }
 ```csharp
 public MockupOptions()
 ```
-
----
-
-[`< Back`](./)

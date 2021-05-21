@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemScopedStoreOptions
 
 Namespace: Proffer.Storage.FileSystem.Configuration
@@ -122,7 +118,3 @@ public string FolderName { get; set; }
 ```csharp
 public FileSystemScopedStoreOptions()
 ```
-
----
-
-[`< Back`](./)

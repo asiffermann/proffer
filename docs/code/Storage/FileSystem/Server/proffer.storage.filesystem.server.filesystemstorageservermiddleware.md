@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemStorageServerMiddleware
 
 Namespace: Proffer.Storage.FileSystem.Server
@@ -56,7 +52,3 @@ The context.
 #### Returns
 
 [Task](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task)<br>
-
----
-
-[`< Back`](./)

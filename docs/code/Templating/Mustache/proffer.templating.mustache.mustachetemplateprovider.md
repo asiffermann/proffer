@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # MustacheTemplateProvider
 
 Namespace: Proffer.Templating.Mustache
@@ -105,7 +101,3 @@ The template.
 #### Exceptions
 
 [NotSupportedException](https://docs.microsoft.com/en-us/dotnet/api/system.notsupportedexception)<br>
-
----
-
-[`< Back`](./)

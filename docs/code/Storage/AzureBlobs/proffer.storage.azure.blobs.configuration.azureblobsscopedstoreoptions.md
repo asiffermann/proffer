@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsScopedStoreOptions
 
 Namespace: Proffer.Storage.Azure.Blobs.Configuration
@@ -122,7 +118,3 @@ public string FolderName { get; set; }
 ```csharp
 public AzureBlobsScopedStoreOptions()
 ```
-
----
-
-[`< Back`](./)

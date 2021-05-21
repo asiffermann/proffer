@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ServiceCollectionExtensions
 
 Namespace: Proffer.Email
@@ -33,7 +29,3 @@ The service collection.
 
 IServiceCollection<br>
 The service collection.
-
----
-
-[`< Back`](./)

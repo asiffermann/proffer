@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # SendGridEmailProvider
 
 Namespace: Proffer.Email.SendGrid
@@ -150,7 +146,3 @@ Each email address should be unique between to, cc, and bcc recipients. We found
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 Cannot Send Email: {response.StatusCode}
-
----
-
-[`< Back`](./)

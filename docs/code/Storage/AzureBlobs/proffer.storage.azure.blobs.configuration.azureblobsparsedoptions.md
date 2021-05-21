@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsParsedOptions
 
 Namespace: Proffer.Storage.Azure.Blobs.Configuration
@@ -125,7 +121,3 @@ The provider instance options.
 #### Exceptions
 
 Proffer.Storage.Exceptions.BadStoreConfiguration<br>
-
----
-
-[`< Back`](./)

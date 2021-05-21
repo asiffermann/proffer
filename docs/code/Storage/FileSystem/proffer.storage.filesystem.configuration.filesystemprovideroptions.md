@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemProviderOptions
 
 Namespace: Proffer.Storage.FileSystem.Configuration
@@ -62,7 +58,3 @@ public string Type { get; set; }
 ```csharp
 public FileSystemProviderOptions()
 ```
-
----
-
-[`< Back`](./)

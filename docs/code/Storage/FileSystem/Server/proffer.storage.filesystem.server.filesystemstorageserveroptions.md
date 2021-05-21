@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemStorageServerOptions
 
 Namespace: Proffer.Storage.FileSystem.Server
@@ -61,7 +57,3 @@ public Byte[] SigningKey { get; set; }
 ```csharp
 public FileSystemStorageServerOptions()
 ```
-
----
-
-[`< Back`](./)

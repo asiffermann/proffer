@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # SendGridEmailProviderType
 
 Namespace: Proffer.Email.SendGrid
@@ -59,7 +55,3 @@ The provider options.
 IEmailProvider<br>
 
             A new .
-
----
-
-[`< Back`](./)

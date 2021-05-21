@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # IOptionError
 
 Namespace: Proffer.Configuration
@@ -37,7 +33,3 @@ public abstract string ErrorMessage { get; }
 #### Property Value
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-
----
-
-[`< Back`](./)

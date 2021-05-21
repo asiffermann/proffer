@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # TemplateCollectionBase&lt;TStore&gt;
 
 Namespace: Proffer.Templating
@@ -50,7 +46,3 @@ The typed store.
 
 `templateLoaderFactory` [ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory)<br>
 The template loader factory.
-
----
-
-[`< Back`](./)

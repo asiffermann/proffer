@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsProviderOptions
 
 Namespace: Proffer.Storage.Azure.Blobs.Configuration
@@ -74,7 +70,3 @@ public string Type { get; set; }
 ```csharp
 public AzureBlobsProviderOptions()
 ```
-
----
-
-[`< Back`](./)

@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsStore
 
 Namespace: Proffer.Storage.Azure.Blobs
@@ -327,7 +323,3 @@ The policy.
 ValueTask&lt;String&gt;<br>
 
             A shared access signature to read or list the store files.
-
----
-
-[`< Back`](./)

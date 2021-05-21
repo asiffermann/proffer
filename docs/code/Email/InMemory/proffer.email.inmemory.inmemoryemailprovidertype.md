@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # InMemoryEmailProviderType
 
 Namespace: Proffer.Email.InMemory
@@ -64,7 +60,3 @@ The provider options.
 IEmailProvider<br>
 
             A new .
-
----
-
-[`< Back`](./)

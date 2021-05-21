@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ITemplateLoaderFactory
 
 Namespace: Proffer.Templating
@@ -52,7 +48,3 @@ The cache scope.
 
 [ITemplateLoader](./proffer.templating.itemplateloader)<br>
 A  that loads templates from the given .
-
----
-
-[`< Back`](./)

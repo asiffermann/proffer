@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # TemplateNotFoundException
 
 Namespace: Proffer.Templating.Exceptions
@@ -127,7 +123,3 @@ public TemplateNotFoundException(string templateName)
 
 `templateName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the missing template.
-
----
-
-[`< Back`](./)

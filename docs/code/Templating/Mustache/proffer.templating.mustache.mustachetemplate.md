@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # MustacheTemplate
 
 Namespace: Proffer.Templating.Mustache
@@ -80,7 +76,3 @@ The format provider.
 #### Exceptions
 
 Proffer.Templating.InvalidContextException<br>
-
----
-
-[`< Back`](./)

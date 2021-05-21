@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ServiceCollectionExtensions
 
 Namespace: Proffer.Storage
@@ -54,7 +50,3 @@ The application builder.
 
 IApplicationBuilder<br>
 The application builder.
-
----
-
-[`< Back`](./)

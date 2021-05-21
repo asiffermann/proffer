@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsStorageProvider
 
 Namespace: Proffer.Storage.Azure.Blobs
@@ -77,7 +73,3 @@ The store options.
 IStore<br>
 
             A configured .
-
----
-
-[`< Back`](./)

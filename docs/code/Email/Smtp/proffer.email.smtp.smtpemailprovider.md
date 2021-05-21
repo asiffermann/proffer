@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # SmtpEmailProvider
 
 Namespace: Proffer.Email.Smtp
@@ -146,7 +142,3 @@ The reply-to email address.
 #### Returns
 
 [Task](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task)<br>
-
----
-
-[`< Back`](./)

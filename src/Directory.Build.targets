@@ -1,6 +1,6 @@
 <Project>
   <Target Name="XmlDocToMarkup" AfterTargets="AfterBuild" Condition="false">
     <Exec Command="dotnet tool restore" />
-    <Exec Command="dotnet xmldoc2md &quot;$(TargetPath)&quot; ../../docs/code/$(DocPath) --github-pages --back-button" />
+    <Exec Command="dotnet xmldoc2md &quot;$(TargetPath)&quot; ../../docs/code/$(DocPath) --github-pages" />
   </Target>
 </Project>

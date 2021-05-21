@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # SmtpEmailProviderType
 
 Namespace: Proffer.Email.Smtp
@@ -64,7 +60,3 @@ The provider options.
 IEmailProvider<br>
 
             A new .
-
----
-
-[`< Back`](./)

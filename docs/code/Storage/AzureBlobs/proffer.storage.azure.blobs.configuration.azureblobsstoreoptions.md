@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsStoreOptions
 
 Namespace: Proffer.Storage.Azure.Blobs.Configuration
@@ -135,7 +131,3 @@ If set to true, throws an exception when the validation fails with any .
 #### Exceptions
 
 Proffer.Storage.Exceptions.BadStoreConfiguration<br>
-
----
-
-[`< Back`](./)

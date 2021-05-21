@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # IEmailSender
 
 Namespace: Proffer.Email
@@ -430,7 +426,3 @@ The reply-to email address.
 [Task](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task)<br>
 
             A task that represents the asynchronous operation.
-
----
-
-[`< Back`](./)

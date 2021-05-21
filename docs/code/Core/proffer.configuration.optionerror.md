@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # OptionError
 
 Namespace: Proffer.Configuration
@@ -50,7 +46,3 @@ public string ErrorMessage { get; set; }
 ```csharp
 public OptionError()
 ```
-
----
-
-[`< Back`](./)

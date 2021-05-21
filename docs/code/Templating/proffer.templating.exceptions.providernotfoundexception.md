@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # ProviderNotFoundException
 
 Namespace: Proffer.Templating.Exceptions
@@ -133,7 +129,3 @@ The extension of the unmatched template.
 
 `contentType` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The MIME type of the unmatched template.
-
----
-
-[`< Back`](./)

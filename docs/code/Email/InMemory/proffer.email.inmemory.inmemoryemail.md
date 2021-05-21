@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # InMemoryEmail
 
 Namespace: Proffer.Email.InMemory
@@ -133,7 +129,3 @@ public IEnumerable<IEmailAttachment> Attachments { get; set; }
 ```csharp
 public InMemoryEmail()
 ```
-
----
-
-[`< Back`](./)

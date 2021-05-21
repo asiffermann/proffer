@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # FileSystemFileReference
 
 Namespace: Proffer.Storage.FileSystem.Internal
@@ -236,7 +232,3 @@ public Task FetchProperties()
 
 [Task](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task)<br>
 A task that represents the asynchronous operation.
-
----
-
-[`< Back`](./)

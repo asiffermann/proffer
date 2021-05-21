@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # MockupExceptionsOptions
 
 Namespace: Proffer.Email
@@ -49,7 +45,3 @@ public List<string> Domains { get; set; }
 ```csharp
 public MockupExceptionsOptions()
 ```
-
----
-
-[`< Back`](./)

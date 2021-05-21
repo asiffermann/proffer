@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsFileProperties
 
 Namespace: Proffer.Storage.Azure.Blobs.Internal
@@ -148,7 +144,3 @@ internal Task SaveAsync()
 #### Returns
 
 [Task](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task)<br>
-
----
-
-[`< Back`](./)

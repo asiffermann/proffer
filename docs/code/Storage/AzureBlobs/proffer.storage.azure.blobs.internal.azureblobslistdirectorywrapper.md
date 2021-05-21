@@ -1,7 +1,3 @@
-[`< Back`](./)
-
----
-
 # AzureBlobsListDirectoryWrapper
 
 Namespace: Proffer.Storage.Azure.Blobs.Internal
@@ -140,7 +136,3 @@ The file name
 FileInfoBase<br>
 
             Instance of  even if file does not exist
-
----
-
-[`< Back`](./)
