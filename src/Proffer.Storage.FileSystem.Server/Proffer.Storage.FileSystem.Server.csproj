@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Storage.FileSystem.Server</AssemblyName>
-    <PackageId>Proffer.Storage.FileSystem.Server</PackageId>
     <Description>File Server based on the Proffer.Storage.FileSystem provider.</Description>
-    <DocPath>Storage/FileSystem/Server</DocPath>
+    <DocPath>storage/filesystem/server</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>

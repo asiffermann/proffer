@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Storage.Azure.Blobs</AssemblyName>
-    <PackageId>Proffer.Storage.Azure.Blobs</PackageId>
     <Description>Azure Blobs provider for Proffer.Storage abstractions.</Description>
-    <DocPath>Storage/AzureBlobs</DocPath>
+    <DocPath>storage/azure/blobs</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>

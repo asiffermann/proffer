@@ -4,7 +4,7 @@
     <AssemblyName>Proffer.Email</AssemblyName>
     <PackageId>Proffer.Email</PackageId>
     <Description>Templated email sending abstractions with providers.</Description>
-    <DocPath>Email</DocPath>
+    <DocPath>email</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>

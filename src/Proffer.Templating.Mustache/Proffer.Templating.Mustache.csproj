@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Templating.Mustache</AssemblyName>
-    <PackageId>Proffer.Templating.Mustache</PackageId>
     <Description>Mustache.js provider for Proffer.Templating abstractions.</Description>
-    <DocPath>Templating/Mustache</DocPath>
+    <DocPath>templating/mustache</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>

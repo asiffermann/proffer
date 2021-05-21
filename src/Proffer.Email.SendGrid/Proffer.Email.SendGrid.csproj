@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Email.SendGrid</AssemblyName>
-    <PackageId>Proffer.Email.SendGrid</PackageId>
     <Description>SendGrid provider for Proffer.Email abstractions.</Description>
-    <DocPath>Email/SendGrid</DocPath>
+    <DocPath>email/sendgrid</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>

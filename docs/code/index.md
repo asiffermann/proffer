@@ -2,36 +2,36 @@
 
 ## Core libraries
 
-[Proffer](./Core)
+[Proffer](./core)
 
-[Proffer.Azure](./Core/Azure)
+[Proffer.Azure](./core/azure)
 
 ## Storage
 
-[Proffer.Storage](./Storage)
+[Proffer.Storage](./storage)
 
-[Proffer.Storage.Azure.Blobs](./Storage/AzureBlobs)
+[Proffer.Storage.Azure.Blobs](./storage/azure/blobs)
 
-[Proffer.Storage.FileSystem](./Storage/FileSystem)
+[Proffer.Storage.FileSystem](./storage/filesystem)
 
-[Proffer.Storage.FileSystem.Properties.Json](./Storage/Properties/Json)
+[Proffer.Storage.FileSystem.Properties.Json](./storage/filesystem/properties/json)
 
-[Proffer.Storage.FileSystem.Server](./Storage/FileSystem/Server)
+[Proffer.Storage.FileSystem.Server](./storage/filesystem/server)
 
 ## Templating
 
-[Proffer.Templating](./Templating)
+[Proffer.Templating](./templating)
 
-[Proffer.Templating.Handlebars](./Templating/Handlebars)
+[Proffer.Templating.Handlebars](./templating/handlebars)
 
-[Proffer.Templating.Mustache](./Templating/Mustache)
+[Proffer.Templating.Mustache](./templating/mustache)
 
 ## Email
 
-[Proffer.Email](./Email)
+[Proffer.Email](./email)
 
-[Proffer.Email.Smtp](./Email/Smtp)
+[Proffer.Email.Smtp](./email/smtp)
 
-[Proffer.Email.SendGrid](./Email/SendGrid)
+[Proffer.Email.SendGrid](./email/sendgrid)
 
-[Proffer.Email.InMemory](./Email/InMemory)
+[Proffer.Email.InMemory](./email/in-memory)

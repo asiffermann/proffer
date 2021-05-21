@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer</AssemblyName>
-    <PackageId>Proffer</PackageId>
     <Description>.NET Core basic abstractions to configuration-driven providers.</Description>
-    <DocPath>Core</DocPath>
+    <DocPath>core</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>
