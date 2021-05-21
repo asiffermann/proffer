@@ -4,16 +4,11 @@
     <AssemblyName>Proffer.Azure</AssemblyName>
     <PackageId>Proffer.Azure</PackageId>
     <Description>Proffer Azure common abstractions.</Description>
-    <Product>Proffer</Product>
-    <Authors>Adrien Siffermann</Authors>
-    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+    <DocPath>Core/Azure</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

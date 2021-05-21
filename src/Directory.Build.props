@@ -1,0 +1,15 @@
+<Project>
+
+  <PropertyGroup>
+    <Product>Proffer</Product>
+    <Authors>Adrien Siffermann</Authors>
+    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+</Project>

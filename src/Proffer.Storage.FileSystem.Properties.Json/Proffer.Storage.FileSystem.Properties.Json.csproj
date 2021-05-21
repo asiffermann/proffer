@@ -4,16 +4,11 @@
     <AssemblyName>Proffer.Storage.FileSystem.Properties.Json</AssemblyName>
     <PackageId>Proffer.Storage.FileSystem.Properties.Json</PackageId>
     <Description>File System based extended properties storage provider for the FileSystem provider.</Description>
-    <Product>Proffer</Product>
-    <Authors>Adrien Siffermann</Authors>
-    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+    <DocPath>Storage/FileSystem/Properties/Json</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,12 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+		src\Directory.Build.targets = src\Directory.Build.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C-4548-46EC-BE45-F716251461DD}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		coverlet.runsettings = coverlet.runsettings
+		.config\dotnet-tools.json = .config\dotnet-tools.json
 		gitversion.yml = gitversion.yml
 		LICENSE = LICENSE
 		README.md = README.md
