@@ -22,3 +22,6 @@ defaults:
       path: ""
     values:
       image: /assets/img/banner.png
+
+plugins:
+  - jekyll-titles-from-headings
