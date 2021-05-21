@@ -10,8 +10,9 @@ banner: /assets/img/banner.png
 author: asiffermann
 twitter:
   username: proffer_dotnet
-  card: summary
+  card: summary_large_image
 social:
+  name: Proffer
   links:
     - https://github.com/asiffermann/proffer
     - https://twitter.com/proffer_dotnet
