@@ -237,7 +237,7 @@ defaults:
       path: ""
     values:
       header:
-        og_image: /assets/img/banner.png
+        og_image: /assets/images/banner.png
 
   # _posts
   - scope:
@@ -252,7 +252,7 @@ defaults:
       related: true
       classes: wide
       header:
-        image: /assets/img/banner.png
+        image: /assets/images/banner.png
   # _pages
   - scope:
       path: "_pages"
