@@ -1,19 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer</AssemblyName>
-    <PackageId>Proffer</PackageId>
     <Description>.NET Core basic abstractions to configuration-driven providers.</Description>
-    <Product>Proffer</Product>
-    <Authors>Adrien Siffermann</Authors>
-    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+    <DocPath>core</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
 </Project>

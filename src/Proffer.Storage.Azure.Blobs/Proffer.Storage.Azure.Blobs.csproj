@@ -1,19 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Storage.Azure.Blobs</AssemblyName>
-    <PackageId>Proffer.Storage.Azure.Blobs</PackageId>
     <Description>Azure Blobs provider for Proffer.Storage abstractions.</Description>
-    <Product>Proffer</Product>
-    <Authors>Adrien Siffermann</Authors>
-    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+    <DocPath>storage/azure/blobs</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

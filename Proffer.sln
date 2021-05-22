@@ -4,12 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8B67DB72-5CC8-441F-9EFF-8F41BB637DA8}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+		src\Directory.Build.targets = src\Directory.Build.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{4835CA7C-4548-46EC-BE45-F716251461DD}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		coverlet.runsettings = coverlet.runsettings
+		.config\dotnet-tools.json = .config\dotnet-tools.json
 		gitversion.yml = gitversion.yml
 		LICENSE = LICENSE
 		README.md = README.md
@@ -81,9 +86,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Templating.Mustache
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.Tests", "tests\Proffer.Email.Tests\Proffer.Email.Tests.csproj", "{912A7766-6FA4-49E2-8256-BAF3181BA1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Email.InMemory.Tests", "tests\Proffer.Email.InMemory.Tests\Proffer.Email.InMemory.Tests.csproj", "{0A6C1CB3-809F-4930-AE97-AAC77CEF957A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.InMemory.Tests", "tests\Proffer.Email.InMemory.Tests\Proffer.Email.InMemory.Tests.csproj", "{0A6C1CB3-809F-4930-AE97-AAC77CEF957A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proffer.Email.Smtp.Tests", "tests\Proffer.Email.Smtp.Tests\Proffer.Email.Smtp.Tests.csproj", "{4677285D-19A7-4B38-B056-1D946A51E47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proffer.Email.Smtp.Tests", "tests\Proffer.Email.Smtp.Tests\Proffer.Email.Smtp.Tests.csproj", "{4677285D-19A7-4B38-B056-1D946A51E47C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

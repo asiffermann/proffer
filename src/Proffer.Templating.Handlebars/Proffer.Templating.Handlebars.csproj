@@ -1,19 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Templating.Handlebars</AssemblyName>
-    <PackageId>Proffer.Templating.Handlebars</PackageId>
     <Description>Handlebars provider for Proffer.Templating abstractions.</Description>
-    <Product>Proffer</Product>
-    <Authors>Adrien Siffermann</Authors>
-    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+    <DocPath>templating/handlebars</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

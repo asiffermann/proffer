@@ -1,0 +1,88 @@
+main:
+  - title: "Getting started"
+    url: /docs/getting-started
+  - title: "About"
+    url: /docs/about
+  - title: "News"
+    url: /categories/news
+  - title: "Use cases"
+    url: /use-cases
+  - title: "API documentation"
+    url: /api
+
+# documentation links
+docs:
+  - title: About
+    url: /docs/about
+  - title: Getting Started
+    url: /docs/getting-started
+  - title: Core libraries
+    children:
+      - title: "Core"
+        url: /docs/core
+      - title: "Azure"
+        url: /docs/core/azure
+  - title: Storage
+    url: /docs/storage
+    children:
+      - title: "FileSystem"
+        url: /docs/storage/filesystem
+      - title: "FileSystem Server"
+        url: /docs/storage/filesystem/server
+      - title: "FileSystem Json Properties"
+        url: /docs/storage/filesystem/properties/json
+      - title: "Azure Blobs"
+        url: /docs/storage/azure/blobs
+  - title: Templating
+    url: /docs/templating
+    children:
+      - title: "HandleBars"
+        url: /docs/templating/handlebars
+      - title: "Mustache"
+        url: /docs/templating/mustache
+  - title: Email
+    url: /docs/email
+    children:
+      - title: "In memory"
+        url: /docs/email/in-memory
+      - title: "SMTP"
+        url: /docs/email/smtp
+      - title: "SendGrid"
+        url: /docs/email/SendGrid
+
+# api documentation links
+api:
+  - title: API
+    url: /api
+  - title: Core libraries
+    url: /api/core
+    children:
+      - title: "Azure"
+        url: /api/core/azure
+  - title: Storage
+    url: /api/storage
+    children:
+      - title: "FileSystem"
+        url: /api/storage/filesystem
+      - title: "FileSystem Server"
+        url: /api/storage/filesystem/server
+      - title: "FileSystem Json Properties"
+        url: /api/storage/filesystem/properties/json
+      - title: "Azure Blobs"
+        url: /api/storage/azure/blobs
+  - title: Templating
+    url: /api/templating
+    children:
+      - title: "HandleBars"
+        url: /api/templating/handlebars
+      - title: "Mustache"
+        url: /api/templating/mustache
+  - title: Email
+    url: /api/email
+    children:
+      - title: "In memory"
+        url: /api/email/in-memory
+      - title: "SMTP"
+        url: /api/email/smtp
+      - title: "SendGrid"
+        url: /api/email/SendGrid

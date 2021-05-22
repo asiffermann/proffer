@@ -1,0 +1,14 @@
+Adrien Siffermann:
+  name: "Adrien Siffermann"
+  avatar: https://avatars.githubusercontent.com/u/12293953?v=4
+  bio: "I'm a freelance full stack developer. I love Cloud and Web development, automation and ALM. Cultural all-rounder, science addict and bon vivant above all!"
+  location: "Paris, France"
+  email: adrien@siffermann.me
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/asiffermann"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/asiffermann"
+

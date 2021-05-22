@@ -1,19 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyName>Proffer.Storage</AssemblyName>
-    <PackageId>Proffer.Storage</PackageId>
     <Description>File Storage abstractions with providers.</Description>
-    <Product>Proffer</Product>
-    <Authors>Adrien Siffermann</Authors>
-    <RepositoryUrl>https://github.com/asiffermann/proffer</RepositoryUrl>
+    <DocPath>storage</DocPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NeutralLanguage>en-US</NeutralLanguage>    
   </PropertyGroup>
 
   <ItemGroup>
