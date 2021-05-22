@@ -52,7 +52,7 @@ docs:
 
 # api documentation links
 api:
-  - title: Home
+  - title: API
     url: /api
   - title: Core libraries
     url: /api/core
