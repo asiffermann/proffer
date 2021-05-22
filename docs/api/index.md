@@ -1,7 +1,3 @@
----
-permalink: /api/
----
-
 # API documentation
 
 ## Core libraries

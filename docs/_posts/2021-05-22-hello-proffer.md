@@ -1,4 +1,6 @@
 ---
+title: "Hello Proffer!"
+date: 2021-05-22
 categories: 
   - News
 tags:
@@ -7,7 +9,5 @@ tags:
   - Templating
   - Email
 ---
-
-# Hello Proffer!
 
 New release ...

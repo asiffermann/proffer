@@ -1,8 +1,8 @@
 ---
-permalink: /core/
+title: "Core libraries"
+permalink: /docs/core/
+excerpt: "Common abstractions for any Proffer project or provider."
 ---
-
-# Core libraries
 
 Those libraries provide common abstractions for any Proffer project or provider.
 

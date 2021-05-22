@@ -1,11 +1,52 @@
 main:
   - title: "Getting started"
-    url: /getting-started/
+    url: /docs/getting-started
   - title: "About"
-    url: /about/
+    url: /docs/about
   - title: "Posts"
-    url: /year-archive/
+    url: /posts
   - title: "Use cases"
-    url: /use-cases/
+    url: /use-cases
   - title: "API documentation"
-    url: /api/
+    url: /api
+
+# documentation links
+docs:
+  - title: About
+    url: /docs/about
+  - title: Getting Started
+    url: /docs/getting-started
+  - title: Core libraries
+    children:
+      - title: "Core"
+        url: /docs/core
+      - title: "Azure"
+        url: /docs/core/azure
+  - title: Storage
+    url: /docs/storage
+    children:
+      - title: "Provider FileSystem"
+        url: /docs/storage/filesystem
+        children:
+          - title: "Server"
+            url: /docs/storage/filesystem/server
+          - title: "Json Properties"
+            url: /docs/storage/filesystem/properties/json
+      - title: "Provider Azure Blobs"
+        url: /docs/storage/azure/blobs
+  - title: Templating
+    url: /docs/templating
+    children:
+      - title: "Provider HandleBars"
+        url: /docs/templating/handlebars
+      - title: "Provider Mustache"
+        url: /docs/templating/mustache
+  - title: Email
+    url: /docs/email
+    children:
+      - title: "Provider in memory"
+        url: /docs/email/in-memory
+      - title: "Provider SMTP"
+        url: /docs/email/smtp
+      - title: "Provider SendGrid"
+        url: /docs/email/SendGrid
