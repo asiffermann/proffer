@@ -3,8 +3,8 @@ main:
     url: /docs/getting-started
   - title: "About"
     url: /docs/about
-  - title: "Posts"
-    url: /posts
+  - title: "News"
+    url: /categories/news
   - title: "Use cases"
     url: /use-cases
   - title: "API documentation"
