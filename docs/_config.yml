@@ -233,6 +233,12 @@ collections:
 
 # Defaults
 defaults:
+  - scope:
+      path: ""
+    values:
+      header:
+        og_image: /assets/img/banner.png
+
   # _posts
   - scope:
       path: ""
@@ -244,6 +250,9 @@ defaults:
       comments: # true
       share: true
       related: true
+      classes: wide
+      header:
+        image: /assets/img/banner.png
   # _pages
   - scope:
       path: "_pages"

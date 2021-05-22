@@ -1,11 +1,11 @@
 ---
 title: "Core libraries"
 permalink: /docs/core/
-excerpt: "Common abstractions for any Proffer project or provider."
+excerpt_separator: <!--more-->
 ---
 
 Those libraries provide common abstractions for any Proffer project or provider.
-
+<!--more-->
 There is not much here until the configuration will be shared across all different projects.
 
 ## Projects
