@@ -241,6 +241,7 @@ defaults:
       path: ""
     values:
       image: /assets/img/banner.png
+      layout: single
   # _posts
   - scope:
       path: ""
@@ -252,8 +253,3 @@ defaults:
       comments: # true
       share: true
       related: true
-  - scope:
-      path: _pages
-    values:
-      layout: single
-      permalink: /:basename/
