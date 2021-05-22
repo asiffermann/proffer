@@ -49,3 +49,40 @@ docs:
         url: /docs/email/smtp
       - title: "SendGrid"
         url: /docs/email/SendGrid
+
+# api documentation links
+api:
+  - title: Home
+    url: /api
+  - title: Core libraries
+    url: /api/core
+    children:
+      - title: "Azure"
+        url: /api/core/azure
+  - title: Storage
+    url: /api/storage
+    children:
+      - title: "FileSystem"
+        url: /api/storage/filesystem
+      - title: "FileSystem Server"
+        url: /api/storage/filesystem/server
+      - title: "FileSystem Json Properties"
+        url: /api/storage/filesystem/properties/json
+      - title: "Azure Blobs"
+        url: /api/storage/azure/blobs
+  - title: Templating
+    url: /api/templating
+    children:
+      - title: "HandleBars"
+        url: /api/templating/handlebars
+      - title: "Mustache"
+        url: /api/templating/mustache
+  - title: Email
+    url: /api/email
+    children:
+      - title: "In memory"
+        url: /api/email/in-memory
+      - title: "SMTP"
+        url: /api/email/smtp
+      - title: "SendGrid"
+        url: /api/email/SendGrid

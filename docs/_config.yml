@@ -23,7 +23,7 @@ url: https://getproffer.net
 repository: asiffermann/proffer
 teaser: /assets/images/banner.png
 logo: /assets/images/logo.png
-breadcrumbs: true
+breadcrumbs: false
 words_per_minute: 200
 comments:
   provider: # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
@@ -269,6 +269,8 @@ defaults:
       author_profile: false
       toc: true
       toc_sticky: true
+      sidebar:
+        nav: "api"
   # _docs
   - scope:
       path: ""
