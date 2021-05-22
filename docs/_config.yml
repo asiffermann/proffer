@@ -252,7 +252,7 @@ defaults:
       related: true
       classes: wide
       header:
-        image: /assets/images/banner.png
+        overlay_color: "#5c2d91"
   # _pages
   - scope:
       path: "_pages"
