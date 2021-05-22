@@ -1,4 +1,4 @@
-theme: jekyll-theme-architect
+remote_theme: "mmistakes/minimal-mistakes@4.23.0"
 main_color: "#5c2d91"
 show_downloads: true
 show_title: false
@@ -22,3 +22,6 @@ defaults:
       path: ""
     values:
       image: /assets/img/banner.png
+
+plugins:
+  - jekyll-include-cache

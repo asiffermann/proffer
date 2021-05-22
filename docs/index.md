@@ -1,4 +1,6 @@
+---
 title: "Proffer"
+---
 
 # Why Proffer?
 

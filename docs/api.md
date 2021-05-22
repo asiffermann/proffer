@@ -10,7 +10,7 @@
 - [Proffer.Storage](/storage/api)
 - [Proffer.Storage.Azure.Blobs](/storage/azure/blobs/api)
 - [Proffer.Storage.FileSystem](/storage/filesystem/api)
-- [Proffer.Storage.FileSystem.Properties.Json](/storage/filesystem/- properties/json/api)
+- [Proffer.Storage.FileSystem.Properties.Json](/storage/filesystem/properties/json/api)
 - [Proffer.Storage.FileSystem.Server](/storage/filesystem/server/api)
 
 ## Templating
