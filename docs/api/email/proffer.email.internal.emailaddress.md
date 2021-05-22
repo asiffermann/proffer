@@ -8,8 +8,8 @@ A simple email address with its optional display name.
 public class EmailAddress : Proffer.Email.IEmailAddress
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailAddress](./proffer.email.internal.emailaddress)<br>
-Implements [IEmailAddress](./proffer.email.iemailaddress)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailAddress](./proffer.email.internal.emailaddress.md)<br>
+Implements [IEmailAddress](./proffer.email.iemailaddress.md)
 
 ## Properties
 
@@ -41,7 +41,7 @@ public string DisplayName { get; set; }
 
 ### **EmailAddress()**
 
-Initializes a new instance of the [EmailAddress](./proffer.email.internal.emailaddress) class.
+Initializes a new instance of the [EmailAddress](./proffer.email.internal.emailaddress.md) class.
 
 ```csharp
 public EmailAddress()
@@ -49,7 +49,7 @@ public EmailAddress()
 
 ### **EmailAddress(String, String)**
 
-Initializes a new instance of the [EmailAddress](./proffer.email.internal.emailaddress) class.
+Initializes a new instance of the [EmailAddress](./proffer.email.internal.emailaddress.md) class.
 
 ```csharp
 public EmailAddress(string email, string displayName)

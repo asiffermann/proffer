@@ -8,7 +8,7 @@ Thrown when a store was not found in the configuration.
 public class StoreNotFoundException : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **StoreNotFoundException(String)**
 
-Initializes a new instance of the [StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception) class.
+Initializes a new instance of the [StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md) class.
 
 ```csharp
 public StoreNotFoundException(string storeName)

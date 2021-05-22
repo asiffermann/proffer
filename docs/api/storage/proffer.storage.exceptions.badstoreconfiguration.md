@@ -8,7 +8,7 @@ Thrown when a store was not properly configured.
 public class BadStoreConfiguration : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -125,7 +125,7 @@ public int HResult { get; set; }
 
 ### **BadStoreConfiguration(String, String)**
 
-Initializes a new instance of the [BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration) class.
+Initializes a new instance of the [BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md) class.
 
 ```csharp
 public BadStoreConfiguration(string storeName, string details)
@@ -141,7 +141,7 @@ The details.
 
 ### **BadStoreConfiguration(String, IEnumerable&lt;IOptionError&gt;)**
 
-Initializes a new instance of the [BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration) class.
+Initializes a new instance of the [BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md) class.
 
 ```csharp
 public BadStoreConfiguration(string storeName, IEnumerable<IOptionError> errors)

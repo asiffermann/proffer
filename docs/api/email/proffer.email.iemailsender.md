@@ -26,7 +26,7 @@ The subject.
 `message` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The body as plain text.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -45,7 +45,7 @@ Task SendEmailAsync(IEmailAddress from, string subject, string message, IEmailAd
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `subject` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -54,7 +54,7 @@ The subject.
 `message` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The body as plain text.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -73,10 +73,10 @@ Task SendEmailAsync(IEmailAddress from, IEmailAddress replyTo, string subject, s
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
-`replyTo` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`replyTo` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The reply-to email address.
 
 `subject` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -88,7 +88,7 @@ The body as plain text.
 `plainTextOnly` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 If set to true the body shoud be sent as plain text only.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -107,7 +107,7 @@ Task SendEmailAsync(IEmailAddress from, string subject, string message, IEnumera
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `subject` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -119,7 +119,7 @@ The body as plain text.
 `attachments` [IEnumerable&lt;IEmailAttachment&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 The file attachments.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -138,10 +138,10 @@ Task SendEmailAsync(IEmailAddress from, IEmailAddress replyTo, string subject, s
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
-`replyTo` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`replyTo` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The reply-to email address.
 
 `subject` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -156,7 +156,7 @@ If set to true the body shoud be sent as plain text only.
 `attachments` [IEnumerable&lt;IEmailAttachment&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 The file attachments.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -175,7 +175,7 @@ Task SendEmailAsync(IEmailAddress from, string subject, string message, IEnumera
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `subject` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -187,16 +187,16 @@ The body as plain text.
 `attachments` [IEnumerable&lt;IEmailAttachment&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 The file attachments.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
-`cc` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`cc` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The CC email recipients.
 
-`bcc` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`bcc` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The BCC email recipients.
 
-`replyTo` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`replyTo` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The reply-to email address.
 
 `plainTextOnly` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
@@ -229,7 +229,7 @@ The template key.
 `context` T<br>
 The context  to apply on the template.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -253,7 +253,7 @@ The type of context to apply on the template.
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `templateKey` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -262,7 +262,7 @@ The template key.
 `context` T<br>
 The context  to apply on the template.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -286,10 +286,10 @@ The type of context to apply on the template.
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
-`replyTo` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`replyTo` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The reply-to email address.
 
 `templateKey` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -298,7 +298,7 @@ The template key.
 `context` T<br>
 The context  to apply on the template.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -322,7 +322,7 @@ The type of context to apply on the template.
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `templateKey` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -334,7 +334,7 @@ The context  to apply on the template.
 `attachments` [IEnumerable&lt;IEmailAttachment&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 The file attachments.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -358,10 +358,10 @@ The type of context to apply on the template.
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
-`replyTo` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`replyTo` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The reply-to email address.
 
 `templateKey` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -373,7 +373,7 @@ The context  to apply on the template.
 `attachments` [IEnumerable&lt;IEmailAttachment&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 The file attachments.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
 #### Returns
@@ -397,7 +397,7 @@ The type of context to apply on the template.
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `templateKey` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -409,16 +409,16 @@ The context  to apply on the template.
 `attachments` [IEnumerable&lt;IEmailAttachment&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 The file attachments.
 
-`to` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`to` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The email recipients.
 
-`cc` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`cc` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The CC email recipients.
 
-`bcc` [IEmailAddress[]](./proffer.email.iemailaddress)<br>
+`bcc` [IEmailAddress[]](./proffer.email.iemailaddress.md)<br>
 The BCC email recipients.
 
-`replyTo` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`replyTo` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The reply-to email address.
 
 #### Returns

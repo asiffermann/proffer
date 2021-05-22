@@ -2,20 +2,20 @@
 
 Namespace: Proffer.Templating.Internal
 
-Creates [ITemplateLoader](./proffer.templating.itemplateloader) from Proffer.Storage.IStore.
+Creates [ITemplateLoader](./proffer.templating.itemplateloader.md) from Proffer.Storage.IStore.
 
 ```csharp
 public class TemplateLoaderFactory : Proffer.Templating.ITemplateLoaderFactory
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateLoaderFactory](./proffer.templating.internal.templateloaderfactory)<br>
-Implements [ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateLoaderFactory](./proffer.templating.internal.templateloaderfactory.md)<br>
+Implements [ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory.md)
 
 ## Constructors
 
 ### **TemplateLoaderFactory(IEnumerable&lt;ITemplateProvider&gt;, IMemoryCache)**
 
-Initializes a new instance of the [TemplateLoaderFactory](./proffer.templating.internal.templateloaderfactory) class.
+Initializes a new instance of the [TemplateLoaderFactory](./proffer.templating.internal.templateloaderfactory.md) class.
 
 ```csharp
 public TemplateLoaderFactory(IEnumerable<ITemplateProvider> providers, IMemoryCache memoryCache)
@@ -46,7 +46,7 @@ The store.
 
 #### Returns
 
-[ITemplateLoader](./proffer.templating.itemplateloader)<br>
+[ITemplateLoader](./proffer.templating.itemplateloader.md)<br>
 
             A  that loads templates from the given .
 
@@ -68,6 +68,6 @@ The scope.
 
 #### Returns
 
-[ITemplateLoader](./proffer.templating.itemplateloader)<br>
+[ITemplateLoader](./proffer.templating.itemplateloader.md)<br>
 
             A  that loads templates from the given .

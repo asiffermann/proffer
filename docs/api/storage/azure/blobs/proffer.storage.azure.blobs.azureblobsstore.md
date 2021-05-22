@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.Azure.Blobs
 
-An Azure store allows to save, list or read files on a container in its configured [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider).
+An Azure store allows to save, list or read files on a container in its configured [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider.md).
 
 ```csharp
 public class AzureBlobsStore : Proffer.Storage.IStore
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore.md)<br>
 Implements IStore
 
 ## Properties
@@ -29,7 +29,7 @@ public string Name { get; }
 
 ### **AzureBlobsStore(AzureBlobsStoreOptions)**
 
-Initializes a new instance of the [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore) class.
+Initializes a new instance of the [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore.md) class.
 
 ```csharp
 public AzureBlobsStore(AzureBlobsStoreOptions storeOptions)
@@ -37,7 +37,7 @@ public AzureBlobsStore(AzureBlobsStoreOptions storeOptions)
 
 #### Parameters
 
-`storeOptions` [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions)<br>
+`storeOptions` [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions.md)<br>
 The store options.
 
 ## Methods

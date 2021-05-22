@@ -25,7 +25,7 @@ Content of the template.
 
 #### Returns
 
-[ITemplate](./proffer.templating.itemplate)<br>
+[ITemplate](./proffer.templating.itemplate.md)<br>
 A new  compiled from the content.
 
 ### **RegisterPartial(String, String)**

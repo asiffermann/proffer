@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.FileSystem
 
-A File System store allows to save, list or read files on a container in its configured [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider).
+A File System store allows to save, list or read files on a container in its configured [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider.md).
 
 ```csharp
 public class FileSystemStore : Proffer.Storage.IStore
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStore](./proffer.storage.filesystem.filesystemstore)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStore](./proffer.storage.filesystem.filesystemstore.md)<br>
 Implements IStore
 
 ## Properties
@@ -29,7 +29,7 @@ public string Name { get; }
 
 ### **FileSystemStore(FileSystemStoreOptions, IPublicUrlProvider, IExtendedPropertiesProvider)**
 
-Initializes a new instance of the [FileSystemStore](./proffer.storage.filesystem.filesystemstore) class.
+Initializes a new instance of the [FileSystemStore](./proffer.storage.filesystem.filesystemstore.md) class.
 
 ```csharp
 public FileSystemStore(FileSystemStoreOptions storeOptions, IPublicUrlProvider publicUrlProvider, IExtendedPropertiesProvider extendedPropertiesProvider)
@@ -37,13 +37,13 @@ public FileSystemStore(FileSystemStoreOptions storeOptions, IPublicUrlProvider p
 
 #### Parameters
 
-`storeOptions` [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions)<br>
+`storeOptions` [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions.md)<br>
 The store options.
 
-`publicUrlProvider` [IPublicUrlProvider](./proffer.storage.filesystem.ipublicurlprovider)<br>
+`publicUrlProvider` [IPublicUrlProvider](./proffer.storage.filesystem.ipublicurlprovider.md)<br>
 The public URL provider.
 
-`extendedPropertiesProvider` [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider)<br>
+`extendedPropertiesProvider` [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider.md)<br>
 The extended properties provider.
 
 ## Methods

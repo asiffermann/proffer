@@ -8,8 +8,8 @@ A simple reference of a stored file at a given path.
 public class PrivateFileReference : Proffer.Storage.IPrivateFileReference
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrivateFileReference](./proffer.storage.internal.privatefilereference)<br>
-Implements [IPrivateFileReference](./proffer.storage.iprivatefilereference)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrivateFileReference](./proffer.storage.internal.privatefilereference.md)<br>
+Implements [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)
 
 ## Properties
 
@@ -29,7 +29,7 @@ public string Path { get; }
 
 ### **PrivateFileReference(String)**
 
-Initializes a new instance of the [PrivateFileReference](./proffer.storage.internal.privatefilereference) class.
+Initializes a new instance of the [PrivateFileReference](./proffer.storage.internal.privatefilereference.md) class.
 
 ```csharp
 public PrivateFileReference(string path)

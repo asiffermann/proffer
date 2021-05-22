@@ -2,7 +2,7 @@
 
 Namespace: Proffer.Templating
 
-Creates [ITemplateLoader](./proffer.templating.itemplateloader) from Proffer.Storage.IStore.
+Creates [ITemplateLoader](./proffer.templating.itemplateloader.md) from Proffer.Storage.IStore.
 
 ```csharp
 public interface ITemplateLoaderFactory
@@ -25,7 +25,7 @@ The store.
 
 #### Returns
 
-[ITemplateLoader](./proffer.templating.itemplateloader)<br>
+[ITemplateLoader](./proffer.templating.itemplateloader.md)<br>
 A  that loads templates from the given .
 
 ### **Create(IStore, String)**
@@ -46,5 +46,5 @@ The cache scope.
 
 #### Returns
 
-[ITemplateLoader](./proffer.templating.itemplateloader)<br>
+[ITemplateLoader](./proffer.templating.itemplateloader.md)<br>
 A  that loads templates from the given .

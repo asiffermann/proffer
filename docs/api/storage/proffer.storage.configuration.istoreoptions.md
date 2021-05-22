@@ -2,7 +2,7 @@
 
 Namespace: Proffer.Storage.Configuration
 
-Options for an [IStore](./proffer.storage.istore).
+Options for an [IStore](./proffer.storage.istore.md).
 
 ```csharp
 public interface IStoreOptions : Proffer.Configuration.INamedElementOptions
@@ -46,7 +46,7 @@ public abstract AccessLevel AccessLevel { get; set; }
 
 #### Property Value
 
-[AccessLevel](./proffer.storage.configuration.accesslevel)<br>
+[AccessLevel](./proffer.storage.configuration.accesslevel.md)<br>
 
 ### **FolderName**
 
@@ -82,4 +82,4 @@ The  returned by the validation, if any.
 
 #### Exceptions
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>

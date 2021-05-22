@@ -20,7 +20,7 @@ Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, s
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `recipients` [IEnumerable&lt;IEmailAddress&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
@@ -51,7 +51,7 @@ Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, s
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `recipients` [IEnumerable&lt;IEmailAddress&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
@@ -85,7 +85,7 @@ Task SendEmailAsync(IEmailAddress from, IEnumerable<IEmailAddress> recipients, I
 
 #### Parameters
 
-`from` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`from` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The sender email address.
 
 `recipients` [IEnumerable&lt;IEmailAddress&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
@@ -109,7 +109,7 @@ The body as HTML.
 `attachments` [IEnumerable&lt;IEmailAttachment&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)<br>
 The file attachments.
 
-`replyTo` [IEmailAddress](./proffer.email.iemailaddress)<br>
+`replyTo` [IEmailAddress](./proffer.email.iemailaddress.md)<br>
 The reply-to email address.
 
 #### Returns

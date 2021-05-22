@@ -114,4 +114,4 @@ The provider instance options.
 
 #### Exceptions
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>

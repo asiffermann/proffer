@@ -2,14 +2,14 @@
 
 Namespace: Proffer.Storage.FileSystem
 
-Default [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider) without property storage capacity.
+Default [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider.md) without property storage capacity.
 
 ```csharp
 public class NoExtendedPropertiesProvider : IExtendedPropertiesProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [NoExtendedPropertiesProvider](./proffer.storage.filesystem.noextendedpropertiesprovider)<br>
-Implements [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [NoExtendedPropertiesProvider](./proffer.storage.filesystem.noextendedpropertiesprovider.md)<br>
+Implements [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider.md)
 
 ## Constructors
 
@@ -60,7 +60,7 @@ The store absolute path.
 `file` IPrivateFileReference<br>
 The reference holding the file path.
 
-`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties)<br>
+`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties.md)<br>
 The extended properties.
 
 #### Returns

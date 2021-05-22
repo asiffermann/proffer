@@ -2,7 +2,7 @@
 
 Namespace: Proffer.Storage.Internal
 
-Generic [IStore](./proffer.storage.istore) proxy to allow direct dependency injection of a [IStore&lt;TOptions&gt;](./proffer.storage.istore-1).
+Generic [IStore](./proffer.storage.istore.md) proxy to allow direct dependency injection of a [IStore&lt;TOptions&gt;](./proffer.storage.istore-1.md).
 
 ```csharp
 public class GenericStoreProxy<TOptions> : Proffer.Storage.IStore, 
@@ -13,8 +13,8 @@ public class GenericStoreProxy<TOptions> : Proffer.Storage.IStore,
 `TOptions`<br>
 The type of the store options.
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GenericStoreProxy&lt;TOptions&gt;](./proffer.storage.internal.genericstoreproxy-1)<br>
-Implements [IStore](./proffer.storage.istore), IStore&lt;TOptions&gt;
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GenericStoreProxy&lt;TOptions&gt;](./proffer.storage.internal.genericstoreproxy-1.md)<br>
+Implements [IStore](./proffer.storage.istore.md), IStore&lt;TOptions&gt;
 
 ## Properties
 
@@ -34,7 +34,7 @@ public string Name { get; }
 
 ### **GenericStoreProxy(IStorageFactory, IOptions&lt;TOptions&gt;)**
 
-Initializes a new instance of the [GenericStoreProxy&lt;TOptions&gt;](./proffer.storage.internal.genericstoreproxy-1) class.
+Initializes a new instance of the [GenericStoreProxy&lt;TOptions&gt;](./proffer.storage.internal.genericstoreproxy-1.md) class.
 
 ```csharp
 public GenericStoreProxy(IStorageFactory factory, IOptions<TOptions> options)
@@ -42,7 +42,7 @@ public GenericStoreProxy(IStorageFactory factory, IOptions<TOptions> options)
 
 #### Parameters
 
-`factory` [IStorageFactory](./proffer.storage.istoragefactory)<br>
+`factory` [IStorageFactory](./proffer.storage.istoragefactory.md)<br>
 The storage factory.
 
 `options` IOptions&lt;TOptions&gt;<br>
@@ -56,7 +56,7 @@ The options.
 
 ### **InitAsync(CancellationToken)**
 
-Initializes the store by creating a container in its [IStorageProvider](./proffer.storage.istorageprovider).
+Initializes the store by creating a container in its [IStorageProvider](./proffer.storage.istorageprovider.md).
 
 ```csharp
 public Task InitAsync(CancellationToken cancellationToken)
@@ -82,7 +82,7 @@ public Task DeleteAsync(IPrivateFileReference file)
 
 #### Parameters
 
-`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference)<br>
+`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)<br>
 The reference holding the file path.
 
 #### Returns
@@ -127,7 +127,7 @@ public ValueTask<IFileReference> GetAsync(IPrivateFileReference file, bool withM
 
 #### Parameters
 
-`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference)<br>
+`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)<br>
 The reference holding the file path.
 
 `withMetadata` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
@@ -202,7 +202,7 @@ public ValueTask<Byte[]> ReadAllBytesAsync(IPrivateFileReference file)
 
 #### Parameters
 
-`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference)<br>
+`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)<br>
 The reference holding the file path.
 
 #### Returns
@@ -221,7 +221,7 @@ public ValueTask<string> ReadAllTextAsync(IPrivateFileReference file)
 
 #### Parameters
 
-`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference)<br>
+`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)<br>
 The reference holding the file path.
 
 #### Returns
@@ -240,7 +240,7 @@ public ValueTask<Stream> ReadAsync(IPrivateFileReference file)
 
 #### Parameters
 
-`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference)<br>
+`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)<br>
 The reference holding the file path.
 
 #### Returns
@@ -262,13 +262,13 @@ public ValueTask<IFileReference> SaveAsync(Stream data, IPrivateFileReference fi
 `data` [Stream](https://docs.microsoft.com/en-us/dotnet/api/system.io.stream)<br>
 The file content.
 
-`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference)<br>
+`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)<br>
 The reference holding the file path.
 
 `contentType` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The content-type of the file.
 
-`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy)<br>
+`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy.md)<br>
 The overwrite policy.
 
 `metadata` [IDictionary&lt;String, String&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2)<br>
@@ -282,7 +282,7 @@ ValueTask&lt;IFileReference&gt;<br>
 
 #### Exceptions
 
-[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception)<br>
+[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception.md)<br>
 
 ### **SaveAsync(Byte[], IPrivateFileReference, String, OverwritePolicy, IDictionary&lt;String, String&gt;)**
 
@@ -297,13 +297,13 @@ public ValueTask<IFileReference> SaveAsync(Byte[] data, IPrivateFileReference fi
 `data` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
 The file content.
 
-`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference)<br>
+`file` [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)<br>
 The reference holding the file path.
 
 `contentType` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The content-type of the file.
 
-`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy)<br>
+`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy.md)<br>
 The overwrite policy.
 
 `metadata` [IDictionary&lt;String, String&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2)<br>
@@ -317,7 +317,7 @@ ValueTask&lt;IFileReference&gt;<br>
 
 #### Exceptions
 
-[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception)<br>
+[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception.md)<br>
 
 ### **GetSharedAccessSignatureAsync(ISharedAccessPolicy)**
 
@@ -329,7 +329,7 @@ public ValueTask<string> GetSharedAccessSignatureAsync(ISharedAccessPolicy polic
 
 #### Parameters
 
-`policy` [ISharedAccessPolicy](./proffer.storage.isharedaccesspolicy)<br>
+`policy` [ISharedAccessPolicy](./proffer.storage.isharedaccesspolicy.md)<br>
 The policy.
 
 #### Returns

@@ -2,14 +2,14 @@
 
 Namespace: Proffer.Storage.Configuration
 
-Generic options for a scoped [IStore](./proffer.storage.istore).
+Generic options for a scoped [IStore](./proffer.storage.istore.md).
 
 ```csharp
 public class ScopedStoreOptions : StoreOptions, IStoreOptions, Proffer.Configuration.INamedElementOptions, IScopedStoreOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StoreOptions](./proffer.storage.configuration.storeoptions) → [ScopedStoreOptions](./proffer.storage.configuration.scopedstoreoptions)<br>
-Implements [IStoreOptions](./proffer.storage.configuration.istoreoptions), INamedElementOptions, [IScopedStoreOptions](./proffer.storage.configuration.iscopedstoreoptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StoreOptions](./proffer.storage.configuration.storeoptions.md) → [ScopedStoreOptions](./proffer.storage.configuration.scopedstoreoptions.md)<br>
+Implements [IStoreOptions](./proffer.storage.configuration.istoreoptions.md), INamedElementOptions, [IScopedStoreOptions](./proffer.storage.configuration.iscopedstoreoptions.md)
 
 ## Properties
 
@@ -71,7 +71,7 @@ public AccessLevel AccessLevel { get; set; }
 
 #### Property Value
 
-[AccessLevel](./proffer.storage.configuration.accesslevel)<br>
+[AccessLevel](./proffer.storage.configuration.accesslevel.md)<br>
 
 ### **FolderName**
 

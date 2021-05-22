@@ -8,7 +8,7 @@ A reference of a stored file at a given path.
 public interface IFileReference : IPrivateFileReference
 ```
 
-Implements [IPrivateFileReference](./proffer.storage.iprivatefilereference)
+Implements [IPrivateFileReference](./proffer.storage.iprivatefilereference.md)
 
 ## Properties
 
@@ -34,7 +34,7 @@ public abstract IFileProperties Properties { get; }
 
 #### Property Value
 
-[IFileProperties](./proffer.storage.ifileproperties)<br>
+[IFileProperties](./proffer.storage.ifileproperties.md)<br>
 
 ## Methods
 
@@ -149,7 +149,7 @@ ValueTask<string> GetSharedAccessSignature(ISharedAccessPolicy policy)
 
 #### Parameters
 
-`policy` [ISharedAccessPolicy](./proffer.storage.isharedaccesspolicy)<br>
+`policy` [ISharedAccessPolicy](./proffer.storage.isharedaccesspolicy.md)<br>
 The policy.
 
 #### Returns

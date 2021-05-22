@@ -8,8 +8,8 @@ A simpl email attachment file.
 public class EmailAttachment : Proffer.Email.IEmailAttachment
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailAttachment](./proffer.email.internal.emailattachment)<br>
-Implements [IEmailAttachment](./proffer.email.iemailattachment)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailAttachment](./proffer.email.internal.emailattachment.md)<br>
+Implements [IEmailAttachment](./proffer.email.iemailattachment.md)
 
 ## Properties
 
@@ -77,7 +77,7 @@ public string ContentType { get; }
 
 ### **EmailAttachment()**
 
-Initializes a new instance of the [EmailAttachment](./proffer.email.internal.emailattachment) class.
+Initializes a new instance of the [EmailAttachment](./proffer.email.internal.emailattachment.md) class.
 
 ```csharp
 public EmailAttachment()
@@ -85,7 +85,7 @@ public EmailAttachment()
 
 ### **EmailAttachment(String, Byte[], String)**
 
-Initializes a new instance of the [EmailAttachment](./proffer.email.internal.emailattachment) class.
+Initializes a new instance of the [EmailAttachment](./proffer.email.internal.emailattachment.md) class.
 
 ```csharp
 public EmailAttachment(string fileName, Byte[] data, string contentType)
@@ -104,7 +104,7 @@ The content-type.
 
 ### **EmailAttachment(String, Byte[], String, String)**
 
-Initializes a new instance of the [EmailAttachment](./proffer.email.internal.emailattachment) class.
+Initializes a new instance of the [EmailAttachment](./proffer.email.internal.emailattachment.md) class.
 
 ```csharp
 public EmailAttachment(string fileName, Byte[] data, string mediaType, string mediaSubtype)

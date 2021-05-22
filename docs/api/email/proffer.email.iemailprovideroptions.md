@@ -2,7 +2,7 @@
 
 Namespace: Proffer.Email
 
-Options for a [IEmailProvider](./proffer.email.iemailprovider).
+Options for a [IEmailProvider](./proffer.email.iemailprovider.md).
 
 ```csharp
 public interface IEmailProviderOptions

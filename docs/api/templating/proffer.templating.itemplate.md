@@ -30,7 +30,7 @@ The templated result.
 
 #### Exceptions
 
-[InvalidContextException](./proffer.templating.invalidcontextexception)<br>
+[InvalidContextException](./proffer.templating.invalidcontextexception.md)<br>
 
 ### **Apply(Object, IFormatProvider)**
 
@@ -56,4 +56,4 @@ The format provider.
 
 #### Exceptions
 
-[InvalidContextException](./proffer.templating.invalidcontextexception)<br>
+[InvalidContextException](./proffer.templating.invalidcontextexception.md)<br>

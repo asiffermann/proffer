@@ -8,7 +8,7 @@ A reference of a stored file at a given path on a File System.
 public class FileSystemFileReference : Proffer.Storage.IFileReference, Proffer.Storage.IPrivateFileReference
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemFileReference](./proffer.storage.filesystem.internal.filesystemfilereference)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemFileReference](./proffer.storage.filesystem.internal.filesystemfilereference.md)<br>
 Implements IFileReference, IPrivateFileReference
 
 ## Properties
@@ -65,7 +65,7 @@ IFileProperties<br>
 
 ### **FileSystemFileReference(String, String, FileSystemStore, Boolean, FileExtendedProperties, IPublicUrlProvider, IExtendedPropertiesProvider)**
 
-Initializes a new instance of the [FileSystemFileReference](./proffer.storage.filesystem.internal.filesystemfilereference) class.
+Initializes a new instance of the [FileSystemFileReference](./proffer.storage.filesystem.internal.filesystemfilereference.md) class.
 
 ```csharp
 public FileSystemFileReference(string filePath, string path, FileSystemStore store, bool withMetadata, FileExtendedProperties extendedProperties, IPublicUrlProvider publicUrlProvider, IExtendedPropertiesProvider extendedPropertiesProvider)
@@ -79,19 +79,19 @@ The file system path.
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The path.
 
-`store` [FileSystemStore](./proffer.storage.filesystem.filesystemstore)<br>
+`store` [FileSystemStore](./proffer.storage.filesystem.filesystemstore.md)<br>
 The store.
 
 `withMetadata` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 If set to true, the metadata for the file have been fetched.
 
-`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties)<br>
+`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties.md)<br>
 The extended properties.
 
-`publicUrlProvider` [IPublicUrlProvider](./proffer.storage.filesystem.ipublicurlprovider)<br>
+`publicUrlProvider` [IPublicUrlProvider](./proffer.storage.filesystem.ipublicurlprovider.md)<br>
 The public URL provider.
 
-`extendedPropertiesProvider` [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider)<br>
+`extendedPropertiesProvider` [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider.md)<br>
 The extended properties provider.
 
 ## Methods

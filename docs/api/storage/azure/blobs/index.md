@@ -2,30 +2,30 @@
 
 ## Proffer.Storage
 
-[AzureBlobsStorageServiceCollectionExtensions](./proffer.storage.azureblobsstorageservicecollectionextensions)
+[AzureBlobsStorageServiceCollectionExtensions](./proffer.storage.azureblobsstorageservicecollectionextensions.md)
 
 ## Proffer.Storage.Azure.Blobs
 
-[AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider)
+[AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider.md)
 
-[AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore)
+[AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore.md)
 
 ## Proffer.Storage.Azure.Blobs.Configuration
 
-[AzureBlobsParsedOptions](./proffer.storage.azure.blobs.configuration.azureblobsparsedoptions)
+[AzureBlobsParsedOptions](./proffer.storage.azure.blobs.configuration.azureblobsparsedoptions.md)
 
-[AzureBlobsProviderOptions](./proffer.storage.azure.blobs.configuration.azureblobsprovideroptions)
+[AzureBlobsProviderOptions](./proffer.storage.azure.blobs.configuration.azureblobsprovideroptions.md)
 
-[AzureBlobsScopedStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsscopedstoreoptions)
+[AzureBlobsScopedStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsscopedstoreoptions.md)
 
-[AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions)
+[AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions.md)
 
 ## Proffer.Storage.Azure.Blobs.Internal
 
-[AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties)
+[AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties.md)
 
-[AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference)
+[AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference.md)
 
-[AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper)
+[AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper.md)
 
-[AzureBlobsListFileWrapper](./proffer.storage.azure.blobs.internal.azureblobslistfilewrapper)
+[AzureBlobsListFileWrapper](./proffer.storage.azure.blobs.internal.azureblobslistfilewrapper.md)

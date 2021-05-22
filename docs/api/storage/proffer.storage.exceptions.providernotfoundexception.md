@@ -8,7 +8,7 @@ Thrown when a configured provider cannot be resolved through dependency injectio
 public class ProviderNotFoundException : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **ProviderNotFoundException(String)**
 
-Initializes a new instance of the [ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception) class.
+Initializes a new instance of the [ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception.md) class.
 
 ```csharp
 public ProviderNotFoundException(string providerName)

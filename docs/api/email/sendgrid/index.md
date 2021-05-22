@@ -2,10 +2,10 @@
 
 ## Proffer.Email
 
-[ServiceCollectionExtensions](./proffer.email.servicecollectionextensions)
+[ServiceCollectionExtensions](./proffer.email.servicecollectionextensions.md)
 
 ## Proffer.Email.SendGrid
 
-[SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider)
+[SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider.md)
 
-[SendGridEmailProviderType](./proffer.email.sendgrid.sendgridemailprovidertype)
+[SendGridEmailProviderType](./proffer.email.sendgrid.sendgridemailprovidertype.md)

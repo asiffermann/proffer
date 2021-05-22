@@ -2,12 +2,12 @@
 
 ## Proffer.Storage
 
-[FileSystemPropertiesJsonServiceCollectionExtensions](./proffer.storage.filesystempropertiesjsonservicecollectionextensions)
+[FileSystemPropertiesJsonServiceCollectionExtensions](./proffer.storage.filesystempropertiesjsonservicecollectionextensions.md)
 
 ## Proffer.Storage.FileSystem.Properties.Json
 
-[FileSystemPropertiesJsonOptions](./proffer.storage.filesystem.properties.json.filesystempropertiesjsonoptions)
+[FileSystemPropertiesJsonOptions](./proffer.storage.filesystem.properties.json.filesystempropertiesjsonoptions.md)
 
 ## Proffer.Storage.FileSystem.Properties.Json.Internal
 
-[ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider)
+[ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider.md)

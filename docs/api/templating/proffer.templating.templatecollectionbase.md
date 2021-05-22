@@ -8,7 +8,7 @@ Abstract base class to load and apply templates from a named Proffer.Storage.ISt
 public abstract class TemplateCollectionBase
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateCollectionBase](./proffer.templating.templatecollectionbase)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateCollectionBase](./proffer.templating.templatecollectionbase.md)
 
 ## Properties
 
@@ -22,13 +22,13 @@ public ITemplateLoader Loader { get; }
 
 #### Property Value
 
-[ITemplateLoader](./proffer.templating.itemplateloader)<br>
+[ITemplateLoader](./proffer.templating.itemplateloader.md)<br>
 
 ## Constructors
 
 ### **TemplateCollectionBase(String, IStorageFactory, ITemplateLoaderFactory)**
 
-Initializes a new instance of the [TemplateCollectionBase](./proffer.templating.templatecollectionbase) class.
+Initializes a new instance of the [TemplateCollectionBase](./proffer.templating.templatecollectionbase.md) class.
 
 ```csharp
 public TemplateCollectionBase(string storeName, IStorageFactory storageFactory, ITemplateLoaderFactory templateLoaderFactory)
@@ -42,7 +42,7 @@ The name of the store.
 `storageFactory` IStorageFactory<br>
 The storage factory.
 
-`templateLoaderFactory` [ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory)<br>
+`templateLoaderFactory` [ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory.md)<br>
 The template loader factory.
 
 ## Methods

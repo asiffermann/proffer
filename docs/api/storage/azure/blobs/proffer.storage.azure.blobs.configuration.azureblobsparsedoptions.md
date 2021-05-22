@@ -8,7 +8,7 @@ Typed Azure Blobs options parsed from the dynamic configuration.
 public class AzureBlobsParsedOptions : Proffer.Storage.Configuration.IParsedOptions`3[[Proffer.Storage.Azure.Blobs.Configuration.AzureBlobsProviderOptions, Proffer.Storage.Azure.Blobs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.Azure.Blobs.Configuration.AzureBlobsStoreOptions, Proffer.Storage.Azure.Blobs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.Azure.Blobs.Configuration.AzureBlobsScopedStoreOptions, Proffer.Storage.Azure.Blobs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsParsedOptions](./proffer.storage.azure.blobs.configuration.azureblobsparsedoptions)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsParsedOptions](./proffer.storage.azure.blobs.configuration.azureblobsparsedoptions.md)<br>
 Implements IParsedOptions&lt;AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions&gt;
 
 ## Properties
@@ -95,7 +95,7 @@ public void BindProviderOptions(AzureBlobsProviderOptions providerInstanceOption
 
 #### Parameters
 
-`providerInstanceOptions` [AzureBlobsProviderOptions](./proffer.storage.azure.blobs.configuration.azureblobsprovideroptions)<br>
+`providerInstanceOptions` [AzureBlobsProviderOptions](./proffer.storage.azure.blobs.configuration.azureblobsprovideroptions.md)<br>
 The provider instance options.
 
 #### Exceptions
@@ -112,10 +112,10 @@ public void BindStoreOptions(AzureBlobsStoreOptions storeOptions, AzureBlobsProv
 
 #### Parameters
 
-`storeOptions` [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions)<br>
+`storeOptions` [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions.md)<br>
 The store options.
 
-`providerInstanceOptions` [AzureBlobsProviderOptions](./proffer.storage.azure.blobs.configuration.azureblobsprovideroptions)<br>
+`providerInstanceOptions` [AzureBlobsProviderOptions](./proffer.storage.azure.blobs.configuration.azureblobsprovideroptions.md)<br>
 The provider instance options.
 
 #### Exceptions

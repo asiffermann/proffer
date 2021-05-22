@@ -8,14 +8,14 @@ A provider which does not send any email but holds it in a collection in memory.
 public class InMemoryEmailProvider : Proffer.Email.IEmailProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider.md)<br>
 Implements IEmailProvider
 
 ## Constructors
 
 ### **InMemoryEmailProvider(IInMemoryEmailRepository)**
 
-Initializes a new instance of the [InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider) class.
+Initializes a new instance of the [InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider.md) class.
 
 ```csharp
 public InMemoryEmailProvider(IInMemoryEmailRepository inMemoryEmailRepository)
@@ -23,7 +23,7 @@ public InMemoryEmailProvider(IInMemoryEmailRepository inMemoryEmailRepository)
 
 #### Parameters
 
-`inMemoryEmailRepository` [IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository)<br>
+`inMemoryEmailRepository` [IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository.md)<br>
 The in-memory email repository.
 
 ## Methods

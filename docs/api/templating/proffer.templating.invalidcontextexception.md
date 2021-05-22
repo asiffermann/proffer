@@ -8,7 +8,7 @@ Thrown when the generation context is invalid for a template.
 public class InvalidContextException : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [InvalidContextException](./proffer.templating.invalidcontextexception)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [InvalidContextException](./proffer.templating.invalidcontextexception.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **InvalidContextException(Exception)**
 
-Initializes a new instance of the [InvalidContextException](./proffer.templating.invalidcontextexception) class.
+Initializes a new instance of the [InvalidContextException](./proffer.templating.invalidcontextexception.md) class.
 
 ```csharp
 public InvalidContextException(Exception innerException)

@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class AzureBlobsStorageServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsStorageServiceCollectionExtensions](./proffer.storage.azureblobsstorageservicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsStorageServiceCollectionExtensions](./proffer.storage.azureblobsstorageservicecollectionextensions.md)
 
 ## Methods
 

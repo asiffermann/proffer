@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class FileSystemPropertiesJsonServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemPropertiesJsonServiceCollectionExtensions](./proffer.storage.filesystempropertiesjsonservicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemPropertiesJsonServiceCollectionExtensions](./proffer.storage.filesystempropertiesjsonservicecollectionextensions.md)
 
 ## Methods
 

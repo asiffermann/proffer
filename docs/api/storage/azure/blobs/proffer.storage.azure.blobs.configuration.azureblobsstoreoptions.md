@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.Azure.Blobs.Configuration
 
-Options for an [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore).
+Options for an [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore.md).
 
 ```csharp
 public class AzureBlobsStoreOptions : Proffer.Storage.Configuration.StoreOptions, Proffer.Storage.Configuration.IStoreOptions, Proffer.Configuration.INamedElementOptions, Proffer.Azure.Configuration.IAzureStorageOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StoreOptions → [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StoreOptions → [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions.md)<br>
 Implements IStoreOptions, INamedElementOptions, IAzureStorageOptions
 
 ## Properties

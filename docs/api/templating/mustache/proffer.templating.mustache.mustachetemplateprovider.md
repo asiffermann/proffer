@@ -8,7 +8,7 @@ A provider handles and compiles templates using N:Mustache.
 public class MustacheTemplateProvider : Proffer.Templating.ITemplateProvider, Proffer.Templating.ITemplateProviderScope
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MustacheTemplateProvider](./proffer.templating.mustache.mustachetemplateprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MustacheTemplateProvider](./proffer.templating.mustache.mustachetemplateprovider.md)<br>
 Implements ITemplateProvider, ITemplateProviderScope
 
 ## Properties
@@ -41,7 +41,7 @@ public ISet<string> Extensions { get; }
 
 ### **MustacheTemplateProvider()**
 
-Initializes a new instance of the [MustacheTemplateProvider](./proffer.templating.mustache.mustachetemplateprovider) class.
+Initializes a new instance of the [MustacheTemplateProvider](./proffer.templating.mustache.mustachetemplateprovider.md) class.
 
 ```csharp
 public MustacheTemplateProvider()

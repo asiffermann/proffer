@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.Azure.Blobs.Internal
 
-Represents a file in a being-listed [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore).
+Represents a file in a being-listed [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore.md).
 
 ```csharp
 public class AzureBlobsListFileWrapper : Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → FileSystemInfoBase → FileInfoBase → [AzureBlobsListFileWrapper](./proffer.storage.azure.blobs.internal.azureblobslistfilewrapper)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → FileSystemInfoBase → FileInfoBase → [AzureBlobsListFileWrapper](./proffer.storage.azure.blobs.internal.azureblobslistfilewrapper.md)
 
 ## Properties
 
@@ -52,7 +52,7 @@ DirectoryInfoBase<br>
 
 ### **AzureBlobsListFileWrapper(AzureBlobsFileReference, AzureBlobsListDirectoryWrapper)**
 
-Initializes a new instance of the [AzureBlobsListFileWrapper](./proffer.storage.azure.blobs.internal.azureblobslistfilewrapper) class.
+Initializes a new instance of the [AzureBlobsListFileWrapper](./proffer.storage.azure.blobs.internal.azureblobslistfilewrapper.md) class.
 
 ```csharp
 public AzureBlobsListFileWrapper(AzureBlobsFileReference file, AzureBlobsListDirectoryWrapper parent)
@@ -60,8 +60,8 @@ public AzureBlobsListFileWrapper(AzureBlobsFileReference file, AzureBlobsListDir
 
 #### Parameters
 
-`file` [AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference)<br>
+`file` [AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference.md)<br>
 The file reference.
 
-`parent` [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper)<br>
+`parent` [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper.md)<br>
 The parent directory.

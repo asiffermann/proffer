@@ -2,14 +2,14 @@
 
 Namespace: Proffer.Storage.Configuration
 
-Generic options for an [IStore](./proffer.storage.istore).
+Generic options for an [IStore](./proffer.storage.istore.md).
 
 ```csharp
 public class StoreOptions : IStoreOptions, Proffer.Configuration.INamedElementOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StoreOptions](./proffer.storage.configuration.storeoptions)<br>
-Implements [IStoreOptions](./proffer.storage.configuration.istoreoptions), INamedElementOptions
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StoreOptions](./proffer.storage.configuration.storeoptions.md)<br>
+Implements [IStoreOptions](./proffer.storage.configuration.istoreoptions.md), INamedElementOptions
 
 ## Properties
 
@@ -59,7 +59,7 @@ public AccessLevel AccessLevel { get; set; }
 
 #### Property Value
 
-[AccessLevel](./proffer.storage.configuration.accesslevel)<br>
+[AccessLevel](./proffer.storage.configuration.accesslevel.md)<br>
 
 ### **FolderName**
 
@@ -106,7 +106,7 @@ If set to true, throws an exception when the validation fails with any .
 
 #### Exceptions
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
 ### **PushMissingPropertyError(List&lt;OptionError&gt;, String)**
 

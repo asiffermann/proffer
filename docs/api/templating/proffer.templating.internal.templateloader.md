@@ -8,14 +8,14 @@ Loads template references from an Proffer.Storage.IStore and cache results.
 public class TemplateLoader : Proffer.Templating.ITemplateLoader
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateLoader](./proffer.templating.internal.templateloader)<br>
-Implements [ITemplateLoader](./proffer.templating.itemplateloader)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateLoader](./proffer.templating.internal.templateloader.md)<br>
+Implements [ITemplateLoader](./proffer.templating.itemplateloader.md)
 
 ## Constructors
 
 ### **TemplateLoader(IStore, IEnumerable&lt;ITemplateProvider&gt;, IMemoryCache)**
 
-Initializes a new instance of the [TemplateLoader](./proffer.templating.internal.templateloader) class.
+Initializes a new instance of the [TemplateLoader](./proffer.templating.internal.templateloader.md) class.
 
 ```csharp
 public TemplateLoader(IStore store, IEnumerable<ITemplateProvider> providers, IMemoryCache memoryCache)

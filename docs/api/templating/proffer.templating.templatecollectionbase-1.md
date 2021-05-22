@@ -13,7 +13,7 @@ public abstract class TemplateCollectionBase<TStore> : TemplateCollectionBase
 `TStore`<br>
 The type of the store.
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateCollectionBase](./proffer.templating.templatecollectionbase) → [TemplateCollectionBase&lt;TStore&gt;](./proffer.templating.templatecollectionbase-1)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplateCollectionBase](./proffer.templating.templatecollectionbase.md) → [TemplateCollectionBase&lt;TStore&gt;](./proffer.templating.templatecollectionbase-1.md)
 
 ## Properties
 
@@ -27,13 +27,13 @@ public ITemplateLoader Loader { get; }
 
 #### Property Value
 
-[ITemplateLoader](./proffer.templating.itemplateloader)<br>
+[ITemplateLoader](./proffer.templating.itemplateloader.md)<br>
 
 ## Constructors
 
 ### **TemplateCollectionBase(TStore, ITemplateLoaderFactory)**
 
-Initializes a new instance of the [TemplateCollectionBase&lt;TStore&gt;](./proffer.templating.templatecollectionbase-1) class.
+Initializes a new instance of the [TemplateCollectionBase&lt;TStore&gt;](./proffer.templating.templatecollectionbase-1.md) class.
 
 ```csharp
 public TemplateCollectionBase(TStore store, ITemplateLoaderFactory templateLoaderFactory)
@@ -44,5 +44,5 @@ public TemplateCollectionBase(TStore store, ITemplateLoaderFactory templateLoade
 `store` TStore<br>
 The typed store.
 
-`templateLoaderFactory` [ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory)<br>
+`templateLoaderFactory` [ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory.md)<br>
 The template loader factory.

@@ -8,7 +8,7 @@ A provider handles and compiles templates using N:HandlebarsDotNet.
 public class HandlebarsTemplateProvider : Proffer.Templating.ITemplateProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HandlebarsTemplateProvider](./proffer.templating.handlebars.handlebarstemplateprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HandlebarsTemplateProvider](./proffer.templating.handlebars.handlebarstemplateprovider.md)<br>
 Implements ITemplateProvider
 
 ## Properties
@@ -41,7 +41,7 @@ public ISet<string> Extensions { get; }
 
 ### **HandlebarsTemplateProvider()**
 
-Initializes a new instance of the [HandlebarsTemplateProvider](./proffer.templating.handlebars.handlebarstemplateprovider) class.
+Initializes a new instance of the [HandlebarsTemplateProvider](./proffer.templating.handlebars.handlebarstemplateprovider.md) class.
 
 ```csharp
 public HandlebarsTemplateProvider()

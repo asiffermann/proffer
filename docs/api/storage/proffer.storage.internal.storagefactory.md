@@ -2,20 +2,20 @@
 
 Namespace: Proffer.Storage.Internal
 
-Default storage factory to build [IStore](./proffer.storage.istore) from configured [IStorageProvider](./proffer.storage.istorageprovider).
+Default storage factory to build [IStore](./proffer.storage.istore.md) from configured [IStorageProvider](./proffer.storage.istorageprovider.md).
 
 ```csharp
 public class StorageFactory : Proffer.Storage.IStorageFactory
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StorageFactory](./proffer.storage.internal.storagefactory)<br>
-Implements [IStorageFactory](./proffer.storage.istoragefactory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StorageFactory](./proffer.storage.internal.storagefactory.md)<br>
+Implements [IStorageFactory](./proffer.storage.istoragefactory.md)
 
 ## Constructors
 
 ### **StorageFactory(IEnumerable&lt;IStorageProvider&gt;, IOptions&lt;StorageOptions&gt;)**
 
-Initializes a new instance of the [StorageFactory](./proffer.storage.internal.storagefactory) class.
+Initializes a new instance of the [StorageFactory](./proffer.storage.internal.storagefactory.md) class.
 
 ```csharp
 public StorageFactory(IEnumerable<IStorageProvider> storageProviders, IOptions<StorageOptions> options)
@@ -44,24 +44,24 @@ public IStore GetStore(string storeName, IStoreOptions configuration)
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`configuration` [IStoreOptions](./proffer.storage.configuration.istoreoptions)<br>
+`configuration` [IStoreOptions](./proffer.storage.configuration.istoreoptions.md)<br>
 The store options.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
 #### Exceptions
 
-[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
-[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception)<br>
+[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception.md)<br>
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
 ### **GetStore(String)**
 
@@ -78,19 +78,19 @@ The name of the store.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
 #### Exceptions
 
-[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
-[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception)<br>
+[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception.md)<br>
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
 ### **GetScopedStore(String, Object[])**
 
@@ -110,21 +110,21 @@ The arguments to apply to the scoped store name format.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
 #### Exceptions
 
-[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
-[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception)<br>
+[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception.md)<br>
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
-[BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration)<br>
+[BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration.md)<br>
 
 ### **TryGetStore(String, IStore&)**
 
@@ -139,7 +139,7 @@ public bool TryGetStore(string storeName, IStore& store)
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`store` [IStore&](./proffer.storage.istore&)<br>
+`store` [IStore&](./proffer.storage.istore&.md)<br>
 When this method returns, contains the store associated with the specified name, if it is found in the ; otherwise, null. This parameter is passed uninitialized.
 
 #### Returns
@@ -149,13 +149,13 @@ true if the store was configured and built from its provider; otherwise, false.
 
 #### Exceptions
 
-[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
-[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception)<br>
+[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception.md)<br>
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
 ### **TryGetStore(String, IStore&, String)**
 
@@ -170,7 +170,7 @@ public bool TryGetStore(string storeName, IStore& store, string providerName)
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`store` [IStore&](./proffer.storage.istore&)<br>
+`store` [IStore&](./proffer.storage.istore&.md)<br>
 When this method returns, contains the store associated with the specified name, if it is found in the ; otherwise, null. This parameter is passed uninitialized.
 
 `providerName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -183,10 +183,10 @@ true if the store was configured and built from its provider; otherwise, false.
 
 #### Exceptions
 
-[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
-[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception)<br>
+[ProviderNotFoundException](./proffer.storage.exceptions.providernotfoundexception.md)<br>
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>

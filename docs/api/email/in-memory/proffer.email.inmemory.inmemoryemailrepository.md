@@ -8,8 +8,8 @@ A repository in memory to hold sent emails through the provider.
 public class InMemoryEmailRepository : IInMemoryEmailRepository
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmailRepository](./proffer.email.inmemory.inmemoryemailrepository)<br>
-Implements [IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmailRepository](./proffer.email.inmemory.inmemoryemailrepository.md)<br>
+Implements [IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository.md)
 
 ## Properties
 
@@ -47,5 +47,5 @@ public void Save(InMemoryEmail email)
 
 #### Parameters
 
-`email` [InMemoryEmail](./proffer.email.inmemory.inmemoryemail)<br>
+`email` [InMemoryEmail](./proffer.email.inmemory.inmemoryemail.md)<br>
 The email.

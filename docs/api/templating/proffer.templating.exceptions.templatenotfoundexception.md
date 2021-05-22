@@ -8,7 +8,7 @@ Thrown when a template was not found in the store.
 public class TemplateNotFoundException : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [TemplateNotFoundException](./proffer.templating.exceptions.templatenotfoundexception)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [TemplateNotFoundException](./proffer.templating.exceptions.templatenotfoundexception.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **TemplateNotFoundException(String)**
 
-Initializes a new instance of the [TemplateNotFoundException](./proffer.templating.exceptions.templatenotfoundexception) class.
+Initializes a new instance of the [TemplateNotFoundException](./proffer.templating.exceptions.templatenotfoundexception.md) class.
 
 ```csharp
 public TemplateNotFoundException(string templateName)

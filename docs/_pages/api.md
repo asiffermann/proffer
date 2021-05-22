@@ -1,4 +1,11 @@
-# API documentation
+---
+title: "API documentation"
+permalink: /api
+layout: single
+author_profile: false
+toc: true
+toc_sticky: true
+---
 
 ## Core libraries
 

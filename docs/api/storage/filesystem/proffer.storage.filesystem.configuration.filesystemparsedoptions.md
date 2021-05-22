@@ -8,7 +8,7 @@ Typed File System options parsed from the dynamic configuration.
 public class FileSystemParsedOptions : Proffer.Storage.Configuration.IParsedOptions`3[[Proffer.Storage.FileSystem.Configuration.FileSystemProviderOptions, Proffer.Storage.FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.FileSystem.Configuration.FileSystemStoreOptions, Proffer.Storage.FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.FileSystem.Configuration.FileSystemScopedStoreOptions, Proffer.Storage.FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemParsedOptions](./proffer.storage.filesystem.configuration.filesystemparsedoptions)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemParsedOptions](./proffer.storage.filesystem.configuration.filesystemparsedoptions.md)<br>
 Implements IParsedOptions&lt;FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions&gt;
 
 ## Properties
@@ -107,7 +107,7 @@ public void BindProviderOptions(FileSystemProviderOptions providerInstanceOption
 
 #### Parameters
 
-`providerInstanceOptions` [FileSystemProviderOptions](./proffer.storage.filesystem.configuration.filesystemprovideroptions)<br>
+`providerInstanceOptions` [FileSystemProviderOptions](./proffer.storage.filesystem.configuration.filesystemprovideroptions.md)<br>
 The provider instance options.
 
 ### **BindStoreOptions(FileSystemStoreOptions, FileSystemProviderOptions)**
@@ -120,8 +120,8 @@ public void BindStoreOptions(FileSystemStoreOptions storeOptions, FileSystemProv
 
 #### Parameters
 
-`storeOptions` [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions)<br>
+`storeOptions` [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions.md)<br>
 The store options.
 
-`providerInstanceOptions` [FileSystemProviderOptions](./proffer.storage.filesystem.configuration.filesystemprovideroptions)<br>
+`providerInstanceOptions` [FileSystemProviderOptions](./proffer.storage.filesystem.configuration.filesystemprovideroptions.md)<br>
 The provider instance options.

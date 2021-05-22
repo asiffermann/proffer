@@ -22,8 +22,8 @@ The type of the store options.
 `TScopedStoreOptions`<br>
 The type of the scoped store options.
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StorageProviderBase&lt;TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.storageproviderbase-4)<br>
-Implements [IStorageProvider](./proffer.storage.istorageprovider)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StorageProviderBase&lt;TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.storageproviderbase-4.md)<br>
+Implements [IStorageProvider](./proffer.storage.istorageprovider.md)
 
 ## Properties
 
@@ -43,7 +43,7 @@ public abstract string Name { get; }
 
 ### **StorageProviderBase(IOptions&lt;TParsedOptions&gt;)**
 
-Initializes a new instance of the [StorageProviderBase&lt;TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.storageproviderbase-4) class.
+Initializes a new instance of the [StorageProviderBase&lt;TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.storageproviderbase-4.md) class.
 
 ```csharp
 public StorageProviderBase(IOptions<TParsedOptions> options)
@@ -71,13 +71,13 @@ The name of the store.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
 #### Exceptions
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
 ### **BuildStore(String, IStoreOptions)**
 
@@ -92,12 +92,12 @@ public IStore BuildStore(string storeName, IStoreOptions storeOptions)
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`storeOptions` [IStoreOptions](./proffer.storage.configuration.istoreoptions)<br>
+`storeOptions` [IStoreOptions](./proffer.storage.configuration.istoreoptions.md)<br>
 The store options.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
@@ -119,15 +119,15 @@ The arguments to apply to the scoped store name format.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
 #### Exceptions
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
-[BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration)<br>
+[BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration.md)<br>
 
 ### **BuildStoreInternal(String, TStoreOptions)**
 
@@ -147,6 +147,6 @@ The store options.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .

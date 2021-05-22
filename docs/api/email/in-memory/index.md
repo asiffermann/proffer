@@ -2,16 +2,16 @@
 
 ## Proffer.Email
 
-[InMemoryEmailServiceCollectionExtensions](./proffer.email.inmemoryemailservicecollectionextensions)
+[InMemoryEmailServiceCollectionExtensions](./proffer.email.inmemoryemailservicecollectionextensions.md)
 
 ## Proffer.Email.InMemory
 
-[IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository)
+[IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository.md)
 
-[InMemoryEmail](./proffer.email.inmemory.inmemoryemail)
+[InMemoryEmail](./proffer.email.inmemory.inmemoryemail.md)
 
-[InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider)
+[InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider.md)
 
-[InMemoryEmailProviderType](./proffer.email.inmemory.inmemoryemailprovidertype)
+[InMemoryEmailProviderType](./proffer.email.inmemory.inmemoryemailprovidertype.md)
 
-[InMemoryEmailRepository](./proffer.email.inmemory.inmemoryemailrepository)
+[InMemoryEmailRepository](./proffer.email.inmemory.inmemoryemailrepository.md)

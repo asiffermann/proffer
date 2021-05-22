@@ -8,8 +8,8 @@ Standard options for a provider.
 public class ProviderOptions : IProviderOptions, INamedElementOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ProviderOptions](./proffer.configuration.provideroptions)<br>
-Implements [IProviderOptions](./proffer.configuration.iprovideroptions), [INamedElementOptions](./proffer.configuration.inamedelementoptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ProviderOptions](./proffer.configuration.provideroptions.md)<br>
+Implements [IProviderOptions](./proffer.configuration.iprovideroptions.md), [INamedElementOptions](./proffer.configuration.inamedelementoptions.md)
 
 ## Properties
 

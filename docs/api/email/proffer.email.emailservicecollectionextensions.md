@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class EmailServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailServiceCollectionExtensions](./proffer.email.emailservicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailServiceCollectionExtensions](./proffer.email.emailservicecollectionextensions.md)
 
 ## Methods
 

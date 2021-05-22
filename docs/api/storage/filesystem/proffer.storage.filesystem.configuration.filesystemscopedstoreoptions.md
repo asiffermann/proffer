@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.FileSystem.Configuration
 
-Options for a scoped [FileSystemStore](./proffer.storage.filesystem.filesystemstore).
+Options for a scoped [FileSystemStore](./proffer.storage.filesystem.filesystemstore.md).
 
 ```csharp
 public class FileSystemScopedStoreOptions : FileSystemStoreOptions, Proffer.Storage.Configuration.IStoreOptions, Proffer.Configuration.INamedElementOptions, Proffer.Storage.Configuration.IScopedStoreOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StoreOptions → [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions) → [FileSystemScopedStoreOptions](./proffer.storage.filesystem.configuration.filesystemscopedstoreoptions)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StoreOptions → [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions.md) → [FileSystemScopedStoreOptions](./proffer.storage.filesystem.configuration.filesystemscopedstoreoptions.md)<br>
 Implements IStoreOptions, INamedElementOptions, IScopedStoreOptions
 
 ## Properties

@@ -2,14 +2,14 @@
 
 Namespace: Proffer.Email
 
-Generic options for a [IEmailProvider](./proffer.email.iemailprovider).
+Generic options for a [IEmailProvider](./proffer.email.iemailprovider.md).
 
 ```csharp
 public class EmailProviderOptions : IEmailProviderOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailProviderOptions](./proffer.email.emailprovideroptions)<br>
-Implements [IEmailProviderOptions](./proffer.email.iemailprovideroptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailProviderOptions](./proffer.email.emailprovideroptions.md)<br>
+Implements [IEmailProviderOptions](./proffer.email.iemailprovideroptions.md)
 
 ## Properties
 

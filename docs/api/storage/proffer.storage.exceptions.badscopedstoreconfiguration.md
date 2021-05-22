@@ -8,7 +8,7 @@ Thrown when a scoped store was not properly configured.
 public class BadScopedStoreConfiguration : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **BadScopedStoreConfiguration(String, String, Exception)**
 
-Initializes a new instance of the [BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration) class.
+Initializes a new instance of the [BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration.md) class.
 
 ```csharp
 public BadScopedStoreConfiguration(string storeName, string details, Exception innerException)

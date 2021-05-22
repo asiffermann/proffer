@@ -8,7 +8,7 @@ Thrown when trying to create a file that already exists in a store.
 public class FileAlreadyExistsException : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **FileAlreadyExistsException(String, String)**
 
-Initializes a new instance of the [FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception) class.
+Initializes a new instance of the [FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception.md) class.
 
 ```csharp
 public FileAlreadyExistsException(string storeName, string filePath)

@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Email.SendGrid
 
-Builds [SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider).
+Builds [SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider.md).
 
 ```csharp
 public class SendGridEmailProviderType : Proffer.Email.IEmailProviderType
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SendGridEmailProviderType](./proffer.email.sendgrid.sendgridemailprovidertype)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SendGridEmailProviderType](./proffer.email.sendgrid.sendgridemailprovidertype.md)<br>
 Implements IEmailProviderType
 
 ## Properties

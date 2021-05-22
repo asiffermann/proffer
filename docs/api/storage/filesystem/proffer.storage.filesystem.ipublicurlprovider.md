@@ -23,7 +23,7 @@ string GetPublicUrl(string storeName, FileSystemFileReference file)
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`file` [FileSystemFileReference](./proffer.storage.filesystem.internal.filesystemfilereference)<br>
+`file` [FileSystemFileReference](./proffer.storage.filesystem.internal.filesystemfilereference.md)<br>
 The reference holding the file path.
 
 #### Returns

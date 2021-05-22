@@ -8,7 +8,7 @@ Extends standard file properties to match the requirements of Proffer.Storage.IF
 public class FileExtendedProperties
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties.md)
 
 ## Properties
 
@@ -76,7 +76,7 @@ public IDictionary<string, string> Metadata { get; set; }
 
 ### **FileExtendedProperties()**
 
-Initializes a new instance of the [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties) class.
+Initializes a new instance of the [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties.md) class.
 
 ```csharp
 public FileExtendedProperties()

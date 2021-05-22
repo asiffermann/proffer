@@ -8,7 +8,7 @@ A reference of a stored file at a given path on Azure Blobs.
 public class AzureBlobsFileReference : Proffer.Storage.IFileReference, Proffer.Storage.IPrivateFileReference
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference.md)<br>
 Implements IFileReference, IPrivateFileReference
 
 ## Properties
@@ -53,7 +53,7 @@ public string PublicUrl { get; }
 
 ### **AzureBlobsFileReference(BlobClient, AzureBlobsFileProperties)**
 
-Initializes a new instance of the [AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference) class.
+Initializes a new instance of the [AzureBlobsFileReference](./proffer.storage.azure.blobs.internal.azureblobsfilereference.md) class.
 
 ```csharp
 public AzureBlobsFileReference(BlobClient blobClient, AzureBlobsFileProperties properties)
@@ -64,7 +64,7 @@ public AzureBlobsFileReference(BlobClient blobClient, AzureBlobsFileProperties p
 `blobClient` BlobClient<br>
 The Azure Blobs client.
 
-`properties` [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties)<br>
+`properties` [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties.md)<br>
 The properties, if fetched.
 
 ## Methods

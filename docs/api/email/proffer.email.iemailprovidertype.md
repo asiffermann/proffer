@@ -34,10 +34,10 @@ IEmailProvider BuildProvider(IEmailProviderOptions providerOptions)
 
 #### Parameters
 
-`providerOptions` [IEmailProviderOptions](./proffer.email.iemailprovideroptions)<br>
+`providerOptions` [IEmailProviderOptions](./proffer.email.iemailprovideroptions.md)<br>
 The provider options.
 
 #### Returns
 
-[IEmailProvider](./proffer.email.iemailprovider)<br>
+[IEmailProvider](./proffer.email.iemailprovider.md)<br>
 A new .

@@ -8,13 +8,13 @@ ASP.NET Core middleware to serve over HTTP files stored in a Storage store.
 public class FileSystemStorageServerMiddleware
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware.md)
 
 ## Constructors
 
 ### **FileSystemStorageServerMiddleware(RequestDelegate, IOptions&lt;FileSystemStorageServerOptions&gt;, ILogger&lt;FileSystemStorageServerMiddleware&gt;, IOptions&lt;FileSystemParsedOptions&gt;)**
 
-Initializes a new instance of the [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware) class.
+Initializes a new instance of the [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware.md) class.
 
 ```csharp
 public FileSystemStorageServerMiddleware(RequestDelegate next, IOptions<FileSystemStorageServerOptions> serverOptions, ILogger<FileSystemStorageServerMiddleware> logger, IOptions<FileSystemParsedOptions> fileSystemParsedOptions)

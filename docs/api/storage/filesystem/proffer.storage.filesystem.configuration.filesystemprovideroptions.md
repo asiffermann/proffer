@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.FileSystem.Configuration
 
-Options for a [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider).
+Options for a [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider.md).
 
 ```csharp
 public class FileSystemProviderOptions : Proffer.Configuration.ProviderOptions, Proffer.Configuration.IProviderOptions, Proffer.Configuration.INamedElementOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → ProviderOptions → [FileSystemProviderOptions](./proffer.storage.filesystem.configuration.filesystemprovideroptions)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → ProviderOptions → [FileSystemProviderOptions](./proffer.storage.filesystem.configuration.filesystemprovideroptions.md)<br>
 Implements IProviderOptions, INamedElementOptions
 
 ## Properties

@@ -46,5 +46,5 @@ ITemplateProviderScope CreateScope()
 
 #### Returns
 
-[ITemplateProviderScope](./proffer.templating.itemplateproviderscope)<br>
+[ITemplateProviderScope](./proffer.templating.itemplateproviderscope.md)<br>
 A new templating provider scope.

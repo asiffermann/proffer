@@ -44,4 +44,4 @@ public abstract SharedAccessPermissions Permissions { get; }
 
 #### Property Value
 
-[SharedAccessPermissions](./proffer.storage.sharedaccesspermissions)<br>
+[SharedAccessPermissions](./proffer.storage.sharedaccesspermissions.md)<br>

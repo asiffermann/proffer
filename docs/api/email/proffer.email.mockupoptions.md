@@ -8,7 +8,7 @@ Options to mockup the email sender (all recipients would be redirect to the mock
 public class MockupOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MockupOptions](./proffer.email.mockupoptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MockupOptions](./proffer.email.mockupoptions.md)
 
 ## Properties
 
@@ -34,7 +34,7 @@ public MockupExceptionsOptions Exceptions { get; set; }
 
 #### Property Value
 
-[MockupExceptionsOptions](./proffer.email.mockupexceptionsoptions)<br>
+[MockupExceptionsOptions](./proffer.email.mockupexceptionsoptions.md)<br>
 
 ### **Disclaimer**
 

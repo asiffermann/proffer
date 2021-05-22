@@ -8,8 +8,8 @@ A generic error reported from the options validation.
 public class OptionError : IOptionError
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [OptionError](./proffer.configuration.optionerror)<br>
-Implements [IOptionError](./proffer.configuration.ioptionerror)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [OptionError](./proffer.configuration.optionerror.md)<br>
+Implements [IOptionError](./proffer.configuration.ioptionerror.md)
 
 ## Properties
 

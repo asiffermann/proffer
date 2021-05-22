@@ -8,14 +8,14 @@ A provider that sends email using N:SendGrid API.
 public class SendGridEmailProvider : Proffer.Email.IEmailProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider.md)<br>
 Implements IEmailProvider
 
 ## Constructors
 
 ### **SendGridEmailProvider(IEmailProviderOptions)**
 
-Initializes a new instance of the [SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider) class.
+Initializes a new instance of the [SendGridEmailProvider](./proffer.email.sendgrid.sendgridemailprovider.md) class.
 
 ```csharp
 public SendGridEmailProvider(IEmailProviderOptions options)

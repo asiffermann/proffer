@@ -8,7 +8,7 @@ Extensions methods to parse and bind options.
 public static class ConfigurationExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ConfigurationExtensions](./proffer.storage.configuration.configurationextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ConfigurationExtensions](./proffer.storage.configuration.configurationextensions.md)
 
 ## Methods
 
@@ -72,7 +72,7 @@ The typed store configuration.
 
 #### Exceptions
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
 ### **GetScopedStoreConfiguration&lt;TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;(IParsedOptions&lt;TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;, String, Boolean)**
 
@@ -111,7 +111,7 @@ The typed scoped store configuration.
 
 #### Exceptions
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
 ### **Compute&lt;TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions&gt;(TProviderOptions, TParsedOptions)**
 
@@ -145,7 +145,7 @@ The options.
 
 #### Exceptions
 
-[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>
 
 ### **Compute&lt;TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;(TStoreOptions, TParsedOptions)**
 
@@ -179,7 +179,7 @@ The options.
 
 #### Exceptions
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
 ### **ParseStoreOptions&lt;TParsedOptions, TInstanceOptions, TStoreOptions, TScopedStoreOptions&gt;(IStoreOptions, TParsedOptions)**
 
@@ -205,7 +205,7 @@ The type of the scoped store options.
 
 #### Parameters
 
-`storeOptions` [IStoreOptions](./proffer.storage.configuration.istoreoptions)<br>
+`storeOptions` [IStoreOptions](./proffer.storage.configuration.istoreoptions.md)<br>
 The store options.
 
 `options` TParsedOptions<br>

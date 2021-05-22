@@ -8,14 +8,14 @@ A template reference can be executed on a specific context using N:HandlebarsDot
 public class HandlebarsTemplate : Proffer.Templating.ITemplate
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate.md)<br>
 Implements ITemplate
 
 ## Constructors
 
 ### **HandlebarsTemplate(String)**
 
-Initializes a new instance of the [HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate) class.
+Initializes a new instance of the [HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate.md) class.
 
 ```csharp
 public HandlebarsTemplate(string templateContent)
@@ -28,7 +28,7 @@ Content of the template.
 
 ### **HandlebarsTemplate(IHandlebars, String)**
 
-Initializes a new instance of the [HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate) class.
+Initializes a new instance of the [HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate.md) class.
 
 ```csharp
 public HandlebarsTemplate(IHandlebars handlebars, string templateContent)

@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class HandlebarsServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HandlebarsServiceCollectionExtensions](./proffer.templating.handlebarsservicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HandlebarsServiceCollectionExtensions](./proffer.templating.handlebarsservicecollectionextensions.md)
 
 ## Methods
 

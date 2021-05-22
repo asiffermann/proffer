@@ -8,7 +8,7 @@ Abstract base typed store.
 public abstract class StoreBase
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StoreBase](./proffer.storage.storebase)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StoreBase](./proffer.storage.storebase.md)
 
 ## Properties
 
@@ -22,13 +22,13 @@ public IStore Store { get; }
 
 #### Property Value
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
 ## Constructors
 
 ### **StoreBase(String, IStorageFactory)**
 
-Initializes a new instance of the [StoreBase](./proffer.storage.storebase) class.
+Initializes a new instance of the [StoreBase](./proffer.storage.storebase.md) class.
 
 ```csharp
 public StoreBase(string storeName, IStorageFactory storageFactory)
@@ -39,5 +39,5 @@ public StoreBase(string storeName, IStorageFactory storageFactory)
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`storageFactory` [IStorageFactory](./proffer.storage.istoragefactory)<br>
+`storageFactory` [IStorageFactory](./proffer.storage.istoragefactory.md)<br>
 The storage factory.

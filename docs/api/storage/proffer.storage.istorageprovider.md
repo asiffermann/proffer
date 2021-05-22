@@ -39,13 +39,13 @@ The name of the store.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
 #### Exceptions
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
 ### **BuildStore(String, IStoreOptions)**
 
@@ -60,12 +60,12 @@ IStore BuildStore(string storeName, IStoreOptions storeOptions)
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`storeOptions` [IStoreOptions](./proffer.storage.configuration.istoreoptions)<br>
+`storeOptions` [IStoreOptions](./proffer.storage.configuration.istoreoptions.md)<br>
 The store options.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
@@ -87,12 +87,12 @@ The arguments to apply to the scoped store name format.
 
 #### Returns
 
-[IStore](./proffer.storage.istore)<br>
+[IStore](./proffer.storage.istore.md)<br>
 
             A configured .
 
 #### Exceptions
 
-[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception)<br>
+[StoreNotFoundException](./proffer.storage.exceptions.storenotfoundexception.md)<br>
 
-[BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration)<br>
+[BadScopedStoreConfiguration](./proffer.storage.exceptions.badscopedstoreconfiguration.md)<br>

@@ -8,7 +8,7 @@ An object to retain the values of the email that would have been sent.
 public class InMemoryEmail
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmail](./proffer.email.inmemory.inmemoryemail)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmail](./proffer.email.inmemory.inmemoryemail.md)
 
 ## Properties
 

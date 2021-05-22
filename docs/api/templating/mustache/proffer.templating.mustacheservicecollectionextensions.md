@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class MustacheServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MustacheServiceCollectionExtensions](./proffer.templating.mustacheservicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MustacheServiceCollectionExtensions](./proffer.templating.mustacheservicecollectionextensions.md)
 
 ## Methods
 

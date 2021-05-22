@@ -8,7 +8,7 @@ File common properties with metadata stored on a File System.
 public class FileSystemFileProperties : Proffer.Storage.IFileProperties
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemFileProperties](./proffer.storage.filesystem.internal.filesystemfileproperties)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemFileProperties](./proffer.storage.filesystem.internal.filesystemfileproperties.md)<br>
 Implements IFileProperties
 
 ## Properties
@@ -101,7 +101,7 @@ public IDictionary<string, string> Metadata { get; }
 
 ### **FileSystemFileProperties(String, FileExtendedProperties)**
 
-Initializes a new instance of the [FileSystemFileProperties](./proffer.storage.filesystem.internal.filesystemfileproperties) class.
+Initializes a new instance of the [FileSystemFileProperties](./proffer.storage.filesystem.internal.filesystemfileproperties.md) class.
 
 ```csharp
 public FileSystemFileProperties(string fileSystemPath, FileExtendedProperties extendedProperties)
@@ -112,5 +112,5 @@ public FileSystemFileProperties(string fileSystemPath, FileExtendedProperties ex
 `fileSystemPath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The file system path.
 
-`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties)<br>
+`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties.md)<br>
 The extended properties.

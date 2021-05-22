@@ -8,7 +8,7 @@ Thrown when a provider was not properly configured.
 public class BadProviderConfiguration : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **BadProviderConfiguration(String, String)**
 
-Initializes a new instance of the [BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration) class.
+Initializes a new instance of the [BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md) class.
 
 ```csharp
 public BadProviderConfiguration(string providerName, string details)

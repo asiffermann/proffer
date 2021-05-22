@@ -8,7 +8,7 @@ Thrown when a matching provider was not found for a given template.
 public class ProviderNotFoundException : System.Exception, System.Runtime.Serialization.ISerializable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [ProviderNotFoundException](./proffer.templating.exceptions.providernotfoundexception)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) → [ProviderNotFoundException](./proffer.templating.exceptions.providernotfoundexception.md)<br>
 Implements [ISerializable](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable)
 
 ## Properties
@@ -113,7 +113,7 @@ public int HResult { get; set; }
 
 ### **ProviderNotFoundException(String, String, String)**
 
-Initializes a new instance of the [ProviderNotFoundException](./proffer.templating.exceptions.providernotfoundexception) class.
+Initializes a new instance of the [ProviderNotFoundException](./proffer.templating.exceptions.providernotfoundexception.md) class.
 
 ```csharp
 public ProviderNotFoundException(string templateName, string extension, string contentType)

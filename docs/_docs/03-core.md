@@ -1,7 +1,6 @@
 ---
 title: "Core libraries"
-permalink: /docs/core/
-excerpt_separator: <!--more-->
+permalink: /docs/core
 ---
 
 Those libraries provide common abstractions for any Proffer project or provider.

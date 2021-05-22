@@ -8,14 +8,14 @@ A template reference can be executed on a specific context using N:Mustache.
 public class MustacheTemplate : Proffer.Templating.ITemplate
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MustacheTemplate](./proffer.templating.mustache.mustachetemplate)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MustacheTemplate](./proffer.templating.mustache.mustachetemplate.md)<br>
 Implements ITemplate
 
 ## Constructors
 
 ### **MustacheTemplate(String)**
 
-Initializes a new instance of the [MustacheTemplate](./proffer.templating.mustache.mustachetemplate) class.
+Initializes a new instance of the [MustacheTemplate](./proffer.templating.mustache.mustachetemplate.md) class.
 
 ```csharp
 public MustacheTemplate(string templateContent)

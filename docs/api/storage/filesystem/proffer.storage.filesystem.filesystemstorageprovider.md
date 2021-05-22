@@ -8,14 +8,14 @@ A provider to handle and build file stores pointing on a File System directory.
 public class FileSystemStorageProvider : Proffer.Storage.Internal.StorageProviderBase`4[[Proffer.Storage.FileSystem.Configuration.FileSystemParsedOptions, Proffer.Storage.FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.FileSystem.Configuration.FileSystemProviderOptions, Proffer.Storage.FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.FileSystem.Configuration.FileSystemStoreOptions, Proffer.Storage.FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.FileSystem.Configuration.FileSystemScopedStoreOptions, Proffer.Storage.FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Proffer.Storage.IStorageProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StorageProviderBase&lt;FileSystemParsedOptions, FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions&gt; → [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StorageProviderBase&lt;FileSystemParsedOptions, FileSystemProviderOptions, FileSystemStoreOptions, FileSystemScopedStoreOptions&gt; → [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider.md)<br>
 Implements IStorageProvider
 
 ## Fields
 
 ### **ProviderName**
 
-The [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider) name.
+The [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider.md) name.
 
 ```csharp
 public static string ProviderName;
@@ -39,7 +39,7 @@ public string Name { get; }
 
 ### **FileSystemStorageProvider(IOptions&lt;FileSystemParsedOptions&gt;, IPublicUrlProvider, IExtendedPropertiesProvider)**
 
-Initializes a new instance of the [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider) class.
+Initializes a new instance of the [FileSystemStorageProvider](./proffer.storage.filesystem.filesystemstorageprovider.md) class.
 
 ```csharp
 public FileSystemStorageProvider(IOptions<FileSystemParsedOptions> options, IPublicUrlProvider publicUrlProvider, IExtendedPropertiesProvider extendedPropertiesProvider)
@@ -50,10 +50,10 @@ public FileSystemStorageProvider(IOptions<FileSystemParsedOptions> options, IPub
 `options` IOptions&lt;FileSystemParsedOptions&gt;<br>
 The options.
 
-`publicUrlProvider` [IPublicUrlProvider](./proffer.storage.filesystem.ipublicurlprovider)<br>
+`publicUrlProvider` [IPublicUrlProvider](./proffer.storage.filesystem.ipublicurlprovider.md)<br>
 The public URL provider.
 
-`extendedPropertiesProvider` [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider)<br>
+`extendedPropertiesProvider` [IExtendedPropertiesProvider](./proffer.storage.filesystem.iextendedpropertiesprovider.md)<br>
 The extended properties provider.
 
 ## Methods
@@ -71,7 +71,7 @@ protected IStore BuildStoreInternal(string storeName, FileSystemStoreOptions sto
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`storeOptions` [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions)<br>
+`storeOptions` [FileSystemStoreOptions](./proffer.storage.filesystem.configuration.filesystemstoreoptions.md)<br>
 The store options.
 
 #### Returns

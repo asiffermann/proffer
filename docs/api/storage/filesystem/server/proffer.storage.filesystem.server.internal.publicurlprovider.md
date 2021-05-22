@@ -8,14 +8,14 @@ Provides a way to serve files from an HTTP URL on a File System using an ASP.NET
 public class PublicUrlProvider : Proffer.Storage.FileSystem.IPublicUrlProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PublicUrlProvider](./proffer.storage.filesystem.server.internal.publicurlprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PublicUrlProvider](./proffer.storage.filesystem.server.internal.publicurlprovider.md)<br>
 Implements IPublicUrlProvider
 
 ## Constructors
 
 ### **PublicUrlProvider(IOptions&lt;FileSystemStorageServerOptions&gt;)**
 
-Initializes a new instance of the [PublicUrlProvider](./proffer.storage.filesystem.server.internal.publicurlprovider) class.
+Initializes a new instance of the [PublicUrlProvider](./proffer.storage.filesystem.server.internal.publicurlprovider.md) class.
 
 ```csharp
 public PublicUrlProvider(IOptions<FileSystemStorageServerOptions> options)

@@ -8,14 +8,14 @@ Provides a way to store and retrieve extended file properties to match the requi
 public class ExtendedPropertiesProvider : Proffer.Storage.FileSystem.IExtendedPropertiesProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider.md)<br>
 Implements IExtendedPropertiesProvider
 
 ## Constructors
 
 ### **ExtendedPropertiesProvider(IOptions&lt;FileSystemPropertiesJsonOptions&gt;)**
 
-Initializes a new instance of the [ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider) class.
+Initializes a new instance of the [ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider.md) class.
 
 ```csharp
 public ExtendedPropertiesProvider(IOptions<FileSystemPropertiesJsonOptions> options)

@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.Azure.Blobs.Configuration
 
-Options for a scoped [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore).
+Options for a scoped [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore.md).
 
 ```csharp
 public class AzureBlobsScopedStoreOptions : AzureBlobsStoreOptions, Proffer.Storage.Configuration.IStoreOptions, Proffer.Configuration.INamedElementOptions, Proffer.Azure.Configuration.IAzureStorageOptions, Proffer.Storage.Configuration.IScopedStoreOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StoreOptions → [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions) → [AzureBlobsScopedStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsscopedstoreoptions)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StoreOptions → [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions.md) → [AzureBlobsScopedStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsscopedstoreoptions.md)<br>
 Implements IStoreOptions, INamedElementOptions, IAzureStorageOptions, IScopedStoreOptions
 
 ## Properties

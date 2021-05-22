@@ -2,40 +2,40 @@
 
 ## Proffer.Email
 
-[EmailOptions](./proffer.email.emailoptions)
+[EmailOptions](./proffer.email.emailoptions.md)
 
-[EmailProviderOptions](./proffer.email.emailprovideroptions)
+[EmailProviderOptions](./proffer.email.emailprovideroptions.md)
 
-[EmailServiceCollectionExtensions](./proffer.email.emailservicecollectionextensions)
+[EmailServiceCollectionExtensions](./proffer.email.emailservicecollectionextensions.md)
 
-[EmailTemplateType](./proffer.email.emailtemplatetype)
+[EmailTemplateType](./proffer.email.emailtemplatetype.md)
 
-[IEmailAddress](./proffer.email.iemailaddress)
+[IEmailAddress](./proffer.email.iemailaddress.md)
 
-[IEmailAttachment](./proffer.email.iemailattachment)
+[IEmailAttachment](./proffer.email.iemailattachment.md)
 
-[IEmailProvider](./proffer.email.iemailprovider)
+[IEmailProvider](./proffer.email.iemailprovider.md)
 
-[IEmailProviderOptions](./proffer.email.iemailprovideroptions)
+[IEmailProviderOptions](./proffer.email.iemailprovideroptions.md)
 
-[IEmailProviderType](./proffer.email.iemailprovidertype)
+[IEmailProviderType](./proffer.email.iemailprovidertype.md)
 
-[IEmailSender](./proffer.email.iemailsender)
+[IEmailSender](./proffer.email.iemailsender.md)
 
-[MockupExceptionsOptions](./proffer.email.mockupexceptionsoptions)
+[MockupExceptionsOptions](./proffer.email.mockupexceptionsoptions.md)
 
-[MockupOptions](./proffer.email.mockupoptions)
+[MockupOptions](./proffer.email.mockupoptions.md)
 
 ## Proffer.Email.Internal
 
-[EmailAddress](./proffer.email.internal.emailaddress)
+[EmailAddress](./proffer.email.internal.emailaddress.md)
 
-[EmailAddressEqualityComparer](./proffer.email.internal.emailaddressequalitycomparer)
+[EmailAddressEqualityComparer](./proffer.email.internal.emailaddressequalitycomparer.md)
 
-[EmailAddressStrictEqualityComparer](./proffer.email.internal.emailaddressstrictequalitycomparer)
+[EmailAddressStrictEqualityComparer](./proffer.email.internal.emailaddressstrictequalitycomparer.md)
 
-[EmailAttachment](./proffer.email.internal.emailattachment)
+[EmailAttachment](./proffer.email.internal.emailattachment.md)
 
-[EmailAttachmentEqualityComparer](./proffer.email.internal.emailattachmentequalitycomparer)
+[EmailAttachmentEqualityComparer](./proffer.email.internal.emailattachmentequalitycomparer.md)
 
-[EmailSender](./proffer.email.internal.emailsender)
+[EmailSender](./proffer.email.internal.emailsender.md)

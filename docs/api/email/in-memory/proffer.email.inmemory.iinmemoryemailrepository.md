@@ -34,5 +34,5 @@ void Save(InMemoryEmail email)
 
 #### Parameters
 
-`email` [InMemoryEmail](./proffer.email.inmemory.inmemoryemail)<br>
+`email` [InMemoryEmail](./proffer.email.inmemory.inmemoryemail.md)<br>
 The email.

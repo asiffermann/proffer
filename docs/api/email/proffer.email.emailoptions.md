@@ -8,7 +8,7 @@ The Proffer.Email options with providers.
 public class EmailOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailOptions](./proffer.email.emailoptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [EmailOptions](./proffer.email.emailoptions.md)
 
 ## Fields
 
@@ -32,7 +32,7 @@ public EmailProviderOptions Provider { get; set; }
 
 #### Property Value
 
-[EmailProviderOptions](./proffer.email.emailprovideroptions)<br>
+[EmailProviderOptions](./proffer.email.emailprovideroptions.md)<br>
 
 ### **DefaultSender**
 
@@ -44,7 +44,7 @@ public EmailAddress DefaultSender { get; set; }
 
 #### Property Value
 
-[EmailAddress](./proffer.email.internal.emailaddress)<br>
+[EmailAddress](./proffer.email.internal.emailaddress.md)<br>
 
 ### **TemplateStorage**
 
@@ -68,7 +68,7 @@ public MockupOptions Mockup { get; set; }
 
 #### Property Value
 
-[MockupOptions](./proffer.email.mockupoptions)<br>
+[MockupOptions](./proffer.email.mockupoptions.md)<br>
 
 ## Constructors
 

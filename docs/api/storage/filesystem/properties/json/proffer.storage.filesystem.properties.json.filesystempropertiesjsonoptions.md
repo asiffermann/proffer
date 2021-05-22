@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.FileSystem.Properties.Json
 
-Options for an [ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider).
+Options for an [ExtendedPropertiesProvider](./proffer.storage.filesystem.properties.json.internal.extendedpropertiesprovider.md).
 
 ```csharp
 public class FileSystemPropertiesJsonOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemPropertiesJsonOptions](./proffer.storage.filesystem.properties.json.filesystempropertiesjsonoptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemPropertiesJsonOptions](./proffer.storage.filesystem.properties.json.filesystempropertiesjsonoptions.md)
 
 ## Properties
 

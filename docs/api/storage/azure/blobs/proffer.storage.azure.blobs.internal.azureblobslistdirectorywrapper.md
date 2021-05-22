@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.Azure.Blobs.Internal
 
-Represents a directory in a being-listed [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore).
+Represents a directory in a being-listed [AzureBlobsStore](./proffer.storage.azure.blobs.azureblobsstore.md).
 
 ```csharp
 public class AzureBlobsListDirectoryWrapper : Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → FileSystemInfoBase → DirectoryInfoBase → [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → FileSystemInfoBase → DirectoryInfoBase → [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper.md)
 
 ## Properties
 
@@ -52,7 +52,7 @@ DirectoryInfoBase<br>
 
 ### **AzureBlobsListDirectoryWrapper(FileSystemInfoBase)**
 
-Initializes a new instance of the [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper) class.
+Initializes a new instance of the [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper.md) class.
 
 ```csharp
 public AzureBlobsListDirectoryWrapper(FileSystemInfoBase childrens)
@@ -65,7 +65,7 @@ The childrens.
 
 ### **AzureBlobsListDirectoryWrapper(String, Dictionary&lt;String, AzureBlobsFileReference&gt;)**
 
-Initializes a new instance of the [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper) class.
+Initializes a new instance of the [AzureBlobsListDirectoryWrapper](./proffer.storage.azure.blobs.internal.azureblobslistdirectorywrapper.md) class.
 
 ```csharp
 public AzureBlobsListDirectoryWrapper(string path, Dictionary<string, AzureBlobsFileReference> files)

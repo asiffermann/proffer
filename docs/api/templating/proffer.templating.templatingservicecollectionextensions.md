@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class TemplatingServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplatingServiceCollectionExtensions](./proffer.templating.templatingservicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TemplatingServiceCollectionExtensions](./proffer.templating.templatingservicecollectionextensions.md)
 
 ## Methods
 

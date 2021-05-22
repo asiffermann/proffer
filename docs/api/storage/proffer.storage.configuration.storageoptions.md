@@ -8,8 +8,8 @@ The Proffer.Storage options with providers and stores.
 public class StorageOptions : IParsedOptions`3
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StorageOptions](./proffer.storage.configuration.storageoptions)<br>
-Implements [IParsedOptions&lt;ProviderOptions, StoreOptions, ScopedStoreOptions&gt;](./proffer.storage.configuration.iparsedoptions-3)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [StorageOptions](./proffer.storage.configuration.storageoptions.md)<br>
+Implements [IParsedOptions&lt;ProviderOptions, StoreOptions, ScopedStoreOptions&gt;](./proffer.storage.configuration.iparsedoptions-3.md)
 
 ## Fields
 
@@ -123,7 +123,7 @@ public IReadOnlyDictionary<string, ScopedStoreOptions> ParsedScopedStores { get;
 
 ### **StorageOptions()**
 
-Initializes a new instance of the [StorageOptions](./proffer.storage.configuration.storageoptions) class.
+Initializes a new instance of the [StorageOptions](./proffer.storage.configuration.storageoptions.md) class.
 
 ```csharp
 public StorageOptions()
@@ -154,7 +154,7 @@ public void BindStoreOptions(StoreOptions storeOptions, ProviderOptions provider
 
 #### Parameters
 
-`storeOptions` [StoreOptions](./proffer.storage.configuration.storeoptions)<br>
+`storeOptions` [StoreOptions](./proffer.storage.configuration.storeoptions.md)<br>
 The store options.
 
 `providerInstanceOptions` ProviderOptions<br>

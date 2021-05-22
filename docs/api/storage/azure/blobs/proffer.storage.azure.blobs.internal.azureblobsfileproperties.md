@@ -8,7 +8,7 @@ File common properties with metadata stored on Azure Blobs.
 public class AzureBlobsFileProperties : Proffer.Storage.IFileProperties
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties.md)<br>
 Implements IFileProperties
 
 ## Properties
@@ -101,7 +101,7 @@ public IDictionary<string, string> Metadata { get; }
 
 ### **AzureBlobsFileProperties(BlobClient, BlobProperties)**
 
-Initializes a new instance of the [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties) class.
+Initializes a new instance of the [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties.md) class.
 
 ```csharp
 public AzureBlobsFileProperties(BlobClient blobClient, BlobProperties blobProperties)
@@ -117,7 +117,7 @@ The blob properties.
 
 ### **AzureBlobsFileProperties(BlobClient, BlobItem)**
 
-Initializes a new instance of the [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties) class.
+Initializes a new instance of the [AzureBlobsFileProperties](./proffer.storage.azure.blobs.internal.azureblobsfileproperties.md) class.
 
 ```csharp
 public AzureBlobsFileProperties(BlobClient blobClient, BlobItem blobItem)

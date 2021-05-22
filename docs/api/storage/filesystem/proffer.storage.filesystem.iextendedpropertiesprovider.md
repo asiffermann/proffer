@@ -47,7 +47,7 @@ The store absolute path.
 `file` IPrivateFileReference<br>
 The reference holding the file path.
 
-`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties)<br>
+`extendedProperties` [FileExtendedProperties](./proffer.storage.filesystem.internal.fileextendedproperties.md)<br>
 The extended properties.
 
 #### Returns

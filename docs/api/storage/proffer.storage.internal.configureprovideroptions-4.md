@@ -2,7 +2,7 @@
 
 Namespace: Proffer.Storage.Internal
 
-Configures a provider  from generic [StorageOptions](./proffer.storage.configuration.storageoptions).
+Configures a provider  from generic [StorageOptions](./proffer.storage.configuration.storageoptions.md).
 
 ```csharp
 public class ConfigureProviderOptions<TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions> : 
@@ -22,14 +22,14 @@ The type of the store options.
 `TScopedStoreOptions`<br>
 The type of the scoped store options.
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ConfigureProviderOptions&lt;TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.configureprovideroptions-4)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ConfigureProviderOptions&lt;TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.configureprovideroptions-4.md)<br>
 Implements IConfigureOptions&lt;TParsedOptions&gt;
 
 ## Constructors
 
 ### **ConfigureProviderOptions(IOptions&lt;StorageOptions&gt;)**
 
-Initializes a new instance of the [ConfigureProviderOptions&lt;TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.configureprovideroptions-4) class.
+Initializes a new instance of the [ConfigureProviderOptions&lt;TParsedOptions, TProviderOptions, TStoreOptions, TScopedStoreOptions&gt;](./proffer.storage.internal.configureprovideroptions-4.md) class.
 
 ```csharp
 public ConfigureProviderOptions(IOptions<StorageOptions> storageOptions)
@@ -57,6 +57,6 @@ The options instance to configure.
 
 #### Exceptions
 
-[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration)<br>
+[BadStoreConfiguration](./proffer.storage.exceptions.badstoreconfiguration.md)<br>
 
-[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration)<br>
+[BadProviderConfiguration](./proffer.storage.exceptions.badproviderconfiguration.md)<br>

@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage.FileSystem.Server
 
-Options for a [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware).
+Options for a [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware.md).
 
 ```csharp
 public class FileSystemStorageServerOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStorageServerOptions](./proffer.storage.filesystem.server.filesystemstorageserveroptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStorageServerOptions](./proffer.storage.filesystem.server.filesystemstorageserveroptions.md)
 
 ## Properties
 

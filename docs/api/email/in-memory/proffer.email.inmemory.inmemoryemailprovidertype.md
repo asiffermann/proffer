@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Email.InMemory
 
-Builds [InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider).
+Builds [InMemoryEmailProvider](./proffer.email.inmemory.inmemoryemailprovider.md).
 
 ```csharp
 public class InMemoryEmailProviderType : Proffer.Email.IEmailProviderType
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmailProviderType](./proffer.email.inmemory.inmemoryemailprovidertype)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [InMemoryEmailProviderType](./proffer.email.inmemory.inmemoryemailprovidertype.md)<br>
 Implements IEmailProviderType
 
 ## Properties
@@ -29,7 +29,7 @@ public string Name { get; }
 
 ### **InMemoryEmailProviderType(IInMemoryEmailRepository)**
 
-Initializes a new instance of the [InMemoryEmailProviderType](./proffer.email.inmemory.inmemoryemailprovidertype) class.
+Initializes a new instance of the [InMemoryEmailProviderType](./proffer.email.inmemory.inmemoryemailprovidertype.md) class.
 
 ```csharp
 public InMemoryEmailProviderType(IInMemoryEmailRepository inMemoryEmailRepository)
@@ -37,7 +37,7 @@ public InMemoryEmailProviderType(IInMemoryEmailRepository inMemoryEmailRepositor
 
 #### Parameters
 
-`inMemoryEmailRepository` [IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository)<br>
+`inMemoryEmailRepository` [IInMemoryEmailRepository](./proffer.email.inmemory.iinmemoryemailrepository.md)<br>
 The in-memory email repository.
 
 ## Methods

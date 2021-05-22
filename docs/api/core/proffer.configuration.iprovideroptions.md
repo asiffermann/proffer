@@ -8,7 +8,7 @@ Options of a provider.
 public interface IProviderOptions : INamedElementOptions
 ```
 
-Implements [INamedElementOptions](./proffer.configuration.inamedelementoptions)
+Implements [INamedElementOptions](./proffer.configuration.inamedelementoptions.md)
 
 ## Properties
 

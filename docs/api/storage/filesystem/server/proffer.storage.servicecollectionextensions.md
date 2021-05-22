@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class ServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ServiceCollectionExtensions](./proffer.storage.servicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ServiceCollectionExtensions](./proffer.storage.servicecollectionextensions.md)
 
 ## Methods
 
@@ -35,7 +35,7 @@ The service collection.
 
 ### **UseFileSystemStorageServer(IApplicationBuilder)**
 
-Adds a [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware) to the application's request pipeline.
+Adds a [FileSystemStorageServerMiddleware](./proffer.storage.filesystem.server.filesystemstorageservermiddleware.md) to the application's request pipeline.
 
 ```csharp
 public static IApplicationBuilder UseFileSystemStorageServer(IApplicationBuilder app)

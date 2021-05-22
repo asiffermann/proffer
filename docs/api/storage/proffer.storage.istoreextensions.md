@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Storage
 
-[IStore](./proffer.storage.istore) extension methods.
+[IStore](./proffer.storage.istore.md) extension methods.
 
 ```csharp
 public static class IStoreExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [IStoreExtensions](./proffer.storage.istoreextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [IStoreExtensions](./proffer.storage.istoreextensions.md)
 
 ## Methods
 
@@ -22,7 +22,7 @@ public static ValueTask<IFileReference[]> ListAsync(IStore store, string path, b
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -50,7 +50,7 @@ public static ValueTask<IFileReference[]> ListAsync(IStore store, string path, s
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -81,7 +81,7 @@ public static Task DeleteAsync(IStore store, string path)
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -103,7 +103,7 @@ public static ValueTask<IFileReference> GetAsync(IStore store, string path, bool
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -128,7 +128,7 @@ public static ValueTask<Stream> ReadAsync(IStore store, string path)
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -150,7 +150,7 @@ public static ValueTask<Byte[]> ReadAllBytesAsync(IStore store, string path)
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -172,7 +172,7 @@ public static ValueTask<string> ReadAllTextAsync(IStore store, string path)
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `path` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
@@ -194,7 +194,7 @@ public static ValueTask<IFileReference> SaveAsync(IStore store, Byte[] data, str
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `data` [Byte[]](https://docs.microsoft.com/en-us/dotnet/api/system.byte)<br>
@@ -206,7 +206,7 @@ The file path.
 `contentType` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The content-type of the file.
 
-`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy)<br>
+`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy.md)<br>
 The overwrite policy.
 
 `metadata` [IDictionary&lt;String, String&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2)<br>
@@ -220,7 +220,7 @@ ValueTask&lt;IFileReference&gt;<br>
 
 #### Exceptions
 
-[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception)<br>
+[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception.md)<br>
 
 ### **SaveAsync(IStore, Stream, String, String, OverwritePolicy, IDictionary&lt;String, String&gt;)**
 
@@ -232,7 +232,7 @@ public static ValueTask<IFileReference> SaveAsync(IStore store, Stream data, str
 
 #### Parameters
 
-`store` [IStore](./proffer.storage.istore)<br>
+`store` [IStore](./proffer.storage.istore.md)<br>
 The store.
 
 `data` [Stream](https://docs.microsoft.com/en-us/dotnet/api/system.io.stream)<br>
@@ -244,7 +244,7 @@ The file path.
 `contentType` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The content-type of the file.
 
-`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy)<br>
+`overwritePolicy` [OverwritePolicy](./proffer.storage.overwritepolicy.md)<br>
 The overwrite policy.
 
 `metadata` [IDictionary&lt;String, String&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2)<br>
@@ -258,4 +258,4 @@ ValueTask&lt;IFileReference&gt;<br>
 
 #### Exceptions
 
-[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception)<br>
+[FileAlreadyExistsException](./proffer.storage.exceptions.filealreadyexistsexception.md)<br>

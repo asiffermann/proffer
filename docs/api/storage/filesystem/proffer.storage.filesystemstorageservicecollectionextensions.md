@@ -8,7 +8,7 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection extension methods.
 public static class FileSystemStorageServiceCollectionExtensions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStorageServiceCollectionExtensions](./proffer.storage.filesystemstorageservicecollectionextensions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [FileSystemStorageServiceCollectionExtensions](./proffer.storage.filesystemstorageservicecollectionextensions.md)
 
 ## Methods
 

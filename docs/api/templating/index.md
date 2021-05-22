@@ -2,32 +2,32 @@
 
 ## Proffer.Templating
 
-[InvalidContextException](./proffer.templating.invalidcontextexception)
+[InvalidContextException](./proffer.templating.invalidcontextexception.md)
 
-[ITemplate](./proffer.templating.itemplate)
+[ITemplate](./proffer.templating.itemplate.md)
 
-[ITemplateLoader](./proffer.templating.itemplateloader)
+[ITemplateLoader](./proffer.templating.itemplateloader.md)
 
-[ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory)
+[ITemplateLoaderFactory](./proffer.templating.itemplateloaderfactory.md)
 
-[ITemplateProvider](./proffer.templating.itemplateprovider)
+[ITemplateProvider](./proffer.templating.itemplateprovider.md)
 
-[ITemplateProviderScope](./proffer.templating.itemplateproviderscope)
+[ITemplateProviderScope](./proffer.templating.itemplateproviderscope.md)
 
-[TemplateCollectionBase](./proffer.templating.templatecollectionbase)
+[TemplateCollectionBase](./proffer.templating.templatecollectionbase.md)
 
-[TemplateCollectionBase&lt;TStore&gt;](./proffer.templating.templatecollectionbase-1)
+[TemplateCollectionBase&lt;TStore&gt;](./proffer.templating.templatecollectionbase-1.md)
 
-[TemplatingServiceCollectionExtensions](./proffer.templating.templatingservicecollectionextensions)
+[TemplatingServiceCollectionExtensions](./proffer.templating.templatingservicecollectionextensions.md)
 
 ## Proffer.Templating.Exceptions
 
-[ProviderNotFoundException](./proffer.templating.exceptions.providernotfoundexception)
+[ProviderNotFoundException](./proffer.templating.exceptions.providernotfoundexception.md)
 
-[TemplateNotFoundException](./proffer.templating.exceptions.templatenotfoundexception)
+[TemplateNotFoundException](./proffer.templating.exceptions.templatenotfoundexception.md)
 
 ## Proffer.Templating.Internal
 
-[TemplateLoader](./proffer.templating.internal.templateloader)
+[TemplateLoader](./proffer.templating.internal.templateloader.md)
 
-[TemplateLoaderFactory](./proffer.templating.internal.templateloaderfactory)
+[TemplateLoaderFactory](./proffer.templating.internal.templateloaderfactory.md)

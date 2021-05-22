@@ -2,13 +2,13 @@
 
 Namespace: Proffer.Email.Smtp
 
-Builds [SmtpEmailProvider](./proffer.email.smtp.smtpemailprovider).
+Builds [SmtpEmailProvider](./proffer.email.smtp.smtpemailprovider.md).
 
 ```csharp
 public class SmtpEmailProviderType : Proffer.Email.IEmailProviderType
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SmtpEmailProviderType](./proffer.email.smtp.smtpemailprovidertype)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SmtpEmailProviderType](./proffer.email.smtp.smtpemailprovidertype.md)<br>
 Implements IEmailProviderType
 
 ## Properties
@@ -29,7 +29,7 @@ public string Name { get; }
 
 ### **SmtpEmailProviderType(IServiceProvider)**
 
-Initializes a new instance of the [SmtpEmailProviderType](./proffer.email.smtp.smtpemailprovidertype) class.
+Initializes a new instance of the [SmtpEmailProviderType](./proffer.email.smtp.smtpemailprovidertype.md) class.
 
 ```csharp
 public SmtpEmailProviderType(IServiceProvider serviceProvider)

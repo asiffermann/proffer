@@ -8,14 +8,14 @@ A provider to handle and build file stores pointing on an Azure Storage account.
 public class AzureBlobsStorageProvider : Proffer.Storage.Internal.StorageProviderBase`4[[Proffer.Storage.Azure.Blobs.Configuration.AzureBlobsParsedOptions, Proffer.Storage.Azure.Blobs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.Azure.Blobs.Configuration.AzureBlobsProviderOptions, Proffer.Storage.Azure.Blobs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.Azure.Blobs.Configuration.AzureBlobsStoreOptions, Proffer.Storage.Azure.Blobs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Proffer.Storage.Azure.Blobs.Configuration.AzureBlobsScopedStoreOptions, Proffer.Storage.Azure.Blobs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Proffer.Storage.IStorageProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StorageProviderBase&lt;AzureBlobsParsedOptions, AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions&gt; → [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → StorageProviderBase&lt;AzureBlobsParsedOptions, AzureBlobsProviderOptions, AzureBlobsStoreOptions, AzureBlobsScopedStoreOptions&gt; → [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider.md)<br>
 Implements IStorageProvider
 
 ## Fields
 
 ### **ProviderName**
 
-The [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider) name.
+The [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider.md) name.
 
 ```csharp
 public static string ProviderName;
@@ -39,7 +39,7 @@ public string Name { get; }
 
 ### **AzureBlobsStorageProvider(IOptions&lt;AzureBlobsParsedOptions&gt;)**
 
-Initializes a new instance of the [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider) class.
+Initializes a new instance of the [AzureBlobsStorageProvider](./proffer.storage.azure.blobs.azureblobsstorageprovider.md) class.
 
 ```csharp
 public AzureBlobsStorageProvider(IOptions<AzureBlobsParsedOptions> options)
@@ -65,7 +65,7 @@ protected IStore BuildStoreInternal(string storeName, AzureBlobsStoreOptions sto
 `storeName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name of the store.
 
-`storeOptions` [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions)<br>
+`storeOptions` [AzureBlobsStoreOptions](./proffer.storage.azure.blobs.configuration.azureblobsstoreoptions.md)<br>
 The store options.
 
 #### Returns

@@ -8,14 +8,14 @@ A provider that sends email to a SMTP server with N:MailKit.
 public class SmtpEmailProvider : Proffer.Email.IEmailProvider
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SmtpEmailProvider](./proffer.email.smtp.smtpemailprovider)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [SmtpEmailProvider](./proffer.email.smtp.smtpemailprovider.md)<br>
 Implements IEmailProvider
 
 ## Constructors
 
 ### **SmtpEmailProvider(IServiceProvider, IEmailProviderOptions)**
 
-Initializes a new instance of the [SmtpEmailProvider](./proffer.email.smtp.smtpemailprovider) class.
+Initializes a new instance of the [SmtpEmailProvider](./proffer.email.smtp.smtpemailprovider.md) class.
 
 ```csharp
 public SmtpEmailProvider(IServiceProvider serviceProvider, IEmailProviderOptions options)

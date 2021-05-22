@@ -2,10 +2,10 @@
 
 ## Proffer.Templating
 
-[HandlebarsServiceCollectionExtensions](./proffer.templating.handlebarsservicecollectionextensions)
+[HandlebarsServiceCollectionExtensions](./proffer.templating.handlebarsservicecollectionextensions.md)
 
 ## Proffer.Templating.Handlebars
 
-[HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate)
+[HandlebarsTemplate](./proffer.templating.handlebars.handlebarstemplate.md)
 
-[HandlebarsTemplateProvider](./proffer.templating.handlebars.handlebarstemplateprovider)
+[HandlebarsTemplateProvider](./proffer.templating.handlebars.handlebarstemplateprovider.md)

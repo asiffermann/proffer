@@ -13,7 +13,7 @@ public abstract class EqualityComparerBase<T> : , System.Collections.IEqualityCo
 `T`<br>
 The type of objects to compare.
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → EqualityComparer&lt;T&gt; → [EqualityComparerBase&lt;T&gt;](./proffer.equalitycomparerbase-1)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → EqualityComparer&lt;T&gt; → [EqualityComparerBase&lt;T&gt;](./proffer.equalitycomparerbase-1.md)<br>
 Implements [IEqualityComparer](https://docs.microsoft.com/en-us/dotnet/api/system.collections.iequalitycomparer), IEqualityComparer&lt;T&gt;
 
 ## Methods

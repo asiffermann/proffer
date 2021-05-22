@@ -8,7 +8,7 @@ Options to exclude some emails or domains from a mockup configuration.
 public class MockupExceptionsOptions
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MockupExceptionsOptions](./proffer.email.mockupexceptionsoptions)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MockupExceptionsOptions](./proffer.email.mockupexceptionsoptions.md)
 
 ## Properties
 
