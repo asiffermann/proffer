@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Common" Version="12.7.2" />
+    <PackageReference Include="Azure.Storage.Common" Version="12.7.3" />
   </ItemGroup>
 
 </Project>
