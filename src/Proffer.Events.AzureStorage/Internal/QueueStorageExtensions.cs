@@ -1,7 +1,7 @@
 namespace Proffer.Events.AzureStorage.Internal
 {
     using System.Threading.Tasks;
-    using Azure.Storage.Queues;
+    using global::Azure.Storage.Queues;
 
     /// <summary>
     /// Some queue storage extensions methods
@@ -9,7 +9,7 @@ namespace Proffer.Events.AzureStorage.Internal
     public static class QueueStorageExtensions
     {
         /// <summary>
-        /// Create the a
+        /// Create the queue if not exist.
         /// </summary>
         /// <param name="queueService">The queue service.</param>
         /// <param name="queueName">Name of the queue.</param>

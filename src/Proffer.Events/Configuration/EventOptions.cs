@@ -14,7 +14,7 @@ namespace Proffer.Events.Configuration
     {
         internal const string DefaultConfigurationSectionName = "Event";
 
-        private readonly Lazy<IReadOnlyDictionary<string, ProviderOptions>> parsedProviderInstances;
+        private readonly Lazy<IReadOnlyDictionary<string, ProviderOptions>> parsedProviderOptions;
         private readonly Lazy<IReadOnlyDictionary<string, QueueOptions>> parsedQueueOptions;
 
         /// <summary>
@@ -22,10 +22,10 @@ namespace Proffer.Events.Configuration
         /// </summary>
         public EventOptions()
         {
-            this.parsedProviderInstances = new Lazy<IReadOnlyDictionary<string, ProviderOptions>>(
-                () => this.ProviderConfigurations.Parse<ProviderOptions>());
+            this.parsedProviderOptions = new Lazy<IReadOnlyDictionary<string, ProviderOptions>>(
+                () => this.Providers.Parse<ProviderOptions>());
             this.parsedQueueOptions = new Lazy<IReadOnlyDictionary<string, QueueOptions>>(
-                () => this.QueueConfigurations.Parse<QueueOptions>());
+                () => this.Queues.Parse<QueueOptions>());
         }
 
         /// <summary>
@@ -36,12 +36,12 @@ namespace Proffer.Events.Configuration
         /// <summary>
         /// Gets or sets the providers unparsed options.
         /// </summary>
-        public IReadOnlyDictionary<string, IConfigurationSection> ProviderConfigurations { get; set; }
+        public IReadOnlyDictionary<string, IConfigurationSection> Providers { get; set; }
 
         /// <summary>
         /// Gets or sets the queues unparsed options.
         /// </summary>
-        public IReadOnlyDictionary<string, IConfigurationSection> QueueConfigurations { get; set; }
+        public IReadOnlyDictionary<string, IConfigurationSection> Queues { get; set; }
 
         /// <summary>
         /// Gets or sets the connection strings.
@@ -56,7 +56,7 @@ namespace Proffer.Events.Configuration
         /// <summary>
         /// Gets or sets the provider options.
         /// </summary>
-        public IReadOnlyDictionary<string, ProviderOptions> ProviderOptions { get => this.parsedProviderInstances.Value; set { } }
+        public IReadOnlyDictionary<string, ProviderOptions> ProviderOptions { get => this.parsedProviderOptions.Value; set { } }
 
         /// <summary>
         /// Binds the queue options.

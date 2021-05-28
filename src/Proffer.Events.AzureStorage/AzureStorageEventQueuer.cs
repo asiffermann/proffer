@@ -4,7 +4,7 @@ namespace Proffer.Events.AzureStorage
     using System.Linq;
     using System.Text.Json;
     using System.Threading.Tasks;
-    using Azure.Storage.Queues;
+    using global::Azure.Storage.Queues;
     using Proffer.Events.AzureStorage.Configuration;
     using Proffer.Events.AzureStorage.Internal;
 

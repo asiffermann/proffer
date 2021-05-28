@@ -8,11 +8,11 @@ namespace Proffer.Events
         /// <summary>
         /// Initializes a new instance of the <see cref="EventQueuerBase"/> class.
         /// </summary>
-        /// <param name="storeName">Name of the store.</param>
+        /// <param name="queueName">Name of the queue.</param>
         /// <param name="eventQueuerFactory">The event queuer factory.</param>
-        public EventQueuerBase(string storeName, IEventFactory eventQueuerFactory)
+        public EventQueuerBase(string queueName, IEventFactory eventQueuerFactory)
         {
-            this.Queuer = eventQueuerFactory.GetQueuer(storeName);
+            this.Queuer = eventQueuerFactory.GetQueuer(queueName);
         }
 
         /// <summary>

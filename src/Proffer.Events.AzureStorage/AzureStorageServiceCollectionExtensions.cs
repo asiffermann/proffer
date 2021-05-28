@@ -9,7 +9,7 @@ namespace Proffer.Events.AzureStorage
     /// <summary>
     /// Some azure storage extentions methods 
     /// </summary>
-    public static class AzureStorageExtensions
+    public static class AzureStorageServiceCollectionExtensions
     {
         /// <summary>
         /// Inject the AzureStorageOptions parsed options in DI.

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>In memory provider for Proffer.Events abstractions.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Proffer.Events\Proffer.Events.csproj" />
+  </ItemGroup>
+
+</Project>

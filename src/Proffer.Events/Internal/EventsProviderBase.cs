@@ -3,14 +3,13 @@ namespace Proffer.Events.Internal
     using Microsoft.Extensions.Options;
     using Proffer.Events.Configuration;
     using Proffer.Events.Configuration.Queue;
-    using Proffer.Events.Configuration.Provider;
     using Proffer.Configuration;
 
     /// <summary>
     /// A abstract class to implement an EventsProvider 
     /// </summary>
     /// <typeparam name="TParsedOptions">The type of the parsed options. <see cref="IParsedOptions{TProviderOptions, TQueueOptions}"/> <seealso cref="EventOptions"/></typeparam>
-    /// <typeparam name="TProviderOptions">The type of the provider options. <see cref="IEventProviderOptions"/></typeparam>
+    /// <typeparam name="TProviderOptions">The type of the provider options. <see cref="IProviderOptions"/></typeparam>
     /// <typeparam name="TQueueOptions">The type of the queue options. <see cref="IQueueOptions"/></typeparam>
     /// <seealso cref="IEventProvider" />
     public abstract class EventsProviderBase<TParsedOptions, TProviderOptions, TQueueOptions> : IEventProvider

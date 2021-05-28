@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Azure queue provider for Proffer.Events abstractions.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Proffer.Azure\Proffer.Azure.csproj" />
+    <ProjectReference Include="..\Proffer.Events\Proffer.Events.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Queues" Version="12.6.2" />
+  </ItemGroup>
+
+</Project>

@@ -47,6 +47,8 @@ namespace Proffer.Storage
         /// </returns>
         public static IServiceCollection AddStorage(this IServiceCollection services, IConfigurationRoot configurationRoot, string sectionName = StorageOptions.DefaultConfigurationSectionName)
         {
+            var a = configurationRoot.GetSection(sectionName);
+
             return services
                 .Configure<StorageOptions>(configurationRoot.GetSection(sectionName))
                 .Configure<StorageOptions>(storageOptions =>

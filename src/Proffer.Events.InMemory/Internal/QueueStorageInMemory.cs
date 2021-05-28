@@ -26,7 +26,7 @@ namespace Proffer.Events.InMemory.Internal
         /// Gets the next event from queue.
         /// </summary>
         /// <returns>
-        ///     The next <see cref="EventBase"/> from the <seealso cref="Queue{T}."/> 
+        ///     The next <see cref="EventBase"/> from the <seealso cref="Queue{EventBase}"/> 
         /// </returns>
         public EventBase GetEvent()
         {

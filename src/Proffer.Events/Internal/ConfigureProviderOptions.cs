@@ -31,7 +31,7 @@ namespace Proffer.Events.Internal
         }
 
         /// <summary>
-        /// Invoked to configure a <typeparamref name="TOptions" /> instance.
+        /// Invoked to configure a <typeparamref name="TParsedOptions" /> instance.
         /// </summary>
         /// <param name="options">The options instance to configure.</param>
         public void Configure(TParsedOptions options)
@@ -43,7 +43,7 @@ namespace Proffer.Events.Internal
 
             options.ConnectionStrings = this.eventOptions.ConnectionStrings;
 
-            options.ProviderOptions = this.eventOptions.ProviderConfigurations.Parse<TProviderOptions>()
+            options.ProviderOptions = this.eventOptions.Providers.Parse<TProviderOptions>()
                 .Where(kvp => kvp.Value.Type == options.Name)
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
@@ -52,7 +52,7 @@ namespace Proffer.Events.Internal
                 providerOption.Value.Compute<TParsedOptions, TProviderOptions, TQueueOptions>(options);
             }
 
-            var parsedQueues = this.eventOptions.QueueConfigurations.Parse<TQueueOptions>();
+            var parsedQueues = this.eventOptions.Queues.Parse<TQueueOptions>();
 
             foreach (var queueOption in parsedQueues)
             {

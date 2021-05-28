@@ -39,6 +39,14 @@ namespace Proffer.Events.InMemory
             this.storedQueue = storedQueue;
         }
 
+        /// <summary>
+        /// Builds the queue, a provider must overrid this abstract method.
+        /// </summary>
+        /// <param name="queueName">The name of the queue.</param>
+        /// <param name="queueOptions">The queue options.</param>
+        /// <returns>
+        /// An instance of <see cref="IEventQueuer" />
+        /// </returns>
         protected override IEventQueuer BuildQueueInternal(string queueName, QueueOptions queueOptions)
         {
             return new InMemoryEventQueuer(this.storedQueue, queueOptions);

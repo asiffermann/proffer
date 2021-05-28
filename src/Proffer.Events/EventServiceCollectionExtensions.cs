@@ -40,9 +40,10 @@ namespace Proffer.Events
         /// </summary>
         /// <param name="services">The services.</param>
         /// <param name="configurationRoot">The configuration root.</param>
-        /// <returns></returns>
         public static IServiceCollection AddEvent(this IServiceCollection services, IConfigurationRoot configurationRoot)
         {
+            var a = configurationRoot.GetSection(EventOptions.DefaultConfigurationSectionName);
+
             return services
                 .Configure<EventOptions>(configurationRoot.GetSection(EventOptions.DefaultConfigurationSectionName))
                 .Configure<EventOptions>(eventOptions =>

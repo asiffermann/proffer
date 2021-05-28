@@ -35,8 +35,16 @@ namespace Proffer.Events
 
             object getEventHandler = this.serviceProvider.GetService(queryType);
 
-            await (Task)queryType.GetMethod("ExecuteAsync")
-                .Invoke(getEventHandler, new object[] { eventBase });
+            try
+            {
+                await (Task)queryType.GetMethod("ExecuteAsync")
+                    .Invoke(getEventHandler, new object[] { eventBase });
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException("The handler throw an exception", e);
+            }
+
         }
     }
 }
