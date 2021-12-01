@@ -37,7 +37,7 @@ jobs:
           name: packages
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1.8.0
+        uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: 5.0.x
           source-url: https://nuget.pkg.github.com/asiffermann/index.json
@@ -70,7 +70,7 @@ jobs:
           name: packages
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1.8.0
+        uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: 5.0.x
           source-url: https://api.nuget.org/v3/index.json
