@@ -27,7 +27,7 @@ jobs:
           name: tests-results
 
       - name: Publish unit tests results
-        uses: EnricoMi/publish-unit-test-result-action@v1.17
+        uses: EnricoMi/publish-unit-test-result-action@v1.39
         with:
           commit: ${{ github.event.workflow_run.head_sha }}
           files: '*.junit.xml'
